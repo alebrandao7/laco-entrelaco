@@ -1,18 +1,5 @@
 import { useState } from "react";
 
-// ── TESTE DE IMAGEM ────────────────────────────────────────────────────────
-const TesteImg = () => {
-  const [status, setStatus] = useState("carregando...");
-  const url = "https://res.cloudinary.com/djeliz676/image/upload/v1779469881/34234_qq54ml.jpg";
-  return (
-    <div style={{position:"fixed",top:80,left:"50%",transform:"translateX(-50%)",background:"#222",padding:16,borderRadius:12,zIndex:999,width:300,textAlign:"center"}}>
-      <p style={{color:"#fff",fontSize:11,marginBottom:8}}>TESTE: {status}</p>
-      <img src={url} style={{width:"100%",borderRadius:8}}
-        onLoad={()=>setStatus("✅ FUNCIONOU!")}
-        onError={e=>setStatus("❌ ERRO: "+e.type)}/>
-    </div>
-  );
-};
 // ── Cores do logo ──────────────────────────────────────────────────────────
 const VERDE  = "#2D5A27";   // verde escuro do logo
 const VINHO  = "#8B1A2A";   // vermelho vinho do &
@@ -475,11 +462,10 @@ export default function App() {
 
   // ── SHELL ─────────────────────────────────────────────────────────────────
   return(
-    <div style={{minHeight:"100vh",background:"#050505",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'DM Sans',sans-serif"}}>
+    <div style={{minHeight:"100vh",background:"#050505",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'DM Sans',sans-serif",padding:"20px 0"}}>
       <style>{CSS}</style>
-      <TesteImg/>
-      <div style={{width:420,height:820,background:DARK,borderRadius:52,overflow:"hidden",display:"flex",flexDirection:"column",position:"relative",
-        boxShadow:`0 60px 160px rgba(0,0,0,0.98), 0 0 0 1px ${VERDE}44, inset 0 0 40px rgba(45,90,39,0.03)`}}>
+      <div style={{width:"100%",maxWidth:420,minHeight:820,background:DARK,borderRadius:32,overflow:"hidden",display:"flex",flexDirection:"column",position:"relative",
+        boxShadow:`0 60px 160px rgba(0,0,0,0.98), 0 0 0 1px ${VERDE}44`}}>
         {/* Status bar */}
         <div style={{padding:"14px 28px 0",display:"flex",justifyContent:"space-between",flexShrink:0}}>
           <span className="mn" style={{color:"rgba(255,255,255,0.15)",fontSize:11}}>9:41</span>
