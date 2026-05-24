@@ -343,16 +343,22 @@ export default function App() {
     const cor = modal.cores[selColor] || modal.cores[0];
     const tam = modal.sizes[selSize] || modal.sizes[0];
     setCart(c => [...c, {product:modal, size:tam, color:cor, qty, id:Date.now()}]);
+    setItemAdicionado(modal.name);
     setModal(null);
+    setTimeout(() => setItemAdicionado(null), 3000);
   };
   const removeFromCart = id => setCart(c => c.filter(i => i.id!==id));
   const [enviando, setEnviando] = useState(false);
+  const [confirmando, setConfirmando] = useState(false);
+  const [itemAdicionado, setItemAdicionado] = useState(null);
 
-  // ── URL do Google Apps Script — cole aqui depois de configurar ────────────
   const SHEETS_URL = "https://script.google.com/macros/s/AKfycbwAflgdTuMdI-_KOUrUhlfHA67eRye3TAB2d7ABlBjN9niUGsphRh5kKuqw78RmTgFBAA/exec";
 
   const sendOrcamento = async () => {
-    if(!form.nome || !form.whats) return;
+    if(!form.nome || !form.whats) {
+      alert("Por favor preencha Nome e WhatsApp!");
+      return;
+    }
     setEnviando(true);
     const itens = cart.map(i =>
       `${i.product.name} | ${i.size?.ref} | ${i.color?.name} | Qtd: ${i.qty}`
@@ -360,19 +366,21 @@ export default function App() {
     const payload = {
       nome: form.nome,
       whatsapp: form.whats,
-      cidade: form.cidade,
-      observacoes: form.obs,
+      cidade: form.cidade || "—",
+      observacoes: form.obs || "—",
       itens,
       data: new Date().toLocaleString("pt-BR"),
     };
     try {
       await fetch(SHEETS_URL, {
-        method:"POST",
-        mode:"no-cors",
-        headers:{"Content-Type":"application/json"},
+        method: "POST",
+        mode: "no-cors",
+        headers: {"Content-Type":"application/json"},
         body: JSON.stringify(payload),
       });
-    } catch(e) { console.error(e); }
+    } catch(e) {
+      console.error("Erro ao enviar:", e);
+    }
     setEnviando(false);
     setScreen("success");
   };
@@ -610,6 +618,17 @@ export default function App() {
   return (
     <div style={{minHeight:"100vh",background:"#EDE8E0",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'DM Sans',sans-serif",padding:"20px 0"}}>
       <style>{CSS}</style>
+
+      {/* Toast de confirmação */}
+      {itemAdicionado && (
+        <div style={{position:"absolute",top:60,left:16,right:16,background:VERDE,color:"#fff",padding:"12px 16px",borderRadius:12,zIndex:300,display:"flex",alignItems:"center",gap:10,boxShadow:"0 4px 16px rgba(45,90,39,0.4)"}}>
+          <span style={{fontSize:18}}>✅</span>
+          <div>
+            <p className="mn" style={{fontSize:9,letterSpacing:1,opacity:0.8}}>ADICIONADO AO PEDIDO</p>
+            <p className="dm" style={{fontSize:13,fontWeight:600}}>{itemAdicionado}</p>
+          </div>
+        </div>
+      )}
       <div style={{width:"100%",maxWidth:420,minHeight:820,background:BG,borderRadius:32,overflow:"hidden",display:"flex",flexDirection:"column",position:"relative",
         boxShadow:"0 20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(45,90,39,0.12)"}}>
         <div style={{padding:"14px 28px 0",display:"flex",justifyContent:"space-between",flexShrink:0,background:BG}}>
@@ -624,7 +643,7 @@ export default function App() {
         </div>
         {screen!=="success" && (
           <div style={{position:"absolute",bottom:0,left:0,right:0,background:"rgba(250,248,245,0.97)",backdropFilter:"blur(20px)",borderTop:`1px solid ${BORDER}`,display:"flex",justifyContent:"space-around",padding:"10px 0 22px",boxShadow:"0 -4px 20px rgba(0,0,0,0.06)"}}>
-            {[{id:"catalog",label:"CATÁLOGO",icon:"◆"},{id:"orcamento",label:"ORÇAMENTO",icon:cartCount>0?`(${cartCount})`:"○"}].map(t=>(
+            {[{id:"catalog",label:"CATÁLOGO",icon:"◆"},{id:"orcamento",label:`PEDIDO${cartCount>0?` (${cartCount})`:""}`,icon:"🛍"}].map(t=>(
               <button key={t.id} className="btn" onClick={()=>setScreen(t.id)} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:4,padding:"4px 20px",background:"none",border:"none"}}>
                 <span className="mn" style={{color:screen===t.id?VERDE:TEXT3,fontSize:cartCount>0&&t.id==="orcamento"?13:10,fontWeight:cartCount>0&&t.id==="orcamento"?700:400,transition:"color 0.2s"}}>{t.icon}</span>
                 <span className="mn" style={{fontSize:8,letterSpacing:1.5,color:screen===t.id?VERDE:TEXT3,transition:"color 0.2s"}}>{t.label}</span>
