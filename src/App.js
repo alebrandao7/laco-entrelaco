@@ -56,7 +56,7 @@ const PRODUCTS=[
 ];
 
 const CATEGORIES=["Todos","Veludo","Lamê","Estampado","Iluminado"];
-const SHEETS_URL="https://script.google.com/macros/s/AKfycbwu9100g--J00iQNKpyWd3hkHSjuByscpQxbrKfuERvcIZk2bfbkPb_whF8uaRM2OPhWw/exec";
+const SHEETS_URL="https://script.google.com/macros/s/AKfycbySG8IMN9Im2fnogp99fwMSseRMzmzrF7d1PjfdyrJ1OgAXVlIF6-AnNmEN1UhTR1b49Q/exec";
 
 const CSS=`
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
