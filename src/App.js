@@ -349,7 +349,7 @@ export default function App() {
   const [enviando, setEnviando] = useState(false);
 
   // ── URL do Google Apps Script — cole aqui depois de configurar ────────────
-  const SHEETS_URL = "https://script.google.com/macros/s/AKfycbwp7OK1h7XfUTJ-eCf4yRA1eFCjC-dqvOkVh1fatpNYz5QapC_PlOusj3rLi2xQBo5Whw/exec";
+  const SHEETS_URL = "https://script.google.com/macros/s/AKfycbwAflgdTuMdI-_KOUrUhlfHA67eRye3TAB2d7ABlBjN9niUGsphRh5kKuqw78RmTgFBAA/exec";
 
   const sendOrcamento = async () => {
     if(!form.nome || !form.whats) return;
