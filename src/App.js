@@ -362,21 +362,19 @@ export default function App() {
     setEnviando(true);
     const itens = cart.map(i =>
       `${i.product.name} | ${i.size?.ref} | ${i.color?.name} | Qtd: ${i.qty}`
-    ).join("\n");
-    const payload = {
+    ).join(" / ");
+    const params = new URLSearchParams({
       nome: form.nome,
       whatsapp: form.whats,
       cidade: form.cidade || "—",
       observacoes: form.obs || "—",
       itens,
       data: new Date().toLocaleString("pt-BR"),
-    };
+    });
     try {
-      await fetch(SHEETS_URL, {
-        method: "POST",
+      await fetch(`${SHEETS_URL}?${params.toString()}`, {
+        method: "GET",
         mode: "no-cors",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(payload),
       });
     } catch(e) {
       console.error("Erro ao enviar:", e);
@@ -619,14 +617,11 @@ export default function App() {
     <div style={{minHeight:"100vh",background:"#EDE8E0",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'DM Sans',sans-serif",padding:"20px 0"}}>
       <style>{CSS}</style>
 
-      {/* Toast de confirmação */}
+      {/* Toast de confirmação — aparece sobre o botão adicionar */}
       {itemAdicionado && (
-        <div style={{position:"absolute",top:60,left:16,right:16,background:VERDE,color:"#fff",padding:"12px 16px",borderRadius:12,zIndex:300,display:"flex",alignItems:"center",gap:10,boxShadow:"0 4px 16px rgba(45,90,39,0.4)"}}>
-          <span style={{fontSize:18}}>✅</span>
-          <div>
-            <p className="mn" style={{fontSize:9,letterSpacing:1,opacity:0.8}}>ADICIONADO AO PEDIDO</p>
-            <p className="dm" style={{fontSize:13,fontWeight:600}}>{itemAdicionado}</p>
-          </div>
+        <div style={{position:"fixed",bottom:90,left:"50%",transform:"translateX(-50%)",background:VERDE,color:"#fff",padding:"8px 16px",borderRadius:20,zIndex:300,display:"flex",alignItems:"center",gap:8,boxShadow:"0 4px 16px rgba(45,90,39,0.4)",whiteSpace:"nowrap"}}>
+          <span style={{fontSize:14}}>✅</span>
+          <span className="dm" style={{fontSize:12,fontWeight:600}}>{itemAdicionado} adicionado ao pedido</span>
         </div>
       )}
       <div style={{width:"100%",maxWidth:420,minHeight:820,background:BG,borderRadius:32,overflow:"hidden",display:"flex",flexDirection:"column",position:"relative",
