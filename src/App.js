@@ -39,9 +39,9 @@ const F = {
 const coresVeludo = [
   { name:"Vermelho",         hex:"#C0392B", photo: CL+"v1779473532/IMG-20260514-WA0064_bv6xju.jpg" },
   { name:"Verde Floresta",   hex:"#2D5A27", photo: CL+"v1779639907/Gemini_Generated_Image_v2pj4xv2pj4xv2pj_puo5i7.png" },
-  { name:"Branco",           hex:"#F5F5F0", photo: CL+"v1779639976/Gemini_Generated_Image_qulo5gqulo5gqulo_ybfs1j.png" },
+  { name:"Branco",           hex:"#F5F5F0", photo: CL+"v1779646241/Gemini_Generated_Image_c8rr8dc8rr8dc8rr3231_gopcdt.png" },
   { name:"Champagne",        hex:"#C8B89A", photo: CL+"v1779640036/Gemini_Generated_Image_u7t6dbu7t6dbu7t6_oj0uw2.png" },
-  { name:"Dourado Metálico", hex:"#CFB53B", photo: CL+"v1779639978/Gemini_Generated_Image_f6315lf6315lf631_l84nrn.png" },
+  { name:"Dourado Metálico", hex:"#CFB53B", photo: CL+"v1779646240/Gemini_Generated_Image_c8rr8dc8rr8dc8rr543_sgwa0f.png" },
 ];
 
 const coresPadrao = [
@@ -346,7 +346,36 @@ export default function App() {
     setModal(null);
   };
   const removeFromCart = id => setCart(c => c.filter(i => i.id!==id));
-  const sendOrcamento = () => { if(form.nome&&form.whats) setScreen("success"); };
+  const [enviando, setEnviando] = useState(false);
+
+  // ── URL do Google Apps Script — cole aqui depois de configurar ────────────
+  const SHEETS_URL = "https://script.google.com/macros/s/AKfycbwp7OK1h7XfUTJ-eCf4yRA1eFCjC-dqvOkVh1fatpNYz5QapC_PlOusj3rLi2xQBo5Whw/exec";
+
+  const sendOrcamento = async () => {
+    if(!form.nome || !form.whats) return;
+    setEnviando(true);
+    const itens = cart.map(i =>
+      `${i.product.name} | ${i.size?.ref} | ${i.color?.name} | Qtd: ${i.qty}`
+    ).join("\n");
+    const payload = {
+      nome: form.nome,
+      whatsapp: form.whats,
+      cidade: form.cidade,
+      observacoes: form.obs,
+      itens,
+      data: new Date().toLocaleString("pt-BR"),
+    };
+    try {
+      await fetch(SHEETS_URL, {
+        method:"POST",
+        mode:"no-cors",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify(payload),
+      });
+    } catch(e) { console.error(e); }
+    setEnviando(false);
+    setScreen("success");
+  };
 
   // Foto ativa: se cor tem photo própria usa ela, senão usa photo do produto
   const getFotoAtiva = (produto, idxCor) => {
@@ -461,8 +490,8 @@ export default function App() {
             </div>
           </div>
           <button className="btn" onClick={sendOrcamento}
-            style={{width:"100%",background:VERDE,color:"#fff",padding:"17px",borderRadius:14,fontSize:12,fontWeight:700,letterSpacing:2,marginBottom:80,boxShadow:"0 4px 16px rgba(45,90,39,0.3)"}}>
-            ENVIAR SOLICITAÇÃO DE ORÇAMENTO
+            style={{width:"100%",background:enviando?"#999":VERDE,color:"#fff",padding:"17px",borderRadius:14,fontSize:12,fontWeight:700,letterSpacing:2,marginBottom:80,boxShadow:"0 4px 16px rgba(45,90,39,0.3)"}}>
+            {enviando ? "ENVIANDO..." : "CONFIRMAR PEDIDO"}
           </button>
         </>
       )}
@@ -495,6 +524,8 @@ export default function App() {
         <div className="md" onClick={e=>e.stopPropagation()}>
           <div style={{borderRadius:"28px 28px 0 0",overflow:"hidden",position:"relative"}}>
             <Img src={fotoAtiva} style={{width:"100%",height:280}}/>
+            {/* Botão voltar */}
+            <button onClick={()=>setModal(null)} style={{position:"absolute",top:12,left:12,background:"rgba(255,255,255,0.9)",border:"none",borderRadius:"50%",width:34,height:34,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",boxShadow:"0 2px 8px rgba(0,0,0,0.15)",fontSize:16}}>←</button>
             {/* Badge da cor ativa */}
             {cor?.photo && (
               <div style={{position:"absolute",bottom:10,left:12,background:"rgba(0,0,0,0.5)",backdropFilter:"blur(6px)",padding:"4px 10px",borderRadius:20,display:"flex",alignItems:"center",gap:6}}>
@@ -568,7 +599,7 @@ export default function App() {
 
             <button className="btn" onClick={addToCart}
               style={{width:"100%",background:VERDE,color:"#fff",padding:"16px",borderRadius:14,fontSize:12,fontWeight:700,letterSpacing:2,boxShadow:"0 4px 16px rgba(45,90,39,0.3)"}}>
-              ADICIONAR AO ORÇAMENTO
+              ADICIONAR AO PEDIDO
             </button>
           </div>
         </div>
