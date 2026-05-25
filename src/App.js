@@ -63,8 +63,8 @@ const PRODUCTS=[
   {sku:"CXPI",name:"Caixa Presente Iluminada",subtitle:"Veludo vermelho + LED morno",category:"Iluminado",material:"Madeira + veludo + fita LED 220V",acabamento:"Veludo vermelho + Lamê Dourado",aplicacao:"Vitrine / Hall / Uso interno",sizes:[{label:"40×40cm 36W",ref:"CXPI 40X40"},{label:"45×45cm 48W",ref:"CxPI 45X45"},{label:"50×50cm 58W",ref:"CxPI 50X50"}],prazo:"10–20 dias úteis",cores:[{name:"Vermelho",hex:"#C0392B"},{name:"Dourado",hex:"#CFB53B"}],tag:"Iluminado",tagColor:"#7A5A00",tagBg:"#FDF5E0",photo:F.veludo,desc:"Caixa presente em veludo vermelho com LED morna 220V."},
 ];
 
-const CATEGORIES=["Todos","Veludo","Lamê","Estampado","Iluminado"];
-const SHEETS_URL="https://script.google.com/macros/s/AKfycbySG8IMN9Im2fnogp99fwMSseRMzmzrF7d1PjfdyrJ1OgAXVlIF6-AnNmEN1UhTR1b49Q/exec";
+const CATEGORIES=["Todos","Veludo","Lamê","Estampado","Bolas"];
+const SHEETS_URL="https://script.google.com/macros/s/AKfycbw5c9f7of3GhrjgOcZR7_KDoEp4_avn4D9zsOkn7p_O1GjWii200ow5e9YhP93pjvVGhw/exec";
 
 const CSS=`
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
