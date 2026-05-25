@@ -139,7 +139,6 @@ const SAIAS_BOTAS=[
   BTXDZP: {default:1},
 };
 
-const PRODUCTS_ALL=[...PRODUCTS,...SAIAS_BOTAS];
 const getMin=(sku,ref)=>{const m=MINIMO_QTD[sku];if(!m)return 1;if(typeof m==="number")return m;return m[ref]||m.default||1;};
 const getFoto=(p,i)=>p.cores?.[i]?.photo||p.photo||"";
 const BRL=v=>`R$ ${Number(v).toLocaleString("pt-BR",{minimumFractionDigits:2})}`;
@@ -301,7 +300,7 @@ export default function App(){
   const[toast,setToast]=useState(null);
   const[nrPedido]=useState(gerarNr);
 
-  const filtered=PRODUCTS_ALL.filter(p=>cat==="Todos"||p.category===cat);
+  const filtered=PRODUCTS.filter(p=>cat==="Todos"||p.category===cat);
   const cartCount=cart.reduce((s,i)=>s+i.qty,0);
 
   const showToast=msg=>{setToast(msg);setTimeout(()=>setToast(null),2500);};
