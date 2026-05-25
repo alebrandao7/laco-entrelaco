@@ -27,13 +27,8 @@ const F={
   bola:     CL+"v1779469881/6645645_dd5hsu.jpg",
 };
 
-const cVVM=[
-  {name:"Vermelho",  hex:"#C0392B",photo:F.vvm_verm},
-  {name:"Verde",     hex:"#2D5A27",photo:F.vvm_verde},
-  {name:"Branco",    hex:"#F5F5F0",photo:F.vvm_bran},
-  {name:"Champagne", hex:"#C8B89A",photo:F.vvm_champ},
-  {name:"Dourado",   hex:"#CFB53B",photo:F.vvm_dour},
-];
+// Só foto vermelha para VVM
+const cVVM=[{name:"Vermelho",hex:"#C0392B",photo:F.vvm_verm}];
 const cVGBC=[
   {name:"Vermelho",  hex:"#C0392B"},
   {name:"Verde",     hex:"#2D5A27"},
@@ -47,7 +42,7 @@ const cVP=[{name:"Vermelho",hex:"#C0392B"},{name:"Preto",hex:"#2A2A2A"}];
 const cVB=[{name:"Vermelho",hex:"#C0392B"},{name:"Branco",hex:"#F5F5F0"}];
 const cLD=[{name:"Dourado",hex:"#CFB53B"}];
 
-const P30="Até 30 dias úteis";
+const P30="30 dias úteis";
 const AE="Estrutura interna com espuma e costura francesa.";
 const AP="Estrutura interna com placa ou espuma e costura francesa.";
 const APL="Estrutura interna com placa e costura francesa.";
@@ -74,19 +69,29 @@ const PRODUCTS=[
 ];
 
 const MINIMO_QTD={
-  VVM:   {"20V":15,"30V":12,"40V":10,"50V":6,"60V":4,"80V":3,"100V":2},
-  VALGL: {"30VaL":10,"40VaL":8,"50VaL":6},
+  // VVM: por tamanho conforme planilha
+  VVM:    {"20V":15,"30V":12,"40V":10,"50V":6,"60V":4,"80V":3,"100V":2},
+  // Veludo Cristal Gravata Longa
+  VALGL:  {"30VaL":10,"40VaL":8,"50VaL":6},
+  // Veludo Ale Lindíssimo
   VALLIND:{"30VAl/Lind":6,"60VAl/Lind":4,"90VAl/Lind":2},
-  VAL:   {"20VAl":12,"30VAl":10,"40VAl":8},
-  VX:    {"20VX":12,"30VX":10,"40VX":8},
-  VL:    {"20VL":12,"30VL":10,"40VL":8},
-  VD:    {"20VD":12,"30VD":10,"40VD":8},
-  VXC:   {"20VXC":12,"30VXC":10,"40VXC":8},
-  VFIXDZ:{"40VFiXdz":10},
-  VXP:   {"20VXP":12,"30VXP":10,"40VXP":8},
-  TL:    {"20TL":12,"30TL":10,"40TL":8},
-  LDR:   {"20LDR":12,"30LDR":10,"40LDR":8},
-  BVAL:{default:1},BTXDZ:{default:1},BTLT:{default:1},BTXDZP:{default:1},
+  // Veludo Ale
+  VAL:    {"20VAl":12,"30VAl":10,"40VAl":8},
+  // Estampados — mesmo padrão 20=12, 30=10, 40=8
+  VX:     {"20VX":12,"30VX":10,"40VX":8},
+  VL:     {"20VL":12,"30VL":10,"40VL":8},
+  VD:     {"20VD":12,"30VD":10,"40VD":8},
+  VXC:    {"20VXC":12,"30VXC":10,"40VXC":8},
+  VFIXDZ: {"40VFiXdz":10},
+  VXP:    {"20VXP":12,"30VXP":10,"40VXP":8},
+  TL:     {"20TL":12,"30TL":10,"40TL":8},
+  // Lamê
+  LDR:    {"20LDR":12,"30LDR":10,"40LDR":8},
+  // Bolas — mínimo a definir (deixo 1 por enquanto)
+  BVAL:   {default:1},
+  BTXDZ:  {default:1},
+  BTLT:   {default:1},
+  BTXDZP: {default:1},
 };
 
 const getMin=(sku,ref)=>{const m=MINIMO_QTD[sku];if(!m)return 1;if(typeof m==="number")return m;return m[ref]||m.default||1;};
