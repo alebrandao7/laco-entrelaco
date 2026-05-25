@@ -1,73 +1,102 @@
-import { useState, useRef, useCallback, memo } from "react";
+import { useState, useCallback, memo } from "react";
 
-const VERDE  = "#2D5A27"; const VERDE2 = "#4A7A42"; const VERDES = "#E8F0E6";
-const VINHO  = "#8B1A2A"; const VINHOL = "#F5E8EA";
-const BG     = "#FAF8F5"; const CARD   = "#FFFFFF"; const CARD2  = "#F5F0EB";
-const TEXT   = "#1A1A1A"; const TEXT2  = "#555555"; const TEXT3  = "#888888";
-const BORDER = "#E8E0D8";
-const CL = "https://res.cloudinary.com/djeliz676/image/upload/f_auto,q_auto/";
+const VERDE="#2D5A27",VERDE2="#4A7A42",VERDES="#E8F0E6";
+const VINHO="#8B1A2A",VINHOL="#F5E8EA";
+const BG="#FAF8F5",CARD="#FFFFFF",CARD2="#F5F0EB";
+const TEXT="#1A1A1A",TEXT2="#555555",TEXT3="#888888",BORDER="#E8E0D8";
+const CL="https://res.cloudinary.com/djeliz676/image/upload/f_auto,q_auto/";
 
-const F = {
-  veludo:CL+"v1779469881/6645645_dd5hsu.jpg",veludo_duplo:CL+"v1779473535/IMG-20260514-WA0090_sbll3w.jpg",
-  ale_grav:CL+"v1779473529/IMG-20260514-WA0055_czzsdi.jpg",ale_lind:CL+"v1779473526/IMG-20260514-WA0043_adzjdk.jpg",
-  ale:CL+"v1779473531/IMG-20260514-WA0063_ksi7lc.jpg",vxadrez:CL+"v1779473528/IMG-20260514-WA0053_iccnuq.jpg",
-  vlistra:CL+"v1779473527/IMG-20260514-WA0050_wfq7pi.jpg",vdourado:CL+"v1779639514/WhatsApp_Image_2026-05-14_at_09.35.20121_rkokfs.jpg",
-  vmeiox:CL+"v1779469881/34224_qq2r2s.jpg",vfita:CL+"v1779639354/WhatsApp_Image_2026-05-14_at_09.35.28_yhifod.jpg",
-  vxdz_central:CL+"v1779639425/WhatsApp_Image_2026-05-14_at_09.35.3011_xnhc2h.jpg",
-  tlistra:CL+"v1779473527/IMG-20260514-WA0049_hhcwjl.jpg",txadrez:CL+"v1779473527/IMG-20260514-WA0049_hhcwjl.jpg",
-  tpoa:CL+"v1779473525/IMG-20260514-WA0042_sfbrs6.jpg",lame:CL+"v1779473531/IMG-20260514-WA0060_vuq21n.jpg",
-  lame_duplo:CL+"v1779473534/IMG-20260514-WA0083_czzytz.jpg",
+const F={
+  vvm:      CL+"v1779469881/6645645_dd5hsu.jpg",
+  vvm_verm: CL+"v1779473532/IMG-20260514-WA0064_bv6xju.jpg",
+  vvm_verde:CL+"v1779639907/Gemini_Generated_Image_v2pj4xv2pj4xv2pj_puo5i7.png",
+  vvm_bran: CL+"v1779646241/Gemini_Generated_Image_c8rr8dc8rr8dc8rr3231_gopcdt.png",
+  vvm_champ:CL+"v1779646240/Gemini_Generated_Image_c8rr8dc8rr8dc8rr543_sgwa0f.png",
+  vvm_dour: CL+"v1779639978/Gemini_Generated_Image_f6315lf6315lf631_l84nrn.png",
+  val_gl:   CL+"v1779473529/IMG-20260514-WA0055_czzsdi.jpg",
+  val_lind: CL+"v1779473526/IMG-20260514-WA0043_adzjdk.jpg",
+  val:      CL+"v1779473531/IMG-20260514-WA0063_ksi7lc.jpg",
+  vx:       CL+"v1779473528/IMG-20260514-WA0053_iccnuq.jpg",
+  vl:       CL+"v1779473527/IMG-20260514-WA0050_wfq7pi.jpg",
+  vd:       CL+"v1779639514/WhatsApp_Image_2026-05-14_at_09.35.20121_rkokfs.jpg",
+  vxc:      CL+"v1779469881/34224_qq2r2s.jpg",
+  vfixdz:   CL+"v1779639354/WhatsApp_Image_2026-05-14_at_09.35.28_yhifod.jpg",
+  vxp:      CL+"v1779639425/WhatsApp_Image_2026-05-14_at_09.35.3011_xnhc2h.jpg",
+  tl:       CL+"v1779473527/IMG-20260514-WA0049_hhcwjl.jpg",
+  ldr:      CL+"v1779473531/IMG-20260514-WA0060_vuq21n.jpg",
+  bola:     CL+"v1779469881/6645645_dd5hsu.jpg",
 };
 
-const coresVeludo=[
-  {name:"Vermelho",hex:"#C0392B",photo:CL+"v1779473532/IMG-20260514-WA0064_bv6xju.jpg"},
-  {name:"Verde Floresta",hex:"#2D5A27",photo:CL+"v1779639907/Gemini_Generated_Image_v2pj4xv2pj4xv2pj_puo5i7.png"},
-  {name:"Branco",hex:"#F5F5F0",photo:CL+"v1779646241/Gemini_Generated_Image_c8rr8dc8rr8dc8rr3231_gopcdt.png"},
-  {name:"Champagne",hex:"#C8B89A",photo:CL+"v1779640036/Gemini_Generated_Image_u7t6dbu7t6dbu7t6_oj0uw2.png"},
-  {name:"Dourado Metálico",hex:"#CFB53B",photo:CL+"v1779646240/Gemini_Generated_Image_c8rr8dc8rr8dc8rr543_sgwa0f.png"},
+const cVVM=[
+  {name:"Vermelho",  hex:"#C0392B",photo:F.vvm_verm},
+  {name:"Verde",     hex:"#2D5A27",photo:F.vvm_verde},
+  {name:"Branco",    hex:"#F5F5F0",photo:F.vvm_bran},
+  {name:"Champagne", hex:"#C8B89A",photo:F.vvm_champ},
+  {name:"Dourado",   hex:"#CFB53B",photo:F.vvm_dour},
 ];
-const coresPadrao=[{name:"Vermelho",hex:"#C0392B"},{name:"Verde Floresta",hex:"#2D5A27"},{name:"Branco",hex:"#F5F5F0"},{name:"Champagne",hex:"#C8B89A"},{name:"Dourado Metálico",hex:"#CFB53B"}];
-const coresLame=[{name:"Dourado Metálico",hex:"#CFB53B"},{name:"Prata",hex:"#B8B8C0"}];
-// aliases para compatibilidade
-const coresVeludo=cVVm;
-const coresPadrao=cVGBC;
-const coresLame=cLD;
+const cVGBC=[
+  {name:"Vermelho",  hex:"#C0392B"},
+  {name:"Verde",     hex:"#2D5A27"},
+  {name:"Branco",    hex:"#F5F5F0"},
+  {name:"Champagne", hex:"#C8B89A"},
+];
+const cVGBCL=[...cVGBC,{name:"Lamê Dourado",hex:"#CFB53B"}];
+const cVM=[{name:"Vermelho",hex:"#C0392B"}];
+const cVD=[{name:"Vermelho",hex:"#C0392B"},{name:"Dourado",hex:"#CFB53B"}];
+const cVP=[{name:"Vermelho",hex:"#C0392B"},{name:"Preto",hex:"#2A2A2A"}];
+const cVB=[{name:"Vermelho",hex:"#C0392B"},{name:"Branco",hex:"#F5F5F0"}];
+const cLD=[{name:"Dourado",hex:"#CFB53B"}];
 
-const VENDEDORES=["Ana Paula","Carlos","Fernanda","João","Mariana","Ricardo"];
-const MINIMO_REAIS=2000;
-const MINIMO_QTD={"VVm":{default:2,"20VVm":15,"30VVm":12,"40VVm":10,"50VVm":6,"60VVm":4,"80VVm":3,"100VVm":2},"VDup":3,"Val/GL":3,"Val/Lin":2,"VaL":3,"VX":5,"VL":5,"VD":5,"VXC":5,"V/FiC":5,"VXP":5,"TL":5,"TX":5,"TP":5,"LDR":5,"LDRD":3,"CXPI":1};
-
-// Função que retorna mínimo considerando tamanho selecionado
-const getMin=(sku,ref)=>{
-  const m=MINIMO_QTD[sku];
-  if(!m) return 1;
-  if(typeof m==="number") return m;
-  return m[ref]||m.default||1;
-};const BRL=v=>`R$ ${Number(v).toLocaleString("pt-BR",{minimumFractionDigits:2})}`;
-const gerarNr=()=>`#${Date.now().toString().slice(-5)}`;
-const getFoto=(p,i)=>p.cores?.[i]?.photo||p.photo||"";
+const P30="Até 30 dias úteis";
+const AE="Estrutura interna com espuma e costura francesa.";
+const AP="Estrutura interna com placa ou espuma e costura francesa.";
+const APL="Estrutura interna com placa e costura francesa.";
+const AAR="Estrutura interna com placa e arame; confeccionado em costura francesa.";
+const AIS="Estrutura interna isopor, duplamente amarrada e com fio para pendurar.";
 
 const PRODUCTS=[
-  {sku:"VVm",name:"Laço Veludo Vermelho",subtitle:"Linha clássica — do 20cm ao 100cm",category:"Veludo",material:"100% poliéster",acabamento:"Estrutura interna com placa ou espuma e costura francesa",aplicacao:"Árvore / Portal / Painel / Fachada",sizes:[{label:"20cm",ref:"20VVm"},{label:"30cm",ref:"30VVm"},{label:"40cm",ref:"40VVm"},{label:"50cm",ref:"50VVm"},{label:"60cm",ref:"60VVm"},{label:"80cm",ref:"80VVm"},{label:"100cm",ref:"100VVm"}],prazo:"Até 30 dias úteis",cores:[{name:"Vermelho",hex:"#C0392B"}],tag:"Mais Vendido",tagColor:VINHO,tagBg:VINHOL,photo:F.veludo,desc:"O clássico da linha; confeccionado em Veludo tradicional."},
-  {sku:"VDup",name:"Laço Duplo Veludo Vermelho",subtitle:"Volume duplo para impacto máximo",category:"Veludo",material:"100% poliéster",acabamento:"Dupla camada de veludo, centro reforçado",aplicacao:"Topo de árvore grande / Portal",sizes:[{label:"30cm",ref:"30VDup"},{label:"40cm",ref:"40VDup"},{label:"50cm",ref:"50VDup"}],prazo:"7–15 dias úteis",cores:coresPadrao,tag:"Volume Extra",tagColor:"#5A1A6A",tagBg:"#F3EAF8",photo:F.veludo_duplo,desc:"Laço com dupla camada de veludo que multiplica o volume e o impacto visual."},
-  {sku:"Val/GL",name:"Laço Veludo Ale — Grav. Longa",subtitle:"Cauda longa — efeito cascata",category:"Veludo",material:"100% poliéster",acabamento:"Cauda longa dupla, costura francesa",aplicacao:"Topo de árvore / Portal / Coluna",sizes:[{label:"30cm",ref:"30Val/GL"},{label:"40cm",ref:"40Val/GL"},{label:"50cm",ref:"50Val/GL"}],prazo:"7–15 dias úteis",cores:coresPadrao,tag:"Cauda Longa",tagColor:VERDE,tagBg:VERDES,photo:F.ale_grav,desc:"Laço com gravata longa que cria efeito cascata ao descer pela árvore ou coluna."},
-  {sku:"Val/Lin",name:"Laço Veludo Ale — Lindíssimo",subtitle:"Linha premium — até 90cm",category:"Veludo",material:"100% poliéster",acabamento:"Acabamento premium, volume superior",aplicacao:"Shoppings / Praças / Eventos",sizes:[{label:"30cm",ref:"30Val/Lin"},{label:"60cm",ref:"60Val/Lin"},{label:"90cm",ref:"90Val/Lin"}],prazo:"10–15 dias úteis",cores:coresPadrao,tag:"Premium",tagColor:"#7A5A00",tagBg:"#FDF5E0",photo:F.ale_lind,desc:"O topo da linha Ale. Volume e acabamento superiores, disponível até 90cm."},
-  {sku:"VaL",name:"Laço Veludo Ale Vermelho",subtitle:"Modelo Ale — perfil arredondado",category:"Veludo",material:"100% poliéster",acabamento:"Perfil arredondado, alças largas",aplicacao:"Árvore / Parede / Vitrine",sizes:[{label:"30cm",ref:"30VaL"},{label:"40cm",ref:"40VaL"},{label:"50cm",ref:"50VaL"}],prazo:"7–15 dias úteis",cores:coresPadrao,tag:"Modelo Ale",tagColor:VERDE,tagBg:VERDES,photo:F.ale,desc:"Modelo Ale com perfil diferenciado e alças largas arredondadas."},
-  {sku:"VX",name:"Laço Veludo Verm. / Xadrez",subtitle:"Veludo com detalhe xadrez",category:"Estampado",material:"90% poliéster / 10% algodão",acabamento:"Corpo veludo, gravata xadrez",aplicacao:"Árvore / Guirlanda / Rústico",sizes:[{label:"20cm",ref:"20VX"},{label:"30cm",ref:"30VX"},{label:"40cm",ref:"40VX"}],prazo:"5–10 dias úteis",cores:[{name:"Vermelho",hex:"#C0392B"}],tag:"Estampado",tagColor:"#7A4A1A",tagBg:"#FDF0E5",photo:F.vxadrez,desc:"Corpo em veludo vermelho com detalhe em xadrez."},
-  {sku:"VL",name:"Laço Veludo Verm. / Listra",subtitle:"Veludo com faixa listrada",category:"Estampado",material:"90% poliéster / 10% algodão",acabamento:"Corpo veludo, detalhe listrado",aplicacao:"Árvore / Guirlanda / Vitrine",sizes:[{label:"20cm",ref:"20VL"},{label:"30cm",ref:"30VL"},{label:"40cm",ref:"40VL"}],prazo:"5–10 dias úteis",cores:[{name:"Vermelho",hex:"#C0392B"}],tag:"Estampado",tagColor:"#7A4A1A",tagBg:"#FDF0E5",photo:F.vlistra,desc:"Veludo vermelho com faixa listrada."},
-  {sku:"VD",name:"Laço Veludo Verm. / Dourado",subtitle:"Veludo com acabamento dourado",category:"Estampado",material:"90% poliéster / 10% algodão",acabamento:"Corpo veludo, detalhe dourado",aplicacao:"Árvore / Composição premium",sizes:[{label:"20cm",ref:"20VD"},{label:"30cm",ref:"30VD"},{label:"40cm",ref:"40VD"}],prazo:"5–10 dias úteis",cores:[{name:"Vermelho",hex:"#C0392B"},{name:"Dourado",hex:"#CFB53B"}],tag:"Veludo+Ouro",tagColor:"#7A5A00",tagBg:"#FDF5E0",photo:F.vdourado,desc:"Veludo vermelho com acabamento dourado."},
-  {sku:"VXC",name:"Laço Veludo Verm. / Meio Xadrez",subtitle:"Veludo + xadrez central",category:"Estampado",material:"100% poliéster",acabamento:"Corpo veludo, centro xadrez",aplicacao:"Árvore / Guirlanda / Temático",sizes:[{label:"20cm",ref:"20VXC"},{label:"30cm",ref:"30VXC"},{label:"40cm",ref:"40VXC"}],prazo:"5–10 dias úteis",cores:[{name:"Vermelho",hex:"#C0392B"}],tag:"Estampado",tagColor:"#7A4A1A",tagBg:"#FDF0E5",photo:F.vmeiox,desc:"Corpo em veludo vermelho com centro decorativo em xadrez."},
-  {sku:"V/FiC",name:"Laço Veludo Verm. / Fita",subtitle:"Veludo com fita decorativa",category:"Estampado",material:"100% poliéster",acabamento:"Corpo veludo, fita decorativa",aplicacao:"Árvore / Guirlanda / Composição",sizes:[{label:"20cm",ref:"20V/FiC"},{label:"30cm",ref:"30V/FiC"},{label:"40cm",ref:"40V/FiC"}],prazo:"5–10 dias úteis",cores:[{name:"Vermelho",hex:"#C0392B"}],tag:"Estampado",tagColor:"#7A4A1A",tagBg:"#FDF0E5",photo:F.vfita,desc:"Laço de veludo vermelho com fita decorativa."},
-  {sku:"VXP",name:"Laço Veludo XDZ/VM/PT Central",subtitle:"Xadrez vermelho e preto",category:"Estampado",material:"100% poliéster",acabamento:"Xadrez vermelho e preto central",aplicacao:"Árvore / Temático",sizes:[{label:"20cm",ref:"20VXP"},{label:"30cm",ref:"30VXP"},{label:"40cm",ref:"40VXP"}],prazo:"5–10 dias úteis",cores:[{name:"Vermelho",hex:"#C0392B"},{name:"Preto",hex:"#2A2A2A"}],tag:"Estampado",tagColor:"#7A4A1A",tagBg:"#FDF0E5",photo:F.vxdz_central,desc:"Xadrez vermelho e preto no centro."},
-  {sku:"TL",name:"Laço Tecido Listra Verm./Branco",subtitle:"Listrado clássico natalino",category:"Estampado",material:"100% poliéster",acabamento:"Listra vermelho e branco",aplicacao:"Árvore / Decoração geral",sizes:[{label:"20cm",ref:"20TL"},{label:"30cm",ref:"30TL"},{label:"40cm",ref:"40TL"}],prazo:"5–10 dias úteis",cores:[{name:"Vermelho",hex:"#C0392B"}],tag:"Tradicional",tagColor:VINHO,tagBg:VINHOL,photo:F.tlistra,desc:"Listra vermelho e branco — clássico natalino."},
-  {sku:"TX",name:"Laço Tecido Xadrez Verm./Branco",subtitle:"Xadrez vermelho e branco",category:"Estampado",material:"100% poliéster",acabamento:"Xadrez vermelho e branco",aplicacao:"Árvore / Temático",sizes:[{label:"20cm",ref:"20TX"},{label:"30cm",ref:"30TX"},{label:"40cm",ref:"40TX"}],prazo:"5–10 dias úteis",cores:[{name:"Vermelho",hex:"#C0392B"}],tag:"Tradicional",tagColor:VINHO,tagBg:VINHOL,photo:F.txadrez,desc:"Xadrez vermelho e branco."},
-  {sku:"TP",name:"Laço Tecido Poá Verm./Branco",subtitle:"Poá vermelho e branco",category:"Estampado",material:"100% poliéster",acabamento:"Poá vermelho e branco",aplicacao:"Árvore / Temático",sizes:[{label:"20cm",ref:"20TP"},{label:"30cm",ref:"30TP"},{label:"40cm",ref:"40TP"}],prazo:"5–10 dias úteis",cores:[{name:"Vermelho",hex:"#C0392B"}],tag:"Tradicional",tagColor:VINHO,tagBg:VINHOL,photo:F.tpoa,desc:"Poá vermelho e branco — alegre e festivo."},
-  {sku:"LDR",name:"Laço Lamê Dourado",subtitle:"Brilho metálico permanente",category:"Lamê",material:"100% poliéster metalizado",acabamento:"Costura selada, brilho permanente",aplicacao:"Presépio / Arranjos / Composição ouro",sizes:[{label:"20cm",ref:"20LDR"},{label:"30cm",ref:"30LDR"},{label:"40cm",ref:"40LDR"}],prazo:"5–10 dias úteis",cores:coresLame,tag:"Metálico",tagColor:"#7A5A00",tagBg:"#FDF5E0",photo:F.lame,desc:"Lamê metalizado com brilho intenso e permanente."},
-  {sku:"LDRD",name:"Laço Lamê Dourado Duplo",subtitle:"Dupla camada metálica",category:"Lamê",material:"100% poliéster metalizado",acabamento:"Dupla camada, brilho intensificado",aplicacao:"Presépio / Portal / Decoração central",sizes:[{label:"20cm",ref:"20LDRD"},{label:"30cm",ref:"30LDRD"},{label:"40cm",ref:"40LDRD"}],prazo:"5–10 dias úteis",cores:coresLame,tag:"Duplo Metálico",tagColor:"#7A5A00",tagBg:"#FDF5E0",photo:F.lame_duplo,desc:"Versão dupla do Lamê Dourado."},
-  {sku:"CXPI",name:"Caixa Presente Iluminada",subtitle:"Veludo vermelho + LED morno",category:"Iluminado",material:"Madeira + veludo + fita LED 220V",acabamento:"Veludo vermelho + Lamê Dourado",aplicacao:"Vitrine / Hall / Uso interno",sizes:[{label:"40×40cm 36W",ref:"CXPI 40X40"},{label:"45×45cm 48W",ref:"CxPI 45X45"},{label:"50×50cm 58W",ref:"CxPI 50X50"}],prazo:"10–20 dias úteis",cores:[{name:"Vermelho",hex:"#C0392B"},{name:"Dourado",hex:"#CFB53B"}],tag:"Iluminado",tagColor:"#7A5A00",tagBg:"#FDF5E0",photo:F.veludo,desc:"Caixa presente em veludo vermelho com LED morna 220V."},
+  {sku:"VVM",   name:"Laço Veludo Vermelho",             subtitle:"Linha clássica — 20cm a 100cm",       category:"Veludo",   material:"100% poliéster",              acabamento:AP,  prazo:P30, desc:"O clássico da linha; confeccionado em Veludo tradicional.",                                                                              cores:cVVM,   photo:F.vvm,      tag:"Mais Vendido", tagColor:VINHO,     tagBg:VINHOL,     sizes:[{label:"20cm",ref:"20V"},{label:"30cm",ref:"30V"},{label:"40cm",ref:"40V"},{label:"50cm",ref:"50V"},{label:"60cm",ref:"60V"},{label:"80cm",ref:"80V"},{label:"100cm",ref:"100V"}]},
+  {sku:"VALGL", name:"Laço Veludo Cristal — Grav. Longa",subtitle:"Efeito cascata — 30cm a 50cm",        category:"Veludo",   material:"100% poliéster",              acabamento:AP,  prazo:P30, desc:"Confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata ao descer pela árvore ou coluna.",                             cores:cVGBC,  photo:F.val_gl,   tag:"Cauda Longa",  tagColor:VERDE,     tagBg:VERDES,     sizes:[{label:"30cm",ref:"30VaL"},{label:"40cm",ref:"40VaL"},{label:"50cm",ref:"50VaL"}]},
+  {sku:"VALLIND",name:"Laço Veludo Ale — Lindíssimo",    subtitle:"Linha premium — 30cm a 90cm",         category:"Veludo",   material:"100% poliéster",              acabamento:AAR, prazo:P30, desc:"Laço duplo confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata.",                                                  cores:cVGBC,  photo:F.val_lind,  tag:"Premium",      tagColor:"#7A5A00", tagBg:"#FDF5E0",  sizes:[{label:"30cm",ref:"30VAl/Lind"},{label:"60cm",ref:"60VAl/Lind"},{label:"90cm",ref:"90VAl/Lind"}]},
+  {sku:"VAL",   name:"Laço Veludo Ale Vermelho",         subtitle:"Tradicional — 20cm a 40cm",           category:"Veludo",   material:"100% poliéster",              acabamento:APL, prazo:P30, desc:"Laço tradicional confeccionado em Veludo Cristal.",                                                                                      cores:cVGBC,  photo:F.val,      tag:"Modelo Ale",   tagColor:VERDE,     tagBg:VERDES,     sizes:[{label:"20cm",ref:"20VAl"},{label:"30cm",ref:"30VAl"},{label:"40cm",ref:"40VAl"}]},
+  {sku:"VX",    name:"Laço Veludo Vermelho Xadrez",      subtitle:"Veludo com borda xadrez",             category:"Estampado",material:"90% poliéster / 10% algodão",  acabamento:AE,  prazo:P30, desc:"Laço confeccionado em Veludo Tradicional, com borda xadrez.",                                                                           cores:cVM,    photo:F.vx,       tag:"Estampado",    tagColor:"#7A4A1A", tagBg:"#FDF0E5",  sizes:[{label:"20cm",ref:"20VX"},{label:"30cm",ref:"30VX"},{label:"40cm",ref:"40VX"}]},
+  {sku:"VL",    name:"Laço Veludo Vermelho Listra",      subtitle:"Veludo com borda de listra",          category:"Estampado",material:"90% poliéster / 10% algodão",  acabamento:AE,  prazo:P30, desc:"Laço confeccionado em Veludo Tradicional, com borda de listra.",                                                                        cores:cVM,    photo:F.vl,       tag:"Estampado",    tagColor:"#7A4A1A", tagBg:"#FDF0E5",  sizes:[{label:"20cm",ref:"20VL"},{label:"30cm",ref:"30VL"},{label:"40cm",ref:"40VL"}]},
+  {sku:"VD",    name:"Laço Veludo Vermelho com Dourado", subtitle:"Veludo com borda ouro",               category:"Estampado",material:"90% poliéster / 10% algodão",  acabamento:AE,  prazo:P30, desc:"Laço confeccionado em Veludo Tradicional, com borda ouro.",                                                                             cores:cVD,    photo:F.vd,       tag:"Veludo+Ouro",  tagColor:"#7A5A00", tagBg:"#FDF5E0",  sizes:[{label:"20cm",ref:"20VD"},{label:"30cm",ref:"30VD"},{label:"40cm",ref:"40VD"}]},
+  {sku:"VXC",   name:"Laço Veludo Verm. Meio Xadrez",    subtitle:"Tecido xadrez com borda veludo",      category:"Estampado",material:"100% poliéster",              acabamento:AE,  prazo:P30, desc:"Laço tradicional confeccionado em tecido xadrez, com borda em veludo.",                                                                  cores:cVM,    photo:F.vxc,      tag:"Estampado",    tagColor:"#7A4A1A", tagBg:"#FDF0E5",  sizes:[{label:"20cm",ref:"20VXC"},{label:"30cm",ref:"30VXC"},{label:"40cm",ref:"40VXC"}]},
+  {sku:"VFIXDZ",name:"Laço Veludo Verm. Fita Xadrez",    subtitle:"Veludo com fita xadrez decorativa",   category:"Estampado",material:"100% poliéster",              acabamento:AE,  prazo:P30, desc:"Laço confeccionado em Veludo Tradicional, com fita xadrez decorativa central.",                                                         cores:cVM,    photo:F.vfixdz,   tag:"Estampado",    tagColor:"#7A4A1A", tagBg:"#FDF0E5",  sizes:[{label:"40cm",ref:"40VFiXdz"}]},
+  {sku:"VXP",   name:"Laço Veludo Verm. XDZ/VM/PT",      subtitle:"Veludo com flanela xadrez vm/pt",     category:"Estampado",material:"100% poliéster",              acabamento:AE,  prazo:P30, desc:"Laço confeccionado em veludo tradicional, com flanela xadrez vm/pt central.",                                                           cores:cVP,    photo:F.vxp,      tag:"Estampado",    tagColor:"#7A4A1A", tagBg:"#FDF0E5",  sizes:[{label:"20cm",ref:"20VXP"},{label:"30cm",ref:"30VXP"},{label:"40cm",ref:"40VXP"}]},
+  {sku:"TL",    name:"Laço Tecido Listra Vm/Br",         subtitle:"Tecido listrado tradicional",         category:"Estampado",material:"100% algodão",                 acabamento:AE,  prazo:P30, desc:"Laço tradicional confeccionado em tecido listrado.",                                                                                     cores:cVB,    photo:F.tl,       tag:"Tradicional",  tagColor:VINHO,     tagBg:VINHOL,     sizes:[{label:"20cm",ref:"20TL"},{label:"30cm",ref:"30TL"},{label:"40cm",ref:"40TL"}]},
+  {sku:"LDR",   name:"Laço Lamê Dourado",                subtitle:"Brilho metálico intenso",             category:"Lamê",     material:"100% poliéster metalizado",    acabamento:AE,  prazo:P30, desc:"Laço tradicional confeccionado em Lamê dourado; brilho intenso.",                                                                       cores:cLD,    photo:F.ldr,      tag:"Metálico",     tagColor:"#7A5A00", tagBg:"#FDF5E0",  sizes:[{label:"20cm",ref:"20LDR"},{label:"30cm",ref:"30LDR"},{label:"40cm",ref:"40LDR"}]},
+  {sku:"BVAL",  name:"Bola Veludo Ale Vermelho",          subtitle:"Decorativa — 12cm a 25cm",           category:"Bolas",    material:"Isopor e poliéster",           acabamento:AIS, prazo:P30, desc:"Bola tradicional coberta com veludo cristal vermelho.",                                                                                  cores:cVGBCL, photo:F.bola,     tag:"Decorativa",   tagColor:VINHO,     tagBg:VINHOL,     sizes:[{label:"12cm",ref:"12BVAl"},{label:"15cm",ref:"15BVAl"},{label:"20cm",ref:"20BVAl"},{label:"25cm",ref:"25BVAl"}]},
+  {sku:"BTXDZ", name:"Bola Tecido Xadrez Decorada",       subtitle:"Xadrez Vm/Br com galhos natalinos",  category:"Bolas",    material:"Isopor e poliéster",           acabamento:AIS, prazo:P30, desc:"Bola coberta com tecido xadrez Vm/Br e decorada com galhos natalinos.",                                                                cores:cVB,    photo:F.bola,     tag:"Decorativa",   tagColor:"#7A4A1A", tagBg:"#FDF0E5",  sizes:[{label:"12cm",ref:"12BTXdz"},{label:"15cm",ref:"15BTXdz"},{label:"20cm",ref:"20BTXdz"}]},
+  {sku:"BTLT",  name:"Bola Tecido Listrado Decorada",     subtitle:"Listrado Vm/Br com galhos natalinos",category:"Bolas",    material:"Isopor e poliéster",           acabamento:AIS, prazo:P30, desc:"Bola coberta com tecido listrado Vm/Br e decorada com galhos natalinos.",                                                              cores:cVB,    photo:F.bola,     tag:"Decorativa",   tagColor:"#7A4A1A", tagBg:"#FDF0E5",  sizes:[{label:"12cm",ref:"12BTLt"},{label:"15cm",ref:"15BTLt"},{label:"20cm",ref:"20BTLt"}]},
+  {sku:"BTXDZP",name:"Bola Tecido Xadrez Vm/Pt Decorada", subtitle:"Xadrez Vm/Pt com galhos natalinos",  category:"Bolas",    material:"Isopor e poliéster",           acabamento:AIS, prazo:P30, desc:"Bola coberta com tecido Xadrez Vm/Pt e decorada com galhos natalinos.",                                                               cores:cVP,    photo:F.bola,     tag:"Decorativa",   tagColor:"#7A4A1A", tagBg:"#FDF0E5",  sizes:[{label:"12cm",ref:"12BTXdzVm/Pt"},{label:"15cm",ref:"15BTXdzVm/Pt"},{label:"20cm",ref:"20BTXdzVm/Pt"}]},
 ];
 
+const MINIMO_QTD={
+  VVM:   {"20V":15,"30V":12,"40V":10,"50V":6,"60V":4,"80V":3,"100V":2},
+  VALGL: {"30VaL":10,"40VaL":8,"50VaL":6},
+  VALLIND:{"30VAl/Lind":6,"60VAl/Lind":4,"90VAl/Lind":2},
+  VAL:   {"20VAl":12,"30VAl":10,"40VAl":8},
+  VX:    {"20VX":12,"30VX":10,"40VX":8},
+  VL:    {"20VL":12,"30VL":10,"40VL":8},
+  VD:    {"20VD":12,"30VD":10,"40VD":8},
+  VXC:   {"20VXC":12,"30VXC":10,"40VXC":8},
+  VFIXDZ:{"40VFiXdz":10},
+  VXP:   {"20VXP":12,"30VXP":10,"40VXP":8},
+  TL:    {"20TL":12,"30TL":10,"40TL":8},
+  LDR:   {"20LDR":12,"30LDR":10,"40LDR":8},
+  BVAL:{default:1},BTXDZ:{default:1},BTLT:{default:1},BTXDZP:{default:1},
+};
+
+const getMin=(sku,ref)=>{const m=MINIMO_QTD[sku];if(!m)return 1;if(typeof m==="number")return m;return m[ref]||m.default||1;};
+const getFoto=(p,i)=>p.cores?.[i]?.photo||p.photo||"";
+const BRL=v=>`R$ ${Number(v).toLocaleString("pt-BR",{minimumFractionDigits:2})}`;
+const gerarNr=()=>`#${Date.now().toString().slice(-5)}`;
+
 const CATEGORIES=["Todos","Veludo","Lamê","Estampado","Bolas"];
+const VENDEDORES=["Ana Paula","Carlos","Fernanda","João","Mariana","Ricardo"];
+const MINIMO_REAIS=2000;
 const SHEETS_URL="https://script.google.com/macros/s/AKfycbw5c9f7of3GhrjgOcZR7_KDoEp4_avn4D9zsOkn7p_O1GjWii200ow5e9YhP93pjvVGhw/exec";
 
 const CSS=`
@@ -92,21 +121,28 @@ const Tag=({label,color,bg})=>(
   <span className="mn" style={{background:bg,color,fontSize:8,fontWeight:700,letterSpacing:1.5,padding:"3px 8px",borderRadius:4,border:`1px solid ${color}33`,display:"inline-block"}}>{label.toUpperCase()}</span>
 );
 
-// ── MODAL — componente completamente isolado ──────────────────────────────
+const Logo=()=>(
+  <svg width="160" height="36" viewBox="0 0 340 80" fill="none">
+    <text x="0" y="62" fontFamily="Georgia,serif" fontSize="52" fontStyle="italic" fill="#2D5A27">laço</text>
+    <text x="118" y="66" fontFamily="Georgia,serif" fontSize="58" fontStyle="italic" fill="#8B1A2A">&</text>
+    <text x="148" y="62" fontFamily="Georgia,serif" fontSize="52" fontStyle="italic" fill="#2D5A27">entrelaço</text>
+  </svg>
+);
+
+// ── MODAL — estado completamente isolado ──────────────────────────────────
 const ProductModal=memo(({product:p,cartCount,onClose,onAdd})=>{
   const[sz,setSz]=useState(0);
   const[cl,setCl]=useState(0);
   const tam=p.sizes[sz]||p.sizes[0];
   const min=getMin(p.sku,tam?.ref);
-  const[qt,setQt]=useState(min);
+  const[qt,setQt]=useState(()=>getMin(p.sku,p.sizes[0]?.ref));
   const[er,setEr]=useState("");
   const cor=p.cores[cl]||p.cores[0];
 
-  // Atualiza qty mínimo quando muda tamanho
   const handleSz=i=>{
     setSz(i);
-    const newMin=getMin(p.sku,p.sizes[i]?.ref);
-    setQt(q=>Math.max(q,newMin));
+    const nm=getMin(p.sku,p.sizes[i]?.ref);
+    setQt(q=>Math.max(q,nm));
     setEr("");
   };
 
@@ -117,11 +153,8 @@ const ProductModal=memo(({product:p,cartCount,onClose,onAdd})=>{
   };
 
   return(
-    <div style={{position:"fixed",inset:0,background:"rgba(20,10,10,0.55)",display:"flex",alignItems:"flex-end",justifyContent:"center",zIndex:9999,backdropFilter:"blur(6px)"}}
-      onClick={onClose}>
-      <div className="scr" style={{background:BG,borderRadius:"24px 24px 0 0",width:"100%",maxWidth:420,maxHeight:"92vh",borderTop:`2px solid ${VERDE}`}}
-        onClick={e=>e.stopPropagation()}>
-        {/* Foto */}
+    <div style={{position:"fixed",inset:0,background:"rgba(20,10,10,0.6)",display:"flex",alignItems:"flex-end",justifyContent:"center",zIndex:9999,backdropFilter:"blur(6px)"}} onClick={onClose}>
+      <div className="scr" style={{background:BG,borderRadius:"24px 24px 0 0",width:"100%",maxWidth:420,maxHeight:"92vh",borderTop:`2px solid ${VERDE}`}} onClick={e=>e.stopPropagation()}>
         <div style={{position:"relative",borderRadius:"24px 24px 0 0",overflow:"hidden"}}>
           <Img src={getFoto(p,cl)} h={240}/>
           <button onClick={onClose} style={{position:"absolute",top:12,left:12,background:"rgba(255,255,255,0.92)",border:"none",borderRadius:"50%",width:34,height:34,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",fontSize:15,boxShadow:"0 2px 8px rgba(0,0,0,0.15)"}}>←</button>
@@ -130,7 +163,6 @@ const ProductModal=memo(({product:p,cartCount,onClose,onAdd})=>{
             <span className="mn" style={{color:"#fff",fontSize:9}}>{cor.name}</span>
           </div>}
         </div>
-
         <div style={{padding:"16px 16px 40px"}}>
           <div style={{display:"flex",justifyContent:"space-between",marginBottom:8}}>
             <Tag label={p.tag} color={p.tagColor} bg={p.tagBg}/>
@@ -139,27 +171,21 @@ const ProductModal=memo(({product:p,cartCount,onClose,onAdd})=>{
           <p className="pf" style={{color:TEXT,fontSize:20,marginBottom:2}}>{p.name}</p>
           <p className="dm" style={{color:TEXT3,fontSize:12,marginBottom:10}}>{p.subtitle}</p>
           <p className="dm" style={{color:TEXT2,fontSize:13,lineHeight:1.7,marginBottom:12}}>{p.desc}</p>
-
-          {/* Ficha */}
           <div style={{background:VERDES,borderRadius:12,padding:"10px 12px",marginBottom:12,border:`1px solid ${VERDE}22`}}>
             <p className="mn" style={{color:VERDE,fontSize:8,letterSpacing:2,marginBottom:8}}>FICHA TÉCNICA</p>
-            {[{l:"Composição",v:p.material},{l:"Acabamento",v:p.acabamento},{l:"Aplicação",v:p.aplicacao},{l:"Prazo",v:p.prazo},{l:"Mín. pedido",v:`${min} unidades`}].map((r,i,a)=>(
+            {[{l:"Composição",v:p.material},{l:"Acabamento",v:p.acabamento},{l:"Prazo",v:p.prazo},{l:"Mín. pedido",v:`${min} unidades`}].map((r,i,a)=>(
               <div key={i} style={{display:"flex",gap:10,padding:"5px 0",borderBottom:i<a.length-1?`1px solid ${VERDE}18`:"none"}}>
                 <span className="mn" style={{color:TEXT3,fontSize:9,minWidth:80}}>{r.l}</span>
                 <span className="dm" style={{color:TEXT2,fontSize:12}}>{r.v}</span>
               </div>
             ))}
           </div>
-
-          {/* Tamanho */}
           <p className="mn" style={{color:TEXT3,fontSize:8,letterSpacing:2,marginBottom:8}}>TAMANHO</p>
           <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:12}}>
             {p.sizes.map((s,i)=>(
               <button key={i} onClick={()=>handleSz(i)} style={{padding:"7px 10px",borderRadius:10,background:sz===i?VERDE:CARD,color:sz===i?"#fff":TEXT2,border:sz===i?`1px solid ${VERDE2}`:`1px solid ${BORDER}`,fontSize:10,fontWeight:700,fontFamily:"'DM Mono',monospace",cursor:"pointer"}}>{s.label}</button>
             ))}
           </div>
-
-          {/* Cor */}
           <p className="mn" style={{color:TEXT3,fontSize:8,letterSpacing:2,marginBottom:8}}>COR</p>
           <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:12}}>
             {p.cores.map((c,i)=>(
@@ -170,30 +196,25 @@ const ProductModal=memo(({product:p,cartCount,onClose,onAdd})=>{
               </button>
             ))}
           </div>
-
-          {/* Selecionado */}
           <div style={{background:CARD2,borderRadius:10,padding:"7px 12px",marginBottom:12,display:"flex",justifyContent:"space-between",border:`1px solid ${BORDER}`}}>
             <span className="mn" style={{color:TEXT3,fontSize:9}}>SELECIONADO</span>
             <span className="mn" style={{color:VERDE,fontSize:9,fontWeight:700}}>{tam?.ref} · {cor?.name}</span>
           </div>
-
-          {/* Quantidade */}
           <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:8}}>
             <p className="mn" style={{color:TEXT3,fontSize:8,letterSpacing:2}}>QUANTIDADE</p>
             <div style={{display:"inline-flex",alignItems:"center",background:CARD,borderRadius:10,border:`1px solid ${BORDER}`,overflow:"hidden"}}>
-              <button onClick={()=>setQt(q=>Math.max(min,q-1))} style={{width:36,height:36,background:"none",border:"none",color:VINHO,fontSize:22,fontWeight:700,cursor:"pointer"}}>−</button>              <span className="mn" style={{color:TEXT,fontSize:14,minWidth:28,textAlign:"center",fontWeight:700}}>{qt}</span>
+              <button onClick={()=>setQt(q=>Math.max(min,q-1))} style={{width:36,height:36,background:"none",border:"none",color:VINHO,fontSize:22,fontWeight:700,cursor:"pointer"}}>−</button>
+              <span className="mn" style={{color:TEXT,fontSize:14,minWidth:28,textAlign:"center",fontWeight:700}}>{qt}</span>
               <button onClick={()=>setQt(q=>q+1)} style={{width:36,height:36,background:"none",border:"none",color:VERDE,fontSize:22,fontWeight:700,cursor:"pointer"}}>+</button>
             </div>
             <span className="mn" style={{color:TEXT3,fontSize:9}}>mín. {min}un.</span>
           </div>
-
-          {er&&<p className="dm" style={{color:VINHO,fontSize:11,marginBottom:8}}>⚠ {er}</p>}
-
-          <button onClick={doAdd} style={{width:"100%",background:VERDE,color:"#fff",padding:"14px",borderRadius:14,fontSize:12,fontWeight:700,letterSpacing:2,cursor:"pointer",border:"none",marginBottom:8,boxShadow:"0 4px 16px rgba(45,90,39,0.3)"}}>
+          {er&&<p style={{color:VINHO,fontSize:11,marginBottom:8,fontFamily:"'DM Sans',sans-serif"}}>⚠ {er}</p>}
+          <button onClick={doAdd} style={{width:"100%",background:VERDE,color:"#fff",padding:"14px",borderRadius:14,fontSize:12,fontWeight:700,letterSpacing:2,cursor:"pointer",border:"none",marginBottom:8,boxShadow:"0 4px 16px rgba(45,90,39,0.3)",fontFamily:"'DM Sans',sans-serif"}}>
             ADICIONAR AO PEDIDO
           </button>
           {cartCount>0&&(
-            <button onClick={onClose} style={{width:"100%",background:"transparent",border:`1.5px solid ${VERDE}`,color:VERDE,padding:"11px",borderRadius:14,fontSize:12,fontWeight:600,cursor:"pointer"}}>
+            <button onClick={onClose} style={{width:"100%",background:"transparent",border:`1.5px solid ${VERDE}`,color:VERDE,padding:"11px",borderRadius:14,fontSize:12,fontWeight:600,cursor:"pointer",fontFamily:"'DM Sans',sans-serif"}}>
               VER PEDIDO ({cartCount} {cartCount===1?"item":"itens"}) →
             </button>
           )}
@@ -229,7 +250,7 @@ export default function App(){
   },[]);
 
   const removeFromCart=id=>setCart(c=>c.filter(i=>i.id!==id));
-  const updateQty=(id,d)=>setCart(c=>c.map(i=>i.id===id?{...i,qty:Math.max(MINIMO_QTD[i.product.sku]||1,i.qty+d)}:i));
+  const updateQty=(id,d)=>setCart(c=>c.map(i=>i.id===id?{...i,qty:Math.max(getMin(i.product.sku,i.size?.ref),i.qty+d)}:i));
 
   const sendPedido=async()=>{
     if(!form.nome||!form.whats){alert("Preencha Nome e WhatsApp!");return;}
@@ -241,19 +262,19 @@ export default function App(){
     setScreen("success");
   };
 
+  const s=(v,style={})=><span style={{fontFamily:"'DM Sans',sans-serif",...style}}>{v}</span>;
+
   return(
     <div style={{minHeight:"100vh",background:"#EDE8E0",display:"flex",alignItems:"center",justifyContent:"center",padding:"20px 0"}}>
       <style>{CSS}</style>
-
       <div style={{width:"100%",maxWidth:420,height:"min(820px,100dvh)",background:BG,borderRadius:32,overflow:"hidden",display:"flex",flexDirection:"column",boxShadow:"0 20px 60px rgba(0,0,0,0.15),0 0 0 1px rgba(45,90,39,0.12)"}}>
 
-        {/* Toast */}
         {toast&&<div style={{position:"fixed",bottom:30,left:"50%",transform:"translateX(-50%)",background:VERDE,color:"#fff",padding:"8px 18px",borderRadius:20,zIndex:9998,display:"flex",alignItems:"center",gap:8,boxShadow:"0 4px 16px rgba(45,90,39,0.4)",whiteSpace:"nowrap",pointerEvents:"none",fontFamily:"'DM Sans',sans-serif",fontSize:12,fontWeight:600}}>✅ {toast}</div>}
 
-        {/* CATÁLOGO */}
+        {/* ── CATÁLOGO ── */}
         {screen==="catalog"&&<>
           <div style={{padding:"14px 16px 10px",background:BG,borderBottom:`1px solid ${BORDER}`,display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0}}>
-            <svg width="160" height="36" viewBox="0 0 340 80" fill="none"><text x="0" y="62" fontFamily="Georgia,serif" fontSize="52" fontStyle="italic" fill="#2D5A27">laço</text><text x="118" y="66" fontFamily="Georgia,serif" fontSize="58" fontStyle="italic" fill="#8B1A2A">&</text><text x="148" y="62" fontFamily="Georgia,serif" fontSize="52" fontStyle="italic" fill="#2D5A27">entrelaço</text></svg>
+            <Logo/>
             <button onClick={()=>setScreen("carrinho")} style={{position:"relative",background:cartCount>0?VERDE:"transparent",border:`1.5px solid ${cartCount>0?VERDE:BORDER}`,borderRadius:12,padding:"8px 12px",display:"flex",alignItems:"center",gap:6,cursor:"pointer"}}>
               <span style={{fontSize:16}}>🛍</span>
               {cartCount>0&&<span style={{color:"#fff",fontSize:10,fontWeight:700,fontFamily:"'DM Mono',monospace"}}>{cartCount}</span>}
@@ -273,7 +294,7 @@ export default function App(){
                     <Tag label={p.tag} color={p.tagColor} bg={p.tagBg}/>
                     <p className="pf" style={{color:TEXT,fontSize:16,lineHeight:1.2,marginTop:6}}>{p.name}</p>
                     <p className="dm" style={{color:TEXT3,fontSize:11,marginTop:2,marginBottom:6}}>{p.subtitle}</p>
-                    <p className="mn" style={{color:VERDE2,fontSize:8,letterSpacing:1,marginBottom:8,opacity:0.7}}>REF: {p.sku} · mín. {MINIMO_QTD[p.sku]||1}un.</p>
+                    <p className="mn" style={{color:VERDE2,fontSize:8,letterSpacing:1,marginBottom:8,opacity:0.7}}>REF: {p.sku}</p>
                     <div style={{display:"flex",gap:4,alignItems:"center",marginBottom:10}}>
                       {p.cores.map((c,i)=><div key={i} title={c.name} style={{width:11,height:11,borderRadius:"50%",background:c.hex,border:`1px solid ${BORDER}`}}/>)}
                       <span className="mn" style={{color:TEXT3,fontSize:8,marginLeft:2}}>{p.cores.length} COR{p.cores.length>1?"ES":""}</span>
@@ -289,7 +310,7 @@ export default function App(){
           </div>
         </>}
 
-        {/* CARRINHO */}
+        {/* ── CARRINHO ── */}
         {screen==="carrinho"&&<>
           <div style={{padding:"14px 16px 10px",background:BG,borderBottom:`1px solid ${BORDER}`,display:"flex",alignItems:"center",gap:10,flexShrink:0}}>
             <button onClick={()=>setScreen("catalog")} style={{background:"none",border:"none",color:VERDE,fontSize:20,cursor:"pointer",padding:"0 4px"}}>←</button>
@@ -308,9 +329,7 @@ export default function App(){
                 <div style={{display:"flex",flexDirection:"column",gap:8,marginBottom:12}}>
                   {cart.map(item=>(
                     <div key={item.id} style={{background:CARD,borderRadius:14,padding:"12px",border:`1px solid ${BORDER}`,display:"flex",gap:10,alignItems:"center"}}>
-                      <div style={{width:48,height:48,borderRadius:10,overflow:"hidden",flexShrink:0,border:`1px solid ${BORDER}`}}>
-                        <Img src={item.color?.photo||item.product.photo} h={48}/>
-                      </div>
+                      <div style={{width:48,height:48,borderRadius:10,overflow:"hidden",flexShrink:0,border:`1px solid ${BORDER}`}}><Img src={item.color?.photo||item.product.photo} h={48}/></div>
                       <div style={{flex:1,minWidth:0}}>
                         <p className="pf" style={{color:TEXT,fontSize:12,marginBottom:2,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{item.product.name}</p>
                         <p className="mn" style={{color:VERDE,fontSize:8,letterSpacing:1,marginBottom:3}}>{item.size?.ref}</p>
@@ -328,11 +347,9 @@ export default function App(){
                     </div>
                   ))}
                 </div>
-
                 <button onClick={()=>setScreen("catalog")} style={{width:"100%",background:"transparent",border:`1.5px dashed ${VERDE}`,color:VERDE,padding:"11px",borderRadius:12,fontSize:12,fontWeight:600,marginBottom:16,cursor:"pointer",fontFamily:"'DM Sans',sans-serif"}}>+ Adicionar mais produtos</button>
                 <div style={{height:1,background:BORDER,marginBottom:16}}/>
                 <p className="mn" style={{color:VERDE,fontSize:9,letterSpacing:2.5,marginBottom:12}}>DADOS DO CLIENTE</p>
-
                 <div style={{marginBottom:10}}>
                   <p className="mn" style={{color:TEXT3,fontSize:8,letterSpacing:1,marginBottom:5}}>VENDEDOR</p>
                   <div style={{position:"relative"}}>
@@ -343,24 +360,20 @@ export default function App(){
                     <span style={{position:"absolute",right:12,top:"50%",transform:"translateY(-50%)",color:TEXT3,fontSize:10,pointerEvents:"none"}}>▾</span>
                   </div>
                 </div>
-
                 {[{k:"nome",l:"Nome / Empresa *",p:"Ex: Shopping Parque D. Pedro",t:"text"},{k:"whats",l:"WhatsApp *",p:"(11) 99999-9999",t:"tel"},{k:"email",l:"E-mail",p:"contato@empresa.com.br",t:"email"}].map(f=>(
                   <div key={f.k} style={{marginBottom:10}}>
                     <p className="mn" style={{color:TEXT3,fontSize:8,letterSpacing:1,marginBottom:5}}>{f.l.toUpperCase()}</p>
                     <input className="inp" type={f.t} value={form[f.k]} placeholder={f.p} autoComplete="off" onChange={e=>setForm(p=>({...p,[f.k]:e.target.value}))}/>
                   </div>
                 ))}
-
                 <div style={{marginBottom:16}}>
                   <p className="mn" style={{color:TEXT3,fontSize:8,letterSpacing:1,marginBottom:5}}>OBSERVAÇÕES</p>
                   <textarea className="inp" value={form.obs} placeholder="Data do evento, detalhes especiais..." rows={2} style={{resize:"none"}} onChange={e=>setForm(p=>({...p,obs:e.target.value}))}/>
                 </div>
-
                 <div style={{background:VINHOL,border:`1px solid ${VINHO}33`,borderRadius:10,padding:"10px 12px",marginBottom:14}}>
                   <p className="mn" style={{color:VINHO,fontSize:9,letterSpacing:1}}>PEDIDO MÍNIMO</p>
                   <p className="dm" style={{color:TEXT2,fontSize:12,marginTop:3}}>Valor mínimo de <strong>{BRL(MINIMO_REAIS)}</strong> por pedido.</p>
                 </div>
-
                 <button onClick={sendPedido} style={{width:"100%",background:enviando?"#999":VERDE,color:"#fff",padding:"16px",borderRadius:14,fontSize:12,fontWeight:700,letterSpacing:2,cursor:"pointer",border:"none",boxShadow:"0 4px 16px rgba(45,90,39,0.3)",fontFamily:"'DM Sans',sans-serif"}}>
                   {enviando?"ENVIANDO...":"CONFIRMAR PEDIDO"}
                 </button>
@@ -369,20 +382,19 @@ export default function App(){
           </div>
         </>}
 
-        {/* SUCCESS */}
+        {/* ── SUCCESS ── */}
         {screen==="success"&&(
           <div style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"40px 32px",textAlign:"center"}}>
             <div style={{width:80,height:80,borderRadius:"50%",background:VERDES,border:`2px solid ${VERDE}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:36,marginBottom:20}}>🎀</div>
-            <svg width="160" height="36" viewBox="0 0 340 80" fill="none"><text x="0" y="62" fontFamily="Georgia,serif" fontSize="52" fontStyle="italic" fill="#2D5A27">laço</text><text x="118" y="66" fontFamily="Georgia,serif" fontSize="58" fontStyle="italic" fill="#8B1A2A">&</text><text x="148" y="62" fontFamily="Georgia,serif" fontSize="52" fontStyle="italic" fill="#2D5A27">entrelaço</text></svg>
+            <Logo/>
             <p className="mn" style={{color:TEXT3,fontSize:10,letterSpacing:2,marginTop:12,marginBottom:4}}>PEDIDO {nrPedido}</p>
             <p className="pf" style={{color:VERDE,fontSize:22,marginBottom:8}}>Pedido enviado!</p>
             <p className="dm" style={{color:TEXT2,fontSize:13,lineHeight:1.8,marginBottom:32}}>Recebemos sua solicitação.<br/>Entraremos em contato em até<br/><strong style={{color:VERDE}}>24 horas</strong> pelo WhatsApp.</p>
-            <button onClick={()=>{setScreen("catalog");setCart([]);setForm({nome:"",whats:"",email:"",vendedor:"",obs:""}); }} style={{background:VERDE,color:"#fff",padding:"14px 32px",borderRadius:14,fontSize:12,fontWeight:700,letterSpacing:1.5,cursor:"pointer",border:"none",fontFamily:"'DM Sans',sans-serif"}}>NOVO PEDIDO</button>
+            <button onClick={()=>{setScreen("catalog");setCart([]);setForm({nome:"",whats:"",email:"",vendedor:"",obs:""});}} style={{background:VERDE,color:"#fff",padding:"14px 32px",borderRadius:14,fontSize:12,fontWeight:700,letterSpacing:1.5,cursor:"pointer",border:"none",fontFamily:"'DM Sans',sans-serif"}}>NOVO PEDIDO</button>
           </div>
         )}
       </div>
 
-      {/* Modal completamente fora do container principal */}
       {modal&&<ProductModal product={modal} cartCount={cartCount} onClose={()=>setModal(null)} onAdd={handleAdd}/>}
     </div>
   );
