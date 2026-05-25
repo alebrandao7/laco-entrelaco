@@ -28,6 +28,11 @@ const coresVeludo=[
 ];
 const coresPadrao=[{name:"Vermelho",hex:"#C0392B"},{name:"Verde Floresta",hex:"#2D5A27"},{name:"Branco",hex:"#F5F5F0"},{name:"Champagne",hex:"#C8B89A"},{name:"Dourado Metálico",hex:"#CFB53B"}];
 const coresLame=[{name:"Dourado Metálico",hex:"#CFB53B"},{name:"Prata",hex:"#B8B8C0"}];
+// aliases para compatibilidade
+const coresVeludo=cVVm;
+const coresPadrao=cVGBC;
+const coresLame=cLD;
+
 const VENDEDORES=["Ana Paula","Carlos","Fernanda","João","Mariana","Ricardo"];
 const MINIMO_REAIS=2000;
 const MINIMO_QTD={"VVm":{default:2,"20VVm":15,"30VVm":12,"40VVm":10,"50VVm":6,"60VVm":4,"80VVm":3,"100VVm":2},"VDup":3,"Val/GL":3,"Val/Lin":2,"VaL":3,"VX":5,"VL":5,"VD":5,"VXC":5,"V/FiC":5,"VXP":5,"TL":5,"TX":5,"TP":5,"LDR":5,"LDRD":3,"CXPI":1};
