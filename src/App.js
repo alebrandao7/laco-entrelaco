@@ -24,7 +24,7 @@ const F={
   vxp:      CL+"v1779639425/WhatsApp_Image_2026-05-14_at_09.35.3011_xnhc2h.jpg",
   tl:       CL+"v1779473527/IMG-20260514-WA0049_hhcwjl.jpg",
   ldr:      CL+"v1779473531/IMG-20260514-WA0060_vuq21n.jpg",
-  bola:     CL+"v1779469881/6645645_dd5hsu.jpg",
+  bola:     CL+"v1779736824/LOGOS_daguvp.png",
 };
 
 // Só foto vermelha para VVM
@@ -71,7 +71,49 @@ const PRODUCTS=[
   {sku:"LDR-S",  name:"Laço Lamê Dourado 40cm",             subtitle:"⚡ Últimas unidades — 40cm",          category:"Saldão",   material:"100% poliéster metalizado",  acabamento:AE,  prazo:"Imediato", estoque:4, desc:"Laço Lamê Dourado 40cm — últimas unidades em estoque.",                                                     cores:cLD,    photo:F.ldr,     tag:"🔥 Saldão",    tagColor:"#BF360C", tagBg:"#FBE9E7",  sizes:[{label:"40cm",ref:"40LDR"}]},
 ];
 
-const MINIMO_QTD={
+// TAG extra para Saias & Botas
+TAG_CAT["Saias & Botas"]={tag:"Saias & Botas",tagColor:"#4A235A",tagBg:"#F5EEF8"};
+
+const SB="Saias & Botas";
+const cNAT=[{name:"Natural",hex:"#C8B89A"}];
+const cVM=[{name:"Vermelho",hex:"#C0392B"}];
+// Foto placeholder bola enquanto fotos não chegam
+const PH=F.bola;
+
+const SAIAS_BOTAS=[
+  {sku:"BJR",     name:"Bota Juta Renda",                     subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota decorativa em Juta com Renda.",                                    cores:cNAT,                                    photo:CL+"v1779739002/BOTAJUDARENDA_npyv9b.jpg", ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BJR"}]},
+  {sku:"SFVCBR",  name:"Saia Árvore Feltro VM Cervo Branco",   subtitle:"1MT",           category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em feltro vermelho com cervo branco.",                 cores:cVM,                                     photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"1MT",ref:"1SFVCBR"}]},
+  {sku:"BFVCBR",  name:"Bota Feltro VM Cervo Branco",          subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em feltro vermelho com cervo branco.",                             cores:cVM,                                     photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BFVCBR"}]},
+  {sku:"SFCCXD",  name:"Saia Árvore Feltro Cru Cervo Xadrez",  subtitle:"1MT",           category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em feltro cru com cervo xadrez.",                      cores:[{name:"Vermelho",hex:"#C0392B"}],        photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"1MT",ref:"1SFCCXD"}]},
+  {sku:"BFCCXDZ", name:"Bota Feltro Cru Cervo Xadrez",         subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em feltro cru com cervo xadrez.",                                  cores:[{name:"Vermelho",hex:"#C0392B"}],        photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BFCCXDZ"}]},
+  {sku:"SFXDP",   name:"Saia Árvore Flanelada XD/Pelúcia",     subtitle:"1MT",           category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em tecido flanelado xadrez com pelúcia.",              cores:[{name:"Vermelho",hex:"#C0392B"}],        photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"1MT",ref:"1SFXDP"}]},
+  {sku:"BXFDZP",  name:"Bota Flanelada Xadrez/Pelúcia",        subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em tecido flanelado xadrez com pelúcia.",                          cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BXFDZP"}]},
+  {sku:"SFVDB",   name:"Saia Árvore Feltro Verde Bengala",      subtitle:"1MT",           category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em feltro verde bengala.",                             cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"1MT",ref:"1SFVDB"}]},
+  {sku:"BFVB",    name:"Bota Feltro VD Bengala",                subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em feltro verde bengala.",                                         cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BFVB"}]},
+  {sku:"SFVOC",   name:"Saia Árvore Feltro Verde Oliva Cervo",  subtitle:"1MT",           category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em feltro verde oliva com cervo e guizo.",             cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"1MT",ref:"1SFVOC"}]},
+  {sku:"BFVOC",   name:"Bota Feltro Verde Oliva Cervo",         subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em feltro verde oliva com cervo.",                                 cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BFVOC"}]},
+  {sku:"SFVGPT",  name:"Saia Árvore Feltro Gatinho PT",         subtitle:"1MT",           category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em feltro com gatinho preto.",                         cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"1MT",ref:"1SFVGPT"}]},
+  {sku:"BFVGPT",  name:"Bota Feltro VM Gatinho Preto",          subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em feltro vermelho com gatinho preto.",                            cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BFVGPT"}]},
+  {sku:"SFVCPT",  name:"Saia Árvore Feltro VM Cachorro PT",     subtitle:"1MT",           category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em feltro vermelho com cachorrinho preto.",            cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"1MT",ref:"1SFVCPT"}]},
+  {sku:"BFVMCPT", name:"Bota Feltro VM Cachorrinho Preto",      subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em feltro vermelho com cachorrinho preto.",                        cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BFVMCPT"}]},
+  {sku:"SFVEP",   name:"Saia Árvore Feltro VD Espinha Peixe",   subtitle:"1MT",           category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em feltro verde espinha de peixe.",                   cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"1MT",ref:"1SFVEP"}]},
+  {sku:"BFVDEPX", name:"Bota Feltro VD Espinha Peixe",          subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em feltro verde espinha de peixe.",                                cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BFVDEPX"}]},
+  {sku:"SFVO",    name:"Saia Árvore VM Ossinho",                 subtitle:"1MT",           category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em feltro vermelho com ossinho.",                      cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"1MT",ref:"1SFVO"}]},
+  {sku:"BFVO",    name:"Bota Feltro VD Ossinho",                 subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em feltro verde com ossinho.",                                     cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BFVO"}]},
+  {sku:"BJXDZN",  name:"Bota Juta Xadrez Natalino",             subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em juta com xadrez natalino.",                                     cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BJXDZN"}]},
+  {sku:"BJCM",    name:"Bota Juta Cervo Madeira",                subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em juta com cervo madeira.",                                       cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BJCM"}]},
+  {sku:"BVPArDr", name:"Bota Velboa/Pelúcia DR Árvore",         subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em velboa/pelúcia com árvore.",                                    cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BVPArDr"}]},
+  {sku:"BVVPN",   name:"Bota Velboz Cru/Rosê Laço",             subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em velboz cru/rosê com laço.",                                     cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BVVPN"}]},
+  {sku:"SVVPN",   name:"Saia Árvore Velboa VM Papai Noel",       subtitle:"1MT",           category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em velboa vermelho com Papai Noel.",                   cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"1MT",ref:"1SVVPN"}]},
+  {sku:"SFG",     name:"Saia Árvore Feltro Gnomo",               subtitle:"1MT",           category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em feltro com gnomo.",                                 cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"1MT",ref:"1SFG"}]},
+  {sku:"SFPN",    name:"Saia Árvore Feltro Papai Noel",          subtitle:"1MT",           category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em feltro com Papai Noel.",                            cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"1MT",ref:"1SFPN"}]},
+  {sku:"SFCRU",   name:"Saia Árvore Feltro Cru Organza Lacinho", subtitle:"1MT",           category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em feltro cru com organza e lacinho.",                 cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"1MT",ref:"1SFCRU/OLÇ"}]},
+  {sku:"SVVBBR",  name:"Saia Velboa VM Bolas Pelúcia",           subtitle:"1MT",           category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em velboa vermelho com bolas de pelúcia.",              cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"1MT",ref:"1SVVBBR"}]},
+  {sku:"SFOS",    name:"Saia Árvore Feltro Organza Sextavada",   subtitle:"80cm / 1MT",    category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em feltro com organza sextavada.",                     cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"80cm",ref:"80SFOS"},{label:"1MT",ref:"1SFOS"}]},
+  {sku:"BFCODRLÇ",name:"Bota Feltro Cordeiro Laço",              subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em feltro cordeiro com laço.",                                     cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BFCODRLÇ"}]},
+  {sku:"BFVPACH", name:"Bota Velboz Patchwork",                  subtitle:"50cm",          category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Bota em velboz estilo patchwork.",                                      cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"50cm",ref:"50BFVPACH"}]},
+  {sku:"SOS",     name:"Saia Organza Sextavada",                 subtitle:"60cm / 80cm / 1MT", category:SB, material:"100% Poliéster", acabamento:"", prazo:P30, estoque:500, desc:"Saia para árvore em organza sextavada.",                           cores:cNAT,                                    photo:PH,                                        ...TAG_CAT[SB], sizes:[{label:"60cm",ref:"60SOS"},{label:"80cm",ref:"80SOS"},{label:"1MT",ref:"1SOS"}]},
+];
   // VVM: por tamanho conforme planilha
   VVM:    {"20V":15,"30V":12,"40V":10,"50V":6,"60V":4,"80V":3,"100V":2},
   // Veludo Cristal Gravata Longa
@@ -97,13 +139,21 @@ const MINIMO_QTD={
   BTXDZP: {default:1},
 };
 
+const PRODUCTS_ALL=[...PRODUCTS,...SAIAS_BOTAS];
 const getMin=(sku,ref)=>{const m=MINIMO_QTD[sku];if(!m)return 1;if(typeof m==="number")return m;return m[ref]||m.default||1;};
 const getFoto=(p,i)=>p.cores?.[i]?.photo||p.photo||"";
 const BRL=v=>`R$ ${Number(v).toLocaleString("pt-BR",{minimumFractionDigits:2})}`;
 const gerarNr=()=>`#${Date.now().toString().slice(-5)}`;
 
-const CATEGORIES=["Todos","Veludo","Lamê","Estampado","Bolas","Saldão"];
-const VENDEDORES=["Ana Paula","Carlos","Fernanda","João","Mariana","Ricardo"];
+// Tags = categoria do produto
+const TAG_CAT={
+  Veludo:   {tag:"Veludo",   tagColor:"#2D5A27", tagBg:"#E8F0E6"},
+  Estampado:{tag:"Estampado",tagColor:"#7A4A1A", tagBg:"#FDF0E5"},
+  Lamê:     {tag:"Lamê",     tagColor:"#7A5A00", tagBg:"#FDF5E0"},
+  Bolas:    {tag:"Bolas",    tagColor:"#8B1A2A", tagBg:"#F5E8EA"},
+  Saldão:   {tag:"🔥 Saldão",tagColor:"#BF360C", tagBg:"#FBE9E7"},
+};
+const VENDEDORES=["Alexandra","Valéria","Cleuza"];
 const MINIMO_REAIS=2000;
 const SHEETS_URL="https://script.google.com/macros/s/AKfycbw5c9f7of3GhrjgOcZR7_KDoEp4_avn4D9zsOkn7p_O1GjWii200ow5e9YhP93pjvVGhw/exec";
 
@@ -130,11 +180,11 @@ const Tag=({label,color,bg})=>(
 );
 
 const Logo=()=>(
-  <svg width="160" height="36" viewBox="0 0 340 80" fill="none">
-    <text x="0" y="62" fontFamily="Georgia,serif" fontSize="52" fontStyle="italic" fill="#2D5A27">laço</text>
-    <text x="118" y="66" fontFamily="Georgia,serif" fontSize="58" fontStyle="italic" fill="#8B1A2A">&</text>
-    <text x="148" y="62" fontFamily="Georgia,serif" fontSize="52" fontStyle="italic" fill="#2D5A27">entrelaço</text>
-  </svg>
+  <img
+    src="https://res.cloudinary.com/djeliz676/image/upload/v1779736824/LOGOS_daguvp.png"
+    alt="Laço & Entrelaço"
+    style={{height:36,objectFit:"contain"}}
+  />
 );
 
 // ── MODAL — estado completamente isolado ──────────────────────────────────
@@ -251,7 +301,7 @@ export default function App(){
   const[toast,setToast]=useState(null);
   const[nrPedido]=useState(gerarNr);
 
-  const filtered=PRODUCTS.filter(p=>cat==="Todos"||p.category===cat);
+  const filtered=PRODUCTS_ALL.filter(p=>cat==="Todos"||p.category===cat);
   const cartCount=cart.reduce((s,i)=>s+i.qty,0);
 
   const showToast=msg=>{setToast(msg);setTimeout(()=>setToast(null),2500);};
