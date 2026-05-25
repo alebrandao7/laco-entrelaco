@@ -43,8 +43,7 @@ const getMin=(sku,ref)=>{
   if(!m) return 1;
   if(typeof m==="number") return m;
   return m[ref]||m.default||1;
-};
-const BRL=v=>`R$ ${Number(v).toLocaleString("pt-BR",{minimumFractionDigits:2})}`;
+};const BRL=v=>`R$ ${Number(v).toLocaleString("pt-BR",{minimumFractionDigits:2})}`;
 const gerarNr=()=>`#${Date.now().toString().slice(-5)}`;
 const getFoto=(p,i)=>p.cores?.[i]?.photo||p.photo||"";
 
