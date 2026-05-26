@@ -24,8 +24,30 @@ const F={
   vxp:      CL+"v1779639425/WhatsApp_Image_2026-05-14_at_09.35.3011_xnhc2h.jpg",
   tl:       CL+"v1779473527/IMG-20260514-WA0049_hhcwjl.jpg",
   ldr:      CL+"v1779473531/IMG-20260514-WA0060_vuq21n.jpg",
-  bola:     CL+"v1779736824/LOGOS_daguvp.png",
+  // Bolas
+  bola_vm:  CL+"v1779736486/bolavermelha_zfo7iq.jpg",
+  bola_xdz: CL+"v1779736717/bolaxadrez_vkcy2g.jpg",
+  bola_lst: CL+"v1779736485/bola_listrada_smnpbj.jpg",
+  bola_pt:  CL+"v1779736485/bolapreta_fwxmdl.jpg",
+  // Saias & Botas
   bjr:      CL+"v1779739002/BOTAJUDARENDA_npyv9b.jpg",
+  sfvcbr:   CL+"v1779739089/siacervo_vpr3f7.jpg",
+  bfvcbr:   CL+"v1779739121/botacervo_h84rec.jpg",
+  sfccxd:   CL+"v1779739158/saiaalce_ea2ojn.jpg",
+  bfccxdz:  CL+"v1779739187/botalacexd_kscqar.jpg",
+  sfvdb:    CL+"v1779739356/verde_saia_umudfd.jpg",
+  bfvb:     CL+"v1779739357/botavese_spphcp.jpg",
+  sfvoc:    CL+"v1779739480/olive_saia_v5io5r.jpg",
+  bfvoc:    CL+"v1779739480/WhatsApp_Image_2026-05-14_at_10.42.37oliva_bota_llzqkz.jpg",
+  sfvgpt:   CL+"v1779739534/gato_saia_lwju0r.jpg",
+  bfvgpt:   CL+"v1779739538/bota_gato_c0cc0d.jpg",
+  sfvcpt:   CL+"v1779739538/cachorro_saia_khfhps.jpg",
+  bfvmcpt:  CL+"v1779739536/bota_cachorro_ootfiu.jpg",
+  bfvdepx:  CL+"v1779739790/botaespinha_rtpnkx.jpg",
+  bjxdzn:   CL+"v1779739794/bota_xadrez_juta_ojc5gt.jpg",
+  bvvpn:    CL+"v1779740460/bota_lacinho_djz698.jpg",
+  sfos:     CL+"v1779740423/saia_dourada_jshoba.jpg",
+  ph:       CL+"v1779736824/LOGOS_daguvp.png", // placeholder
 };
 
 const PH=F.bola;
@@ -134,7 +156,7 @@ const MINIMO_QTD={
   "VVM-S":{default:1},"LDR-S":{default:1},
 };
 
-const CATEGORIES=["Todos","Veludo","Lamê","Estampado","Bolas","Saias & Botas","Saldão"];
+const CATEGORIES=["Todos","Veludo","Lamê","Estampado","Bolas","Saldão"];
 const VENDEDORES=["Alexandra","Valéria","Cleuza"];
 const MINIMO_REAIS=2000;
 const SHEETS_URL="https://script.google.com/macros/s/AKfycbw5c9f7of3GhrjgOcZR7_KDoEp4_avn4D9zsOkn7p_O1GjWii200ow5e9YhP93pjvVGhw/exec";
