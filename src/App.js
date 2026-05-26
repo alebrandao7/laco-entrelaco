@@ -1,4 +1,4 @@
-import { useState, useCallback, memo } from "react";
+import { useState, useCallback, memo, useEffect } from "react";
 
 const VERDE = "#2D5A27", VERDE2 = "#4A7A42", VERDES = "#E8F0E6";
 const VINHO = "#8B1A2A", VINHOL = "#F5E8EA";
@@ -135,6 +135,160 @@ const BRL = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits
 const gerarNr = () => `#${Date.now().toString().slice(-5)}`;
 const getFoto = (p, i) => p.cores?.[i]?.photo || p.photo || "";
 
+// ── GERADOR DO PEDIDO PARA IMPRESSÃO ─────────────────────────────────────────
+const gerarPedidoHTML = ({ cart, form, nrPedido }) => {
+  const total       = cart.reduce((s, i) => s + i.qty * i.product.preco, 0);
+  const totalItens  = cart.length;
+  const totalUn     = cart.reduce((s, i) => s + i.qty, 0);
+  const dataHora    = new Date().toLocaleString("pt-BR");
+
+  const linhasItens = cart.map(item => `
+    <tr>
+      <td class="td-ref">${item.size?.ref || ""}</td>
+      <td>
+        <strong>${item.product.name}</strong><br>
+        <span style="font-size:11px;color:#888">${item.product.material}${item.product.acabamento ? " · " + item.product.acabamento : ""}</span>
+      </td>
+      <td>${item.size?.label || ""}</td>
+      <td>
+        <span class="td-cor">
+          <span class="cor-dot" style="background:${item.color?.hex || "#ccc"}"></span>
+          ${item.color?.name || ""}
+        </span>
+      </td>
+      <td style="text-align:center;font-family:'DM Mono',monospace;font-weight:700;color:#2D5A27;">${item.qty}</td>
+      <td style="text-align:right;font-family:'DM Mono',monospace;font-weight:700;color:#2D5A27;">${BRL(item.qty * item.product.preco)}</td>
+    </tr>`).join("");
+
+  return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pedido ${nrPedido} — Laço & Entrelaço</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'DM Sans',sans-serif;background:#f5f5f5;padding:20px;color:#1A1A1A;}
+  .page{background:#fff;max-width:794px;margin:0 auto;padding:40px 48px 48px;box-shadow:0 4px 24px rgba(0,0,0,0.1);border-radius:8px;}
+  .header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;padding-bottom:24px;border-bottom:2px solid #2D5A27;}
+  .logo img{height:52px;object-fit:contain;}
+  .logo-fallback{font-family:'Playfair Display',serif;font-size:22px;color:#2D5A27;}
+  .pedido-nr{font-family:'Playfair Display',serif;font-size:26px;color:#2D5A27;font-weight:600;}
+  .pedido-data{font-family:'DM Mono',monospace;font-size:11px;color:#888;letter-spacing:1px;margin-top:4px;}
+  .pedido-status{display:inline-block;background:#F5E8EA;color:#8B1A2A;font-family:'DM Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;padding:3px 10px;border-radius:4px;margin-top:6px;border:1px solid #8B1A2A44;}
+  .section-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2.5px;color:#2D5A27;text-transform:uppercase;margin-bottom:12px;}
+  .cliente-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:28px;background:#FAF8F5;border-radius:8px;padding:16px;border:1px solid #E8E0D8;}
+  .campo label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:#888;text-transform:uppercase;display:block;margin-bottom:4px;}
+  .campo span{font-size:13px;color:#1A1A1A;font-weight:500;}
+  .tabela-wrap{margin-bottom:28px;}
+  table{width:100%;border-collapse:collapse;}
+  thead tr{background:#2D5A27;}
+  thead th{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:#fff;text-transform:uppercase;padding:10px 12px;text-align:left;}
+  tbody tr{border-bottom:1px solid #E8E0D8;}
+  tbody tr:nth-child(even){background:#FAF8F5;}
+  tbody td{padding:10px 12px;font-size:13px;vertical-align:middle;}
+  .td-ref{font-family:'DM Mono',monospace;font-size:10px;color:#888;}
+  .td-cor{display:inline-flex;align-items:center;gap:6px;}
+  .cor-dot{width:10px;height:10px;border-radius:50%;border:1px solid rgba(0,0,0,0.15);flex-shrink:0;display:inline-block;}
+  .totais{display:flex;justify-content:flex-end;margin-bottom:28px;}
+  .totais-box{background:#FAF8F5;border:1px solid #E8E0D8;border-radius:8px;padding:16px 20px;min-width:240px;}
+  .totais-linha{display:flex;justify-content:space-between;align-items:center;padding:4px 0;}
+  .totais-linha span:first-child{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:#888;text-transform:uppercase;}
+  .totais-linha span:last-child{font-size:13px;font-weight:600;}
+  .totais-linha.destaque{border-top:1px solid #E8E0D8;margin-top:6px;padding-top:10px;}
+  .totais-linha.destaque span:last-child{font-size:16px;color:#2D5A27;}
+  .obs-box{background:#FBE9E7;border:1px solid #8B1A2A33;border-radius:8px;padding:14px 16px;margin-bottom:28px;}
+  .obs-box p{font-size:13px;color:#1A1A1A;line-height:1.6;}
+  .footer{display:flex;justify-content:space-between;align-items:flex-end;padding-top:24px;border-top:1px solid #E8E0D8;}
+  .footer-assinatura{text-align:center;}
+  .footer-assinatura .linha-assinatura{width:180px;border-top:1px solid #888;margin:0 auto 6px;}
+  .footer-assinatura span{font-family:'DM Mono',monospace;font-size:9px;color:#888;letter-spacing:1px;}
+  .footer-contato{text-align:right;font-family:'DM Mono',monospace;font-size:9px;color:#888;letter-spacing:0.5px;line-height:1.8;}
+  .no-print{text-align:center;margin-bottom:20px;display:flex;gap:10px;justify-content:center;}
+  .btn{border:none;padding:10px 28px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
+  .btn-print{background:#2D5A27;color:#fff;}
+  .btn-close{background:#E8E0D8;color:#1A1A1A;}
+  @media print{body{background:#fff;padding:0;}.page{box-shadow:none;border-radius:0;padding:20px 28px;}.no-print{display:none!important;}}
+</style>
+</head>
+<body>
+<div class="no-print">
+  <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+  <button class="btn btn-close" onclick="window.close()">✕ Fechar</button>
+</div>
+<div class="page">
+  <div class="header">
+    <div class="logo">
+      <img src="https://res.cloudinary.com/djeliz676/image/upload/v1779736824/LOGOS_daguvp.png" alt="Laço & Entrelaço" onerror="this.style.display='none'">
+      <div class="logo-fallback" style="display:none">laço & entrelaço</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="pedido-nr">${nrPedido}</div>
+      <div class="pedido-data">DATA: ${dataHora}</div>
+      <div class="pedido-status">AGUARDANDO ORÇAMENTO</div>
+    </div>
+  </div>
+
+  <p class="section-title">Dados do Cliente</p>
+  <div class="cliente-grid">
+    <div class="campo"><label>Empresa / Nome</label><span>${form.nome || "—"}</span></div>
+    <div class="campo"><label>WhatsApp</label><span>${form.whats || "—"}</span></div>
+    <div class="campo"><label>E-mail</label><span>${form.email || "—"}</span></div>
+    <div class="campo"><label>Vendedora</label><span>${form.vendedor || "—"}</span></div>
+  </div>
+
+  <p class="section-title">Itens do Pedido</p>
+  <div class="tabela-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Referência</th>
+          <th>Produto</th>
+          <th>Tamanho</th>
+          <th>Cor</th>
+          <th style="text-align:center">Qtd</th>
+          <th style="text-align:right">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>${linhasItens}</tbody>
+    </table>
+  </div>
+
+  <div class="totais">
+    <div class="totais-box">
+      <div class="totais-linha"><span>Total de Itens</span><span>${totalItens} produto${totalItens !== 1 ? "s" : ""}</span></div>
+      <div class="totais-linha"><span>Total de Unidades</span><span>${totalUn} unidades</span></div>
+      <div class="totais-linha"><span>Prazo de Entrega</span><span style="color:#8B1A2A">30 dias úteis</span></div>
+      <div class="totais-linha destaque"><span>Valor Estimado</span><span>${BRL(total)}</span></div>
+    </div>
+  </div>
+
+  ${form.obs ? `
+  <p class="section-title">Observações</p>
+  <div class="obs-box"><p>${form.obs}</p></div>` : ""}
+
+  <div class="footer">
+    <div class="footer-assinatura">
+      <div class="linha-assinatura"></div>
+      <span>Assinatura do Cliente</span>
+    </div>
+    <div class="footer-assinatura">
+      <div class="linha-assinatura"></div>
+      <span>Vendedora Responsável</span>
+    </div>
+    <div class="footer-contato">
+      <strong style="color:#2D5A27;font-size:10px;">Laço & Entrelaço</strong><br>
+      contato@lacoentrelaco.com.br<br>
+      (11) 99999-9999<br>
+      Pedido mínimo R$ 2.000,00
+    </div>
+  </div>
+</div>
+</body>
+</html>`;
+};
+
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -166,7 +320,7 @@ const Logo = () => (
 );
 
 // ── MODAL ──────────────────────────────────────────────────────────────────────
-const ProductModal = memo(({ product: p, cartCount, onClose, onAdd }) => {
+const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }) => {
   const [sz, setSz] = useState(0);
   const [cl, setCl] = useState(0);
   const [er, setEr] = useState("");
@@ -276,7 +430,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd }) => {
             ADICIONAR AO PEDIDO
           </button>
           {cartCount > 0 && (
-            <button onClick={onClose} style={{ width: "100%", background: "transparent", border: `1.5px solid ${VERDE}`, color: VERDE, padding: "11px", borderRadius: 14, fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
+            <button onClick={onGoToCart} style={{ width: "100%", background: "transparent", border: `1.5px solid ${VERDE}`, color: VERDE, padding: "11px", borderRadius: 14, fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
               VER PEDIDO ({cartCount} {cartCount === 1 ? "item" : "itens"}) →
             </button>
           )}
@@ -292,11 +446,19 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [modal, setModal]   = useState(null);
   const [screen, setScreen] = useState("catalog");
-  const [cart, setCart]     = useState([]);
+  const [cart, setCart]     = useState(() => {
+    try { const s = localStorage.getItem("laco_cart"); return s ? JSON.parse(s) : []; } catch { return []; }
+  });
   const [form, setForm]     = useState({ nome: "", whats: "", email: "", vendedor: "", obs: "" });
   const [enviando, setEnviando] = useState(false);
   const [toast, setToast]   = useState(null);
   const [nrPedido]          = useState(gerarNr);
+  const [pedidoFinalizado, setPedidoFinalizado] = useState(null); // snapshot para impressão
+
+  // Persiste carrinho no localStorage sempre que mudar
+  useEffect(() => {
+    try { localStorage.setItem("laco_cart", JSON.stringify(cart)); } catch {}
+  }, [cart]);
 
   const filtered = PRODUCTS.filter(p => {
     const catOk = cat === "Todos" || p.category === cat;
@@ -328,6 +490,7 @@ export default function App() {
     const itens = cart.map(i => `• ${i.product.name} | Tam: ${i.size?.ref} | Cor: ${i.color?.name} | Qtd: ${i.qty} | Subtotal: ${BRL(i.qty * i.product.preco)}`).join("\n");
     const p = new URLSearchParams({ pedido: nrPedido, data: new Date().toLocaleString("pt-BR"), vendedor: form.vendedor || "—", nome: form.nome, whatsapp: form.whats, email: form.email || "—", itens, total: BRL(cartTotal), observacoes: form.obs || "—" });
     try { await fetch(`${SHEETS_URL}?${p}`, { method: "GET", mode: "no-cors" }); } catch (e) { console.error(e); }
+    setPedidoFinalizado({ cart: [...cart], form: { ...form }, nrPedido });
     setEnviando(false);
     setScreen("success");
   };
@@ -418,7 +581,10 @@ export default function App() {
                         <span className="mn" style={{ color: TEXT3, fontSize: 8, marginLeft: 2 }}>{p.cores.length} COR{p.cores.length > 1 ? "ES" : ""}</span>
                       </div>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 8, borderTop: `1px solid ${BORDER}` }}>
-                        <p className="dm" style={{ color: TEXT2, fontSize: 11 }}>{p.prazo}</p>
+                        <div>
+                          <p className="mn" style={{ color: TEXT3, fontSize: 8, letterSpacing: 1, marginBottom: 2 }}>MÍN. {Math.min(...p.sizes.map(s => s.min || 1))} UN.</p>
+                          <p className="dm" style={{ color: TEXT2, fontSize: 11 }}>{p.prazo}</p>
+                        </div>
                         <div style={{ background: VERDE, borderRadius: 8, padding: "6px 12px" }}>
                           <span className="mn" style={{ color: "#fff", fontSize: 9, letterSpacing: 1 }}>VER DETALHES →</span>
                         </div>
@@ -539,12 +705,29 @@ export default function App() {
             <Logo />
             <p className="mn" style={{ color: TEXT3, fontSize: 10, letterSpacing: 2, marginTop: 12, marginBottom: 4 }}>PEDIDO {nrPedido}</p>
             <p className="pf" style={{ color: VERDE, fontSize: 22, marginBottom: 8 }}>Pedido enviado!</p>
-            <p className="dm" style={{ color: TEXT2, fontSize: 13, lineHeight: 1.8, marginBottom: 32 }}>
+            <p className="dm" style={{ color: TEXT2, fontSize: 13, lineHeight: 1.8, marginBottom: 24 }}>
               Recebemos sua solicitação.<br />
               Entraremos em contato em até<br />
               <strong style={{ color: VERDE }}>24 horas</strong> pelo WhatsApp.
             </p>
-            <button onClick={() => { setScreen("catalog"); setCart([]); setForm({ nome: "", whats: "", email: "", vendedor: "", obs: "" }); }} style={{ background: VERDE, color: "#fff", padding: "14px 32px", borderRadius: 14, fontSize: 12, fontWeight: 700, letterSpacing: 1.5, cursor: "pointer", border: "none", fontFamily: "'DM Sans',sans-serif" }}>
+
+            {/* Botão imprimir */}
+            <button
+              onClick={() => {
+                if (!pedidoFinalizado) return;
+                const html = gerarPedidoHTML(pedidoFinalizado);
+                const win = window.open("", "_blank");
+                if (win) { win.document.write(html); win.document.close(); }
+              }}
+              style={{ width: "100%", background: VINHO, color: "#fff", padding: "13px", borderRadius: 14, fontSize: 12, fontWeight: 700, letterSpacing: 1.5, cursor: "pointer", border: "none", marginBottom: 10, fontFamily: "'DM Sans',sans-serif", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}
+            >
+              🖨️ IMPRIMIR / SALVAR PDF
+            </button>
+
+            <button
+              onClick={() => { setScreen("catalog"); setCart([]); setForm({ nome: "", whats: "", email: "", vendedor: "", obs: "" }); setPedidoFinalizado(null); try { localStorage.removeItem("laco_cart"); } catch {} }}
+              style={{ width: "100%", background: VERDE, color: "#fff", padding: "13px", borderRadius: 14, fontSize: 12, fontWeight: 700, letterSpacing: 1.5, cursor: "pointer", border: "none", fontFamily: "'DM Sans',sans-serif" }}
+            >
               NOVO PEDIDO
             </button>
           </div>
@@ -554,7 +737,13 @@ export default function App() {
 
       {/* Modal */}
       {modal && (
-        <ProductModal product={modal} cartCount={cartCount} onClose={() => setModal(null)} onAdd={handleAdd} />
+        <ProductModal
+          product={modal}
+          cartCount={cartCount}
+          onClose={() => setModal(null)}
+          onAdd={handleAdd}
+          onGoToCart={() => { setModal(null); setScreen("carrinho"); }}
+        />
       )}
     </div>
   );
