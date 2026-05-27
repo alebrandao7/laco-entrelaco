@@ -689,3 +689,100 @@ export default function App() {
                           <span className="mn" style={{ color: TEXT, fontSize: 12, minWidth: 22, textAlign: "center", fontWeight: 700 }}>{item.qty}</span>
                           <button onClick={() => updateQty(item.id, 1)} style={{ width: 28, height: 28, background: "none", border: "none", color: VERDE, fontSize: 16, fontWeight: 700, cursor: "pointer" }}>+</button>
                         </div>
+                                        <span className="mn" style={{ color: VERDE, fontSize: 10, fontWeight: 700 }}>{BRL(item.qty * item.product.preco)}</span>
+                      </div>
+                    </div>
+                    <button onClick={() => removeFromCart(item.id)} style={{ color: "#C0392B", fontSize: 16, background: "none", border: "none", padding: "4px", opacity: 0.5, alignSelf: "flex-start", cursor: "pointer" }}>✕</button>
+                  </div>
+                ))}
+              </div>
+              <div style={{ background: VERDES, borderRadius: 12, padding: "12px 14px", marginBottom: 14, display: "flex", justifyContent: "space-between", alignItems: "center", border: `1px solid ${VERDE}22` }}>
+                <span className="mn" style={{ color: VERDE, fontSize: 10, letterSpacing: 1 }}>TOTAL ESTIMADO</span>
+                <span className="mn" style={{ color: VERDE, fontSize: 18, fontWeight: 700 }}>{BRL(cartTotal)}</span>
+              </div>
+              <button onClick={() => setScreen("catalog")} style={{ width: "100%", background: "transparent", border: `1.5px dashed ${VERDE}`, color: VERDE, padding: "11px", borderRadius: 12, fontSize: 12, fontWeight: 600, marginBottom: 16, cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>
+                + Adicionar mais produtos
+              </button>
+              <div style={{ height: 1, background: BORDER, marginBottom: 16 }} />
+              <p className="mn" style={{ color: VERDE, fontSize: 9, letterSpacing: 2.5, marginBottom: 12 }}>DADOS DO CLIENTE</p>
+              <div style={{ marginBottom: 10 }}>
+                <p className="mn" style={{ color: TEXT3, fontSize: 8, letterSpacing: 1, marginBottom: 5 }}>VENDEDORA</p>
+                <div style={{ position: "relative" }}>
+                  <select className="inp" value={form.vendedor} onChange={e => setForm(p => ({ ...p, vendedor: e.target.value }))}>
+                    <option value="">Selecione a vendedora</option>
+                    {VENDEDORES.map(v => <option key={v} value={v}>{v}</option>)}
+                  </select>
+                  <span style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", color: TEXT3, fontSize: 10, pointerEvents: "none" }}>▾</span>
+                </div>
+              </div>
+              {[
+                { k: "nome",  l: "Nome / Empresa *", p: "Ex: Shopping Parque D. Pedro", t: "text"  },
+                { k: "whats", l: "WhatsApp *",        p: "(11) 99999-9999",              t: "tel"   },
+                { k: "email", l: "E-mail",             p: "atendimento@mkcomercial.com.br", t: "email" },
+              ].map(f => (
+                <div key={f.k} style={{ marginBottom: 10 }}>
+                  <p className="mn" style={{ color: TEXT3, fontSize: 8, letterSpacing: 1, marginBottom: 5 }}>{f.l.toUpperCase()}</p>
+                  <input className="inp" type={f.t} value={form[f.k]} placeholder={f.p} autoComplete="off" onChange={e => setForm(p => ({ ...p, [f.k]: e.target.value }))} />
+                </div>
+              ))}
+              <div style={{ marginBottom: 16 }}>
+                <p className="mn" style={{ color: TEXT3, fontSize: 8, letterSpacing: 1, marginBottom: 5 }}>OBSERVAÇÕES</p>
+                <textarea className="inp" value={form.obs} placeholder="Data do evento, detalhes especiais..." rows={2} style={{ resize: "none" }} onChange={e => setForm(p => ({ ...p, obs: e.target.value }))} />
+              </div>
+              <div style={{ background: VINHOL, border: `1px solid ${VINHO}33`, borderRadius: 10, padding: "10px 12px", marginBottom: 14 }}>
+                <p className="mn" style={{ color: VINHO, fontSize: 9, letterSpacing: 1 }}>PEDIDO MÍNIMO</p>
+                <p className="dm" style={{ color: TEXT2, fontSize: 12, marginTop: 3 }}>Valor mínimo de <strong>R$ 2.000,00</strong> por pedido.</p>
+              </div>
+              <button onClick={sendPedido} style={{ width: "100%", background: enviando ? "#999" : VERDE, color: "#fff", padding: "16px", borderRadius: 14, fontSize: 12, fontWeight: 700, letterSpacing: 2, cursor: "pointer", border: "none", boxShadow: "0 4px 16px rgba(45,90,39,0.3)", fontFamily: "'DM Sans',sans-serif" }}>
+                {enviando ? "ENVIANDO..." : "CONFIRMAR PEDIDO"}
+              </button>
+            </>)}
+          </div>
+        </>}
+
+        {/* ── SUCESSO ── */}
+        {screen === "success" && (
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px 32px", textAlign: "center" }}>
+            <div style={{ width: 80, height: 80, borderRadius: "50%", background: VERDES, border: `2px solid ${VERDE}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 36, marginBottom: 20 }}>🎀</div>
+            <Logo />
+            <p className="mn" style={{ color: TEXT3, fontSize: 10, letterSpacing: 2, marginTop: 12, marginBottom: 4 }}>PEDIDO {nrPedido}</p>
+            <p className="pf" style={{ color: VERDE, fontSize: 22, marginBottom: 8 }}>Pedido enviado!</p>
+            <p className="dm" style={{ color: TEXT2, fontSize: 13, lineHeight: 1.8, marginBottom: 24 }}>
+              Recebemos sua solicitação.<br />
+              Entraremos em contato em até<br />
+              <strong style={{ color: VERDE }}>24 horas</strong> pelo WhatsApp.
+            </p>
+            <button
+              onClick={() => {
+                if (!pedidoFinalizado) return;
+                const html = gerarPedidoHTML(pedidoFinalizado);
+                const win = window.open("", "_blank");
+                if (win) { win.document.write(html); win.document.close(); }
+              }}
+              style={{ width: "100%", background: VINHO, color: "#fff", padding: "13px", borderRadius: 14, fontSize: 12, fontWeight: 700, letterSpacing: 1.5, cursor: "pointer", border: "none", marginBottom: 10, fontFamily: "'DM Sans',sans-serif", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}
+            >
+              🖨️ IMPRIMIR / SALVAR PDF
+            </button>
+            <button
+              onClick={() => { setScreen("catalog"); setCart([]); setForm({ nome: "", whats: "", email: "", vendedor: "", obs: "" }); setPedidoFinalizado(null); try { localStorage.removeItem("laco_cart"); } catch {} }}
+              style={{ width: "100%", background: VERDE, color: "#fff", padding: "13px", borderRadius: 14, fontSize: 12, fontWeight: 700, letterSpacing: 1.5, cursor: "pointer", border: "none", fontFamily: "'DM Sans',sans-serif" }}
+            >
+              NOVO PEDIDO
+            </button>
+          </div>
+        )}
+
+      </div>
+
+      {modal && (
+        <ProductModal
+          product={modal}
+          cartCount={cartCount}
+          onClose={() => setModal(null)}
+          onAdd={handleAdd}
+          onGoToCart={() => { setModal(null); setScreen("carrinho"); }}
+        />
+      )}
+    </div>
+  );
+}
