@@ -156,10 +156,7 @@ const gerarPedidoHTML = ({ cart, form, nrPedido }) => {
   const linhasItens = cart.map(item => `
     <tr>
       <td class="td-ref">${item.size?.ref || ""}</td>
-      <td>
-        <strong>${item.product.name}</strong><br>
-        <span style="font-size:11px;color:#888">${item.product.material}${item.product.acabamento ? " · " + item.product.acabamento : ""}</span>
-      </td>
+      <td><strong>${item.product.name}</strong></td>
       <td>${item.size?.label || ""}</td>
       <td><span class="td-cor"><span class="cor-dot" style="background:${item.color?.hex || "#ccc"}"></span> ${item.color?.name || ""}</span></td>
       <td style="text-align:center;font-family:'DM Mono',monospace;font-weight:700;color:#2D5A27;">${item.qty}</td>
@@ -177,8 +174,8 @@ const gerarPedidoHTML = ({ cart, form, nrPedido }) => {
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'DM Sans',sans-serif;background:#f5f5f5;padding:20px;color:#1A1A1A;}
   .page{background:#fff;max-width:794px;margin:0 auto;padding:40px 48px 48px;box-shadow:0 4px 24px rgba(0,0,0,0.1);border-radius:8px;}
-  .header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;padding-bottom:24px;border-bottom:2px solid #2D5A27;}
-  .logo img{height:52px;object-fit:contain;}
+  .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;padding-bottom:24px;border-bottom:2px solid #2D5A27;}
+  .logo img{height:80px;object-fit:contain;}
   .pedido-nr{font-family:'Playfair Display',serif;font-size:26px;color:#2D5A27;font-weight:600;}
   .pedido-data{font-family:'DM Mono',monospace;font-size:11px;color:#888;letter-spacing:1px;margin-top:4px;}
   .pedido-status{display:inline-block;background:#F5E8EA;color:#8B1A2A;font-family:'DM Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;padding:3px 10px;border-radius:4px;margin-top:6px;border:1px solid #8B1A2A44;}
@@ -196,8 +193,13 @@ const gerarPedidoHTML = ({ cart, form, nrPedido }) => {
   .td-ref{font-family:'DM Mono',monospace;font-size:10px;color:#888;}
   .td-cor{display:inline-flex;align-items:center;gap:6px;}
   .cor-dot{width:10px;height:10px;border-radius:50%;border:1px solid rgba(0,0,0,0.15);flex-shrink:0;display:inline-block;}
-  .totais{display:flex;justify-content:flex-end;margin-bottom:28px;}
-  .totais-box{background:#FAF8F5;border:1px solid #E8E0D8;border-radius:8px;padding:16px 20px;min-width:240px;}
+  .totais-e-condicoes{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:28px;}
+  .condicoes-box{flex:1;background:#FAF8F5;border:1px solid #E8E0D8;border-radius:8px;padding:16px 20px;}
+  .condicoes-linha{margin-bottom:14px;}
+  .condicoes-linha:last-child{margin-bottom:0;}
+  .condicoes-linha label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:#888;text-transform:uppercase;display:block;margin-bottom:6px;}
+  .linha-escrita{border:none;border-bottom:1px solid #888;width:100%;height:22px;background:transparent;font-size:13px;font-family:'DM Sans',sans-serif;}
+  .totais-box{background:#FAF8F5;border:1px solid #E8E0D8;border-radius:8px;padding:16px 20px;min-width:220px;}
   .totais-linha{display:flex;justify-content:space-between;align-items:center;padding:4px 0;}
   .totais-linha span:first-child{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:#888;text-transform:uppercase;}
   .totais-linha span:last-child{font-size:13px;font-weight:600;}
@@ -205,16 +207,16 @@ const gerarPedidoHTML = ({ cart, form, nrPedido }) => {
   .totais-linha.destaque span:last-child{font-size:16px;color:#2D5A27;}
   .obs-box{background:#FBE9E7;border:1px solid #8B1A2A33;border-radius:8px;padding:14px 16px;margin-bottom:28px;}
   .obs-box p{font-size:13px;color:#1A1A1A;line-height:1.6;}
-  .footer{display:flex;justify-content:space-between;align-items:flex-end;padding-top:24px;border-top:1px solid #E8E0D8;}
+  .footer{display:flex;justify-content:space-between;align-items:flex-end;padding-top:24px;border-top:1px solid #E8E0D8;margin-top:8px;}
   .footer-assinatura{text-align:center;}
   .footer-assinatura .linha-assinatura{width:180px;border-top:1px solid #888;margin:0 auto 6px;}
   .footer-assinatura span{font-family:'DM Mono',monospace;font-size:9px;color:#888;letter-spacing:1px;}
-  .footer-contato{text-align:right;font-family:'DM Mono',monospace;font-size:9px;color:#888;letter-spacing:0.5px;line-height:1.8;}
+  .footer-contato{text-align:right;font-family:'DM Mono',monospace;font-size:9px;color:#888;letter-spacing:0.5px;line-height:1.9;}
   .no-print{text-align:center;margin-bottom:20px;display:flex;gap:10px;justify-content:center;}
   .btn{border:none;padding:10px 28px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
   .btn-print{background:#2D5A27;color:#fff;}
   .btn-close{background:#E8E0D8;color:#1A1A1A;}
-  @media print{body{background:#fff;padding:0;}.page{box-shadow:none;border-radius:0;padding:20px 28px;}.no-print{display:none!important;}}
+  @media print{body{background:#fff;padding:0;}.page{box-shadow:none;border-radius:0;padding:20px 28px;}.no-print{display:none!important;}.linha-escrita{border-bottom:1px solid #aaa;}}
 </style>
 </head>
 <body>
@@ -223,6 +225,8 @@ const gerarPedidoHTML = ({ cart, form, nrPedido }) => {
   <button class="btn btn-close" onclick="window.close()">✕ Fechar</button>
 </div>
 <div class="page">
+
+  <!-- HEADER -->
   <div class="header">
     <div class="logo">
       <img src="https://res.cloudinary.com/djeliz676/image/upload/v1779736824/LOGOS_daguvp.png" alt="Laço & Entrelaço" onerror="this.style.display='none'">
@@ -234,6 +238,7 @@ const gerarPedidoHTML = ({ cart, form, nrPedido }) => {
     </div>
   </div>
 
+  <!-- DADOS DO CLIENTE -->
   <p class="section-title">Dados do Cliente</p>
   <div class="cliente-grid">
     <div class="campo"><label>Empresa / Nome</label><span>${form.nome || "—"}</span></div>
@@ -242,6 +247,7 @@ const gerarPedidoHTML = ({ cart, form, nrPedido }) => {
     <div class="campo"><label>Vendedora</label><span>${form.vendedor || "—"}</span></div>
   </div>
 
+  <!-- ITENS -->
   <p class="section-title">Itens do Pedido</p>
   <div class="tabela-wrap">
     <table>
@@ -259,17 +265,38 @@ const gerarPedidoHTML = ({ cart, form, nrPedido }) => {
     </table>
   </div>
 
-  <div class="totais">
-    <div class="totais-box">
-      <div class="totais-linha"><span>Total de Itens</span><span>${totalItens} produto${totalItens !== 1 ? "s" : ""}</span></div>
-      <div class="totais-linha"><span>Total de Unidades</span><span>${totalUn} unidades</span></div>
-      <div class="totais-linha"><span>Prazo de Entrega</span><span style="color:#8B1A2A">30 dias úteis</span></div>
-      <div class="totais-linha destaque"><span>Valor Estimado</span><span>${BRL(total)}</span></div>
+  <!-- TOTAIS + CONDIÇÕES -->
+  <div class="totais-e-condicoes">
+
+    <!-- Forma de pagamento e data de entrega para preencher à mão -->
+    <div class="condicoes-box">
+      <div class="condicoes-linha">
+        <label>Forma de Pagamento</label>
+        <div class="linha-escrita"></div>
+      </div>
+      <div class="condicoes-linha">
+        <label>Data de Entrega</label>
+        <div class="linha-escrita"></div>
+      </div>
+      <div class="condicoes-linha">
+        <label>Observações</label>
+        <div class="linha-escrita"></div>
+      </div>
     </div>
+
+    <!-- Totais -->
+    <div class="totais-box">
+      <div class="totais-linha"><span>Total de Produtos</span><span>${totalItens} item${totalItens !== 1 ? "s" : ""}</span></div>
+      <div class="totais-linha"><span>Total de Unidades</span><span>${totalUn} un.</span></div>
+      <div class="totais-linha"><span>Prazo de Produção</span><span style="color:#8B1A2A">30 dias úteis</span></div>
+      <div class="totais-linha destaque"><span>Valor Total</span><span>${BRL(total)}</span></div>
+    </div>
+
   </div>
 
-  ${form.obs ? `<p class="section-title">Observações</p><div class="obs-box"><p>${form.obs}</p></div>` : ""}
+  ${form.obs ? `<p class="section-title">Observações do Pedido</p><div class="obs-box"><p>${form.obs}</p></div>` : ""}
 
+  <!-- RODAPÉ -->
   <div class="footer">
     <div class="footer-assinatura">
       <div class="linha-assinatura"></div>
@@ -281,11 +308,13 @@ const gerarPedidoHTML = ({ cart, form, nrPedido }) => {
     </div>
     <div class="footer-contato">
       <strong style="color:#2D5A27;font-size:10px;">Laço & Entrelaço</strong><br>
+      Rua XXX, nº Y — Centro, Santo André/SP<br>
       www.laçoentrelaço.com.br<br>
       atendimento@mkcomercial.com.br<br>
       (11) 92609-2607
     </div>
   </div>
+
 </div>
 </body>
 </html>`;
