@@ -198,7 +198,7 @@ const PRODUCTS = [
 
 const CATEGORIES = ["Todos", "Veludo", "Lamê", "Estampado", "Bolas", "Saldão"];
 const VENDEDORES  = ["Alexandra", "Valéria", "Cleuza"];
-const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbwwTdPBtFEyWk-E-Db8WkYlHyBLpbqjvlphsCtpNpZvGjVM-xvXrE7zkoX3cr_xRtdFhg/exec";
+const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbxz6l7WMijLE-Qfq2RcSE2kHfwHjlcl-cnYPuMtL8YwDjw3TqTmsafbBDjVnm65b-gOlQ/exec";
 
 const BRL     = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
 const gerarNr = () => `#${Date.now().toString().slice(-5)}`;
@@ -590,7 +590,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
 });
 
 // ── TELA DE PEDIDOS ──────────────────────────────────────────────────────────
-const ORDERS_URL = "https://script.google.com/macros/s/AKfycbwwTdPBtFEyWk-E-Db8WkYlHyBLpbqjvlphsCtpNpZvGjVM-xvXrE7zkoX3cr_xRtdFhg/exec";
+const ORDERS_URL = "https://script.google.com/macros/s/AKfycbxz6l7WMijLE-Qfq2RcSE2kHfwHjlcl-cnYPuMtL8YwDjw3TqTmsafbBDjVnm65b-gOlQ/exec";
 
 // Cabeçalhos exatos da planilha
 const COL = {
@@ -819,7 +819,7 @@ export default function App() {
     if (!form.nome || !form.whats) { alert("Preencha Nome e WhatsApp!"); return; }
     setEnviando(true);
     const itens = cart.map(i => `• ${i.product.name} | Tam: ${i.size?.ref} | Cor: ${i.color?.name} | Qtd: ${i.qty} | ${BRL(i.qty * (i.preco ?? i.product.preco))}`).join("\n");
-    const p = new URLSearchParams({
+    const payload = {
       pedido:      nrPedido,
       data:        new Date().toLocaleString("pt-BR"),
       vendedor:    vendedora || "—",
@@ -833,9 +833,31 @@ export default function App() {
       frete:       frete > 0 ? BRL(frete) : "—",
       total:       BRL(totalFinal),
       observacoes: form.obs || "—"
-    });
-    try { await fetch(`${SHEETS_URL}?${p}`, { method: "GET", mode: "no-cors" }); } catch (e) { console.error(e); }
-    // Limpa cache imediatamente após envio
+    };
+    try {
+      // Usa form submit via iframe — método mais confiável com Apps Script
+      const form_el = document.createElement("form");
+      form_el.method = "POST";
+      form_el.action = SHEETS_URL;
+      form_el.target = "_sheets_iframe";
+      form_el.style.display = "none";
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = "payload";
+      input.value = JSON.stringify(payload);
+      form_el.appendChild(input);
+      // Cria iframe invisível para receber resposta
+      let iframe = document.getElementById("_sheets_iframe");
+      if (!iframe) {
+        iframe = document.createElement("iframe");
+        iframe.name = "_sheets_iframe";
+        iframe.style.display = "none";
+        document.body.appendChild(iframe);
+      }
+      document.body.appendChild(form_el);
+      form_el.submit();
+      document.body.removeChild(form_el);
+    } catch (e) { console.error(e); }
     try { localStorage.removeItem("laco_cart"); } catch {}
     setPedidoFinalizado({ cart: [...cart], form: { ...form }, nrPedido, desconto, frete });
     setEnviando(false);
