@@ -108,9 +108,9 @@ const TC = {
 
 const PRODUCTS = [
   // VELUDO
-  { sku:"VVM",      name:"Laço Veludo Vermelho",                     subtitle:"20cm a 100cm",           category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"O clássico da linha; confeccionado em Veludo tradicional.",                                       cores:cVVM,   photo:F.vvm,         ...TC.V, sizes:[{label:"20cm", ref:"20V",         min:15,estoque:500},{label:"30cm",ref:"30V",         min:12,estoque:500},{label:"40cm",ref:"40V",  min:10,estoque:500},{label:"50cm",ref:"50V", min:6,estoque:500},{label:"60cm",ref:"60V",min:4,estoque:500},{label:"80cm",ref:"80V",min:3,estoque:500},{label:"100cm",ref:"100V",min:2,estoque:500}] },
-  { sku:"VALGL",    name:"Laço Veludo Cristal Gravata Longa",         subtitle:"30cm a 50cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata ao descer pela árvore ou coluna.", cores:cVGBC,photo:F.val_gl,...TC.V,sizes:[{label:"30cm",ref:"30VaL",min:10,estoque:500},{label:"40cm",ref:"40VaL",min:8,estoque:500},{label:"50cm",ref:"50VaL",min:6,estoque:500}] },
-  { sku:"VALLIND",  name:"Laço Veludo Ale — Lindíssimo",              subtitle:"30cm a 90cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço duplo confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata.",                  cores:cVGBC,  photo:F.val_lind,    ...TC.V, sizes:[{label:"30cm",ref:"30VAl/Lind",min:6,estoque:500},{label:"60cm",ref:"60VAl/Lind",min:4,estoque:500},{label:"90cm",ref:"90VAl/Lind",min:2,estoque:500}] },
+  { sku:"VVM",      name:"Laço Veludo Vermelho",                     subtitle:"20cm a 100cm",           category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"O clássico da linha; confeccionado em Veludo tradicional.",                                       cores:cVVM,   photo:F.vvm,         ...TC.V, sizes:[{label:"20cm",ref:"20V",min:15,estoque:500,preco:21.90},{label:"30cm",ref:"30V",min:12,estoque:500,preco:33.90},{label:"40cm",ref:"40V",min:10,estoque:500,preco:46.90},{label:"50cm",ref:"50V",min:6,estoque:500,preco:79.90},{label:"80cm",ref:"80V",min:3,estoque:500,preco:197.90},{label:"100cm",ref:"100V",min:2,estoque:500,preco:269.00}] },
+  { sku:"VALGL",    name:"Laço Veludo Cristal Gravata Longa",         subtitle:"30cm a 50cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata ao descer pela árvore ou coluna.", cores:cVGBC,photo:F.val_gl,...TC.V,sizes:[{label:"30cm",ref:"30VaL",min:10,estoque:500,preco:43.00},{label:"40cm",ref:"40VaL",min:8,estoque:500,preco:61.90},{label:"50cm",ref:"50VaL",min:6,estoque:500,preco:98.90}] },
+  { sku:"VALLIND",  name:"Laço Veludo Ale — Lindíssimo",              subtitle:"30cm a 90cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço duplo confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata.",                  cores:cVGBC,  photo:F.val_lind,    ...TC.V, sizes:[{label:"30cm",ref:"30VAl/Lind",min:6,estoque:500,preco:58.00},{label:"60cm",ref:"60VAl/Lind",min:4,estoque:500,preco:208.90},{label:"90cm",ref:"90VAl/Lind",min:2,estoque:500,preco:398.00}] },
   { sku:"VAL",      name:"Laço Veludo Ale",                           subtitle:"20cm a 40cm",            category:"Veludo",    material:"100% poliéster",            acabamento:APL,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em Veludo Cristal.",                                                       cores:cVGBC,  photo:F.val,         ...TC.V, sizes:[{label:"20cm",ref:"20VAl",min:12,estoque:500},{label:"30cm",ref:"30VAl",min:10,estoque:500},{label:"40cm",ref:"40VAl",min:8,estoque:500}] },
   { sku:"VAlMinGL", name:"Laço Veludo Ale Min. Gravata Longa",        subtitle:"50cm e 80cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço com borboleta extra larga e Gravata extra longa.",                                                   cores:cVGBCLD,photo:F.veludo_novo,  ...TC.V, sizes:[{label:"50cm",ref:"50VAlMinGL",min:4,estoque:500},{label:"80cm",ref:"80VAlMinGL",min:2,estoque:500}] },
   { sku:"VAlTri",   name:"Laço Veludo Ale Triplo",                    subtitle:"90cm",                   category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço com borboleta tripla e gravata tradicional.",                                                        cores:cVGBCLD,photo:F.veludo_triplo,...TC.V, sizes:[{label:"90cm",ref:"90VAlTri",min:2,estoque:500}] },
@@ -121,14 +121,14 @@ const PRODUCTS = [
   { sku:"VX",       name:"Laço Veludo Vermelho Xadrez",               subtitle:"Borda xadrez",           category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda xadrez.",                                            cores:cVM,    photo:F.vx,          ...TC.E, sizes:[{label:"20cm",ref:"20VX",min:12,estoque:500},{label:"30cm",ref:"30VX",min:10,estoque:500},{label:"40cm",ref:"40VX",min:8,estoque:500}] },
   { sku:"VL",       name:"Laço Veludo Vermelho Listra",               subtitle:"Borda listrada",         category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda de listra.",                                         cores:cVM,    photo:F.vl,          ...TC.E, sizes:[{label:"20cm",ref:"20VL",min:12,estoque:500},{label:"30cm",ref:"30VL",min:10,estoque:500},{label:"40cm",ref:"40VL",min:8,estoque:500}] },
   { sku:"VD",       name:"Laço Veludo Vermelho com Dourado",          subtitle:"Borda ouro",             category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda ouro.",                                               cores:cVD,    photo:F.vd,          ...TC.E, sizes:[{label:"20cm",ref:"20VD",min:12,estoque:500},{label:"30cm",ref:"30VD",min:10,estoque:500},{label:"40cm",ref:"40VD",min:8,estoque:500}] },
-  { sku:"VXC",      name:"Laço Veludo Vermelho Meio Xadrez",          subtitle:"Xadrez central",         category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em tecido xadrez, com borda em veludo.",                                   cores:cVM,    photo:F.vxc,         ...TC.E, sizes:[{label:"20cm",ref:"20VXC",min:12,estoque:500},{label:"30cm",ref:"30VXC",min:10,estoque:500},{label:"40cm",ref:"40VXC",min:8,estoque:500}] },
-  { sku:"VFIXDZ",   name:"Laço Veludo Vermelho Fita Xadrez",          subtitle:"Fita xadrez",            category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com fita xadrez decorativa central.",                          cores:cVM,    photo:F.vfixdz,      ...TC.E, sizes:[{label:"40cm",ref:"40VFiXdz",min:10,estoque:500}] },
-  { sku:"VXP",      name:"Laço Veludo Vermelho Xadrez/Preto",         subtitle:"Flanela xadrez",         category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço com flanela xadrez Vermelho/Preto central.",                                                         cores:cVP,    photo:F.vxp,         ...TC.E, sizes:[{label:"20cm",ref:"20VXP",min:12,estoque:500},{label:"30cm",ref:"30VXP",min:10,estoque:500},{label:"40cm",ref:"40VXP",min:8,estoque:500}] },
-  { sku:"TL",       name:"Laço Tecido Listra Vermelho/Branco",        subtitle:"Listrado clássico",      category:"Estampado", material:"100% algodão",              acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em tecido listrado.",                                                      cores:cVB,    photo:F.tl,          ...TC.E, sizes:[{label:"20cm",ref:"20TL",min:12,estoque:500},{label:"30cm",ref:"30TL",min:10,estoque:500},{label:"40cm",ref:"40TL",min:8,estoque:500}] },
+  { sku:"VXC",      name:"Laço Veludo Vermelho Meio Xadrez",          subtitle:"Xadrez central",         category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em tecido xadrez, com borda em veludo.",                                   cores:cVM,    photo:F.vxc,         ...TC.E, sizes:[{label:"20cm",ref:"20VXC",min:12,estoque:500,preco:27.90},{label:"30cm",ref:"30VXC",min:10,estoque:500,preco:39.90},{label:"40cm",ref:"40VXC",min:8,estoque:500,preco:53.90}] },
+  { sku:"VFIXDZ",   name:"Laço Veludo Vermelho Fita Xadrez",          subtitle:"Fita xadrez",            category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:36, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com fita xadrez decorativa central.",                          cores:cVM,    photo:F.vfixdz,      ...TC.E, sizes:[{label:"40cm",ref:"40VFiXdz",min:10,estoque:36,preco:56.90}] },
+  { sku:"VXP",      name:"Laço Veludo Vermelho Xadrez/Preto",         subtitle:"Flanela xadrez",         category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço com flanela xadrez Vermelho/Preto central.",                                                         cores:cVP,    photo:F.vxp,         ...TC.E, sizes:[{label:"20cm",ref:"20VXP",min:12,estoque:500,preco:24.90},{label:"30cm",ref:"30VXP",min:10,estoque:500,preco:31.90},{label:"40cm",ref:"40VXP",min:8,estoque:500,preco:39.90}] },
+  { sku:"TL",       name:"Laço Tecido Listra Vermelho/Branco",        subtitle:"Listrado clássico",      category:"Estampado", material:"100% algodão",              acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em tecido listrado.",                                                      cores:cVB,    photo:F.tl,          ...TC.E, sizes:[{label:"20cm",ref:"20TL",min:12,estoque:500,preco:21.90},{label:"30cm",ref:"30TL",min:10,estoque:500,preco:33.90},{label:"40cm",ref:"40TL",min:8,estoque:500,preco:44.70}] },
   // LAMÊ
   { sku:"LDR",      name:"Laço Lamê Dourado",                         subtitle:"Brilho metálico",        category:"Lamê",      material:"100% poliéster metalizado", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em Lamê dourado; brilho intenso.",                                         cores:cLD,    photo:F.ldr,         ...TC.L, sizes:[{label:"20cm",ref:"20LDR",min:12,estoque:500},{label:"30cm",ref:"30LDR",min:10,estoque:500},{label:"40cm",ref:"40LDR",min:8,estoque:500}] },
   // BOLAS
-  { sku:"BVAL",     name:"Bola Veludo Ale",                            subtitle:"12cm a 25cm",            category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola tradicional coberta com veludo cristal.",                                                            cores:cVGBCL, photo:F.bola_vm,     ...TC.B, sizes:[{label:"12cm",ref:"12BVAl",min:1,estoque:500},{label:"15cm",ref:"15BVAl",min:1,estoque:500},{label:"20cm",ref:"20BVAl",min:1,estoque:500},{label:"25cm",ref:"25BVAl",min:1,estoque:500}] },
+  { sku:"BVAL",     name:"Bola Veludo Ale",                            subtitle:"12cm a 25cm",            category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola tradicional coberta com veludo cristal.",                                                            cores:cVGBCL, photo:F.bola_vm,     ...TC.B, sizes:[{label:"12cm",ref:"12BVAl",min:10,estoque:12,preco:19.90},{label:"15cm",ref:"15BVAl",min:10,estoque:10,preco:23.20},{label:"20cm",ref:"20BVAl",min:10,estoque:8,preco:39.20},{label:"25cm",ref:"25BVAl",min:10,estoque:6,preco:49.80}] },
   { sku:"BTXDZ",    name:"Bola Tecido Xadrez Decorada",                subtitle:"Xadrez Verm/Branco",     category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola coberta com tecido xadrez Vermelho/Branco e decorada com galhos natalinos.",                         cores:cVB,    photo:F.bola_xdz,    ...TC.B, sizes:[{label:"12cm",ref:"12BTXdz",min:1,estoque:500},{label:"15cm",ref:"15BTXdz",min:1,estoque:500},{label:"20cm",ref:"20BTXdz",min:1,estoque:500}] },
   { sku:"BTLT",     name:"Bola Tecido Listrado Decorada",              subtitle:"Listrado Verm/Branco",   category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola coberta com tecido listrado Vermelho/Branco e decorada com galhos natalinos.",                      cores:cVB,    photo:F.bola_lst,    ...TC.B, sizes:[{label:"12cm",ref:"12BTLt",min:1,estoque:500},{label:"15cm",ref:"15BTLt",min:1,estoque:500},{label:"20cm",ref:"20BTLt",min:1,estoque:500}] },
   { sku:"BTXDZP",   name:"Bola Tecido Xadrez Vermelho/Preto",          subtitle:"Xadrez Verm/Preto",      category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola coberta com tecido Xadrez Vermelho/Preto e decorada com galhos natalinos.",                         cores:cVP,    photo:F.bola_pt,     ...TC.B, sizes:[{label:"12cm",ref:"12BTXdzVm/Pt",min:1,estoque:500},{label:"15cm",ref:"15BTXdzVm/Pt",min:1,estoque:500},{label:"20cm",ref:"20BTXdzVm/Pt",min:1,estoque:500}] },
@@ -165,7 +165,7 @@ const PRODUCTS = [
   { sku:"BFVPACH",  name:"Bota Velboz Patchwork",                        subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:10,  preco:49.70,    desc:"Bota em velboz estilo patchwork.",                                                                        cores:cNAT,   photo:PH,            ...TC.S, sizes:[{label:"50cm",ref:"50BFVPACH",min:1,estoque:10}] },
   { sku:"BVVPN",    name:"Bota Velboz Cru/Rosê Laço",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bota em velboz cru/rosê com laço.",                                                                       cores:cNAT,   photo:F.bvvpn,       ...TC.S, sizes:[{label:"50cm",ref:"50BVVPN",min:1,estoque:500}] },
   { sku:"SOS",      name:"Saia Organza Sextavada",                       subtitle:"60/80/100cm",            category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:500, preco:0,        desc:"Saia para árvore em organza sextavada.",                                                                 cores:cNAT,   photo:F.saia_noel,   ...TC.S, sizes:[{label:"60cm",ref:"60SOS",min:1,estoque:500},{label:"80cm",ref:"80SOS",min:1,estoque:500},{label:"100cm",ref:"1SOS",min:1,estoque:500}] },
-  { sku:"RNL",      name:"Roupa Noel Luxo",                              subtitle:"Tam. GG",                category:"Saldão",    material:"95% poliéster, 5% vinil",   acabamento:"",   prazo:P30,           estoque:500, preco:0,        desc:"Roupa do Papai Noel luxo em feltro e pelúcia.",                                                          cores:cUNI,   photo:F.roupa_noel,  ...TC.S, sizes:[{label:"GG",ref:"RNL",min:2,estoque:500}] },
+  { sku:"RNL",      name:"Roupa Noel Luxo",                              subtitle:"Tam. GG",                category:"Saldão",    material:"95% poliéster, 5% vinil",   acabamento:"",   prazo:P30,           estoque:28, preco:320.00,        desc:"Roupa do Papai Noel luxo em feltro e pelúcia.",                                                          cores:cUNI,   photo:F.roupa_noel,  ...TC.S, sizes:[{label:"GG",ref:"RNL",min:2,estoque:28,preco:320.00}] },
   // KITS
   { sku:"KitVN2",   name:"Kit Varalzinho Natalino",                      subtitle:"Kit 2 pçs · 150cm",     category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e fivela.",      prazo:P30, estoque:10,  preco:39.80, desc:"Kit com 2 pçs: Varalzinho 1,50mt em feltro e pelúcia.",                  cores:cVNude, photo:F.kit_varal,   ...TC.K, sizes:[{label:"150cm",ref:"KitVN2",min:3,estoque:10}] },
   { sku:"KitNat5",  name:"Kit Figuras Natalinas Sortidas",               subtitle:"Kit 5 pçs",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia, soutache e botão.", prazo:P30, estoque:4,   preco:25.00, desc:"Kit com 5 pçs: casaco, calça, bota, gorro, estrela e árvore.",          cores:cVNDou, photo:F.kit_figuras, ...TC.K, sizes:[{label:"Kit 5",ref:"KitNat5",min:3,estoque:4}] },
@@ -190,10 +190,12 @@ const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbwwTdPBtFEyWk-E-Db8
 const BRL     = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
 const gerarNr = () => `#${Date.now().toString().slice(-5)}`;
 const getFoto = (p, i) => p.cores?.[i]?.photo || p.photo || "";
+// Preço efetivo: usa preco do size se definido, senão do produto
+const getPreco = (product, size) => size?.preco ?? product.preco ?? 0;
 
 // ── GERADOR DO PEDIDO PARA IMPRESSÃO ─────────────────────────────────────────
 const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
-  const subtotal   = cart.reduce((s, i) => s + i.qty * i.product.preco, 0);
+  const subtotal   = cart.reduce((s, i) => s + i.qty * (i.preco ?? i.product.preco), 0);
   const descVal    = desconto.tipo === "%" ? subtotal * (desconto.valor / 100) : desconto.valor;
   const totalFinal = Math.max(0, subtotal - descVal) + (frete || 0);
   const totalItens = cart.length;
@@ -207,7 +209,7 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
       <td>${item.size?.label || ""}</td>
       <td><span class="td-cor"><span class="cor-dot" style="background:${item.color?.hex || "#ccc"}"></span> ${item.color?.name || ""}</span></td>
       <td style="text-align:center;font-family:'DM Mono',monospace;font-weight:700;color:#2D5A27;">${item.qty}</td>
-      <td style="text-align:right;font-family:'DM Mono',monospace;font-weight:700;color:#2D5A27;">${BRL(item.qty * item.product.preco)}</td>
+      <td style="text-align:right;font-family:'DM Mono',monospace;font-weight:700;color:#2D5A27;">${BRL(item.qty * (item.preco ?? item.product.preco))}</td>
     </tr>`).join("");
 
   return `<!DOCTYPE html>
@@ -399,7 +401,7 @@ const QuickAdd = memo(({ product: p, onAdd }) => {
 
   const doAdd = e => {
     e.stopPropagation();
-    onAdd({ product: p, size: tam, color: cor, qty: qt, id: Date.now() });
+    onAdd({ product: p, size: tam, color: cor, qty: qt, preco: getPreco(p, tam), id: Date.now() });
     setOpen(false);
     setSz(0); setCl(0); setQt(p.sizes[0]?.min || 1);
   };
@@ -474,6 +476,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
   const [qt, setQt] = useState(min);
   const cor = p.cores[cl] || p.cores[0];
   const estoqueModal = tam?.estoque ?? p.estoque ?? 0;
+  const precoAtual = getPreco(p, tam);
 
   const handleSz = i => { setSz(i); setQt(p.sizes[i]?.min || 1); setEr(""); };
   const addQty = n => setQt(q => Math.min(estoqueModal || 9999, Math.max(min, q + n)));
@@ -481,7 +484,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
   const doAdd = () => {
     if (qt < min) { setEr(`Mínimo de ${min} unidades para este tamanho.`); return; }
     setEr("");
-    onAdd({ product: p, size: tam, color: cor, qty: qt, id: Date.now() });
+    onAdd({ product: p, size: tam, color: cor, qty: qt, preco: precoAtual, id: Date.now() });
   };
 
   return (
@@ -491,7 +494,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
           <Img src={getFoto(p, cl)} h={260} />
           <button onClick={onClose} style={{ position: "absolute", top: 12, left: 12, background: "rgba(255,255,255,0.92)", border: "none", borderRadius: "50%", width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 16, boxShadow: "0 2px 8px rgba(0,0,0,0.15)" }}>←</button>
           <div style={{ position: "absolute", top: 12, right: 12, background: "rgba(255,255,255,0.92)", borderRadius: 8, padding: "4px 10px" }}>
-            <span className="mn" style={{ color: VERDE, fontSize: 12, fontWeight: 700 }}>{BRL(p.preco)}/un</span>
+            <span className="mn" style={{ color: VERDE, fontSize: 12, fontWeight: 700 }}>{BRL(precoAtual)}/un</span>
           </div>
         </div>
         <div style={{ padding: "18px 18px 44px" }}>
@@ -556,7 +559,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
           </div>
           <div style={{ background: VERDES, borderRadius: 10, padding: "9px 14px", marginBottom: 14, display: "flex", justifyContent: "space-between", alignItems: "center", border: `1px solid ${VERDE}22` }}>
             <span className="mn" style={{ color: VERDE, fontSize: 10, letterSpacing: 1 }}>SUBTOTAL</span>
-            <span className="mn" style={{ color: VERDE, fontSize: 16, fontWeight: 700 }}>{BRL(qt * p.preco)}</span>
+            <span className="mn" style={{ color: VERDE, fontSize: 16, fontWeight: 700 }}>{BRL(qt * precoAtual)}</span>
           </div>
           {er && <p style={{ color: VINHO, fontSize: 12, marginBottom: 10, fontFamily: "'DM Sans',sans-serif" }}>⚠ {er}</p>}
           <button onClick={doAdd} style={{ width: "100%", background: VERDE, color: "#fff", padding: "15px", borderRadius: 14, fontSize: 13, fontWeight: 700, letterSpacing: 2, cursor: "pointer", border: "none", marginBottom: 10, boxShadow: "0 4px 16px rgba(45,90,39,0.3)", fontFamily: "'DM Sans',sans-serif" }}>
@@ -775,7 +778,7 @@ export default function App() {
   });
 
   const cartCount   = cart.reduce((s, i) => s + i.qty, 0);
-  const subtotal    = cart.reduce((s, i) => s + i.qty * i.product.preco, 0);
+  const subtotal    = cart.reduce((s, i) => s + i.qty * (i.preco ?? i.product.preco), 0);
   const descVal     = desconto.tipo === "%" ? subtotal * (desconto.valor / 100) : Math.min(desconto.valor, subtotal);
   const totalFinal  = Math.max(0, subtotal - descVal) + (frete || 0);
 
@@ -802,7 +805,7 @@ export default function App() {
   const sendPedido = async () => {
     if (!form.nome || !form.whats) { alert("Preencha Nome e WhatsApp!"); return; }
     setEnviando(true);
-    const itens = cart.map(i => `• ${i.product.name} | Tam: ${i.size?.ref} | Cor: ${i.color?.name} | Qtd: ${i.qty} | ${BRL(i.qty * i.product.preco)}`).join("\n");
+    const itens = cart.map(i => `• ${i.product.name} | Tam: ${i.size?.ref} | Cor: ${i.color?.name} | Qtd: ${i.qty} | ${BRL(i.qty * (i.preco ?? i.product.preco))}`).join("\n");
     const p = new URLSearchParams({
       pedido:      nrPedido,
       data:        new Date().toLocaleString("pt-BR"),
@@ -896,7 +899,9 @@ export default function App() {
                       <Img src={getFoto(p, 0)} h={isDesktop ? 200 : 180} />
                       <div style={{ position: "absolute", top: 10, left: 10 }}><Tag label={p.tag} color={p.tagColor} bg={p.tagBg} /></div>
                       <div style={{ position: "absolute", top: 10, right: 10, background: "rgba(255,255,255,0.92)", borderRadius: 8, padding: "3px 9px" }}>
-                        <span className="mn" style={{ color: VERDE, fontSize: 10, fontWeight: 700 }}>{BRL(p.preco)}/un</span>
+                        <span className="mn" style={{ color: VERDE, fontSize: 10, fontWeight: 700 }}>
+                          {p.sizes.some(s => s.preco) ? `${BRL(Math.min(...p.sizes.map(s => s.preco ?? p.preco)))}/un` : `${BRL(p.preco)}/un`}
+                        </span>
                       </div>
                     </div>
                     <div style={{ padding: "14px", flex: 1, display: "flex", flexDirection: "column" }}>
@@ -957,7 +962,7 @@ export default function App() {
                           <span className="mn" style={{ color: TEXT, fontSize: 13, minWidth: 24, textAlign: "center", fontWeight: 700 }}>{item.qty}</span>
                           <button onClick={() => updateQty(item.id, 1)} style={{ width: 30, height: 30, background: "none", border: "none", color: VERDE, fontSize: 17, fontWeight: 700, cursor: "pointer" }}>+</button>
                         </div>
-                        <span className="mn" style={{ color: VERDE, fontSize: 11, fontWeight: 700 }}>{BRL(item.qty * item.product.preco)}</span>
+                        <span className="mn" style={{ color: VERDE, fontSize: 11, fontWeight: 700 }}>{BRL(item.qty * (item.preco ?? item.product.preco))}</span>
                       </div>
                     </div>
                     <button onClick={() => removeFromCart(item.id)} style={{ color: "#C0392B", fontSize: 17, background: "none", border: "none", padding: "4px", opacity: 0.5, alignSelf: "flex-start", cursor: "pointer" }}>✕</button>
