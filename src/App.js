@@ -835,6 +835,8 @@ export default function App() {
       observacoes: form.obs || "—"
     });
     try { await fetch(`${SHEETS_URL}?${p}`, { method: "GET", mode: "no-cors" }); } catch (e) { console.error(e); }
+    // Limpa cache imediatamente após envio
+    try { localStorage.removeItem("laco_cart"); } catch {}
     setPedidoFinalizado({ cart: [...cart], form: { ...form }, nrPedido, desconto, frete });
     setEnviando(false);
     setScreen("success");
@@ -1097,7 +1099,5 @@ export default function App() {
           onGoToCart={() => { setModal(null); setScreen("carrinho"); }} />
       )}
     </div>
-  );
-}
   );
 }
