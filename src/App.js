@@ -819,7 +819,7 @@ export default function App() {
     if (!form.nome || !form.whats) { alert("Preencha Nome e WhatsApp!"); return; }
     setEnviando(true);
     const itens = cart.map(i => `• ${i.product.name} | Tam: ${i.size?.ref} | Cor: ${i.color?.name} | Qtd: ${i.qty} | ${BRL(i.qty * (i.preco ?? i.product.preco))}`).join("\n");
-    const payload = {
+    const params = new URLSearchParams({
       pedido:      nrPedido,
       data:        new Date().toLocaleString("pt-BR"),
       vendedor:    vendedora || "—",
@@ -832,32 +832,17 @@ export default function App() {
       desconto:    descVal > 0 ? `${desconto.tipo === "%" ? desconto.valor + "%" : "R$"} — ${BRL(descVal)}` : "—",
       frete:       frete > 0 ? BRL(frete) : "—",
       total:       BRL(totalFinal),
-      observacoes: form.obs || "—"
-    };
-    try {
-      // Usa form submit via iframe — método mais confiável com Apps Script
-      const form_el = document.createElement("form");
-      form_el.method = "POST";
-      form_el.action = SHEETS_URL;
-      form_el.target = "_sheets_iframe";
-      form_el.style.display = "none";
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = "payload";
-      input.value = JSON.stringify(payload);
-      form_el.appendChild(input);
-      // Cria iframe invisível para receber resposta
-      let iframe = document.getElementById("_sheets_iframe");
-      if (!iframe) {
-        iframe = document.createElement("iframe");
-        iframe.name = "_sheets_iframe";
-        iframe.style.display = "none";
-        document.body.appendChild(iframe);
-      }
-      document.body.appendChild(form_el);
-      form_el.submit();
-      document.body.removeChild(form_el);
-    } catch (e) { console.error(e); }
+      observacoes: form.obs || "—",
+      callback:    "handleSheetResponse"
+    });
+    await new Promise(resolve => {
+      window.handleSheetResponse = () => { delete window.handleSheetResponse; resolve(); };
+      const script = document.createElement("script");
+      script.src = `${SHEETS_URL}?${params}`;
+      script.onerror = resolve; // resolve mesmo se der erro
+      document.head.appendChild(script);
+      setTimeout(resolve, 5000); // timeout 5s
+    });
     try { localStorage.removeItem("laco_cart"); } catch {}
     setPedidoFinalizado({ cart: [...cart], form: { ...form }, nrPedido, desconto, frete });
     setEnviando(false);
