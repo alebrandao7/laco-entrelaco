@@ -198,7 +198,7 @@ const PRODUCTS = [
 
 const CATEGORIES = ["Todos", "Veludo", "Lamê", "Estampado", "Bolas", "Saldão"];
 const VENDEDORES  = ["Alexandra", "Valéria", "Cleuza"];
-const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbzfA8injH4p--UxoSDFsZeHGgPZjphN7mP2PJpQv8oYemnhLMjDveUdKsI8rQUyTf91HA/exec";
+const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbwc9hkaBc0xgs35V6AL499w8uNPd-L_7m6UKW7l5O3qCX9ejs90IZwcrTrx86BLRgkmEA/exec";
 
 const BRL     = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
 const gerarNr = () => `#${Date.now().toString().slice(-5)}`;
@@ -298,9 +298,10 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
   <p class="section-title">Dados do Cliente</p>
   <div class="cliente-grid">
     <div class="campo"><label>Empresa / Nome</label><span>${form.nome || "—"}</span></div>
-    <div class="campo"><label>CPF / CNPJ</label><span>${form.cpfcnpj || "—"}</span></div>
+    <div class="campo"><label>CNPJ</label><span>${form.cpfcnpj || "—"}</span></div>
     <div class="campo"><label>WhatsApp</label><span>${form.whats || "—"}</span></div>
     <div class="campo"><label>E-mail</label><span>${form.email || "—"}</span></div>
+    <div class="campo"><label>Vendedora</label><span>${form.vendedor || "—"}</span></div>
   </div>
 
   <p class="section-title">Itens do Pedido</p>
@@ -590,7 +591,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
 });
 
 // ── TELA DE PEDIDOS ──────────────────────────────────────────────────────────
-const ORDERS_URL = "https://script.google.com/macros/s/AKfycbzfA8injH4p--UxoSDFsZeHGgPZjphN7mP2PJpQv8oYemnhLMjDveUdKsI8rQUyTf91HA/exec";
+const ORDERS_URL = "https://script.google.com/macros/s/AKfycbwc9hkaBc0xgs35V6AL499w8uNPd-L_7m6UKW7l5O3qCX9ejs90IZwcrTrx86BLRgkmEA/exec";
 
 // Cabeçalhos exatos da planilha
 const COL = {
@@ -598,15 +599,15 @@ const COL = {
   data:        "Data/Hora",
   vendedor:    "Vendedor",
   nome:        "Nome / Empresa",
-  cpfcnpj:     "CPF/CNPJ",
+  cpfcnpj:     "CNPJ",
   whatsapp:    "WhatsApp",
   email:       "E-mail",
   itens:       "Itens do Pedido",
+  observacoes: "Observações",
   subtotal:    "Subtotal",
   desconto:    "Desconto",
   frete:       "Frete",
   total:       "Total",
-  observacoes: "Observações",
 };
 
 const PedidosScreen = memo(({ onBack }) => {
@@ -618,10 +619,30 @@ const PedidosScreen = memo(({ onBack }) => {
 
   const carregar = () => {
     setLoading(true); setErro("");
-    fetch(`${ORDERS_URL}?action=listar`)
-      .then(r => r.json())
-      .then(d => { setPedidos(d.pedidos || []); setLoading(false); })
-      .catch(() => { setErro("Não foi possível carregar os pedidos. Verifique o Apps Script."); setLoading(false); });
+    // JSONP para contornar CORS do Google Apps Script
+    const cbName = "cb_pedidos_" + Date.now();
+    const script = document.createElement("script");
+    const timeout = setTimeout(() => {
+      delete window[cbName];
+      document.head.contains(script) && document.head.removeChild(script);
+      setErro("Tempo esgotado. Verifique sua conexão.");
+      setLoading(false);
+    }, 8000);
+    window[cbName] = (data) => {
+      clearTimeout(timeout);
+      delete window[cbName];
+      document.head.contains(script) && document.head.removeChild(script);
+      setPedidos(data.pedidos || []);
+      setLoading(false);
+    };
+    script.onerror = () => {
+      clearTimeout(timeout);
+      delete window[cbName];
+      setErro("Não foi possível carregar os pedidos.");
+      setLoading(false);
+    };
+    script.src = `${ORDERS_URL}?action=listar&callback=${cbName}`;
+    document.head.appendChild(script);
   };
 
   useEffect(() => { carregar(); }, []);
@@ -838,7 +859,7 @@ export default function App() {
       await fetch(`${SHEETS_URL}?${params}`, { method: "GET", mode: "no-cors" });
     } catch (e) { console.error(e); }
     try { localStorage.removeItem("laco_cart"); } catch {}
-    setPedidoFinalizado({ cart: [...cart], form: { ...form }, nrPedido, desconto, frete });
+    setPedidoFinalizado({ cart: [...cart], form: { ...form, vendedor: vendedora }, nrPedido, desconto, frete });
     setEnviando(false);
     setScreen("success");
   };
@@ -1045,7 +1066,7 @@ export default function App() {
 
               {[
                 { k: "nome",    l: "Nome / Empresa *",  p: "Ex: Shopping Parque D. Pedro", t: "text"  },
-                { k: "cpfcnpj",l: "CPF / CNPJ",         p: "000.000.000-00 ou 00.000.000/0001-00", t: "text" },
+                { k: "cpfcnpj",l: "CNPJ",               p: "00.000.000/0001-00",           t: "text" },
                 { k: "whats",  l: "WhatsApp *",          p: "(11) 99999-9999",              t: "tel"   },
                 { k: "email",  l: "E-mail",               p: "contato@empresa.com.br",       t: "email" },
               ].map(f => (
