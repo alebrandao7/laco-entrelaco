@@ -198,7 +198,7 @@ const PRODUCTS = [
 
 const CATEGORIES = ["Todos", "Veludo", "Lamê", "Estampado", "Bolas", "Saldão"];
 const VENDEDORES  = ["Alexandra", "Valéria", "Cleuza"];
-const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbwc9hkaBc0xgs35V6AL499w8uNPd-L_7m6UKW7l5O3qCX9ejs90IZwcrTrx86BLRgkmEA/exec";
+const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbzMZQ2vE5qQM67SdrYqmD83mo0wt5B-YVHM_A_EiahVbjAvSjwvYOX3am-Y0k1iQyxeeA/exec";
 
 const BRL     = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
 const gerarNr = () => `#${Date.now().toString().slice(-5)}`;
@@ -218,7 +218,7 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
   const linhasItens = cart.map(item => `
     <tr>
       <td class="td-ref">${item.size?.ref || ""}</td>
-      <td><strong>${item.product.name}</strong></td>
+      <td><strong>${item.product.sku ? "[" + item.product.sku + "] " : ""}${item.product.name}</strong></td>
       <td>${item.size?.label || ""}</td>
       <td><span class="td-cor"><span class="cor-dot" style="background:${item.color?.hex || "#ccc"}"></span> ${item.color?.name || ""}</span></td>
       <td style="text-align:center;font-family:'DM Mono',monospace;font-weight:700;color:#2D5A27;">${item.qty}</td>
@@ -411,7 +411,7 @@ const QuickAdd = memo(({ product: p, onAdd }) => {
   const semEstoque = estoqueAtual === 0;
 
   const handleSz = i => { setSz(i); setQt(p.sizes[i]?.min || 1); };
-  const addQty = n => setQt(q => Math.min(estoqueAtual || 9999, Math.max(min, q + n)));
+  const addQty = n => { if (n === 1 || n === -1) setQt(q => Math.min(estoqueAtual || 9999, Math.max(min, q + n))); else setQt(Math.min(estoqueAtual || 9999, Math.max(min, n))); };
 
   const doAdd = e => {
     e.stopPropagation();
@@ -493,7 +493,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
   const precoAtual = getPreco(p, tam);
 
   const handleSz = i => { setSz(i); setQt(p.sizes[i]?.min || 1); setEr(""); };
-  const addQty = n => setQt(q => Math.min(estoqueModal || 9999, Math.max(min, q + n)));
+  const addQty = n => { if (n === 1 || n === -1) setQt(q => Math.min(estoqueModal || 9999, Math.max(min, q + n))); else setQt(Math.min(estoqueModal || 9999, Math.max(min, n))); };
 
   const doAdd = () => {
     if (qt < min) { setEr(`Mínimo de ${min} unidades para este tamanho.`); return; }
@@ -591,7 +591,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
 });
 
 // ── TELA DE PEDIDOS ──────────────────────────────────────────────────────────
-const ORDERS_URL = "https://script.google.com/macros/s/AKfycbwc9hkaBc0xgs35V6AL499w8uNPd-L_7m6UKW7l5O3qCX9ejs90IZwcrTrx86BLRgkmEA/exec";
+const ORDERS_URL = "https://script.google.com/macros/s/AKfycbzMZQ2vE5qQM67SdrYqmD83mo0wt5B-YVHM_A_EiahVbjAvSjwvYOX3am-Y0k1iQyxeeA/exec";
 
 // Cabeçalhos exatos da planilha
 const COL = {
@@ -839,7 +839,7 @@ export default function App() {
   const sendPedido = async () => {
     if (!form.nome || !form.whats) { alert("Preencha Nome e WhatsApp!"); return; }
     setEnviando(true);
-    const itens = cart.map(i => `• ${i.product.name} | Tam: ${i.size?.ref} | Cor: ${i.color?.name} | Qtd: ${i.qty} | ${BRL(i.qty * (i.preco ?? i.product.preco))}`).join("\n");
+    const itens = cart.map(i => `• [${i.product.sku}] ${i.size?.ref ? i.size.ref + " — " : ""}${i.product.name} | Cor: ${i.color?.name} | Qtd: ${i.qty} | ${BRL(i.qty * (i.preco ?? i.product.preco))}`).join("\n");
     const params = new URLSearchParams({
       pedido:      nrPedido,
       data:        new Date().toLocaleString("pt-BR"),
