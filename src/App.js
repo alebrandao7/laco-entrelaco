@@ -153,7 +153,7 @@ const PRODUCTS = [
   { sku:"SFVO",     name:"Saia Árvore Vermelho Ossinho",                 subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:3,   preco:79.50,    desc:"Saia para árvore em feltro vermelho com ossinho.",                                                       cores:cNAT,   photo:F.saia_ossinho,...TC.S, sizes:[{label:"1MT",ref:"1SFVO",min:1,estoque:3}] },
   { sku:"BFVO",     name:"Bota Feltro Verde Ossinho",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:49.80,    desc:"Bota em feltro verde com ossinho.",                                                                       cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780058523/WhatsApp_Image_2026-05-14_at_10.42.38432432_aac4sl.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BFVO",min:1,estoque:4}] },
   { sku:"BJXDZN",   name:"Bota Juta Xadrez Natalino",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:16,  preco:69.50,    desc:"Bota em juta com xadrez natalino.",                                                                       cores:cNAT,   photo:F.bjxdzn,      ...TC.S, sizes:[{label:"50cm",ref:"50BJXDZN",min:1,estoque:16}] },
-  { sku:"BJCM",     name:"Bota Juta Cervo Madeira",                      subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:69.50,    desc:"Bota em juta com cervo madeira.",                                                                         cores:cNAT,   photo:PH,            ...TC.S, sizes:[{label:"50cm",ref:"50BJCM",min:1,estoque:4}] },
+  { sku:"BJCM",     name:"Bota Juta Cervo Madeira",                      subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:69.50,    desc:"Bota em juta com cervo madeira.",                                                                         cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779739791/bota_reninha_l4tydy.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BJCM",min:1,estoque:4}] },
   { sku:"BVPArDr",  name:"Bota Velboa/Pelúcia Árvore",                   subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:27,  preco:34.80,    desc:"Bota em velboa/pelúcia com árvore.",                                                                      cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779740019/bota_arvore_mp9hpw.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BVPArDr",min:1,estoque:27}] },
   { sku:"SVVPN",    name:"Saia Árvore Velboa Vermelho Papai Noel",       subtitle:"80/100/120cm",           category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:14,  preco:59.00,    desc:"Saia para árvore em velboa vermelho com Papai Noel.",                                                    cores:cNAT,   photo:F.saia_noel_vm,...TC.S, sizes:[{label:"80cm",ref:"80SVVPN",min:1,estoque:4,preco:59.00},{label:"100cm",ref:"100SVVPN",min:1,estoque:6,preco:64.00},{label:"120cm",ref:"120SVVPN",min:1,estoque:4,preco:69.00}] },
   { sku:"SFG",      name:"Saia Árvore Feltro Gnomo",                     subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:1,   preco:79.50,    desc:"Saia para árvore em feltro com gnomo.",                                                                  cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779740140/saia_gnomo_ff6t78.jpg",            ...TC.S, sizes:[{label:"100cm",ref:"1SFG",min:1,estoque:1}] },
@@ -198,7 +198,7 @@ const PRODUCTS = [
 
 const CATEGORIES = ["Todos", "Veludo", "Lamê", "Estampado", "Bolas", "Saldão"];
 const VENDEDORES  = ["Alexandra", "Valéria", "Cleuza"];
-const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbwIRXnP0ekuXE7s2ScIM0RThPEk7BxGA60KUIvGIkwgtvUffls7E3i4JogvBmGo3m_hqg/exec";
+const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbziAvTSozsJdOUJYPDhSzlxwyIWg_iZnKgfv69Anq3LKlech3AVWZhL6pZ2OiTvdGgXtg/exec";
 
 const BRL     = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
 const gerarNr = () => `#${Date.now().toString().slice(-5)}`;
@@ -590,7 +590,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
 });
 
 // ── TELA DE PEDIDOS ──────────────────────────────────────────────────────────
-const ORDERS_URL = "https://script.google.com/macros/s/AKfycbwIRXnP0ekuXE7s2ScIM0RThPEk7BxGA60KUIvGIkwgtvUffls7E3i4JogvBmGo3m_hqg/exec";
+const ORDERS_URL = "https://script.google.com/macros/s/AKfycbziAvTSozsJdOUJYPDhSzlxwyIWg_iZnKgfv69Anq3LKlech3AVWZhL6pZ2OiTvdGgXtg/exec";
 
 // Cabeçalhos exatos da planilha
 const COL = {
