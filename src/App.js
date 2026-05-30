@@ -1101,11 +1101,42 @@ export default function App() {
             </p>
             <button onClick={() => {
               if (!pedidoFinalizado) return;
+              // 1. Abre PDF para imprimir
               const html = gerarPedidoHTML(pedidoFinalizado);
               const win = window.open("", "_blank");
               if (win) { win.document.write(html); win.document.close(); }
+              // 2. Abre email na sequência
+              const { cart: c, form: f, nrPedido: nr, desconto: desc, frete: fr } = pedidoFinalizado;
+              const subtotalVal = c.reduce((s, i) => s + i.qty * (i.preco ?? i.product.preco), 0);
+              const descVal2 = desc.tipo === "%" ? subtotalVal * (desc.valor / 100) : Math.min(desc.valor, subtotalVal);
+              const totalVal = Math.max(0, subtotalVal - descVal2) + (fr || 0);
+              const linhas = c.map(i => `• [${i.product.sku}] ${i.size?.ref} — ${i.product.name} | Cor: ${i.color?.name} | Qtd: ${i.qty} | ${BRL(i.qty * (i.preco ?? i.product.preco))}`).join("%0A");
+              const corpo = [
+                `PEDIDO: ${nr}`,
+                `DATA: ${new Date().toLocaleString("pt-BR")}`,
+                ``,
+                `CLIENTE`,
+                `Nome: ${f.nome || "—"}`,
+                `CNPJ: ${f.cpfcnpj || "—"}`,
+                `WhatsApp: ${f.whats || "—"}`,
+                `E-mail: ${f.email || "—"}`,
+                `Vendedora: ${f.vendedor || "—"}`,
+                ``,
+                `ITENS`,
+                decodeURIComponent(linhas),
+                ``,
+                `Subtotal: ${BRL(subtotalVal)}`,
+                descVal2 > 0 ? `Desconto: − ${BRL(descVal2)}` : null,
+                fr > 0 ? `Frete: ${BRL(fr)}` : null,
+                `TOTAL: ${BRL(totalVal)}`,
+                f.obs ? `%0AObs: ${f.obs}` : null,
+              ].filter(Boolean).join("%0A");
+              const assunto = encodeURIComponent(`🎀 Pedido ${nr} — ${f.nome || ""}`);
+              setTimeout(() => {
+                window.location.href = `mailto:?subject=${assunto}&body=${corpo.replace(/ /g, "%20")}`;
+              }, 800);
             }} style={{ width: "100%", background: VINHO, color: "#fff", padding: "14px", borderRadius: 14, fontSize: 13, fontWeight: 700, letterSpacing: 1.5, cursor: "pointer", border: "none", marginBottom: 11, fontFamily: "'DM Sans',sans-serif", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
-              🖨️ IMPRIMIR / SALVAR PDF
+              🖨️ IMPRIMIR E ENVIAR POR EMAIL
             </button>
             <button onClick={() => { resetPedido(); setScreen("catalog"); }}
               style={{ width: "100%", background: VERDE, color: "#fff", padding: "14px", borderRadius: 14, fontSize: 13, fontWeight: 700, letterSpacing: 1.5, cursor: "pointer", border: "none", fontFamily: "'DM Sans',sans-serif" }}>
