@@ -740,18 +740,20 @@ const PedidosScreen = memo(({ onBack }) => {
                   <div style={{ background: CARD2, padding: "14px 16px", borderTop: `1px solid ${BORDER}` }}>
                     {/* Botão PDF */}
                     <button onClick={() => {
+                      // Tenta buscar snapshot completo do histórico local
+                      try {
+                        const historico = JSON.parse(localStorage.getItem("laco_historico") || "[]");
+                        const snapshot = historico.find(h => h.nrPedido === nr);
+                        if (snapshot) {
+                          const html = gerarPedidoHTML(snapshot);
+                          const win = window.open("", "_blank");
+                          if (win) { win.document.write(html); win.document.close(); }
+                          return;
+                        }
+                      } catch {}
+                      // Fallback: gera PDF só com dados da planilha
                       const pedidoData = {
-                        cart: (itns || "").split("\n").filter(Boolean).map(l => {
-                          const match = l.match(/•\s*\[([^\]]+)\]\s*([^\s|]+)\s*—\s*([^|]+)\|\s*Cor:\s*([^|]+)\|\s*Qtd:\s*(\d+)\|\s*(.*)/);
-                          if (!match) return null;
-                          return {
-                            product: { sku: match[1], name: match[3].trim(), preco: 0, material: "", acabamento: "", prazo: "", tag: "", tagColor: "", tagBg: "" },
-                            size: { ref: match[2].trim(), label: match[2].trim() },
-                            color: { name: match[4].trim(), hex: "#C0392B" },
-                            qty: parseInt(match[5]),
-                            preco: parseFloat((match[6] || "0").replace("R$","").replace(".","").replace(",",".")) || 0,
-                          };
-                        }).filter(Boolean),
+                        cart: [],
                         form: { nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend, obs },
                         nrPedido: nr,
                         desconto: { tipo: "%", valor: 0 },
@@ -885,6 +887,13 @@ export default function App() {
     } catch (e) { console.error(e); }
     try { localStorage.removeItem("laco_cart"); } catch {}
     setPedidoFinalizado({ cart: [...cart], form: { ...form, vendedor: vendedora }, nrPedido, desconto, frete });
+    // Salva snapshot completo para reabrir PDF depois
+    try {
+      const historico = JSON.parse(localStorage.getItem("laco_historico") || "[]");
+      historico.unshift({ cart: [...cart], form: { ...form, vendedor: vendedora }, nrPedido, desconto, frete, data: new Date().toLocaleString("pt-BR") });
+      // Mantém só os últimos 50 pedidos
+      localStorage.setItem("laco_historico", JSON.stringify(historico.slice(0, 50)));
+    } catch {}
     setEnviando(false);
     setScreen("success");
   };
