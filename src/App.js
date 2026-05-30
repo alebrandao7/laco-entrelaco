@@ -145,7 +145,7 @@ const PRODUCTS = [
   { sku:"SFVOC",    name:"Saia Árvore Feltro Verde Oliva Cervo",        subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:1,   preco:79.30,    desc:"Saia para árvore em feltro verde oliva com cervo e guizo.",                                              cores:cNAT,   photo:F.sfvoc,       ...TC.S, sizes:[{label:"1MT",ref:"1SFVOC",min:1,estoque:1}] },
   { sku:"BFVOC",    name:"Bota Feltro Verde Oliva Cervo",               subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:29.80,    desc:"Bota em feltro verde oliva com cervo.",                                                                  cores:cNAT,   photo:F.bfvoc,       ...TC.S, sizes:[{label:"50cm",ref:"50BFVOC",min:1,estoque:4}] },
   { sku:"SFVGPT",   name:"Saia Árvore Feltro Gatinho Preto",            subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:1,   preco:119.40,   desc:"Saia para árvore em feltro com gatinho preto.",                                                          cores:cNAT,   photo:F.sfvgpt,      ...TC.S, sizes:[{label:"1MT",ref:"1SFVGPT",min:1,estoque:1}] },
-  { sku:"BFVGPT",   name:"Bota Feltro Vermelho Gatinho Preto",          subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:0,   preco:PRECO_UN, desc:"Bota em feltro vermelho com gatinho preto.",                                                             cores:cNAT,   photo:F.bfvgpt,      ...TC.S, sizes:[{label:"50cm",ref:"50BFVGPT",min:1,estoque:0}] },
+
   { sku:"SFVCPT",   name:"Saia Árvore Feltro Vermelho Cachorro Preto",  subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:3,   preco:129.40,   desc:"Saia para árvore em feltro vermelho com cachorrinho preto.",                                             cores:cNAT,   photo:F.sfvcpt,      ...TC.S, sizes:[{label:"1MT",ref:"1SFVCPT",min:1,estoque:3}] },
   { sku:"BFVMCPT",  name:"Bota Feltro Vermelho Cachorrinho Preto",      subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:5,   preco:69.70,    desc:"Bota em feltro vermelho com cachorrinho preto.",                                                         cores:cNAT,   photo:F.bfvmcpt,     ...TC.S, sizes:[{label:"50cm",ref:"50BFVMCPT",min:1,estoque:5}] },
   { sku:"SFVEP",    name:"Saia Árvore Feltro Verde Espinha Peixe",      subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:79.50,    desc:"Saia para árvore em feltro verde espinha de peixe.",                                                     cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780058374/saia_espinha_1_sq4fqk.jpg",            ...TC.S, sizes:[{label:"1MT",ref:"1SFVEP",min:1,estoque:4}] },
@@ -158,8 +158,8 @@ const PRODUCTS = [
   { sku:"SVVPN",    name:"Saia Árvore Velboa Vermelho Papai Noel",       subtitle:"80/100/120cm",           category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:14,  preco:59.00,    desc:"Saia para árvore em velboa vermelho com Papai Noel.",                                                    cores:cNAT,   photo:F.saia_noel_vm,...TC.S, sizes:[{label:"80cm",ref:"80SVVPN",min:1,estoque:4,preco:59.00},{label:"100cm",ref:"100SVVPN",min:1,estoque:6,preco:64.00},{label:"120cm",ref:"120SVVPN",min:1,estoque:4,preco:69.00}] },
   { sku:"SFG",      name:"Saia Árvore Feltro Gnomo",                     subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:1,   preco:79.50,    desc:"Saia para árvore em feltro com gnomo.",                                                                  cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779740140/saia_gnomo_ff6t78.jpg",            ...TC.S, sizes:[{label:"100cm",ref:"1SFG",min:1,estoque:1}] },
   { sku:"SFPN",     name:"Saia Árvore Feltro Papai Noel",                subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:7,   preco:89.30,    desc:"Saia para árvore em feltro com Papai Noel.",                                                             cores:cNAT,   photo:F.saia_noel,   ...TC.S, sizes:[{label:"100cm",ref:"1SFPN",min:1,estoque:7}] },
-  { sku:"SFCRU",    name:"Saia Feltro Cru Organza Lacinho",              subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:500, preco:0,        desc:"Saia para árvore em feltro cru com organza e lacinho.",                                                  cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780057870/WhatsApp_Image_2026-05-29_at_09.30.44_neopr1.jpg",            ...TC.S, sizes:[{label:"100cm",ref:"1SFCRU/OLÇ",min:1,estoque:500}] },
-  { sku:"SVVBBR",   name:"Saia Velboa Vermelho Bolas Pelúcia",           subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:500, preco:0,        desc:"Saia para árvore em velboa vermelho com bolas de pelúcia.",                                              cores:cNAT,   photo:F.saia_bola_pel,...TC.S,sizes:[{label:"100cm",ref:"1SVVBBR",min:1,estoque:500}] },
+  { sku:"SFCRU",    name:"Saia Feltro Cru Organza Lacinho",              subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:12, preco:79.00,        desc:"Saia para árvore em feltro cru com organza e lacinho.",                                                  cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780057870/WhatsApp_Image_2026-05-29_at_09.30.44_neopr1.jpg",            ...TC.S, sizes:[{label:"100cm",ref:"1SFCRU/OLÇ",min:1,estoque:12,preco:79.00}] },
+  { sku:"SVVBBR",   name:"Saia Velboa Vermelho Bolas Pelúcia",           subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4, preco:69.90,        desc:"Saia para árvore em velboa vermelho com bolas de pelúcia.",                                              cores:cNAT,   photo:F.saia_bola_pel,...TC.S,sizes:[{label:"100cm",ref:"1SVVBBR",min:1,estoque:4,preco:69.90}] },
   { sku:"SFOS",     name:"Saia Feltro Organza Sextavada",                subtitle:"80cm / 100cm",           category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:20,  preco:69.40,    desc:"Saia para árvore em feltro com organza sextavada.",                                                      cores:cNAT,   photo:F.sfos,        ...TC.S, sizes:[{label:"80cm",ref:"80SFOS",min:1,estoque:10,preco:69.40},{label:"100cm",ref:"1SFOS",min:1,estoque:10,preco:79.60}] },
   { sku:"BFCODRLÇ", name:"Bota Feltro Cordeiro Laço",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:10,  preco:29.80,    desc:"Bota em feltro cordeiro com laço.",                                                                       cores:cNAT,   photo:F.bota_laco_dou,...TC.S,sizes:[{label:"50cm",ref:"50BFCODRLÇ",min:1,estoque:10}] },
   { sku:"BFVPACH",  name:"Bota Velboz Patchwork",                        subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:10,  preco:49.70,    desc:"Bota em velboz estilo patchwork.",                                                                        cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780057870/WhatsApp_Image_2026-05-29_at_09.30.44_neopr1.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BFVPACH",min:1,estoque:10}] },
@@ -351,7 +351,7 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
     <div class="footer-contato">
       <strong style="color:#2D5A27;font-size:9px;">Laço & Entrelaço</strong><br>
       CNPJ: 57.815.151/0001-15<br>
-      Rua XXX, nº Y — Centro, Santo André/SP<br>
+      Rua Gertrudes de Lima, 236 — Centro, Santo André/SP<br>
       www.laçoentrelaço.com.br<br>
       atendimento@mkcomercial.com.br · (11) 92609-2607
     </div>
@@ -411,7 +411,7 @@ const QuickAdd = memo(({ product: p, onAdd }) => {
   const semEstoque = estoqueAtual === 0;
 
   const handleSz = i => { setSz(i); setQt(p.sizes[i]?.min || 1); };
-  const addQty = n => { if (n === 1 || n === -1) setQt(q => Math.min(estoqueAtual || 9999, Math.max(min, q + n))); else setQt(Math.min(estoqueAtual || 9999, Math.max(min, n))); };
+  const addQty = n => setQt(q => Math.min(estoqueAtual || 9999, Math.max(min, q + n)));
 
   const doAdd = e => {
     e.stopPropagation();
@@ -493,7 +493,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
   const precoAtual = getPreco(p, tam);
 
   const handleSz = i => { setSz(i); setQt(p.sizes[i]?.min || 1); setEr(""); };
-  const addQty = n => { if (n === 1 || n === -1) setQt(q => Math.min(estoqueModal || 9999, Math.max(min, q + n))); else setQt(Math.min(estoqueModal || 9999, Math.max(min, n))); };
+  const addQty = n => setQt(q => Math.min(estoqueModal || 9999, Math.max(min, q + n)));
 
   const doAdd = () => {
     if (qt < min) { setEr(`Mínimo de ${min} unidades para este tamanho.`); return; }
@@ -738,6 +738,31 @@ const PedidosScreen = memo(({ onBack }) => {
 
                 {open && (
                   <div style={{ background: CARD2, padding: "14px 16px", borderTop: `1px solid ${BORDER}` }}>
+                    {/* Botão PDF */}
+                    <button onClick={() => {
+                      const pedidoData = {
+                        cart: (itns || "").split("\n").filter(Boolean).map(l => {
+                          const match = l.match(/•\s*\[([^\]]+)\]\s*([^\s|]+)\s*—\s*([^|]+)\|\s*Cor:\s*([^|]+)\|\s*Qtd:\s*(\d+)\|\s*(.*)/);
+                          if (!match) return null;
+                          return {
+                            product: { sku: match[1], name: match[3].trim(), preco: 0, material: "", acabamento: "", prazo: "", tag: "", tagColor: "", tagBg: "" },
+                            size: { ref: match[2].trim(), label: match[2].trim() },
+                            color: { name: match[4].trim(), hex: "#C0392B" },
+                            qty: parseInt(match[5]),
+                            preco: parseFloat((match[6] || "0").replace("R$","").replace(".","").replace(",",".")) || 0,
+                          };
+                        }).filter(Boolean),
+                        form: { nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend, obs },
+                        nrPedido: nr,
+                        desconto: { tipo: "%", valor: 0 },
+                        frete: 0,
+                      };
+                      const html = gerarPedidoHTML(pedidoData);
+                      const win = window.open("", "_blank");
+                      if (win) { win.document.write(html); win.document.close(); }
+                    }} style={{ width: "100%", background: VINHO, color: "#fff", padding: "10px", borderRadius: 10, border: "none", cursor: "pointer", fontFamily: "'DM Sans',sans-serif", fontSize: 12, fontWeight: 700, marginBottom: 12, display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
+                      🖨️ ABRIR / IMPRIMIR PDF
+                    </button>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 16px", marginBottom: 12 }}>
                       {[["WhatsApp", wpp], ["E-mail", em], ["CPF/CNPJ", cpf]].map(([l, v]) => v && v !== "—" ? (
                         <div key={l}>
