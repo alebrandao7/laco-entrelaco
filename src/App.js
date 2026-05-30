@@ -1099,16 +1099,44 @@ export default function App() {
               <p className="mn" style={{ color: VERDE, fontSize: 9, letterSpacing: 2.5, marginBottom: 10 }}>DADOS DO CLIENTE</p>
 
               {[
-                { k: "nome",    l: "Nome / Empresa *",  p: "Ex: Shopping Parque D. Pedro", t: "text"  },
-                { k: "cpfcnpj",l: "CNPJ",               p: "00.000.000/0001-00",           t: "text" },
-                { k: "whats",  l: "WhatsApp *",          p: "(11) 99999-9999",              t: "tel"   },
-                { k: "email",  l: "E-mail",               p: "contato@empresa.com.br",       t: "email" },
+                { k: "nome",  l: "Nome / Empresa *", p: "Ex: Shopping Parque D. Pedro", t: "text" },
               ].map(f => (
                 <div key={f.k} style={{ marginBottom: 11 }}>
                   <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>{f.l.toUpperCase()}</p>
                   <input className="inp" type={f.t} value={form[f.k]} placeholder={f.p} autoComplete="off" onChange={e => setForm(prev => ({ ...prev, [f.k]: e.target.value }))} />
                 </div>
               ))}
+              {/* CNPJ com máscara */}
+              <div style={{ marginBottom: 11 }}>
+                <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>CNPJ</p>
+                <input className="inp" type="text" inputMode="numeric" value={form.cpfcnpj} placeholder="00.000.000/0001-00" autoComplete="off"
+                  onChange={e => {
+                    let v = e.target.value.replace(/\D/g, "").slice(0, 14);
+                    if (v.length > 12) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/, "$1.$2.$3/$4-$5");
+                    else if (v.length > 8) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{0,4})/, "$1.$2.$3/$4");
+                    else if (v.length > 5) v = v.replace(/^(\d{2})(\d{3})(\d{0,3})/, "$1.$2.$3");
+                    else if (v.length > 2) v = v.replace(/^(\d{2})(\d{0,3})/, "$1.$2");
+                    setForm(prev => ({ ...prev, cpfcnpj: v }));
+                  }} />
+              </div>
+              {/* WhatsApp com máscara */}
+              <div style={{ marginBottom: 11 }}>
+                <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>WHATSAPP *</p>
+                <input className="inp" type="tel" inputMode="numeric" value={form.whats} placeholder="(11) 99999-9999" autoComplete="off"
+                  onChange={e => {
+                    let v = e.target.value.replace(/\D/g, "").slice(0, 11);
+                    if (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+                    else if (v.length > 6) v = v.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+                    else if (v.length > 2) v = v.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
+                    else if (v.length > 0) v = v.replace(/^(\d{0,2})/, "($1");
+                    setForm(prev => ({ ...prev, whats: v }));
+                  }} />
+              </div>
+              {/* Email */}
+              <div style={{ marginBottom: 11 }}>
+                <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>E-MAIL</p>
+                <input className="inp" type="email" value={form.email} placeholder="contato@empresa.com.br" autoComplete="off" onChange={e => setForm(prev => ({ ...prev, email: e.target.value }))} />
+              </div>
               <div style={{ marginBottom: 18 }}>
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>OBSERVAÇÕES</p>
                 <textarea className="inp" value={form.obs} placeholder="Data do evento, detalhes especiais..." rows={2} style={{ resize: "none" }} onChange={e => setForm(prev => ({ ...prev, obs: e.target.value }))} />
