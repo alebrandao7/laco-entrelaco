@@ -885,15 +885,15 @@ export default function App() {
     try {
       await fetch(`${SHEETS_URL}?${params}`, { method: "GET", mode: "no-cors" });
     } catch (e) { console.error(e); }
-    try { localStorage.removeItem("laco_cart"); } catch {}
-    setPedidoFinalizado({ cart: [...cart], form: { ...form, vendedor: vendedora }, nrPedido, desconto, frete });
-    // Salva snapshot completo para reabrir PDF depois
+    // Salva snapshot ANTES de limpar carrinho
+    const snapshot = { cart: [...cart], form: { ...form, vendedor: vendedora }, nrPedido, desconto, frete, data: new Date().toLocaleString("pt-BR") };
     try {
       const historico = JSON.parse(localStorage.getItem("laco_historico") || "[]");
-      historico.unshift({ cart: [...cart], form: { ...form, vendedor: vendedora }, nrPedido, desconto, frete, data: new Date().toLocaleString("pt-BR") });
-      // Mantém só os últimos 50 pedidos
+      historico.unshift(snapshot);
       localStorage.setItem("laco_historico", JSON.stringify(historico.slice(0, 50)));
     } catch {}
+    try { localStorage.removeItem("laco_cart"); } catch {}
+    setPedidoFinalizado(snapshot);
     setEnviando(false);
     setScreen("success");
   };
@@ -1111,24 +1111,24 @@ export default function App() {
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>CNPJ</p>
                 <input className="inp" type="text" inputMode="numeric" value={form.cpfcnpj} placeholder="00.000.000/0001-00" autoComplete="off"
                   onChange={e => {
-                    let v = e.target.value.replace(/\D/g, "").slice(0, 14);
-                    if (v.length > 12) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/, "$1.$2.$3/$4-$5");
-                    else if (v.length > 8) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{0,4})/, "$1.$2.$3/$4");
-                    else if (v.length > 5) v = v.replace(/^(\d{2})(\d{3})(\d{0,3})/, "$1.$2.$3");
-                    else if (v.length > 2) v = v.replace(/^(\d{2})(\d{0,3})/, "$1.$2");
+                    const d = e.target.value.replace(/\D/g, "").slice(0, 14);
+                    const v = d.length <= 2 ? d
+                      : d.length <= 5 ? d.replace(/(\d{2})(\d+)/, "$1.$2")
+                      : d.length <= 8 ? d.replace(/(\d{2})(\d{3})(\d+)/, "$1.$2.$3")
+                      : d.length <= 12 ? d.replace(/(\d{2})(\d{3})(\d{3})(\d+)/, "$1.$2.$3/$4")
+                      : d.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d+)/, "$1.$2.$3/$4-$5");
                     setForm(prev => ({ ...prev, cpfcnpj: v }));
                   }} />
               </div>
               {/* WhatsApp com máscara */}
               <div style={{ marginBottom: 11 }}>
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>WHATSAPP *</p>
-                <input className="inp" type="tel" inputMode="numeric" value={form.whats} placeholder="(11) 99999-9999" autoComplete="off"
+                <input className="inp" type="text" inputMode="numeric" value={form.whats} placeholder="(11) 99999-9999" autoComplete="off"
                   onChange={e => {
-                    let v = e.target.value.replace(/\D/g, "").slice(0, 11);
-                    if (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
-                    else if (v.length > 6) v = v.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
-                    else if (v.length > 2) v = v.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
-                    else if (v.length > 0) v = v.replace(/^(\d{0,2})/, "($1");
+                    const d = e.target.value.replace(/\D/g, "").slice(0, 11);
+                    const v = d.length <= 2 ? d.length ? `(${d}` : ""
+                      : d.length <= 7 ? d.replace(/(\d{2})(\d+)/, "($1) $2")
+                      : d.replace(/(\d{2})(\d{5})(\d+)/, "($1) $2-$3");
                     setForm(prev => ({ ...prev, whats: v }));
                   }} />
               </div>
@@ -1163,42 +1163,11 @@ export default function App() {
             </p>
             <button onClick={() => {
               if (!pedidoFinalizado) return;
-              // 1. Abre PDF para imprimir
               const html = gerarPedidoHTML(pedidoFinalizado);
               const win = window.open("", "_blank");
               if (win) { win.document.write(html); win.document.close(); }
-              // 2. Abre email na sequência
-              const { cart: c, form: f, nrPedido: nr, desconto: desc, frete: fr } = pedidoFinalizado;
-              const subtotalVal = c.reduce((s, i) => s + i.qty * (i.preco ?? i.product.preco), 0);
-              const descVal2 = desc.tipo === "%" ? subtotalVal * (desc.valor / 100) : Math.min(desc.valor, subtotalVal);
-              const totalVal = Math.max(0, subtotalVal - descVal2) + (fr || 0);
-              const linhas = c.map(i => `• [${i.product.sku}] ${i.size?.ref} — ${i.product.name} | Cor: ${i.color?.name} | Qtd: ${i.qty} | ${BRL(i.qty * (i.preco ?? i.product.preco))}`).join("%0A");
-              const corpo = [
-                `PEDIDO: ${nr}`,
-                `DATA: ${new Date().toLocaleString("pt-BR")}`,
-                ``,
-                `CLIENTE`,
-                `Nome: ${f.nome || "—"}`,
-                `CNPJ: ${f.cpfcnpj || "—"}`,
-                `WhatsApp: ${f.whats || "—"}`,
-                `E-mail: ${f.email || "—"}`,
-                `Vendedora: ${f.vendedor || "—"}`,
-                ``,
-                `ITENS`,
-                decodeURIComponent(linhas),
-                ``,
-                `Subtotal: ${BRL(subtotalVal)}`,
-                descVal2 > 0 ? `Desconto: − ${BRL(descVal2)}` : null,
-                fr > 0 ? `Frete: ${BRL(fr)}` : null,
-                `TOTAL: ${BRL(totalVal)}`,
-                f.obs ? `%0AObs: ${f.obs}` : null,
-              ].filter(Boolean).join("%0A");
-              const assunto = encodeURIComponent(`🎀 Pedido ${nr} — ${f.nome || ""}`);
-              setTimeout(() => {
-                window.location.href = `mailto:?subject=${assunto}&body=${corpo.replace(/ /g, "%20")}`;
-              }, 800);
             }} style={{ width: "100%", background: VINHO, color: "#fff", padding: "14px", borderRadius: 14, fontSize: 13, fontWeight: 700, letterSpacing: 1.5, cursor: "pointer", border: "none", marginBottom: 11, fontFamily: "'DM Sans',sans-serif", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
-              🖨️ IMPRIMIR E ENVIAR POR EMAIL
+              🖨️ IMPRIMIR / SALVAR PDF
             </button>
             <button onClick={() => { resetPedido(); setScreen("catalog"); }}
               style={{ width: "100%", background: VERDE, color: "#fff", padding: "14px", borderRadius: 14, fontSize: 13, fontWeight: 700, letterSpacing: 1.5, cursor: "pointer", border: "none", fontFamily: "'DM Sans',sans-serif" }}>
