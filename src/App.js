@@ -158,7 +158,7 @@ const PRODUCTS = [
   { sku:"BNXdzDec",   name:"Bota Natalina Xadrez Decorada",            subtitle:"50cm",            category:"Saldão",  material:"100% Poliéster", acabamento:"Costura francesa e pelúcia.", prazo:P30, estoque:7, preco:89.00, desc:"Bota Natalina 50cm em Flanela Xadrez, pelúcia e galho natalino.", cores:cUNI, photo:F.bota_pelucia_dec, ...TC.S, sizes:[{label:"50cm",ref:"50BNXdzDec",min:3,estoque:7,preco:89.00}] },
   { sku:"BVVm",     name:"Bota Velboa Vermelho 50cm",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:ACFP, prazo:P30,           estoque:3,   preco:19.90,    desc:"Bota Natalina 50cm em Veludo Velboa e pelúcia.",                                                         cores:cUNI,   photo:F.bota_bolinha,...TC.S, sizes:[{label:"50cm",ref:"50BVVm",min:10,estoque:3}] },
   { sku:"BVPArDr",  name:"Bota Velboa/Pelúcia Árvore",                   subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:27,  preco:34.80,    desc:"Bota em velboa/pelúcia com árvore.",                                                                      cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779740019/bota_arvore_mp9hpw.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BVPArDr",min:1,estoque:27}] },
-  { sku:"BFVPACH",  name:"Bota Velboz Patchwork",                        subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:10,  preco:49.70,    desc:"Bota em velboz estilo patchwork.",                                                                        cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779469881/6645645_dd5hsu.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BFVPACH",min:1,estoque:10,preco:49.70}] },
+  { sku:"BFVPACH",  name:"Bota Velboz Patchwork",                        subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:10,  preco:49.70,    desc:"Bota em velboz estilo patchwork.",                                                                        cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779740460/bota_lacinho_djz698.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BFVPACH",min:1,estoque:10,preco:49.70}] },
   { sku:"RNL",      name:"Roupa Noel Luxo",                              subtitle:"Tam. GG",                category:"Saldão",    material:"95% poliéster, 5% vinil",   acabamento:"",   prazo:P30,           estoque:28, preco:320.00,        desc:"Roupa do Papai Noel luxo em feltro e pelúcia.",                                                          cores:cUNI,   photo:F.roupa_noel,  ...TC.S, sizes:[{label:"GG",ref:"RNL",min:2,estoque:28,preco:320.00}] },
   { sku:"SFCRU",    name:"Saia Feltro Cru Organza Lacinho",              subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:12, preco:79.00,        desc:"Saia para árvore em feltro cru com organza e lacinho.",                                                  cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780057870/WhatsApp_Image_2026-05-29_at_09.30.44_neopr1.jpg", ...TC.S, sizes:[{label:"100cm",ref:"1SFCRU/OLÇ",min:1,estoque:12,preco:79.00}] },
   { sku:"SFOS",     name:"Saia Feltro Organza Sextavada",                subtitle:"80cm / 100cm",           category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:20,  preco:69.40,    desc:"Saia para árvore em feltro com organza sextavada.",                                                      cores:cNAT,   photo:F.sfos,        ...TC.S, sizes:[{label:"80cm",ref:"80SFOS",min:1,estoque:10,preco:69.40},{label:"100cm",ref:"1SFOS",min:1,estoque:10,preco:79.60}] },
@@ -192,7 +192,7 @@ const PRODUCTS = [
 
 const CATEGORIES = ["Todos", "Veludo", "Lamê", "Estampado", "Bolas", "Saldão"];
 const VENDEDORES  = ["Alexandra", "Valéria", "Cleuza"];
-const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbzMZQ2vE5qQM67SdrYqmD83mo0wt5B-YVHM_A_EiahVbjAvSjwvYOX3am-Y0k1iQyxeeA/exec";
+const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbw1H8c_xESyNUOGTnnwn20Q4COOroDgF6vnxQIWBMIfLiMvrCTO9oYeM2bU8sGDmToYpA/exec";
 
 const BRL     = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
 const gerarNr = () => `#${Date.now().toString().slice(-5)}`;
@@ -599,7 +599,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
 });
 
 // ── TELA DE PEDIDOS ──────────────────────────────────────────────────────────
-const ORDERS_URL = "https://script.google.com/macros/s/AKfycbzMZQ2vE5qQM67SdrYqmD83mo0wt5B-YVHM_A_EiahVbjAvSjwvYOX3am-Y0k1iQyxeeA/exec";
+const ORDERS_URL = "https://script.google.com/macros/s/AKfycbw1H8c_xESyNUOGTnnwn20Q4COOroDgF6vnxQIWBMIfLiMvrCTO9oYeM2bU8sGDmToYpA/exec";
 
 const COL = {
   pedido:      "Nº Pedido",
@@ -916,9 +916,26 @@ export default function App() {
       total:       BRL(totalFinal),
       observacoes: form.obs || "—",
     });
-    try {
-      await fetch(`${SHEETS_URL}?${params}`, { method: "GET", mode: "no-cors" });
-    } catch (e) { console.error(e); }
+    // Usa JSONP em vez de fetch para evitar abertura de cliente de email externo
+    await new Promise((resolve) => {
+      const cbName = "cb_pedido_" + Date.now();
+      const script = document.createElement("script");
+      const timeout = setTimeout(() => {
+        delete window[cbName];
+        if (document.head.contains(script)) document.head.removeChild(script);
+        resolve();
+      }, 8000);
+      window[cbName] = () => {
+        clearTimeout(timeout);
+        delete window[cbName];
+        if (document.head.contains(script)) document.head.removeChild(script);
+        resolve();
+      };
+      params.append("callback", cbName);
+      script.src = `${SHEETS_URL}?${params}`;
+      script.onerror = () => { clearTimeout(timeout); delete window[cbName]; resolve(); };
+      document.head.appendChild(script);
+    });
     // Deduz estoque após pedido confirmado
     deduzirEstoque(cart);
     // Salva snapshot
