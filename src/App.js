@@ -194,7 +194,7 @@ const PRODUCTS = [
 
 const CATEGORIES = ["Todos", "Veludo", "Lamê", "Estampado", "Bolas", "Saldão"];
 const VENDEDORES  = ["Alexandra", "Valéria", "Cleuza"];
-const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbzMZQ2vE5qQM67SdrYqmD83mo0wt5B-YVHM_A_EiahVbjAvSjwvYOX3am-Y0k1iQyxeeA/exec";
+const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbxu2wvIO69rQR19DnEqr7WnBB1TiqYWuldiAvLGacN46flZRbJf-z_3O9eiAqvjx3MBmQ/exec";
 
 const BRL     = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
 const gerarNr = () => `#${Date.now().toString().slice(-5)}`;
@@ -587,7 +587,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
 });
 
 // ── TELA DE PEDIDOS ──────────────────────────────────────────────────────────
-const ORDERS_URL = "https://script.google.com/macros/s/AKfycbzMZQ2vE5qQM67SdrYqmD83mo0wt5B-YVHM_A_EiahVbjAvSjwvYOX3am-Y0k1iQyxeeA/exec";
+const ORDERS_URL = "https://script.google.com/macros/s/AKfycbxu2wvIO69rQR19DnEqr7WnBB1TiqYWuldiAvLGacN46flZRbJf-z_3O9eiAqvjx3MBmQ/exec";
 
 // Cabeçalhos exatos da planilha
 const COL = {
