@@ -192,7 +192,7 @@ const PRODUCTS = [
 
 
 const CATEGORIES = ["Todos", "Veludo", "Lamê", "Estampado", "Bolas", "Saldão"];
-const VENDEDORES  = ["Alexandra", "Valéria", "Cleuza"];
+const VENDEDORES  = ["Alexandra", "Valéria", "Cleuza", "Van"];
 const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbxu2wvIO69rQR19DnEqr7WnBB1TiqYWuldiAvLGacN46flZRbJf-z_3O9eiAqvjx3MBmQ/exec";
 
 const BRL     = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
