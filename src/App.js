@@ -4,6 +4,7 @@ const VERDE = "#2D5A27", VERDE2 = "#4A7A42", VERDES = "#E8F0E6";
 const VINHO = "#8B1A2A", VINHOL = "#F5E8EA";
 const BG = "#FAF8F5", CARD = "#FFFFFF", CARD2 = "#F5F0EB";
 const TEXT = "#1A1A1A", TEXT2 = "#555555", TEXT3 = "#888888", BORDER = "#E8E0D8";
+const CL = "https://res.cloudinary.com/djeliz676/image/upload/f_auto,q_auto/";
 
 const F = {
   vvm:          "https://res.cloudinary.com/djeliz676/image/upload/f_auto,q_auto/v1779469881/6645645_dd5hsu.jpg",
@@ -127,14 +128,14 @@ const PRODUCTS = [
   { sku:"VALLIND",  name:"Laço Veludo Ale — Lindíssimo",              subtitle:"30cm a 90cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço duplo confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata.",                  cores:cVGBC,  photo:F.val_lind,    ...TC.V, sizes:[{label:"30cm",ref:"30VAl/Lind",min:6,estoque:500,preco:58.00},{label:"60cm",ref:"60VAl/Lind",min:4,estoque:500,preco:208.90},{label:"90cm",ref:"90VAl/Lind",min:2,estoque:500,preco:398.00}] },
   { sku:"LBCO",     name:"Laço Veludo Branco",                        subtitle:"20cm a 40cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço clássico confeccionado em Veludo na cor Branco.",                                                    cores:cBR,    photo:F.laco_branco, ...TC.V, sizes:[{label:"20cm",ref:"20LBco",min:12,estoque:500,preco:26.90},{label:"30cm",ref:"30LBco",min:10,estoque:500,preco:39.90},{label:"40cm",ref:"40LBco",min:8,estoque:500,preco:56.20}] },
   { sku:"VALGL",    name:"Laço Veludo Cristal Gravata Longa",         subtitle:"30cm a 50cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata ao descer pela árvore ou coluna.", cores:cVGBC,photo:F.val_gl,...TC.V,sizes:[{label:"30cm",ref:"30VaL",min:10,estoque:500,preco:43.00},{label:"40cm",ref:"40VaL",min:8,estoque:500,preco:61.90},{label:"50cm",ref:"50VaL",min:6,estoque:500,preco:98.90}] },
-  { sku:"VDuGV",      name:"Laço Veludo Duplo Gravata V",              subtitle:"100cm",           category:"Veludo",  material:"100% poliéster", acabamento:"Estrutura interna com placa, arame e costura francesa.", prazo:P30, estoque:500, preco:369.00, desc:"Laço confeccionado em Veludo tradicional, com borboleta dupla e gravata em V.", cores:cVVM, photo:F.laco_gravata_tripla, ...TC.V, sizes:[{label:"100cm",ref:"100VDuGV",min:2,estoque:500,preco:369.00}] },
+  { sku:"VDuGV",      name:"Laço Veludo Duplo Gravata V",              subtitle:"100cm",           category:"Veludo",  material:"100% poliéster", acabamento:"Estrutura interna com placa, arame e costura francesa.", prazo:P30, estoque:500, preco:369.00, desc:"Laço confeccionado em Veludo tradicional, com borboleta dupla e gravata em V.", cores:cVVM, photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779990308/laco_gravata_tripla_ekuhtx.jpg", ...TC.V, sizes:[{label:"100cm",ref:"100VDuGV",min:2,estoque:500,preco:369.00}] },
   { sku:"VVM",      name:"Laço Veludo Vermelho",                     subtitle:"20cm a 100cm",           category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"O clássico da linha; confeccionado em Veludo tradicional.",                                       cores:cVVM,   photo:F.vvm,         ...TC.V, sizes:[{label:"20cm",ref:"20V",min:15,estoque:500,preco:21.90},{label:"30cm",ref:"30V",min:12,estoque:500,preco:33.90},{label:"40cm",ref:"40V",min:10,estoque:500,preco:46.90},{label:"50cm",ref:"50V",min:6,estoque:500,preco:79.90},{label:"80cm",ref:"80V",min:3,estoque:500,preco:197.90},{label:"100cm",ref:"100V",min:2,estoque:500,preco:269.00}] },
   { sku:"VD",       name:"Laço Veludo Vermelho com Dourado",          subtitle:"Borda ouro",             category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda ouro.",                                               cores:cVD,    photo:F.vd,          ...TC.E, sizes:[{label:"20cm",ref:"20VD",min:12,estoque:500,preco:24.90},{label:"30cm",ref:"30VD",min:10,estoque:500,preco:36.90},{label:"40cm",ref:"40VD",min:8,estoque:500,preco:48.90}] },
   { sku:"VFIXDZ",   name:"Laço Veludo Vermelho Fita Xadrez",          subtitle:"Fita xadrez",            category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:36, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com fita xadrez decorativa central.",                          cores:cVM,    photo:F.vfixdz,      ...TC.E, sizes:[{label:"40cm",ref:"40VFiXdz",min:10,estoque:36,preco:56.90}] },
   { sku:"VL",       name:"Laço Veludo Vermelho Listra",               subtitle:"Borda listrada",         category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda de listra.",                                         cores:cVM,    photo:F.vl,          ...TC.E, sizes:[{label:"20cm",ref:"20VL",min:12,estoque:500,preco:24.90},{label:"30cm",ref:"30VL",min:10,estoque:500,preco:36.90},{label:"40cm",ref:"40VL",min:8,estoque:500,preco:48.90}] },
   { sku:"VXC",      name:"Laço Veludo Vermelho Meio Xadrez",          subtitle:"Xadrez central",         category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em tecido xadrez, com borda em veludo.",                                   cores:cVM,    photo:F.vxc,         ...TC.E, sizes:[{label:"20cm",ref:"20VXC",min:12,estoque:500,preco:27.90},{label:"30cm",ref:"30VXC",min:10,estoque:500,preco:39.90},{label:"40cm",ref:"40VXC",min:8,estoque:500,preco:53.90}] },
-  { sku:"VMinGL",     name:"Laço Veludo Vermelho Min",                 subtitle:"50cm",            category:"Veludo",  material:"100% poliéster", acabamento:"Estrutura interna com placa e costura francesa.", prazo:P30, estoque:500, preco:169.40, desc:"Laço confeccionado em Veludo Cristal, com borboleta tripla e gravata tradicional.", cores:cVVM, photo:F.vaimin, ...TC.V, sizes:[{label:"50cm",ref:"50VMinGL",min:4,estoque:500,preco:169.40}] },
-  { sku:"VSout",      name:"Laço Veludo Vermelho Soutache",            subtitle:"20cm a 40cm",     category:"Veludo",  material:"100% poliéster", acabamento:"Costura francesa, estrutura interna e soutache dourado.", prazo:P30, estoque:108, preco:32.90, desc:"Laço confeccionado em Veludo tradicional, adornado com fita natalina xadrez e soutache dourado.", cores:cVVM, photo:F.laco_soutache, ...TC.V, sizes:[{label:"20cm",ref:"20VSout",min:1,estoque:48,preco:32.90},{label:"30cm",ref:"30VSout",min:1,estoque:36,preco:51.80},{label:"40cm",ref:"40VSout",min:1,estoque:24,preco:69.50}] },
+  { sku:"VMinGL",     name:"Laço Veludo Vermelho Min",                 subtitle:"50cm",            category:"Veludo",  material:"100% poliéster", acabamento:"Estrutura interna com placa e costura francesa.", prazo:P30, estoque:500, preco:169.40, desc:"Laço confeccionado em Veludo Cristal, com borboleta tripla e gravata tradicional.", cores:cVVM, photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779991951/vaimin_vtqtgd.jpg", ...TC.V, sizes:[{label:"50cm",ref:"50VMinGL",min:4,estoque:500,preco:169.40}] },
+  { sku:"VSout",      name:"Laço Veludo Vermelho Soutache",            subtitle:"20cm a 40cm",     category:"Veludo",  material:"100% poliéster", acabamento:"Costura francesa, estrutura interna e soutache dourado.", prazo:P30, estoque:108, preco:32.90, desc:"Laço confeccionado em Veludo tradicional, adornado com fita natalina xadrez e soutache dourado.", cores:cVVM, photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779992238/laco_soutchj_r6ua5b.jpg", ...TC.V, sizes:[{label:"20cm",ref:"20VSout",min:1,estoque:48,preco:32.90},{label:"30cm",ref:"30VSout",min:1,estoque:36,preco:51.80},{label:"40cm",ref:"40VSout",min:1,estoque:24,preco:69.50}] },
   { sku:"VX",       name:"Laço Veludo Vermelho Xadrez",               subtitle:"Borda xadrez",           category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda xadrez.",                                            cores:cVM,    photo:F.vx,          ...TC.E, sizes:[{label:"20cm",ref:"20VX",min:12,estoque:500,preco:24.90},{label:"30cm",ref:"30VX",min:10,estoque:500,preco:36.90},{label:"40cm",ref:"40VX",min:8,estoque:500,preco:48.90}] },
   { sku:"VXP",      name:"Laço Veludo Vermelho Xadrez/Preto",         subtitle:"Flanela xadrez",         category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço com flanela xadrez Vermelho/Preto central.",                                                         cores:cVP,    photo:F.vxp,         ...TC.E, sizes:[{label:"20cm",ref:"20VXP",min:12,estoque:12,preco:24.90},{label:"30cm",ref:"30VXP",min:10,estoque:43,preco:31.90},{label:"40cm",ref:"40VXP",min:8,estoque:58,preco:39.90}] },
   { sku:"BTLT",     name:"Bola Tecido Listrado Decorada",              subtitle:"Listrado Verm/Branco",   category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola coberta com tecido listrado Vermelho/Branco e decorada com galhos natalinos.",                      cores:cVB,    photo:F.bola_lst,    ...TC.B, sizes:[{label:"15cm",ref:"15BTLt",min:10,estoque:500,preco:29.80}] },
@@ -158,14 +159,15 @@ const PRODUCTS = [
   { sku:"BNXdzDec",   name:"Bota Natalina Xadrez Decorada",            subtitle:"50cm",            category:"Saldão",  material:"100% Poliéster", acabamento:"Costura francesa e pelúcia.", prazo:P30, estoque:7, preco:89.00, desc:"Bota Natalina 50cm em Flanela Xadrez, pelúcia e galho natalino.", cores:cUNI, photo:F.bota_pelucia_dec, ...TC.S, sizes:[{label:"50cm",ref:"50BNXdzDec",min:3,estoque:7,preco:89.00}] },
   { sku:"BVVm",     name:"Bota Velboa Vermelho 50cm",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:ACFP, prazo:P30,           estoque:3,   preco:19.90,    desc:"Bota Natalina 50cm em Veludo Velboa e pelúcia.",                                                         cores:cUNI,   photo:F.bota_bolinha,...TC.S, sizes:[{label:"50cm",ref:"50BVVm",min:10,estoque:3}] },
   { sku:"BVPArDr",  name:"Bota Velboa/Pelúcia Árvore",                   subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:27,  preco:34.80,    desc:"Bota em velboa/pelúcia com árvore.",                                                                      cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779740019/bota_arvore_mp9hpw.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BVPArDr",min:1,estoque:27}] },
-  { sku:"BFVPACH",  name:"Bota Velboz Patchwork",                        subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:10,  preco:49.70,    desc:"Bota em velboz estilo patchwork.",                                                                        cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779740460/bota_lacinho_djz698.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BFVPACH",min:1,estoque:10,preco:49.70}] },
+  { sku:"BVVPN",    name:"Bota Velboz Cru/Rosê Laço",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bota em velboz cru/rosê com laço.",                                                                       cores:cNAT,   photo:F.bvvpn,       ...TC.S, sizes:[{label:"50cm",ref:"50BVVPN",min:1,estoque:500}] },
+  { sku:"BFVPACH",  name:"Bota Velboz Patchwork",                        subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:10,  preco:49.70,    desc:"Bota em velboz estilo patchwork.",                                                                        cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780057870/WhatsApp_Image_2026-05-29_at_09.30.44_neopr1.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BFVPACH",min:1,estoque:10,preco:49.70}] },
   { sku:"RNL",      name:"Roupa Noel Luxo",                              subtitle:"Tam. GG",                category:"Saldão",    material:"95% poliéster, 5% vinil",   acabamento:"",   prazo:P30,           estoque:28, preco:320.00,        desc:"Roupa do Papai Noel luxo em feltro e pelúcia.",                                                          cores:cUNI,   photo:F.roupa_noel,  ...TC.S, sizes:[{label:"GG",ref:"RNL",min:2,estoque:28,preco:320.00}] },
-  { sku:"SFCRU",    name:"Saia Feltro Cru Organza Lacinho",              subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:12, preco:79.00,        desc:"Saia para árvore em feltro cru com organza e lacinho.",                                                  cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780057870/WhatsApp_Image_2026-05-29_at_09.30.44_neopr1.jpg", ...TC.S, sizes:[{label:"100cm",ref:"1SFCRU/OLÇ",min:1,estoque:12,preco:79.00}] },
+  { sku:"SFCRU",    name:"Saia Feltro Cru Organza Lacinho",              subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:12, preco:79.00,        desc:"Saia para árvore em feltro cru com organza e lacinho.",                                                  cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780057870/WhatsApp_Image_2026-05-29_at_09.30.44_neopr1.jpg",            ...TC.S, sizes:[{label:"100cm",ref:"1SFCRU/OLÇ",min:1,estoque:12,preco:79.00}] },
   { sku:"SFOS",     name:"Saia Feltro Organza Sextavada",                subtitle:"80cm / 100cm",           category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:20,  preco:69.40,    desc:"Saia para árvore em feltro com organza sextavada.",                                                      cores:cNAT,   photo:F.sfos,        ...TC.S, sizes:[{label:"80cm",ref:"80SFOS",min:1,estoque:10,preco:69.40},{label:"100cm",ref:"1SFOS",min:1,estoque:10,preco:79.60}] },
   { sku:"SFVVArv",  name:"Saia Feltro Vermelho e Verde Árvore",          subtitle:"80 a 120cm",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, sianinha e botão.",      prazo:P30, estoque:18,  preco:19.90,    desc:"Saia Natalina em Feltro, aplicação árvores Patchwork e sianinha.",       cores:cUNI,   photo:F.saia_arvore, ...TC.S, sizes:[{label:"80cm",ref:"80SFVVArv",min:5,estoque:3,preco:19.90},{label:"100cm",ref:"100SFVVArv",min:3,estoque:12,preco:19.90},{label:"120cm",ref:"120SFVVArv",min:3,estoque:3,preco:19.90}] },
   { sku:"SNFC",     name:"Saia Natalina Feltro Coruja",                  subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, viés e velcro.",         prazo:P30, estoque:3,   preco:79.80,    desc:"Saia Verde Musgo 100cm em Feltro, aplicação Coruja e galho.",            cores:cUNI,   photo:F.saia_coruja, ...TC.S, sizes:[{label:"100cm",ref:"100SNFC",min:8,estoque:3}] },
   { sku:"SNNCxP",   name:"Saia Natalina Noel Caixa Presente",            subtitle:"60 a 100cm",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Cianinha vermelha e botão.",               prazo:P30, estoque:90,  preco:32.90,    desc:"Saia Natalina em Feltro, com aplicação Noel e Caixas Presente.",         cores:cUNI,   photo:F.saia_cx_noel,...TC.S, sizes:[{label:"60cm",ref:"60SNNCxP",min:30,estoque:30,preco:32.90},{label:"80cm",ref:"80SNNCxP",min:30,estoque:30,preco:37.90},{label:"100cm",ref:"100SNNCxP",min:30,estoque:30,preco:42.90}] },
-  { sku:"SNPop",    name:"Saia Natalina POP Árvore",                     subtitle:"60 a 120cm",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Cianinha branca e botão.",                 prazo:P30, estoque:95,  preco:29.90,    desc:"Saia Natalina em Feltro, com aplicação Árvores.",                        cores:cUNI,   photo:F.saia_arvore4,...TC.S,sizes:[{label:"60cm",ref:"60SNPop",min:30,estoque:30,preco:29.90},{label:"80cm",ref:"80SNPop",min:30,estoque:30,preco:34.90},{label:"100cm",ref:"100SNPop",min:30,estoque:30,preco:39.90},{label:"120cm",ref:"120SNPop",min:5,estoque:5,preco:45.90}] },
+  { sku:"SNPop",    name:"Saia Natalina POP Árvore",                     subtitle:"60 a 120cm",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Cianinha branca e botão.",                 prazo:P30, estoque:95,  preco:29.90,    desc:"Saia Natalina em Feltro, com aplicação Árvores.",                        cores:cUNI,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779888440/saia_arvore_4_rvrseu.jpg",...TC.S,sizes:[{label:"60cm",ref:"60SNPop",min:30,estoque:30,preco:29.90},{label:"80cm",ref:"80SNPop",min:30,estoque:30,preco:34.90},{label:"100cm",ref:"100SNPop",min:30,estoque:30,preco:39.90},{label:"120cm",ref:"120SNPop",min:5,estoque:5,preco:45.90}] },
   { sku:"SNSor",    name:"Saia Natalina Sortida",                        subtitle:"60 a 120cm",            category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e fivela.",      prazo:P30, estoque:274, preco:18.90, desc:"Saia Natalina em Organza e Cetim, estampada em Verde, Vermelho, Dourado e Branco.", cores:cVMulti,photo:F.saias_var,...TC.S,sizes:[{label:"60cm",ref:"60SNSor",min:6,estoque:71,preco:18.90},{label:"80cm",ref:"80SNSor",min:6,estoque:78,preco:24.90},{label:"100cm",ref:"100SNSor",min:6,estoque:97,preco:29.00},{label:"120cm",ref:"120SNSor",min:6,estoque:28,preco:34.90}] },
   { sku:"SVVBBR",   name:"Saia Velboa Vermelho Bolas Pelúcia",           subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4, preco:69.90,        desc:"Saia para árvore em velboa vermelho com bolas de pelúcia.",                                              cores:cNAT,   photo:F.saia_bola_pel,...TC.S,sizes:[{label:"100cm",ref:"1SVVBBR",min:1,estoque:4,preco:69.90}] },
   { sku:"SVVmBr",   name:"Saia Velboa Vermelho e Branco",                subtitle:"50 e 60cm",              category:"Saldão",    material:"100% Poliéster",            acabamento:"Cianinha branca.",                         prazo:P30, estoque:8,   preco:24.90,    desc:"Saia Natalina Veludo Velboa e Pelúcia, aplicação cianinha.",              cores:cUNI,   photo:F.saia_velb_pol,...TC.S,sizes:[{label:"50cm",ref:"50SVVmBr",min:7,estoque:4,preco:24.90},{label:"60cm",ref:"60SVVmBr",min:4,estoque:4,preco:29.90}] },
@@ -192,27 +194,13 @@ const PRODUCTS = [
 
 const CATEGORIES = ["Todos", "Veludo", "Lamê", "Estampado", "Bolas", "Saldão"];
 const VENDEDORES  = ["Alexandra", "Valéria", "Cleuza"];
-const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbw1H8c_xESyNUOGTnnwn20Q4COOroDgF6vnxQIWBMIfLiMvrCTO9oYeM2bU8sGDmToYpA/exec";
+const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbzMZQ2vE5qQM67SdrYqmD83mo0wt5B-YVHM_A_EiahVbjAvSjwvYOX3am-Y0k1iQyxeeA/exec";
 
 const BRL     = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
 const gerarNr = () => `#${Date.now().toString().slice(-5)}`;
 const getFoto = (p, i) => p.cores?.[i]?.photo || p.photo || "";
+// Preço efetivo: usa preco do size se definido, senão do produto
 const getPreco = (product, size) => size?.preco ?? product.preco ?? 0;
-
-// ── PATCH 3: helper para preço "a partir de" ─────────────────────────────────
-// Retorna o menor preço entre todos os tamanhos disponíveis em estoque
-const getPrecoMin = (product) => {
-  const precos = product.sizes
-    .filter(s => (s.estoque ?? product.estoque ?? 0) > 0)
-    .map(s => s.preco ?? product.preco ?? 0);
-  if (precos.length === 0) return product.preco ?? 0;
-  return Math.min(...precos);
-};
-// Retorna true se o produto tem múltiplos tamanhos com preços diferentes
-const temPrecoVariavel = (product) => {
-  const precos = new Set(product.sizes.map(s => s.preco ?? product.preco ?? 0));
-  return precos.size > 1;
-};
 
 // ── GERADOR DO PEDIDO PARA IMPRESSÃO ─────────────────────────────────────────
 const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
@@ -599,8 +587,9 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
 });
 
 // ── TELA DE PEDIDOS ──────────────────────────────────────────────────────────
-const ORDERS_URL = "https://script.google.com/macros/s/AKfycbw1H8c_xESyNUOGTnnwn20Q4COOroDgF6vnxQIWBMIfLiMvrCTO9oYeM2bU8sGDmToYpA/exec";
+const ORDERS_URL = "https://script.google.com/macros/s/AKfycbzMZQ2vE5qQM67SdrYqmD83mo0wt5B-YVHM_A_EiahVbjAvSjwvYOX3am-Y0k1iQyxeeA/exec";
 
+// Cabeçalhos exatos da planilha
 const COL = {
   pedido:      "Nº Pedido",
   data:        "Data/Hora",
@@ -626,6 +615,7 @@ const PedidosScreen = memo(({ onBack }) => {
 
   const carregar = () => {
     setLoading(true); setErro("");
+    // JSONP para contornar CORS do Google Apps Script
     const cbName = "cb_pedidos_" + Date.now();
     const script = document.createElement("script");
     const timeout = setTimeout(() => {
@@ -664,6 +654,7 @@ const PedidosScreen = memo(({ onBack }) => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+      {/* Header */}
       <div style={{ padding: "14px 20px 10px", background: BG, borderBottom: `1px solid ${BORDER}`, display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
         <button onClick={onBack} style={{ background: "none", border: "none", color: VERDE, fontSize: 22, cursor: "pointer", padding: "0 4px" }}>←</button>
         <p className="pf" style={{ color: TEXT, fontSize: 20 }}>Pedidos</p>
@@ -672,6 +663,7 @@ const PedidosScreen = memo(({ onBack }) => {
         </button>
       </div>
 
+      {/* Busca */}
       <div style={{ padding: "10px 20px 6px", flexShrink: 0 }}>
         <div style={{ position: "relative", marginBottom: 8 }}>
           <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", fontSize: 15, color: TEXT3, pointerEvents: "none" }}>🔍</span>
@@ -685,6 +677,7 @@ const PedidosScreen = memo(({ onBack }) => {
         )}
       </div>
 
+      {/* Lista */}
       <div className="scr" style={{ flex: 1, padding: "8px 20px 40px" }}>
         {loading && (
           <div style={{ textAlign: "center", padding: "60px 0" }}>
@@ -741,7 +734,9 @@ const PedidosScreen = memo(({ onBack }) => {
 
                 {open && (
                   <div style={{ background: CARD2, padding: "14px 16px", borderTop: `1px solid ${BORDER}` }}>
+                    {/* Botão PDF */}
                     <button onClick={() => {
+                      // Tenta buscar snapshot completo do histórico local
                       try {
                         const historico = JSON.parse(localStorage.getItem("laco_historico") || "[]");
                         const snapshot = historico.find(h => h.nrPedido === nr);
@@ -752,6 +747,7 @@ const PedidosScreen = memo(({ onBack }) => {
                           return;
                         }
                       } catch {}
+                      // Fallback: gera PDF só com dados da planilha
                       const pedidoData = {
                         cart: [],
                         form: { nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend, obs },
@@ -827,36 +823,6 @@ export default function App() {
   const [nrPedido]                = useState(gerarNr);
   const [pedidoFinalizado, setPedidoFinalizado] = useState(null);
 
-  // ── PATCH 2: estoque persistido em localStorage ────────────────────────────
-  // Armazena overrides de estoque por ref: { "50BFVB": 0, "20V": 3, ... }
-  // Ativado quando você chamar: window.__ativarEstoque = true; localStorage.setItem("laco_estoque_ativo","1")
-  const [estoqueOverride, setEstoqueOverride] = useState(() => {
-    try { return JSON.parse(localStorage.getItem("laco_estoque") || "{}"); } catch { return {}; }
-  });
-  const estoqueAtivo = localStorage.getItem("laco_estoque_ativo") === "1";
-
-  // Retorna o estoque efetivo de um size, considerando override
-  const getEstoque = useCallback((product, size) => {
-    if (!estoqueAtivo) return size?.estoque ?? product.estoque ?? 0;
-    const ref = size?.ref || product.sku;
-    return ref in estoqueOverride ? estoqueOverride[ref] : (size?.estoque ?? product.estoque ?? 0);
-  }, [estoqueOverride, estoqueAtivo]);
-
-  // Deduz do estoque quando um pedido é confirmado
-  const deduzirEstoque = useCallback((cartItems) => {
-    if (!estoqueAtivo) return;
-    setEstoqueOverride(prev => {
-      const novo = { ...prev };
-      cartItems.forEach(item => {
-        const ref = item.size?.ref || item.product.sku;
-        const atual = ref in novo ? novo[ref] : (item.size?.estoque ?? item.product.estoque ?? 0);
-        novo[ref] = Math.max(0, atual - item.qty);
-      });
-      try { localStorage.setItem("laco_estoque", JSON.stringify(novo)); } catch {}
-      return novo;
-    });
-  }, [estoqueAtivo]);
-
   useEffect(() => {
     try { localStorage.setItem("laco_cart", JSON.stringify(cart)); } catch {}
   }, [cart]);
@@ -865,11 +831,7 @@ export default function App() {
     const catOk    = cat === "Todos" || p.category === cat;
     const q        = search.toLowerCase().trim();
     const searchOk = !q || p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q) || p.subtitle.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
-    // Filtra produto inteiro somente se TODOS os tamanhos estiverem sem estoque
-    const temEstoque = estoqueAtivo
-      ? p.sizes.some(s => getEstoque(p, s) > 0)
-      : true; // quando estoque não ativo, não filtra
-    return catOk && searchOk && temEstoque;
+    return catOk && searchOk;
   });
 
   const cartCount   = cart.reduce((s, i) => s + i.qty, 0);
@@ -901,13 +863,6 @@ export default function App() {
     if (!form.nome || !form.whats) { alert("Preencha Nome e WhatsApp!"); return; }
     setEnviando(true);
     const itens = cart.map(i => `• [${i.product.sku}] ${i.size?.ref ? i.size.ref + " — " : ""}${i.product.name} | Cor: ${i.color?.name} | Qtd: ${i.qty} | ${BRL(i.qty * (i.preco ?? i.product.preco))}`).join("\n");
-
-    // Gera HTML idêntico ao PDF da aplicação e envia em base64
-    const htmlPedido = gerarPedidoHTML({
-      cart, form: { ...form, vendedor: vendedora }, nrPedido, desconto, frete
-    });
-    const htmlB64 = btoa(unescape(encodeURIComponent(htmlPedido)));
-
     const params = new URLSearchParams({
       pedido:      nrPedido,
       data:        new Date().toLocaleString("pt-BR"),
@@ -922,31 +877,11 @@ export default function App() {
       frete:       frete > 0 ? BRL(frete) : "—",
       total:       BRL(totalFinal),
       observacoes: form.obs || "—",
-      htmlb64:     htmlB64,
     });
-    // JSONP para salvar na planilha e disparar email com PDF idêntico
-    await new Promise((resolve) => {
-      const cbName = "cb_pedido_" + Date.now();
-      const script = document.createElement("script");
-      const timeout = setTimeout(() => {
-        delete window[cbName];
-        if (document.head.contains(script)) document.head.removeChild(script);
-        resolve();
-      }, 8000);
-      window[cbName] = () => {
-        clearTimeout(timeout);
-        delete window[cbName];
-        if (document.head.contains(script)) document.head.removeChild(script);
-        resolve();
-      };
-      params.append("callback", cbName);
-      script.src = `${SHEETS_URL}?${params}`;
-      script.onerror = () => { clearTimeout(timeout); delete window[cbName]; resolve(); };
-      document.head.appendChild(script);
-    });
-    // Deduz estoque após pedido confirmado
-    deduzirEstoque(cart);
-    // Salva snapshot
+    try {
+      await fetch(`${SHEETS_URL}?${params}`, { method: "GET", mode: "no-cors" });
+    } catch (e) { console.error(e); }
+    // Salva snapshot ANTES de limpar carrinho
     const snapshot = { cart: [...cart], form: { ...form, vendedor: vendedora }, nrPedido, desconto, frete, data: new Date().toLocaleString("pt-BR") };
     try {
       const historico = JSON.parse(localStorage.getItem("laco_historico") || "[]");
@@ -1025,46 +960,36 @@ export default function App() {
               </div>
             ) : (
               <div style={{ display: "grid", gridTemplateColumns: isDesktop ? "repeat(3,1fr)" : "1fr", gap: 14 }}>
-                {filtered.map(p => {
-                  // ── PATCH 3: preço "a partir de" no card ──────────────────
-                  const precoMin = getPrecoMin(p);
-                  const variavel = temPrecoVariavel(p);
-                  const labelPreco = variavel
-                    ? `a partir de ${BRL(precoMin)}`
-                    : `${BRL(precoMin)}/un`;
-
-                  return (
-                    <div key={p.sku} style={{ background: CARD, borderRadius: 16, overflow: "hidden", border: `1px solid ${BORDER}`, boxShadow: "0 2px 8px rgba(0,0,0,0.05)", display: "flex", flexDirection: "column" }}>
-                      <div style={{ position: "relative", cursor: "pointer" }} onClick={() => setModal(p)}>
-                        <Img src={getFoto(p, 0)} h={isDesktop ? 200 : 180} />
-                        <div style={{ position: "absolute", top: 10, left: 10 }}><Tag label={p.tag} color={p.tagColor} bg={p.tagBg} /></div>
-                        {/* ── PATCH 3: badge de preço atualizado ── */}
-                        <div style={{ position: "absolute", top: 10, right: 10, background: "rgba(255,255,255,0.95)", borderRadius: 8, padding: "3px 9px", maxWidth: 160 }}>
-                          <span className="mn" style={{ color: VERDE, fontSize: variavel ? 9 : 10, fontWeight: 700, lineHeight: 1.3, display: "block", textAlign: "right" }}>
-                            {labelPreco}
-                          </span>
-                        </div>
-                      </div>
-                      <div style={{ padding: "14px", flex: 1, display: "flex", flexDirection: "column" }}>
-                        <div style={{ cursor: "pointer", flex: 1 }} onClick={() => setModal(p)}>
-                          <p className="pf" style={{ color: TEXT, fontSize: 17, lineHeight: 1.2, marginBottom: 3 }}>{p.name}</p>
-                          <p className="dm" style={{ color: TEXT3, fontSize: 12, marginBottom: 5 }}>{p.subtitle}</p>
-                          <p className="mn" style={{ color: VERDE2, fontSize: 9, letterSpacing: 1, opacity: 0.7, marginBottom: 7 }}>REF: {p.sku}</p>
-                          <div style={{ display: "flex", gap: 5, alignItems: "center", marginBottom: 7 }}>
-                            {p.cores.map((c, i) => <div key={i} title={c.name} style={{ width: 12, height: 12, borderRadius: "50%", background: c.hex, border: `1px solid ${BORDER}` }} />)}
-                            <span className="mn" style={{ color: TEXT3, fontSize: 9, marginLeft: 2 }}>{p.cores.length} COR{p.cores.length > 1 ? "ES" : ""}</span>
-                          </div>
-                          <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 10 }}>
-                            <span className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1 }}>MÍN. {Math.min(...p.sizes.map(s => s.min || 1))} UN.</span>
-                            <span style={{ color: BORDER }}>·</span>
-                            <span className="dm" style={{ color: TEXT2, fontSize: 12 }}>{p.prazo}</span>
-                          </div>
-                        </div>
-                        <QuickAdd product={p} onAdd={handleAdd} />
+                {filtered.map(p => (
+                  <div key={p.sku} style={{ background: CARD, borderRadius: 16, overflow: "hidden", border: `1px solid ${BORDER}`, boxShadow: "0 2px 8px rgba(0,0,0,0.05)", display: "flex", flexDirection: "column" }}>
+                    <div style={{ position: "relative", cursor: "pointer" }} onClick={() => setModal(p)}>
+                      <Img src={getFoto(p, 0)} h={isDesktop ? 200 : 180} />
+                      <div style={{ position: "absolute", top: 10, left: 10 }}><Tag label={p.tag} color={p.tagColor} bg={p.tagBg} /></div>
+                      <div style={{ position: "absolute", top: 10, right: 10, background: "rgba(255,255,255,0.92)", borderRadius: 8, padding: "3px 9px" }}>
+                        <span className="mn" style={{ color: VERDE, fontSize: 10, fontWeight: 700 }}>
+                          {p.sizes.some(s => s.preco) ? `${BRL(Math.min(...p.sizes.map(s => s.preco ?? p.preco)))}/un` : `${BRL(p.preco)}/un`}
+                        </span>
                       </div>
                     </div>
-                  );
-                })}
+                    <div style={{ padding: "14px", flex: 1, display: "flex", flexDirection: "column" }}>
+                      <div style={{ cursor: "pointer", flex: 1 }} onClick={() => setModal(p)}>
+                        <p className="pf" style={{ color: TEXT, fontSize: 17, lineHeight: 1.2, marginBottom: 3 }}>{p.name}</p>
+                        <p className="dm" style={{ color: TEXT3, fontSize: 12, marginBottom: 5 }}>{p.subtitle}</p>
+                        <p className="mn" style={{ color: VERDE2, fontSize: 9, letterSpacing: 1, opacity: 0.7, marginBottom: 7 }}>REF: {p.sku}</p>
+                        <div style={{ display: "flex", gap: 5, alignItems: "center", marginBottom: 7 }}>
+                          {p.cores.map((c, i) => <div key={i} title={c.name} style={{ width: 12, height: 12, borderRadius: "50%", background: c.hex, border: `1px solid ${BORDER}` }} />)}
+                          <span className="mn" style={{ color: TEXT3, fontSize: 9, marginLeft: 2 }}>{p.cores.length} COR{p.cores.length > 1 ? "ES" : ""}</span>
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 10 }}>
+                          <span className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1 }}>MÍN. {Math.min(...p.sizes.map(s => s.min || 1))} UN.</span>
+                          <span style={{ color: BORDER }}>·</span>
+                          <span className="dm" style={{ color: TEXT2, fontSize: 12 }}>{p.prazo}</span>
+                        </div>
+                      </div>
+                      <QuickAdd product={p} onAdd={handleAdd} />
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
           </div>
@@ -1154,7 +1079,7 @@ export default function App() {
               </button>
               <div style={{ height: 1, background: BORDER, marginBottom: 18 }} />
 
-              {/* Vendedora */}
+              {/* Vendedora — separada dos dados do cliente */}
               <div style={{ marginBottom: 14 }}>
                 <p className="mn" style={{ color: VERDE, fontSize: 9, letterSpacing: 2.5, marginBottom: 10 }}>VENDEDORA</p>
                 <div style={{ position: "relative" }}>
@@ -1177,7 +1102,7 @@ export default function App() {
                   <input className="inp" type={f.t} value={form[f.k]} placeholder={f.p} autoComplete="off" onChange={e => setForm(prev => ({ ...prev, [f.k]: e.target.value }))} />
                 </div>
               ))}
-              {/* CNPJ */}
+              {/* CNPJ com máscara */}
               <div style={{ marginBottom: 11 }}>
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>CNPJ</p>
                 <input className="inp" type="text" inputMode="numeric" value={form.cpfcnpj} placeholder="00.000.000/0001-00" autoComplete="off"
@@ -1191,7 +1116,7 @@ export default function App() {
                     setForm(prev => ({ ...prev, cpfcnpj: v }));
                   }} />
               </div>
-              {/* WhatsApp */}
+              {/* WhatsApp com máscara */}
               <div style={{ marginBottom: 11 }}>
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>WHATSAPP *</p>
                 <input className="inp" type="text" inputMode="numeric" value={form.whats} placeholder="(11) 99999-9999" autoComplete="off"
