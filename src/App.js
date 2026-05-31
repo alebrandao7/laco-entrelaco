@@ -901,6 +901,13 @@ export default function App() {
     if (!form.nome || !form.whats) { alert("Preencha Nome e WhatsApp!"); return; }
     setEnviando(true);
     const itens = cart.map(i => `• [${i.product.sku}] ${i.size?.ref ? i.size.ref + " — " : ""}${i.product.name} | Cor: ${i.color?.name} | Qtd: ${i.qty} | ${BRL(i.qty * (i.preco ?? i.product.preco))}`).join("\n");
+
+    // Gera HTML idêntico ao PDF da aplicação e envia em base64
+    const htmlPedido = gerarPedidoHTML({
+      cart, form: { ...form, vendedor: vendedora }, nrPedido, desconto, frete
+    });
+    const htmlB64 = btoa(unescape(encodeURIComponent(htmlPedido)));
+
     const params = new URLSearchParams({
       pedido:      nrPedido,
       data:        new Date().toLocaleString("pt-BR"),
@@ -915,8 +922,9 @@ export default function App() {
       frete:       frete > 0 ? BRL(frete) : "—",
       total:       BRL(totalFinal),
       observacoes: form.obs || "—",
+      htmlb64:     htmlB64,
     });
-    // Usa JSONP em vez de fetch para evitar abertura de cliente de email externo
+    // JSONP para salvar na planilha e disparar email com PDF idêntico
     await new Promise((resolve) => {
       const cbName = "cb_pedido_" + Date.now();
       const script = document.createElement("script");
