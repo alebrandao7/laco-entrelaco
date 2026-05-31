@@ -199,26 +199,9 @@ const BRL     = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDi
 const gerarNr = () => `#${Date.now().toString().slice(-5)}`;
 const getFoto = (p, i) => p.cores?.[i]?.photo || p.photo || "";
 const getPreco = (product, size) => size?.preco ?? product.preco ?? 0;
-
-// ── ESTOQUE PERSISTENTE ──────────────────────────────────────────────────────
-const ESTOQUE_KEY = "laco_estoque";
-const getEstoqueLocal = () => { try { return JSON.parse(localStorage.getItem(ESTOQUE_KEY) || "{}"); } catch { return {}; } };
-const setEstoqueLocal = (obj) => { try { localStorage.setItem(ESTOQUE_KEY, JSON.stringify(obj)); } catch {} };
-const getEstoque = (sku, ref, base) => {
-  const local = getEstoqueLocal();
-  const key = `${sku}_${ref}`;
-  return key in local ? local[key] : base;
-};
-const decrementarEstoque = (cartItems) => {
-  const local = getEstoqueLocal();
-  cartItems.forEach(item => {
-    const key = `${item.product.sku}_${item.size?.ref}`;
-    const base = item.size?.estoque ?? item.product.estoque ?? 0;
-    const atual = key in local ? local[key] : base;
-    local[key] = Math.max(0, atual - item.qty);
-  });
-  setEstoqueLocal(local);
-};
+// Estoque: usa sempre o valor fixo do código (persistente desativado por ora)
+const getEstoque = (sku, ref, base) => base;
+const decrementarEstoque = (cartItems) => {}; // desativado
 
 // ── GERADOR DO PEDIDO PARA IMPRESSÃO ─────────────────────────────────────────
 const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
