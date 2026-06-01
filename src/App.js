@@ -126,7 +126,7 @@ const PRODUCTS = [
   { sku:"VAlTri",   name:"Laço Veludo Ale Triplo",                    subtitle:"90cm",                   category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço com borboleta tripla e gravata tradicional.",                                                        cores:cVGBCLD,photo:F.veludo_triplo,...TC.V, sizes:[{label:"90cm",ref:"90VAlTri",min:1,estoque:500,preco:389.80}] },
   { sku:"VALLIND",  name:"Laço Veludo Ale — Lindíssimo",              subtitle:"30cm a 90cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço duplo confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata.",                  cores:cVGBC,  photo:F.val_lind,    ...TC.V, sizes:[{label:"30cm",ref:"30VAl/Lind",min:1,estoque:500,preco:58.00},{label:"60cm",ref:"60VAl/Lind",min:1,estoque:500,preco:208.90},{label:"90cm",ref:"90VAl/Lind",min:1,estoque:500,preco:398.00}] },
   { sku:"LBCO",     name:"Laço Veludo Branco",                        subtitle:"20cm a 40cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço clássico confeccionado em Veludo na cor Branco.",                                                    cores:cBR,    photo:F.laco_branco, ...TC.V, sizes:[{label:"20cm",ref:"20LBco",min:1,estoque:500,preco:26.90},{label:"30cm",ref:"30LBco",min:1,estoque:500,preco:39.90},{label:"40cm",ref:"40LBco",min:1,estoque:500,preco:56.20}] },
-  { sku:"VALGL",    name:"Laço Veludo Cristal Gravata Longa",         subtitle:"30cm a 50cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata ao descer pela árvore ou coluna.", cores:cVGBC, photo:F.val_gl,  ...TC.V, sizes:[{label:"30cm",ref:"30VaL",min:1,estoque:500,preco:43.00},{label:"40cm",ref:"40VaL",min:1,estoque:500,preco:61.90},{label:"50cm",ref:"50VaL",min:1,estoque:500,preco:98.90}] },
+  { sku:"VALGL",    name:"Laço Veludo Cristal Gravata Longa",         subtitle:"30cm a 50cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata ao descer pela árvore ou coluna.", cores:cVGBC, photo:F.val_gl, ...TC.V, sizes:[{label:"30cm",ref:"30VaL",min:1,estoque:500,preco:43.00},{label:"40cm",ref:"40VaL",min:1,estoque:500,preco:61.90},{label:"50cm",ref:"50VaL",min:1,estoque:500,preco:98.90}] },
   { sku:"VDuGV",    name:"Laço Veludo Duplo Gravata V",               subtitle:"100cm",                  category:"Veludo",    material:"100% poliéster",            acabamento:"Estrutura interna com placa, arame e costura francesa.", prazo:P30, estoque:500, preco:369.00, desc:"Laço confeccionado em Veludo tradicional, com borboleta dupla e gravata em V.", cores:cVVM, photo:PH, ...TC.V, sizes:[{label:"100cm",ref:"100VDuGV",min:1,estoque:500,preco:369.00}] },
   { sku:"VVM",      name:"Laço Veludo Vermelho",                      subtitle:"20cm a 100cm",           category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"O clássico da linha; confeccionado em Veludo tradicional.",                                               cores:cVVM,   photo:F.vvm,         ...TC.V, sizes:[{label:"20cm",ref:"20V",min:1,estoque:500,preco:21.90},{label:"30cm",ref:"30V",min:1,estoque:500,preco:33.90},{label:"40cm",ref:"40V",min:1,estoque:500,preco:46.90},{label:"50cm",ref:"50V",min:1,estoque:500,preco:79.90},{label:"80cm",ref:"80V",min:1,estoque:500,preco:197.90},{label:"100cm",ref:"100V",min:1,estoque:500,preco:269.00}] },
   { sku:"VD",       name:"Laço Veludo Vermelho com Dourado",          subtitle:"Borda ouro",             category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda ouro.",                                               cores:cVD,    photo:F.vd,          ...TC.E, sizes:[{label:"20cm",ref:"20VD",min:1,estoque:500,preco:24.90},{label:"30cm",ref:"30VD",min:1,estoque:500,preco:36.90},{label:"40cm",ref:"40VD",min:1,estoque:500,preco:48.90}] },
@@ -200,26 +200,55 @@ const getPreco   = (product, size) => size?.preco ?? product.preco ?? 0;
 const getEstoque = (sku, ref, base) => base;
 const decrementarEstoque = () => {};
 
+// Converte "R$ 1.234,56" → 1234.56
+const parseBRL = (str) => {
+  if (!str) return 0;
+  const s = String(str).replace(/[^\d,]/g, "").replace(",", ".");
+  return parseFloat(s) || 0;
+};
+
 // ─────────────────────────────────────────────────────────────────────────────
 // GERADOR DO PEDIDO PARA IMPRESSÃO
+// Aceita dois modos:
+//   modo "snapshot" → cart com objetos completos, calcula tudo internamente
+//   modo "planilha" → itensTexto + totaisStr já prontos da planilha
 // ─────────────────────────────────────────────────────────────────────────────
-const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
-  const subtotal   = cart.reduce((s, i) => s + i.qty * (i.preco ?? i.product.preco), 0);
-  const descVal    = desconto.tipo === "%" ? subtotal * (desconto.valor / 100) : (desconto.valor || 0);
-  const totalFinal = Math.max(0, subtotal - descVal) + (frete || 0);
-  const totalItens = cart.length;
-  const totalUn    = cart.reduce((s, i) => s + i.qty, 0);
-  const dataHora   = new Date().toLocaleString("pt-BR");
+const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete, _totaisStr }) => {
+  const dataHora = new Date().toLocaleString("pt-BR");
 
-  const linhasItens = cart.map(item => `
-    <tr>
+  // Se veio de snapshot completo, calcula os totais normalmente
+  // Se veio da reconstrução textual, usa os _totaisStr da planilha
+  const usarTotaisStr = _totaisStr && _totaisStr.total;
+
+  const subtotal   = usarTotaisStr ? parseBRL(_totaisStr.subtotal) : cart.reduce((s, i) => s + i.qty * (i.preco ?? i.product?.preco ?? 0), 0);
+  const descValNum = usarTotaisStr
+    ? parseBRL(_totaisStr.subtotal) - parseBRL(_totaisStr.total) - parseBRL(_totaisStr.frete)
+    : (desconto?.tipo === "%" ? subtotal * ((desconto?.valor || 0) / 100) : (desconto?.valor || 0));
+  const freteNum   = usarTotaisStr ? parseBRL(_totaisStr.frete) : (frete || 0);
+  const totalFinal = usarTotaisStr ? parseBRL(_totaisStr.total) : Math.max(0, subtotal - descValNum) + freteNum;
+
+  const totalItens = cart.length;
+  const totalUn    = cart.reduce((s, i) => s + (i.qty || 0), 0);
+
+  // Linhas da tabela de itens
+  const linhasItens = cart.map(item => {
+    // subtotal do item: usa o valor calculado ou o que veio do texto
+    const precoUnit = item.preco ?? item.product?.preco ?? 0;
+    const subtotalItem = item._subtotalStr || (precoUnit > 0 ? BRL(item.qty * precoUnit) : "");
+    const precoUnitStr = precoUnit > 0 ? BRL(precoUnit) : (item._precoUnitStr || "");
+
+    return `<tr>
       <td class="td-ref">${item.size?.ref || ""}</td>
-      <td><strong>${item.product?.sku ? "[" + item.product.sku + "] " : ""}${item.product?.name || ""}</strong></td>
+      <td>
+        <strong>${item.product?.sku ? "[" + item.product.sku + "] " : ""}${item.product?.name || ""}</strong>
+        ${precoUnitStr ? `<span style="display:block;font-size:9px;color:#888;margin-top:1px;">${precoUnitStr}/un</span>` : ""}
+      </td>
       <td>${item.size?.label || ""}</td>
       <td><span class="td-cor"><span class="cor-dot" style="background:${item.color?.hex || "#ccc"}"></span> ${item.color?.name || ""}</span></td>
       <td style="text-align:center;font-family:'DM Mono',monospace;font-weight:700;color:#2D5A27;">${item.qty}</td>
-      <td style="text-align:right;font-family:'DM Mono',monospace;font-weight:700;color:#2D5A27;">${BRL(item.qty * (item.preco ?? item.product?.preco ?? 0))}</td>
-    </tr>`).join("");
+      <td style="text-align:right;font-family:'DM Mono',monospace;font-weight:700;color:#2D5A27;">${subtotalItem}</td>
+    </tr>`;
+  }).join("");
 
   return `<!DOCTYPE html>
 <html lang="pt-BR">
@@ -251,10 +280,9 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
   .td-cor{display:inline-flex;align-items:center;gap:5px;}
   .cor-dot{width:8px;height:8px;border-radius:50%;border:1px solid rgba(0,0,0,0.15);flex-shrink:0;display:inline-block;}
   .bottom-area{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:24px;}
-  .condicoes-box{flex:1;background:#FAF8F5;border:1px solid #E8E0D8;border-radius:6px;padding:12px 16px;}
-  .condicoes-linha{margin-bottom:10px;}.condicoes-linha:last-child{margin-bottom:0;}
-  .condicoes-linha label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;color:#888;text-transform:uppercase;display:block;margin-bottom:5px;}
-  .linha-escrita{border:none;border-bottom:1px solid #888;width:100%;height:20px;background:transparent;}
+  .obs-box{flex:1;background:#FAF8F5;border:1px solid #E8E0D8;border-radius:6px;padding:14px 16px;min-height:100px;}
+  .obs-box label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;color:#888;text-transform:uppercase;display:block;margin-bottom:8px;}
+  .obs-content{font-size:12px;color:#1A1A1A;line-height:1.7;white-space:pre-wrap;}
   .totais-box{background:#FAF8F5;border:1px solid #E8E0D8;border-radius:6px;padding:12px 16px;min-width:200px;}
   .totais-linha{display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:11px;}
   .totais-linha span:first-child{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:#888;text-transform:uppercase;}
@@ -269,7 +297,7 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
   .no-print{text-align:center;margin-bottom:20px;display:flex;gap:10px;justify-content:center;}
   .btn{border:none;padding:10px 28px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
   .btn-print{background:#2D5A27;color:#fff;}.btn-close{background:#E8E0D8;color:#1A1A1A;}
-  @media print{body{background:#fff;padding:0;}.page{box-shadow:none;border-radius:0;padding:16px 24px;}.no-print{display:none!important;}.linha-escrita{border-bottom:1px solid #aaa;}}
+  @media print{body{background:#fff;padding:0;}.page{box-shadow:none;border-radius:0;padding:16px 24px;}.no-print{display:none!important;}}
 </style>
 </head>
 <body>
@@ -285,6 +313,7 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
       <div class="pedido-data">DATA: ${dataHora}</div>
     </div>
   </div>
+
   <p class="section-title">Dados do Cliente</p>
   <div class="cliente-grid">
     <div class="campo"><label>Empresa / Nome</label><span>${form.nome || "—"}</span></div>
@@ -293,29 +322,29 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
     <div class="campo"><label>E-mail</label><span>${form.email || "—"}</span></div>
     <div class="campo"><label>Vendedora</label><span>${form.vendedor || "—"}</span></div>
   </div>
+
   <p class="section-title">Itens do Pedido</p>
   <div class="tabela-wrap">
     <table>
       <thead><tr><th>Ref.</th><th>Produto</th><th>Tam.</th><th>Cor</th><th style="text-align:center">Qtd</th><th style="text-align:right">Subtotal</th></tr></thead>
-      <tbody>${linhasItens || `<tr><td colspan="6" style="text-align:center;padding:20px;color:#888;font-style:italic;">Nenhum item encontrado</td></tr>`}</tbody>
+      <tbody>${linhasItens || `<tr><td colspan="6" style="text-align:center;padding:20px;color:#888;font-style:italic;">Nenhum item</td></tr>`}</tbody>
     </table>
   </div>
+
   <div class="bottom-area">
-    <div class="condicoes-box">
-      <div class="condicoes-linha"><label>Forma de Pagamento</label><div class="linha-escrita"></div></div>
-      <div class="condicoes-linha"><label>Data de Entrega</label><div class="linha-escrita"></div></div>
-      <div class="condicoes-linha"><label>Frete</label><div class="linha-escrita"></div></div>
-      <div class="condicoes-linha"><label>Observações</label><div class="linha-escrita"></div></div>
+    <div class="obs-box">
+      <label>Observações</label>
+      <div class="obs-content">${form.obs || ""}</div>
     </div>
     <div class="totais-box">
       <div class="totais-linha"><span>Itens / Unidades</span><span>${totalItens} / ${totalUn} un.</span></div>
       <div class="totais-linha"><span>Subtotal</span><span>${BRL(subtotal)}</span></div>
-      ${descVal > 0 ? `<div class="totais-linha desconto"><span>Desconto ${desconto.tipo === "%" ? `(${desconto.valor}%)` : ""}</span><span>− ${BRL(descVal)}</span></div>` : ""}
-      ${frete > 0   ? `<div class="totais-linha"><span>Frete</span><span>${BRL(frete)}</span></div>` : ""}
+      ${descValNum > 0 ? `<div class="totais-linha desconto"><span>Desconto</span><span>− ${BRL(descValNum)}</span></div>` : ""}
+      ${freteNum   > 0 ? `<div class="totais-linha"><span>Frete</span><span>${BRL(freteNum)}</span></div>` : ""}
       <div class="totais-linha total-final"><span>Total</span><span>${BRL(totalFinal)}</span></div>
     </div>
   </div>
-  ${form.obs ? `<p class="section-title" style="margin-top:4px;">Observações</p><div style="background:#FBE9E7;border:1px solid #8B1A2A33;border-radius:6px;padding:10px 14px;margin-bottom:20px;font-size:12px;line-height:1.6;white-space:pre-wrap;">${form.obs}</div>` : ""}
+
   <div class="footer">
     <div class="footer-assinatura"><div class="linha-assinatura"></div><span>Assinatura do Cliente</span></div>
     <div class="footer-assinatura"><div class="linha-assinatura"></div><span>Vendedora Responsável</span></div>
@@ -548,67 +577,109 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// HELPERS DE SNAPSHOT — tentam todas as grafias possíveis de chave
+// HELPERS DE PDF / SNAPSHOT
 // ─────────────────────────────────────────────────────────────────────────────
 const ORDERS_URL = "https://script.google.com/macros/s/AKfycbzLrphy9FQJBPv5hi0G1Rm3enp4RNqanAVfbfBUV4QjB8jTTmQvb01tNl1fVOxZKs4wTQ/exec";
 
-// Extrai a string raw do snapshot de um objeto pedido,
-// tentando todas as grafias possíveis de cabeçalho
+const jsonp = (url, timeout = 12000) => new Promise((resolve) => {
+  const cb = "cb_" + Date.now() + "_" + Math.random().toString(36).slice(2);
+  const script = document.createElement("script");
+  const timer = setTimeout(() => {
+    delete window[cb]; script.parentNode?.removeChild(script); resolve(null);
+  }, timeout);
+  window[cb] = (data) => { clearTimeout(timer); delete window[cb]; script.parentNode?.removeChild(script); resolve(data); };
+  script.onerror = () => { clearTimeout(timer); delete window[cb]; resolve(null); };
+  script.src = url + (url.includes("?") ? "&" : "?") + `callback=${cb}`;
+  document.head.appendChild(script);
+});
+
 const extrairRawSnapshot = (obj) => {
   if (!obj) return "";
-  const tentativas = ["snapshot", "Snapshot", "SNAPSHOT", "Snapshot JSON", "snap"];
-  for (const k of tentativas) {
-    if (obj[k] && String(obj[k]).trim() !== "" && String(obj[k]) !== "undefined" && String(obj[k]) !== "null") {
-      return String(obj[k]);
-    }
+  for (const k of ["snapshot", "Snapshot", "SNAPSHOT"]) {
+    const v = String(obj[k] || "").trim();
+    if (v && v !== "undefined" && v !== "null") return v;
   }
   return "";
 };
 
-// Tenta parsear o raw e valida que tem cart e form
 const parsearSnapshot = (raw) => {
   if (!raw || raw.trim() === "" || raw === "undefined" || raw === "null") return null;
   try {
     const obj = JSON.parse(raw);
     if (obj && Array.isArray(obj.cart) && obj.cart.length > 0 && obj.form) return obj;
     return null;
-  } catch (e) {
-    console.error("[SNAP] parse falhou:", e.message, "| raw (200):", raw.slice(0, 200));
-    return null;
-  }
+  } catch { return null; }
 };
 
-// JSONP genérico — retorna uma Promise com o dado ou null
-const jsonp = (url, timeout = 12000) => new Promise((resolve) => {
-  const cb = "cb_" + Date.now() + "_" + Math.random().toString(36).slice(2);
-  const script = document.createElement("script");
-  const timer = setTimeout(() => {
-    delete window[cb];
-    script.parentNode && script.parentNode.removeChild(script);
-    console.warn("[JSONP] timeout:", url);
-    resolve(null);
-  }, timeout);
-  window[cb] = (data) => {
-    clearTimeout(timer);
-    delete window[cb];
-    script.parentNode && script.parentNode.removeChild(script);
-    resolve(data);
-  };
-  script.onerror = () => {
-    clearTimeout(timer);
-    delete window[cb];
-    resolve(null);
-  };
-  script.src = url + (url.includes("?") ? "&" : "?") + `callback=${cb}`;
-  document.head.appendChild(script);
-});
-
-// Abre janela de PDF — centralizado
 const abrirPDF = (snapObj) => {
   const html = gerarPedidoHTML(snapObj);
   const win = window.open("", "_blank");
   if (win) { win.document.write(html); win.document.close(); }
-  else { alert("Pop-up bloqueado pelo navegador. Libere pop-ups para este site e tente novamente."); }
+  else { alert("Pop-up bloqueado. Libere pop-ups para este site e tente novamente."); }
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Reconstrói o pedido a partir do texto da coluna "Itens do Pedido"
+// Formato gravado: • [SKU] REF — Nome | Cor: X | Qtd: N | R$ V,VV
+// Os totais vêm das colunas Subtotal/Desconto/Frete/Total da planilha
+// ─────────────────────────────────────────────────────────────────────────────
+const reconstruirDoPlanilha = ({ pedidoRow, colMap }) => {
+  const itensTexto = pedidoRow[colMap.itens] || "";
+
+  const cart = itensTexto
+    .split("\n")
+    .map(l => l.trim())
+    .filter(l => l.startsWith("•"))
+    .map(l => {
+      // Formato: • [SKU] REF — Nome do produto | Cor: X | Qtd: N | R$ V
+      // Captura grupos: sku, ref+nome, cor, qtd, subtotalItem
+      const m = l.match(/•\s*\[(.+?)\]\s*(.+?)\s*\|\s*Cor:\s*(.+?)\s*\|\s*Qtd:\s*(\d+)\s*\|\s*(R\$\s*[\d.,]+)/);
+      if (!m) return null;
+      const [, sku, refNome, cor, qtdStr, subtotalItemStr] = m;
+      const qtd = parseInt(qtdStr) || 1;
+
+      // separa ref do nome: "200EVV — Escapulário Veludo Vermelho" ou só "Escapulário..."
+      const partes = refNome.split(/\s*—\s*/);
+      const ref  = partes.length > 1 ? partes[0].trim() : sku;
+      const nome = partes.length > 1 ? partes[1].trim() : refNome.trim();
+
+      // calcula preço unitário a partir do subtotal do item
+      const subtotalItemNum = parseBRL(subtotalItemStr);
+      const precoUnit = qtd > 0 ? subtotalItemNum / qtd : 0;
+
+      return {
+        product: { sku, name: nome },
+        size:    { ref, label: "" },
+        color:   { name: cor.trim(), hex: "#C0392B" },
+        qty:     qtd,
+        preco:   precoUnit,
+        _subtotalStr: subtotalItemStr.trim(),
+        _precoUnitStr: precoUnit > 0 ? BRL(precoUnit) : "",
+      };
+    })
+    .filter(Boolean);
+
+  return {
+    cart,
+    form: {
+      nome:     pedidoRow[colMap.nome]        || "",
+      cpfcnpj:  pedidoRow[colMap.cpfcnpj]     || "",
+      whats:    pedidoRow[colMap.whatsapp]    || "",
+      email:    pedidoRow[colMap.email]        || "",
+      vendedor: pedidoRow[colMap.vendedor]    || "",
+      obs:      pedidoRow[colMap.observacoes] !== "—" ? (pedidoRow[colMap.observacoes] || "") : "",
+    },
+    nrPedido:  pedidoRow[colMap.pedido] || "—",
+    desconto:  { tipo: "%", valor: 0 },
+    frete:     0,
+    // Passa os totais da planilha para o gerador usar diretamente
+    _totaisStr: {
+      subtotal: pedidoRow[colMap.subtotal] || "",
+      desconto: pedidoRow[colMap.desconto] || "",
+      frete:    pedidoRow[colMap.frete]    || "",
+      total:    pedidoRow[colMap.total]    || "",
+    },
+  };
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -640,13 +711,9 @@ const PedidosScreen = memo(({ onBack }) => {
 
   const carregar = () => {
     setLoading(true); setErro("");
-    // ?action=listar — Apps Script retorna todos os pedidos SEM snapshot (leve)
     jsonp(`${ORDERS_URL}?action=listar`).then(data => {
-      if (data && data.pedidos) {
-        setPedidos(data.pedidos);
-      } else {
-        setErro("Não foi possível carregar os pedidos. Verifique a conexão.");
-      }
+      if (data?.pedidos) { setPedidos(data.pedidos); }
+      else { setErro("Não foi possível carregar os pedidos."); }
       setLoading(false);
     });
   };
@@ -662,100 +729,41 @@ const PedidosScreen = memo(({ onBack }) => {
       || (p[COL.vendedor] || "").toLowerCase().includes(q);
   });
 
-  // ── Handler do botão PDF — 3 etapas em cascata ──────────────────────────
   const handleAbrirPDF = async (pedidoRow) => {
-    const nr   = pedidoRow[COL.pedido]      || "—";
-    const nm   = pedidoRow[COL.nome]        || "";
-    const cpf  = pedidoRow[COL.cpfcnpj]    || "";
-    const wpp  = pedidoRow[COL.whatsapp]   || "";
-    const em   = pedidoRow[COL.email]       || "";
-    const vend = pedidoRow[COL.vendedor]    || "";
-    const obs  = pedidoRow[COL.observacoes] || "";
-    const sub  = pedidoRow[COL.subtotal]   || "";
-    const desc = pedidoRow[COL.desconto]   || "";
-    const frt  = pedidoRow[COL.frete]      || "";
-    const tot  = pedidoRow[COL.total]      || "";
-
+    const nr = pedidoRow[COL.pedido] || "—";
     setPdfLoading(nr);
 
-    // ── ETAPA 1: localStorage (mesmo dispositivo que criou) ──────────────
+    // ETAPA 1: localStorage (mesmo dispositivo)
     try {
-      const historico = JSON.parse(localStorage.getItem("laco_historico") || "[]");
-      const snap = historico.find(h => h.nrPedido === nr);
+      const hist = JSON.parse(localStorage.getItem("laco_historico") || "[]");
+      const snap = hist.find(h => h.nrPedido === nr);
       if (snap) {
         const obj = parsearSnapshot(JSON.stringify(snap));
         if (obj) { setPdfLoading(null); abrirPDF(obj); return; }
       }
-    } catch (e) { console.warn("[PDF] localStorage:", e.message); }
+    } catch {}
 
-    // ── ETAPA 2: busca snapshot dedicado via ?action=snapshot&pedido=XXX ──
-    // (requer Apps Script atualizado com a ação "snapshot")
-    const data2 = await jsonp(`${ORDERS_URL}?action=snapshot&pedido=${encodeURIComponent(nr)}`);
-    if (data2) {
-      const raw2 = data2.snapshot || extrairRawSnapshot(data2);
-      const obj2 = parsearSnapshot(raw2);
+    // ETAPA 2: ação dedicada ?action=snapshot (requer Apps Script atualizado)
+    const d2 = await jsonp(`${ORDERS_URL}?action=snapshot&pedido=${encodeURIComponent(nr)}`);
+    if (d2) {
+      const obj2 = parsearSnapshot(d2.snapshot || extrairRawSnapshot(d2));
       if (obj2) { setPdfLoading(null); abrirPDF(obj2); return; }
     }
 
-    // ── ETAPA 3: busca a lista completa COM snapshot incluído ─────────────
-    // (fallback para Apps Script na versão antiga que incluía snapshot na listagem)
-    const data3 = await jsonp(`${ORDERS_URL}?action=listar&incluir_snapshot=1`);
-    if (data3 && data3.pedidos) {
-      const linha = data3.pedidos.find(p => p[COL.pedido] === nr || p["Nº Pedido"] === nr);
+    // ETAPA 3: listagem completa com snapshot (Apps Script versão antiga)
+    const d3 = await jsonp(`${ORDERS_URL}?action=listar&incluir_snapshot=1`);
+    if (d3?.pedidos) {
+      const linha = d3.pedidos.find(p => p[COL.pedido] === nr);
       if (linha) {
-        const raw3 = extrairRawSnapshot(linha);
-        const obj3 = parsearSnapshot(raw3);
+        const obj3 = parsearSnapshot(extrairRawSnapshot(linha));
         if (obj3) { setPdfLoading(null); abrirPDF(obj3); return; }
       }
     }
 
+    // ETAPA 4: reconstrói do texto da planilha com totais reais
+    const reconstruido = reconstruirDoPlanilha({ pedidoRow, colMap: COL });
     setPdfLoading(null);
-
-    // ── ETAPA 4: fallback visual — monta PDF com dados disponíveis ────────
-    // Usa os campos de texto "Itens do Pedido" para montar uma tabela simples
-    const linhaItensTexto = pedidoRow[COL.itens] || "";
-    const itensTextuais = linhaItensTexto
-      .split("\n")
-      .filter(l => l.trim().startsWith("•"))
-      .map(l => {
-        // Formato: • [SKU] REF — Nome | Cor: X | Qtd: N | R$ V
-        const m = l.match(/\[(.+?)\].+?—\s*(.+?)\s*\|\s*Cor:\s*(.+?)\s*\|\s*Qtd:\s*(\d+)\s*\|\s*(.+)/);
-        if (!m) return null;
-        const [, sku, nome, cor, qtd, valor] = m;
-        return {
-          product: { sku, name: nome },
-          size:    { ref: sku, label: "" },
-          color:   { name: cor, hex: "#C0392B" },
-          qty:     parseInt(qtd),
-          preco:   0,
-        };
-      })
-      .filter(Boolean);
-
-    const snapFallback = {
-      cart: itensTextuais,
-      form: {
-        nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend,
-        obs: [obs && obs !== "—" ? obs : ""].filter(Boolean).join("\n"),
-      },
-      nrPedido: nr,
-      desconto: { tipo: "%", valor: 0 },
-      frete: 0,
-    };
-
-    // Se conseguiu reconstruir itens pelo texto, usa; senão monta PDF só com financeiro
-    if (snapFallback.cart.length === 0) {
-      snapFallback.form.obs = [
-        obs && obs !== "—" ? obs : "",
-        "— RESUMO FINANCEIRO —",
-        sub  && sub  !== "—" ? `Subtotal: ${sub}`  : "",
-        desc && desc !== "—" ? `Desconto: ${desc}` : "",
-        frt  && frt  !== "—" ? `Frete: ${frt}`     : "",
-        tot  && tot  !== "—" ? `Total: ${tot}`      : "",
-      ].filter(Boolean).join("\n");
-    }
-
-    abrirPDF(snapFallback);
+    abrirPDF(reconstruido);
   };
 
   return (
@@ -780,8 +788,7 @@ const PedidosScreen = memo(({ onBack }) => {
         {erro && (
           <div style={{ background: VINHOL, border: `1px solid ${VINHO}33`, borderRadius: 10, padding: "14px 16px", margin: "12px 0" }}>
             <p style={{ color: VINHO, fontSize: 13, fontFamily: "'DM Sans',sans-serif", marginBottom: 8 }}>⚠ {erro}</p>
-            <p className="mn" style={{ color: TEXT3, fontSize: 10 }}>Certifique-se de que o Apps Script está publicado com acesso "Qualquer pessoa".</p>
-            <button onClick={carregar} style={{ marginTop: 10, background: VERDE, color: "#fff", border: "none", borderRadius: 8, padding: "8px 16px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif", fontSize: 12, fontWeight: 700 }}>Tentar novamente</button>
+            <button onClick={carregar} style={{ background: VERDE, color: "#fff", border: "none", borderRadius: 8, padding: "8px 16px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif", fontSize: 12, fontWeight: 700 }}>Tentar novamente</button>
           </div>
         )}
         {!loading && !erro && filtrados.length === 0 && (
@@ -828,22 +835,11 @@ const PedidosScreen = memo(({ onBack }) => {
 
                 {open && (
                   <div style={{ background: CARD2, padding: "14px 16px", borderTop: `1px solid ${BORDER}` }}>
-
                     <button
                       onClick={() => !carregandoPDF && handleAbrirPDF(p)}
                       disabled={carregandoPDF}
-                      style={{
-                        width: "100%", background: carregandoPDF ? "#888" : VINHO,
-                        color: "#fff", padding: "11px", borderRadius: 10, border: "none",
-                        cursor: carregandoPDF ? "not-allowed" : "pointer",
-                        fontFamily: "'DM Sans',sans-serif", fontSize: 12, fontWeight: 700,
-                        marginBottom: 12, display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
-                        opacity: carregandoPDF ? 0.8 : 1,
-                      }}
-                    >
-                      {carregandoPDF
-                        ? "⏳ Buscando dados do pedido..."
-                        : "🖨️ ABRIR / IMPRIMIR PDF"}
+                      style={{ width: "100%", background: carregandoPDF ? "#888" : VINHO, color: "#fff", padding: "11px", borderRadius: 10, border: "none", cursor: carregandoPDF ? "not-allowed" : "pointer", fontFamily: "'DM Sans',sans-serif", fontSize: 12, fontWeight: 700, marginBottom: 12, display: "flex", alignItems: "center", justifyContent: "center", gap: 6, opacity: carregandoPDF ? 0.8 : 1 }}>
+                      {carregandoPDF ? "⏳ Buscando dados..." : "🖨️ ABRIR / IMPRIMIR PDF"}
                     </button>
 
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 16px", marginBottom: 12 }}>
@@ -967,9 +963,9 @@ export default function App() {
     });
     try { await fetch(`${SHEETS_URL}?${params}`, { method: "GET", mode: "no-cors" }); } catch (e) { console.error(e); }
     try {
-      const historico = JSON.parse(localStorage.getItem("laco_historico") || "[]");
-      historico.unshift(snapshot);
-      localStorage.setItem("laco_historico", JSON.stringify(historico.slice(0, 50)));
+      const hist = JSON.parse(localStorage.getItem("laco_historico") || "[]");
+      hist.unshift(snapshot);
+      localStorage.setItem("laco_historico", JSON.stringify(hist.slice(0, 50)));
     } catch {}
     decrementarEstoque(cart);
     try { localStorage.removeItem("laco_cart"); } catch {}
@@ -984,14 +980,7 @@ export default function App() {
     <div style={{ minHeight: "100vh", background: "#EDE8E0", display: "flex", alignItems: isDesktop ? "flex-start" : "center", justifyContent: "center", padding: isDesktop ? "32px 20px" : "20px 0" }}>
       <style>{CSS}</style>
 
-      <div style={{
-        width: "100%", maxWidth: isDesktop ? 960 : 460,
-        height: isDesktop ? "auto" : "min(860px,100dvh)",
-        minHeight: isDesktop ? "calc(100vh - 64px)" : undefined,
-        background: BG, borderRadius: isDesktop ? 20 : 32,
-        overflow: "hidden", display: "flex", flexDirection: "column",
-        boxShadow: "0 20px 60px rgba(0,0,0,0.14),0 0 0 1px rgba(45,90,39,0.1)"
-      }}>
+      <div style={{ width: "100%", maxWidth: isDesktop ? 960 : 460, height: isDesktop ? "auto" : "min(860px,100dvh)", minHeight: isDesktop ? "calc(100vh - 64px)" : undefined, background: BG, borderRadius: isDesktop ? 20 : 32, overflow: "hidden", display: "flex", flexDirection: "column", boxShadow: "0 20px 60px rgba(0,0,0,0.14),0 0 0 1px rgba(45,90,39,0.1)" }}>
 
         {toast && (
           <div style={{ position: "fixed", bottom: 30, left: "50%", transform: "translateX(-50%)", background: VERDE, color: "#fff", padding: "9px 20px", borderRadius: 20, zIndex: 9998, display: "flex", alignItems: "center", gap: 8, boxShadow: "0 4px 16px rgba(45,90,39,0.4)", whiteSpace: "nowrap", pointerEvents: "none", fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 600 }}>
@@ -999,7 +988,6 @@ export default function App() {
           </div>
         )}
 
-        {/* ── TELAS ── */}
         {screen === "pedidos"  && <PedidosScreen onBack={() => setScreen("catalog")} />}
 
         {screen === "catalog" && <>
