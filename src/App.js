@@ -191,7 +191,8 @@ const PRODUCTS = [
 
 const CATEGORIES = ["Todos", "Veludo", "Lamê", "Estampado", "Bolas", "Saldão"];
 const VENDEDORES  = ["Alexandra", "Valéria", "Cleuza", "Van"];
-const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbzLrphy9FQJBPv5hi0G1Rm3enp4RNqanAVfbfBUV4QjB8jTTmQvb01tNl1fVOxZKs4wTQ/exec";
+// ─── URL do Apps Script ────────────────────────────────────────────────────────
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbzLrphy9FQJBPv5hi0G1Rm3enp4RNqanAVfbfBUV4QjB8jTTmQvb01tNl1fVOxZKs4wTQ/exec";
 
 const BRL     = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
 const gerarNr = () => `#${Date.now().toString().slice(-5)}`;
@@ -208,35 +209,41 @@ const parseBRL = (str) => {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
+// JSONP — helper usado apenas para LEITURA (listar / snapshot)
+// NUNCA passa por ele para gravação
+// ─────────────────────────────────────────────────────────────────────────────
+const jsonp = (url, timeout = 12000) => new Promise((resolve) => {
+  const cb = "cb_" + Date.now() + "_" + Math.random().toString(36).slice(2);
+  const script = document.createElement("script");
+  const timer = setTimeout(() => {
+    delete window[cb]; script.parentNode?.removeChild(script); resolve(null);
+  }, timeout);
+  window[cb] = (data) => { clearTimeout(timer); delete window[cb]; script.parentNode?.removeChild(script); resolve(data); };
+  script.onerror = () => { clearTimeout(timer); delete window[cb]; resolve(null); };
+  script.src = url + (url.includes("?") ? "&" : "?") + `callback=${cb}`;
+  document.head.appendChild(script);
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
 // GERADOR DO PEDIDO PARA IMPRESSÃO
-// Aceita dois modos:
-//   modo "snapshot" → cart com objetos completos, calcula tudo internamente
-//   modo "planilha" → itensTexto + totaisStr já prontos da planilha
 // ─────────────────────────────────────────────────────────────────────────────
 const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete, _totaisStr }) => {
   const dataHora = new Date().toLocaleString("pt-BR");
-
-  // Se veio de snapshot completo, calcula os totais normalmente
-  // Se veio da reconstrução textual, usa os _totaisStr da planilha
   const usarTotaisStr = _totaisStr && _totaisStr.total;
 
   const subtotal   = usarTotaisStr ? parseBRL(_totaisStr.subtotal) : cart.reduce((s, i) => s + i.qty * (i.preco ?? i.product?.preco ?? 0), 0);
   const descValNum = usarTotaisStr
-    ? parseBRL(_totaisStr.subtotal) - parseBRL(_totaisStr.total) - parseBRL(_totaisStr.frete)
+    ? Math.max(0, parseBRL(_totaisStr.subtotal) - parseBRL(_totaisStr.total) - parseBRL(_totaisStr.frete))
     : (desconto?.tipo === "%" ? subtotal * ((desconto?.valor || 0) / 100) : (desconto?.valor || 0));
-  const freteNum   = usarTotaisStr ? parseBRL(_totaisStr.frete) : (frete || 0);
-  const totalFinal = usarTotaisStr ? parseBRL(_totaisStr.total) : Math.max(0, subtotal - descValNum) + freteNum;
-
+  const freteNum   = usarTotaisStr ? parseBRL(_totaisStr.frete)   : (frete || 0);
+  const totalFinal = usarTotaisStr ? parseBRL(_totaisStr.total)   : Math.max(0, subtotal - descValNum) + freteNum;
   const totalItens = cart.length;
   const totalUn    = cart.reduce((s, i) => s + (i.qty || 0), 0);
 
-  // Linhas da tabela de itens
   const linhasItens = cart.map(item => {
-    // subtotal do item: usa o valor calculado ou o que veio do texto
-    const precoUnit = item.preco ?? item.product?.preco ?? 0;
-    const subtotalItem = item._subtotalStr || (precoUnit > 0 ? BRL(item.qty * precoUnit) : "");
-    const precoUnitStr = precoUnit > 0 ? BRL(precoUnit) : (item._precoUnitStr || "");
-
+    const precoUnit      = item.preco ?? item.product?.preco ?? 0;
+    const subtotalItem   = item._subtotalStr || (precoUnit > 0 ? BRL(item.qty * precoUnit) : "");
+    const precoUnitStr   = precoUnit > 0 ? BRL(precoUnit) : (item._precoUnitStr || "");
     return `<tr>
       <td class="td-ref">${item.size?.ref || ""}</td>
       <td>
@@ -313,7 +320,6 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete, _totaisStr }) 
       <div class="pedido-data">DATA: ${dataHora}</div>
     </div>
   </div>
-
   <p class="section-title">Dados do Cliente</p>
   <div class="cliente-grid">
     <div class="campo"><label>Empresa / Nome</label><span>${form.nome || "—"}</span></div>
@@ -322,7 +328,6 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete, _totaisStr }) 
     <div class="campo"><label>E-mail</label><span>${form.email || "—"}</span></div>
     <div class="campo"><label>Vendedora</label><span>${form.vendedor || "—"}</span></div>
   </div>
-
   <p class="section-title">Itens do Pedido</p>
   <div class="tabela-wrap">
     <table>
@@ -330,7 +335,6 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete, _totaisStr }) 
       <tbody>${linhasItens || `<tr><td colspan="6" style="text-align:center;padding:20px;color:#888;font-style:italic;">Nenhum item</td></tr>`}</tbody>
     </table>
   </div>
-
   <div class="bottom-area">
     <div class="obs-box">
       <label>Observações</label>
@@ -344,7 +348,6 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete, _totaisStr }) 
       <div class="totais-linha total-final"><span>Total</span><span>${BRL(totalFinal)}</span></div>
     </div>
   </div>
-
   <div class="footer">
     <div class="footer-assinatura"><div class="linha-assinatura"></div><span>Assinatura do Cliente</span></div>
     <div class="footer-assinatura"><div class="linha-assinatura"></div><span>Vendedora Responsável</span></div>
@@ -385,11 +388,9 @@ const Img = memo(({ src, h = 200 }) => {
   if (err || !src) return <div style={{ width: "100%", height: h, background: CARD2, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 32 }}>🎀</div>;
   return <img src={src} alt="" style={{ width: "100%", height: h, objectFit: "cover", display: "block" }} onError={() => setErr(true)} />;
 });
-
 const Tag = ({ label, color, bg }) => (
   <span className="mn" style={{ background: bg, color, fontSize: 9, fontWeight: 700, letterSpacing: 1.5, padding: "3px 9px", borderRadius: 4, border: `1px solid ${color}33`, display: "inline-block" }}>{label.toUpperCase()}</span>
 );
-
 const Logo = () => (
   <img src={F.logo} alt="Laço & Entrelaço" style={{ height: 40, objectFit: "contain" }} onError={e => e.target.style.display = "none"} />
 );
@@ -577,22 +578,8 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// HELPERS DE PDF / SNAPSHOT
+// HELPERS PDF — extrair e parsear snapshot
 // ─────────────────────────────────────────────────────────────────────────────
-const ORDERS_URL = "https://script.google.com/macros/s/AKfycbzLrphy9FQJBPv5hi0G1Rm3enp4RNqanAVfbfBUV4QjB8jTTmQvb01tNl1fVOxZKs4wTQ/exec";
-
-const jsonp = (url, timeout = 12000) => new Promise((resolve) => {
-  const cb = "cb_" + Date.now() + "_" + Math.random().toString(36).slice(2);
-  const script = document.createElement("script");
-  const timer = setTimeout(() => {
-    delete window[cb]; script.parentNode?.removeChild(script); resolve(null);
-  }, timeout);
-  window[cb] = (data) => { clearTimeout(timer); delete window[cb]; script.parentNode?.removeChild(script); resolve(data); };
-  script.onerror = () => { clearTimeout(timer); delete window[cb]; resolve(null); };
-  script.src = url + (url.includes("?") ? "&" : "?") + `callback=${cb}`;
-  document.head.appendChild(script);
-});
-
 const extrairRawSnapshot = (obj) => {
   if (!obj) return "";
   for (const k of ["snapshot", "Snapshot", "SNAPSHOT"]) {
@@ -618,46 +605,29 @@ const abrirPDF = (snapObj) => {
   else { alert("Pop-up bloqueado. Libere pop-ups para este site e tente novamente."); }
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Reconstrói o pedido a partir do texto da coluna "Itens do Pedido"
-// Formato gravado: • [SKU] REF — Nome | Cor: X | Qtd: N | R$ V,VV
-// Os totais vêm das colunas Subtotal/Desconto/Frete/Total da planilha
-// ─────────────────────────────────────────────────────────────────────────────
+// Reconstrói do texto da planilha — usa totais reais das colunas
 const reconstruirDoPlanilha = ({ pedidoRow, colMap }) => {
   const itensTexto = pedidoRow[colMap.itens] || "";
-
-  const cart = itensTexto
-    .split("\n")
-    .map(l => l.trim())
-    .filter(l => l.startsWith("•"))
-    .map(l => {
-      // Formato: • [SKU] REF — Nome do produto | Cor: X | Qtd: N | R$ V
-      // Captura grupos: sku, ref+nome, cor, qtd, subtotalItem
-      const m = l.match(/•\s*\[(.+?)\]\s*(.+?)\s*\|\s*Cor:\s*(.+?)\s*\|\s*Qtd:\s*(\d+)\s*\|\s*(R\$\s*[\d.,]+)/);
-      if (!m) return null;
-      const [, sku, refNome, cor, qtdStr, subtotalItemStr] = m;
-      const qtd = parseInt(qtdStr) || 1;
-
-      // separa ref do nome: "200EVV — Escapulário Veludo Vermelho" ou só "Escapulário..."
-      const partes = refNome.split(/\s*—\s*/);
-      const ref  = partes.length > 1 ? partes[0].trim() : sku;
-      const nome = partes.length > 1 ? partes[1].trim() : refNome.trim();
-
-      // calcula preço unitário a partir do subtotal do item
-      const subtotalItemNum = parseBRL(subtotalItemStr);
-      const precoUnit = qtd > 0 ? subtotalItemNum / qtd : 0;
-
-      return {
-        product: { sku, name: nome },
-        size:    { ref, label: "" },
-        color:   { name: cor.trim(), hex: "#C0392B" },
-        qty:     qtd,
-        preco:   precoUnit,
-        _subtotalStr: subtotalItemStr.trim(),
-        _precoUnitStr: precoUnit > 0 ? BRL(precoUnit) : "",
-      };
-    })
-    .filter(Boolean);
+  const cart = itensTexto.split("\n").map(l => l.trim()).filter(l => l.startsWith("•")).map(l => {
+    const m = l.match(/•\s*\[(.+?)\]\s*(.+?)\s*\|\s*Cor:\s*(.+?)\s*\|\s*Qtd:\s*(\d+)\s*\|\s*(R\$\s*[\d.,]+)/);
+    if (!m) return null;
+    const [, sku, refNome, cor, qtdStr, subtotalItemStr] = m;
+    const qtd = parseInt(qtdStr) || 1;
+    const partes = refNome.split(/\s*—\s*/);
+    const ref  = partes.length > 1 ? partes[0].trim() : sku;
+    const nome = partes.length > 1 ? partes[1].trim() : refNome.trim();
+    const subtotalItemNum = parseBRL(subtotalItemStr);
+    const precoUnit = qtd > 0 ? subtotalItemNum / qtd : 0;
+    return {
+      product: { sku, name: nome },
+      size:    { ref, label: "" },
+      color:   { name: cor.trim(), hex: "#C0392B" },
+      qty:     qtd,
+      preco:   precoUnit,
+      _subtotalStr:  subtotalItemStr.trim(),
+      _precoUnitStr: precoUnit > 0 ? BRL(precoUnit) : "",
+    };
+  }).filter(Boolean);
 
   return {
     cart,
@@ -667,12 +637,11 @@ const reconstruirDoPlanilha = ({ pedidoRow, colMap }) => {
       whats:    pedidoRow[colMap.whatsapp]    || "",
       email:    pedidoRow[colMap.email]        || "",
       vendedor: pedidoRow[colMap.vendedor]    || "",
-      obs:      pedidoRow[colMap.observacoes] !== "—" ? (pedidoRow[colMap.observacoes] || "") : "",
+      obs:      (pedidoRow[colMap.observacoes] !== "—" ? pedidoRow[colMap.observacoes] : "") || "",
     },
-    nrPedido:  pedidoRow[colMap.pedido] || "—",
-    desconto:  { tipo: "%", valor: 0 },
-    frete:     0,
-    // Passa os totais da planilha para o gerador usar diretamente
+    nrPedido:   pedidoRow[colMap.pedido] || "—",
+    desconto:   { tipo: "%", valor: 0 },
+    frete:      0,
     _totaisStr: {
       subtotal: pedidoRow[colMap.subtotal] || "",
       desconto: pedidoRow[colMap.desconto] || "",
@@ -711,7 +680,8 @@ const PedidosScreen = memo(({ onBack }) => {
 
   const carregar = () => {
     setLoading(true); setErro("");
-    jsonp(`${ORDERS_URL}?action=listar`).then(data => {
+    // Leitura: action=listar — nunca grava nada
+    jsonp(`${SHEETS_URL}?action=listar`).then(data => {
       if (data?.pedidos) { setPedidos(data.pedidos); }
       else { setErro("Não foi possível carregar os pedidos."); }
       setLoading(false);
@@ -743,24 +713,14 @@ const PedidosScreen = memo(({ onBack }) => {
       }
     } catch {}
 
-    // ETAPA 2: ação dedicada ?action=snapshot (requer Apps Script atualizado)
-    const d2 = await jsonp(`${ORDERS_URL}?action=snapshot&pedido=${encodeURIComponent(nr)}`);
+    // ETAPA 2: action=snapshot — leitura, nunca grava
+    const d2 = await jsonp(`${SHEETS_URL}?action=snapshot&pedido=${encodeURIComponent(nr)}`);
     if (d2) {
       const obj2 = parsearSnapshot(d2.snapshot || extrairRawSnapshot(d2));
       if (obj2) { setPdfLoading(null); abrirPDF(obj2); return; }
     }
 
-    // ETAPA 3: listagem completa com snapshot (Apps Script versão antiga)
-    const d3 = await jsonp(`${ORDERS_URL}?action=listar&incluir_snapshot=1`);
-    if (d3?.pedidos) {
-      const linha = d3.pedidos.find(p => p[COL.pedido] === nr);
-      if (linha) {
-        const obj3 = parsearSnapshot(extrairRawSnapshot(linha));
-        if (obj3) { setPdfLoading(null); abrirPDF(obj3); return; }
-      }
-    }
-
-    // ETAPA 4: reconstrói do texto da planilha com totais reais
+    // ETAPA 3: reconstrução do texto da planilha (sem chamar o script de novo)
     const reconstruido = reconstruirDoPlanilha({ pedidoRow, colMap: COL });
     setPdfLoading(null);
     abrirPDF(reconstruido);
@@ -797,7 +757,6 @@ const PedidosScreen = memo(({ onBack }) => {
             <p className="pf" style={{ color: TEXT2, fontSize: 18 }}>{busca ? "Nenhum resultado" : "Nenhum pedido ainda"}</p>
           </div>
         )}
-
         <div style={{ display: "flex", flexDirection: "column", gap: 9, marginTop: 8 }}>
           {filtrados.map((p, idx) => {
             const nr   = p[COL.pedido]      || "—";
@@ -839,9 +798,8 @@ const PedidosScreen = memo(({ onBack }) => {
                       onClick={() => !carregandoPDF && handleAbrirPDF(p)}
                       disabled={carregandoPDF}
                       style={{ width: "100%", background: carregandoPDF ? "#888" : VINHO, color: "#fff", padding: "11px", borderRadius: 10, border: "none", cursor: carregandoPDF ? "not-allowed" : "pointer", fontFamily: "'DM Sans',sans-serif", fontSize: 12, fontWeight: 700, marginBottom: 12, display: "flex", alignItems: "center", justifyContent: "center", gap: 6, opacity: carregandoPDF ? 0.8 : 1 }}>
-                      {carregandoPDF ? "⏳ Buscando dados..." : "🖨️ ABRIR / IMPRIMIR PDF"}
+                      {carregandoPDF ? "⏳ Gerando PDF..." : "🖨️ ABRIR / IMPRIMIR PDF"}
                     </button>
-
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 16px", marginBottom: 12 }}>
                       {[["WhatsApp", wpp], ["E-mail", em], ["CPF/CNPJ", cpf]].map(([l, v]) => v && v !== "—" ? (
                         <div key={l}>
@@ -850,7 +808,6 @@ const PedidosScreen = memo(({ onBack }) => {
                         </div>
                       ) : null)}
                     </div>
-
                     {(sub || desc || frt || tot) && (
                       <div style={{ background: VERDES, borderRadius: 10, padding: "10px 12px", marginBottom: 12, border: `1px solid ${VERDE}22` }}>
                         {[["Subtotal", sub], ["Desconto", desc], ["Frete", frt], ["Total", tot]].map(([l, v]) => v && v !== "—" ? (
@@ -861,14 +818,12 @@ const PedidosScreen = memo(({ onBack }) => {
                         ) : null)}
                       </div>
                     )}
-
                     {itns && (
                       <div style={{ background: BG, borderRadius: 10, padding: "10px 12px", border: `1px solid ${BORDER}`, marginBottom: obs && obs !== "—" ? 10 : 0 }}>
                         <p className="mn" style={{ color: VERDE, fontSize: 9, letterSpacing: 2, marginBottom: 8 }}>ITENS DO PEDIDO</p>
                         <pre style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: TEXT2, whiteSpace: "pre-wrap", lineHeight: 1.8 }}>{itns}</pre>
                       </div>
                     )}
-
                     {obs && obs !== "—" && (
                       <div style={{ background: VINHOL, borderRadius: 10, padding: "10px 12px", border: `1px solid ${VINHO}22`, marginTop: 10 }}>
                         <p className="mn" style={{ color: VINHO, fontSize: 9, letterSpacing: 1, marginBottom: 4 }}>OBSERVAÇÕES</p>
@@ -940,12 +895,18 @@ export default function App() {
     setPedidoFinalizado(null); try { localStorage.removeItem("laco_cart"); } catch {}
   };
 
+  // ── GRAVAR PEDIDO — agora usa action=gravar explicitamente ────────────────
   const sendPedido = async () => {
     if (!form.nome || !form.whats) { alert("Preencha Nome e WhatsApp!"); return; }
     setEnviando(true);
-    const itens = cart.map(i => `• [${i.product.sku}] ${i.size?.ref ? i.size.ref + " — " : ""}${i.product.name} | Cor: ${i.color?.name} | Qtd: ${i.qty} | ${BRL(i.qty * (i.preco ?? i.product.preco))}`).join("\n");
+    const itens = cart.map(i =>
+      `• [${i.product.sku}] ${i.size?.ref ? i.size.ref + " — " : ""}${i.product.name} | Cor: ${i.color?.name} | Qtd: ${i.qty} | ${BRL(i.qty * (i.preco ?? i.product.preco))}`
+    ).join("\n");
     const snapshot = { cart: [...cart], form: { ...form, vendedor: vendedora }, nrPedido, desconto, frete, data: new Date().toLocaleString("pt-BR") };
+
+    // action=gravar é o único que efetivamente grava na planilha
     const params = new URLSearchParams({
+      action:      "gravar",           // ← obrigatório para gravar
       pedido:      nrPedido,
       data:        new Date().toLocaleString("pt-BR"),
       vendedor:    vendedora || "—",
@@ -961,12 +922,15 @@ export default function App() {
       observacoes: form.obs || "—",
       snapshot:    JSON.stringify(snapshot),
     });
+
     try { await fetch(`${SHEETS_URL}?${params}`, { method: "GET", mode: "no-cors" }); } catch (e) { console.error(e); }
+
     try {
       const hist = JSON.parse(localStorage.getItem("laco_historico") || "[]");
       hist.unshift(snapshot);
       localStorage.setItem("laco_historico", JSON.stringify(hist.slice(0, 50)));
     } catch {}
+
     decrementarEstoque(cart);
     try { localStorage.removeItem("laco_cart"); } catch {}
     setPedidoFinalizado(snapshot);
