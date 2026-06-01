@@ -128,14 +128,14 @@ const PRODUCTS = [
   { sku:"VALLIND",  name:"Laço Veludo Ale — Lindíssimo",              subtitle:"30cm a 90cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço duplo confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata.",                  cores:cVGBC,  photo:F.val_lind,    ...TC.V, sizes:[{label:"30cm",ref:"30VAl/Lind",min:1,estoque:500,preco:58.00},{label:"60cm",ref:"60VAl/Lind",min:1,estoque:500,preco:208.90},{label:"90cm",ref:"90VAl/Lind",min:1,estoque:500,preco:398.00}] },
   { sku:"LBCO",     name:"Laço Veludo Branco",                        subtitle:"20cm a 40cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço clássico confeccionado em Veludo na cor Branco.",                                                    cores:cBR,    photo:F.laco_branco, ...TC.V, sizes:[{label:"20cm",ref:"20LBco",min:1,estoque:500,preco:26.90},{label:"30cm",ref:"30LBco",min:1,estoque:500,preco:39.90},{label:"40cm",ref:"40LBco",min:1,estoque:500,preco:56.20}] },
   { sku:"VALGL",    name:"Laço Veludo Cristal Gravata Longa",         subtitle:"30cm a 50cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata ao descer pela árvore ou coluna.", cores:cVGBC,photo:F.val_gl,...TC.V,sizes:[{label:"30cm",ref:"30VaL",min:1,estoque:500,preco:43.00},{label:"40cm",ref:"40VaL",min:1,estoque:500,preco:61.90},{label:"50cm",ref:"50VaL",min:1,estoque:500,preco:98.90}] },
-  { sku:"VDuGV",      name:"Laço Veludo Duplo Gravata V",              subtitle:"100cm",           category:"Veludo",  material:"100% poliéster", acabamento:"Estrutura interna com placa, arame e costura francesa.", prazo:P30, estoque:500, preco:369.00, desc:"Laço confeccionado em Veludo tradicional, com borboleta dupla e gravata em V.", cores:cVVM, photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779990308/laco_gravata_tripla_ekuhtx.jpg", ...TC.V, sizes:[{label:"100cm",ref:"100VDuGV",min:1,estoque:500,preco:369.00}] },
+  { sku:"VDuGV",      name:"Laço Veludo Duplo Gravata V",              subtitle:"100cm",           category:"Veludo",  material:"100% poliéster", acabamento:"Estrutura interna com placa, arame e costura francesa.", prazo:P30, estoque:500, preco:369.00, desc:"Laço confeccionado em Veludo tradicional, com borboleta dupla e gravata em V.", cores:cVVM, photo:PH, ...TC.V, sizes:[{label:"100cm",ref:"100VDuGV",min:1,estoque:500,preco:369.00}] },
   { sku:"VVM",      name:"Laço Veludo Vermelho",                     subtitle:"20cm a 100cm",           category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"O clássico da linha; confeccionado em Veludo tradicional.",                                       cores:cVVM,   photo:F.vvm,         ...TC.V, sizes:[{label:"20cm",ref:"20V",min:1,estoque:500,preco:21.90},{label:"30cm",ref:"30V",min:1,estoque:500,preco:33.90},{label:"40cm",ref:"40V",min:1,estoque:500,preco:46.90},{label:"50cm",ref:"50V",min:1,estoque:500,preco:79.90},{label:"80cm",ref:"80V",min:1,estoque:500,preco:197.90},{label:"100cm",ref:"100V",min:1,estoque:500,preco:269.00}] },
   { sku:"VD",       name:"Laço Veludo Vermelho com Dourado",          subtitle:"Borda ouro",             category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda ouro.",                                               cores:cVD,    photo:F.vd,          ...TC.E, sizes:[{label:"20cm",ref:"20VD",min:1,estoque:500,preco:24.90},{label:"30cm",ref:"30VD",min:1,estoque:500,preco:36.90},{label:"40cm",ref:"40VD",min:1,estoque:500,preco:48.90}] },
   { sku:"VFIXDZ",   name:"Laço Veludo Vermelho Fita Xadrez",          subtitle:"Fita xadrez",            category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:36, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com fita xadrez decorativa central.",                          cores:cVM,    photo:F.vfixdz,      ...TC.E, sizes:[{label:"40cm",ref:"40VFiXdz",min:1,estoque:36,preco:56.90}] },
   { sku:"VL",       name:"Laço Veludo Vermelho Listra",               subtitle:"Borda listrada",         category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda de listra.",                                         cores:cVM,    photo:F.vl,          ...TC.E, sizes:[{label:"20cm",ref:"20VL",min:1,estoque:500,preco:24.90},{label:"30cm",ref:"30VL",min:1,estoque:500,preco:36.90},{label:"40cm",ref:"40VL",min:1,estoque:500,preco:48.90}] },
   { sku:"VXC",      name:"Laço Veludo Vermelho Meio Xadrez",          subtitle:"Xadrez central",         category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em tecido xadrez, com borda em veludo.",                                   cores:cVM,    photo:F.vxc,         ...TC.E, sizes:[{label:"20cm",ref:"20VXC",min:1,estoque:500,preco:27.90},{label:"30cm",ref:"30VXC",min:1,estoque:500,preco:39.90},{label:"40cm",ref:"40VXC",min:1,estoque:500,preco:53.90}] },
-  { sku:"VMinGL",     name:"Laço Veludo Vermelho Min",                 subtitle:"50cm",            category:"Veludo",  material:"100% poliéster", acabamento:"Estrutura interna com placa e costura francesa.", prazo:P30, estoque:500, preco:169.40, desc:"Laço confeccionado em Veludo Cristal, com borboleta tripla e gravata tradicional.", cores:cVVM, photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780197703/vaimin_loh0io.jpg", ...TC.V, sizes:[{label:"50cm",ref:"50VMinGL",min:1,estoque:500,preco:169.40}] },
-  { sku:"VSout",      name:"Laço Veludo Vermelho Soutache",            subtitle:"20cm a 40cm",     category:"Veludo",  material:"100% poliéster", acabamento:"Costura francesa, estrutura interna e soutache dourado.", prazo:P30, estoque:108, preco:32.90, desc:"Laço confeccionado em Veludo tradicional, adornado com fita natalina xadrez e soutache dourado.", cores:cVVM, photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780197639/laco_soutchj_ytzrzb.jpg", ...TC.V, sizes:[{label:"20cm",ref:"20VSout",min:1,estoque:48,preco:32.90},{label:"30cm",ref:"30VSout",min:1,estoque:36,preco:51.80},{label:"40cm",ref:"40VSout",min:1,estoque:24,preco:69.50}] },
+  { sku:"VMinGL",     name:"Laço Veludo Vermelho Min",                 subtitle:"50cm",            category:"Veludo",  material:"100% poliéster", acabamento:"Estrutura interna com placa e costura francesa.", prazo:P30, estoque:500, preco:169.40, desc:"Laço confeccionado em Veludo Cristal, com borboleta tripla e gravata tradicional.", cores:cVVM, photo:PH, ...TC.V, sizes:[{label:"50cm",ref:"50VMinGL",min:1,estoque:500,preco:169.40}] },
+  { sku:"VSout",      name:"Laço Veludo Vermelho Soutache",            subtitle:"20cm a 40cm",     category:"Veludo",  material:"100% poliéster", acabamento:"Costura francesa, estrutura interna e soutache dourado.", prazo:P30, estoque:108, preco:32.90, desc:"Laço confeccionado em Veludo tradicional, adornado com fita natalina xadrez e soutache dourado.", cores:cVVM, photo:PH, ...TC.V, sizes:[{label:"20cm",ref:"20VSout",min:1,estoque:48,preco:32.90},{label:"30cm",ref:"30VSout",min:1,estoque:36,preco:51.80},{label:"40cm",ref:"40VSout",min:1,estoque:24,preco:69.50}] },
   { sku:"VX",       name:"Laço Veludo Vermelho Xadrez",               subtitle:"Borda xadrez",           category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda xadrez.",                                            cores:cVM,    photo:F.vx,          ...TC.E, sizes:[{label:"20cm",ref:"20VX",min:1,estoque:500,preco:24.90},{label:"30cm",ref:"30VX",min:1,estoque:500,preco:36.90},{label:"40cm",ref:"40VX",min:1,estoque:500,preco:48.90}] },
   { sku:"VXP",      name:"Laço Veludo Vermelho Xadrez/Preto",         subtitle:"Flanela xadrez",         category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço com flanela xadrez Vermelho/Preto central.",                                                         cores:cVP,    photo:F.vxp,         ...TC.E, sizes:[{label:"20cm",ref:"20VXP",min:1,estoque:12,preco:24.90},{label:"30cm",ref:"30VXP",min:1,estoque:43,preco:31.90},{label:"40cm",ref:"40VXP",min:1,estoque:58,preco:39.90}] },
   { sku:"BTLT",     name:"Bola Tecido Listrado Decorada",              subtitle:"Listrado Verm/Branco",   category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola coberta com tecido listrado Vermelho/Branco e decorada com galhos natalinos.",                      cores:cVB,    photo:F.bola_lst,    ...TC.B, sizes:[{label:"15cm",ref:"15BTLt",min:1,estoque:500,preco:29.80}] },
@@ -193,7 +193,7 @@ const PRODUCTS = [
 
 const CATEGORIES = ["Todos", "Veludo", "Lamê", "Estampado", "Bolas", "Saldão"];
 const VENDEDORES  = ["Alexandra", "Valéria", "Cleuza", "Van"];
-const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbxu2wvIO69rQR19DnEqr7WnBB1TiqYWuldiAvLGacN46flZRbJf-z_3O9eiAqvjx3MBmQ/exec";
+const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbzLrphy9FQJBPv5hi0G1Rm3enp4RNqanAVfbfBUV4QjB8jTTmQvb01tNl1fVOxZKs4wTQ/exec";
 
 const BRL     = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
 const gerarNr = () => `#${Date.now().toString().slice(-5)}`;
@@ -588,7 +588,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
 });
 
 // ── TELA DE PEDIDOS ──────────────────────────────────────────────────────────
-const ORDERS_URL = "https://script.google.com/macros/s/AKfycbxu2wvIO69rQR19DnEqr7WnBB1TiqYWuldiAvLGacN46flZRbJf-z_3O9eiAqvjx3MBmQ/exec";
+const ORDERS_URL = "https://script.google.com/macros/s/AKfycbzLrphy9FQJBPv5hi0G1Rm3enp4RNqanAVfbfBUV4QjB8jTTmQvb01tNl1fVOxZKs4wTQ/exec";
 
 // Cabeçalhos exatos da planilha
 const COL = {
@@ -736,29 +736,46 @@ const PedidosScreen = memo(({ onBack }) => {
                 {open && (
                   <div style={{ background: CARD2, padding: "14px 16px", borderTop: `1px solid ${BORDER}` }}>
                     {/* Botão PDF */}
-                    <button onClick={() => {
-                      // Tenta buscar snapshot completo do histórico local
+                    <button onClick={async () => {
+                      // 1. Tenta localStorage primeiro
                       try {
                         const historico = JSON.parse(localStorage.getItem("laco_historico") || "[]");
-                        const snapshot = historico.find(h => h.nrPedido === nr);
-                        if (snapshot) {
-                          const html = gerarPedidoHTML(snapshot);
+                        const snap = historico.find(h => h.nrPedido === nr);
+                        if (snap) {
+                          const html = gerarPedidoHTML(snap);
                           const win = window.open("", "_blank");
                           if (win) { win.document.write(html); win.document.close(); }
                           return;
                         }
                       } catch {}
-                      // Fallback: gera PDF só com dados da planilha
-                      const pedidoData = {
-                        cart: [],
-                        form: { nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend, obs },
-                        nrPedido: nr,
-                        desconto: { tipo: "%", valor: 0 },
-                        frete: 0,
+                      // 2. Tenta buscar snapshot da planilha via JSONP
+                      const cbName = "cb_snap_" + Date.now();
+                      const script = document.createElement("script");
+                      const timeout = setTimeout(() => {
+                        delete window[cbName];
+                        document.head.contains(script) && document.head.removeChild(script);
+                        // Fallback: PDF só com dados do cliente
+                        const snap = { cart: [], form: { nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend, obs }, nrPedido: nr, desconto: { tipo: "%", valor: 0 }, frete: 0 };
+                        const html = gerarPedidoHTML(snap);
+                        const win = window.open("", "_blank");
+                        if (win) { win.document.write(html); win.document.close(); }
+                      }, 5000);
+                      window[cbName] = (data) => {
+                        clearTimeout(timeout);
+                        delete window[cbName];
+                        document.head.contains(script) && document.head.removeChild(script);
+                        const pedido = (data.pedidos || []).find(p => p[COL.pedido] === nr);
+                        let snap;
+                        try {
+                          snap = pedido?.snapshot ? JSON.parse(pedido.snapshot) : null;
+                        } catch {}
+                        if (!snap) snap = { cart: [], form: { nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend, obs }, nrPedido: nr, desconto: { tipo: "%", valor: 0 }, frete: 0 };
+                        const html = gerarPedidoHTML(snap);
+                        const win = window.open("", "_blank");
+                        if (win) { win.document.write(html); win.document.close(); }
                       };
-                      const html = gerarPedidoHTML(pedidoData);
-                      const win = window.open("", "_blank");
-                      if (win) { win.document.write(html); win.document.close(); }
+                      script.src = `${ORDERS_URL}?action=listar&callback=${cbName}`;
+                      document.head.appendChild(script);
                     }} style={{ width: "100%", background: VINHO, color: "#fff", padding: "10px", borderRadius: 10, border: "none", cursor: "pointer", fontFamily: "'DM Sans',sans-serif", fontSize: 12, fontWeight: 700, marginBottom: 12, display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
                       🖨️ ABRIR / IMPRIMIR PDF
                     </button>
@@ -864,6 +881,7 @@ export default function App() {
     if (!form.nome || !form.whats) { alert("Preencha Nome e WhatsApp!"); return; }
     setEnviando(true);
     const itens = cart.map(i => `• [${i.product.sku}] ${i.size?.ref ? i.size.ref + " — " : ""}${i.product.name} | Cor: ${i.color?.name} | Qtd: ${i.qty} | ${BRL(i.qty * (i.preco ?? i.product.preco))}`).join("\n");
+    const snapshot = { cart: [...cart], form: { ...form, vendedor: vendedora }, nrPedido, desconto, frete, data: new Date().toLocaleString("pt-BR") };
     const params = new URLSearchParams({
       pedido:      nrPedido,
       data:        new Date().toLocaleString("pt-BR"),
@@ -878,12 +896,12 @@ export default function App() {
       frete:       frete > 0 ? BRL(frete) : "—",
       total:       BRL(totalFinal),
       observacoes: form.obs || "—",
+      snapshot:    JSON.stringify(snapshot),
     });
     try {
       await fetch(`${SHEETS_URL}?${params}`, { method: "GET", mode: "no-cors" });
     } catch (e) { console.error(e); }
-    // Salva snapshot ANTES de limpar carrinho
-    const snapshot = { cart: [...cart], form: { ...form, vendedor: vendedora }, nrPedido, desconto, frete, data: new Date().toLocaleString("pt-BR") };
+    // Salva snapshot localmente também
     try {
       const historico = JSON.parse(localStorage.getItem("laco_historico") || "[]");
       historico.unshift(snapshot);
