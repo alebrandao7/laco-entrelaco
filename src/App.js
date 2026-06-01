@@ -4,7 +4,6 @@ const VERDE = "#2D5A27", VERDE2 = "#4A7A42", VERDES = "#E8F0E6";
 const VINHO = "#8B1A2A", VINHOL = "#F5E8EA";
 const BG = "#FAF8F5", CARD = "#FFFFFF", CARD2 = "#F5F0EB";
 const TEXT = "#1A1A1A", TEXT2 = "#555555", TEXT3 = "#888888", BORDER = "#E8E0D8";
-const CL = "https://res.cloudinary.com/djeliz676/image/upload/f_auto,q_auto/";
 
 const F = {
   vvm:          "https://res.cloudinary.com/djeliz676/image/upload/f_auto,q_auto/v1779469881/6645645_dd5hsu.jpg",
@@ -190,7 +189,6 @@ const PRODUCTS = [
   { sku:"KitVN2",   name:"Kit Varalzinho Natalino",                      subtitle:"Kit 2 pçs · 150cm",     category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e fivela.",      prazo:P30, estoque:10,  preco:39.80, desc:"Kit com 2 pçs: Varalzinho 1,50mt em feltro e pelúcia.",                  cores:cVNude, photo:F.kit_varal,   ...TC.K, sizes:[{label:"150cm",ref:"KitVN2",min:1,estoque:10,preco:39.80}] }
 ];
 
-
 const CATEGORIES = ["Todos", "Veludo", "Lamê", "Estampado", "Bolas", "Saldão"];
 const VENDEDORES  = ["Alexandra", "Valéria", "Cleuza", "Van"];
 const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbzLrphy9FQJBPv5hi0G1Rm3enp4RNqanAVfbfBUV4QjB8jTTmQvb01tNl1fVOxZKs4wTQ/exec";
@@ -201,10 +199,9 @@ const getFoto = (p, i) => {
   if (p.photo === PH) return PH;
   return p.cores?.[i]?.photo || p.photo || PH;
 };
-const getPreco = (product, size) => size?.preco ?? product.preco ?? 0;
-// Estoque: usa sempre o valor fixo do código (persistente desativado por ora)
-const getEstoque = (sku, ref, base) => base;
-const decrementarEstoque = (cartItems) => {}; // desativado
+const getPreco    = (product, size) => size?.preco ?? product.preco ?? 0;
+const getEstoque  = (sku, ref, base) => base;
+const decrementarEstoque = () => {};
 
 // ── GERADOR DO PEDIDO PARA IMPRESSÃO ─────────────────────────────────────────
 const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
@@ -276,6 +273,7 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
   .btn{border:none;padding:10px 28px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
   .btn-print{background:#2D5A27;color:#fff;}
   .btn-close{background:#E8E0D8;color:#1A1A1A;}
+  .sem-itens{text-align:center;padding:24px;color:#888;font-size:13px;font-style:italic;}
   @media print{body{background:#fff;padding:0;}.page{box-shadow:none;border-radius:0;padding:16px 24px;}.no-print{display:none!important;}.linha-escrita{border-bottom:1px solid #aaa;}}
 </style>
 </head>
@@ -317,7 +315,9 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
           <th style="text-align:right">Subtotal</th>
         </tr>
       </thead>
-      <tbody>${linhasItens}</tbody>
+      <tbody>
+        ${linhasItens || `<tr><td colspan="6" class="sem-itens">Itens não disponíveis neste dispositivo</td></tr>`}
+      </tbody>
     </table>
   </div>
 
@@ -593,7 +593,6 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
 // ── TELA DE PEDIDOS ──────────────────────────────────────────────────────────
 const ORDERS_URL = "https://script.google.com/macros/s/AKfycbzLrphy9FQJBPv5hi0G1Rm3enp4RNqanAVfbfBUV4QjB8jTTmQvb01tNl1fVOxZKs4wTQ/exec";
 
-// Cabeçalhos exatos da planilha
 const COL = {
   pedido:      "Nº Pedido",
   data:        "Data/Hora",
@@ -608,6 +607,29 @@ const COL = {
   desconto:    "Desconto",
   frete:       "Frete",
   total:       "Total",
+  snapshot:    "snapshot",
+};
+
+// ── HELPER: abre o PDF a partir de um objeto snap já parseado ────────────────
+const abrirPDF = (snapObj) => {
+  const html = gerarPedidoHTML(snapObj);
+  const win = window.open("", "_blank");
+  if (win) { win.document.write(html); win.document.close(); }
+  else { alert("Seu navegador bloqueou a janela pop-up. Libere pop-ups para este site e tente novamente."); }
+};
+
+// ── HELPER: tenta parsear o snapshot vindo da planilha ───────────────────────
+const parsearSnapshot = (raw) => {
+  if (!raw || raw.trim() === "" || raw === "undefined" || raw === "null") return null;
+  try {
+    const obj = JSON.parse(raw);
+    // Valida que tem pelo menos cart e form
+    if (obj && Array.isArray(obj.cart) && obj.form) return obj;
+    return null;
+  } catch (e) {
+    console.error("[PDF] Falha ao parsear snapshot:", e.message, "\nValor (200 chars):", raw.slice(0, 200));
+    return null;
+  }
 };
 
 const PedidosScreen = memo(({ onBack }) => {
@@ -616,10 +638,10 @@ const PedidosScreen = memo(({ onBack }) => {
   const [erro, setErro]           = useState("");
   const [busca, setBusca]         = useState("");
   const [expandido, setExpandido] = useState(null);
+  const [pdfLoading, setPdfLoading] = useState(null); // sku do pedido sendo carregado
 
   const carregar = () => {
     setLoading(true); setErro("");
-    // JSONP para contornar CORS do Google Apps Script
     const cbName = "cb_pedidos_" + Date.now();
     const script = document.createElement("script");
     const timeout = setTimeout(() => {
@@ -627,7 +649,7 @@ const PedidosScreen = memo(({ onBack }) => {
       document.head.contains(script) && document.head.removeChild(script);
       setErro("Tempo esgotado. Verifique sua conexão.");
       setLoading(false);
-    }, 8000);
+    }, 10000);
     window[cbName] = (data) => {
       clearTimeout(timeout);
       delete window[cbName];
@@ -655,6 +677,72 @@ const PedidosScreen = memo(({ onBack }) => {
       || (p[COL.whatsapp] || "").toLowerCase().includes(q)
       || (p[COL.vendedor] || "").toLowerCase().includes(q);
   });
+
+  // ── Handler principal do botão PDF ────────────────────────────────────────
+  const handleAbrirPDF = (pedidoRow) => {
+    const nr   = pedidoRow[COL.pedido]   || "—";
+    const nm   = pedidoRow[COL.nome]     || "";
+    const cpf  = pedidoRow[COL.cpfcnpj]  || "";
+    const wpp  = pedidoRow[COL.whatsapp] || "";
+    const em   = pedidoRow[COL.email]    || "";
+    const vend = pedidoRow[COL.vendedor] || "";
+    const obs  = pedidoRow[COL.observacoes] || "";
+
+    // 1. Tenta localStorage (mesmo dispositivo que criou o pedido)
+    try {
+      const historico = JSON.parse(localStorage.getItem("laco_historico") || "[]");
+      const snap = historico.find(h => h.nrPedido === nr);
+      if (snap && Array.isArray(snap.cart) && snap.cart.length > 0) {
+        abrirPDF(snap);
+        return;
+      }
+    } catch (e) {
+      console.warn("[PDF] localStorage indisponível:", e.message);
+    }
+
+    // 2. Usa snapshot já carregado junto com a lista de pedidos
+    //    Tenta as duas grafias possíveis do cabeçalho ("snapshot" ou "Snapshot")
+    const snapRaw = pedidoRow[COL.snapshot]
+      || pedidoRow["Snapshot"]
+      || pedidoRow["snapshot"]
+      || "";
+
+    const snapObj = parsearSnapshot(snapRaw);
+
+    if (snapObj) {
+      // Snapshot válido com itens encontrado na planilha
+      abrirPDF(snapObj);
+      return;
+    }
+
+    // 3. Fallback: PDF com dados do cliente sem itens detalhados
+    //    Mas tenta reconstruir os totais a partir do texto "Itens do Pedido" e dos totais gravados
+    const subtotalRaw = pedidoRow[COL.subtotal] || "";
+    const totalRaw    = pedidoRow[COL.total]    || "";
+    const descontoRaw = pedidoRow[COL.desconto] || "";
+    const freteRaw    = pedidoRow[COL.frete]    || "";
+
+    // Cria um cart vazio mas preenche os totais manualmente no PDF via obs
+    const obsCompleta = [
+      obs && obs !== "—" ? obs : "",
+      "",
+      "— RESUMO FINANCEIRO —",
+      subtotalRaw && subtotalRaw !== "—" ? `Subtotal: ${subtotalRaw}` : "",
+      descontoRaw && descontoRaw !== "—" ? `Desconto: ${descontoRaw}` : "",
+      freteRaw    && freteRaw    !== "—" ? `Frete: ${freteRaw}` : "",
+      totalRaw    && totalRaw    !== "—" ? `Total: ${totalRaw}` : "",
+    ].filter(Boolean).join("\n");
+
+    const snapFallback = {
+      cart: [],
+      form: { nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend, obs: obsCompleta },
+      nrPedido: nr,
+      desconto: { tipo: "%", valor: 0 },
+      frete: 0,
+    };
+
+    abrirPDF(snapFallback);
+  };
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
@@ -692,7 +780,7 @@ const PedidosScreen = memo(({ onBack }) => {
         {erro && (
           <div style={{ background: VINHOL, border: `1px solid ${VINHO}33`, borderRadius: 10, padding: "14px 16px", margin: "12px 0", lineHeight: 1.7 }}>
             <p style={{ color: VINHO, fontSize: 13, fontFamily: "'DM Sans',sans-serif", marginBottom: 8 }}>⚠ {erro}</p>
-            <p className="mn" style={{ color: TEXT3, fontSize: 10 }}>Certifique-se de que o Apps Script está publicado com acesso "Qualquer pessoa" e retorna JSON para ?action=listar</p>
+            <p className="mn" style={{ color: TEXT3, fontSize: 10 }}>Certifique-se de que o Apps Script está publicado com acesso "Qualquer pessoa".</p>
           </div>
         )}
         {!loading && !erro && filtrados.length === 0 && (
@@ -717,6 +805,11 @@ const PedidosScreen = memo(({ onBack }) => {
             const sub  = p[COL.subtotal]    || "";
             const desc = p[COL.desconto]    || "";
             const frt  = p[COL.frete]       || "";
+
+            // Verifica se há snapshot válido (para mostrar ícone de PDF completo)
+            const snapRaw = p[COL.snapshot] || p["Snapshot"] || p["snapshot"] || "";
+            const temSnapshot = parsearSnapshot(snapRaw) !== null;
+
             const open = expandido === idx;
 
             return (
@@ -726,6 +819,10 @@ const PedidosScreen = memo(({ onBack }) => {
                     <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 3 }}>
                       <span className="mn" style={{ color: VERDE, fontSize: 12, fontWeight: 700 }}>{nr}</span>
                       {vend && <span style={{ background: VERDES, color: VERDE, fontFamily: "'DM Mono',monospace", fontSize: 8, fontWeight: 700, padding: "2px 7px", borderRadius: 4, border: `1px solid ${VERDE}33` }}>{vend}</span>}
+                      {/* Indicador: PDF completo disponível */}
+                      {temSnapshot && (
+                        <span style={{ background: "#E8F0E6", color: VERDE, fontFamily: "'DM Mono',monospace", fontSize: 8, fontWeight: 700, padding: "2px 7px", borderRadius: 4, border: `1px solid ${VERDE}33` }}>📄 PDF</span>
+                      )}
                     </div>
                     <p className="dm" style={{ color: TEXT, fontSize: 15, fontWeight: 600, marginBottom: 2, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{nm}</p>
                     <p className="mn" style={{ color: TEXT3, fontSize: 10 }}>{dt}</p>
@@ -738,50 +835,38 @@ const PedidosScreen = memo(({ onBack }) => {
 
                 {open && (
                   <div style={{ background: CARD2, padding: "14px 16px", borderTop: `1px solid ${BORDER}` }}>
+
                     {/* Botão PDF */}
-                    <button onClick={async () => {
-                      // 1. Tenta localStorage primeiro
-                      try {
-                        const historico = JSON.parse(localStorage.getItem("laco_historico") || "[]");
-                        const snap = historico.find(h => h.nrPedido === nr);
-                        if (snap) {
-                          const html = gerarPedidoHTML(snap);
-                          const win = window.open("", "_blank");
-                          if (win) { win.document.write(html); win.document.close(); }
-                          return;
-                        }
-                      } catch {}
-                      // 2. Tenta buscar snapshot da planilha via JSONP
-                      const cbName = "cb_snap_" + Date.now();
-                      const script = document.createElement("script");
-                      const timeout = setTimeout(() => {
-                        delete window[cbName];
-                        document.head.contains(script) && document.head.removeChild(script);
-                        // Fallback: PDF só com dados do cliente
-                        const snap = { cart: [], form: { nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend, obs }, nrPedido: nr, desconto: { tipo: "%", valor: 0 }, frete: 0 };
-                        const html = gerarPedidoHTML(snap);
-                        const win = window.open("", "_blank");
-                        if (win) { win.document.write(html); win.document.close(); }
-                      }, 5000);
-                      window[cbName] = (data) => {
-                        clearTimeout(timeout);
-                        delete window[cbName];
-                        document.head.contains(script) && document.head.removeChild(script);
-                        const pedido = (data.pedidos || []).find(p => p[COL.pedido] === nr);
-                        let snap;
-                        try {
-                          snap = pedido?.snapshot ? JSON.parse(pedido.snapshot) : null;
-                        } catch {}
-                        if (!snap) snap = { cart: [], form: { nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend, obs }, nrPedido: nr, desconto: { tipo: "%", valor: 0 }, frete: 0 };
-                        const html = gerarPedidoHTML(snap);
-                        const win = window.open("", "_blank");
-                        if (win) { win.document.write(html); win.document.close(); }
-                      };
-                      script.src = `${ORDERS_URL}?action=listar&callback=${cbName}`;
-                      document.head.appendChild(script);
-                    }} style={{ width: "100%", background: VINHO, color: "#fff", padding: "10px", borderRadius: 10, border: "none", cursor: "pointer", fontFamily: "'DM Sans',sans-serif", fontSize: 12, fontWeight: 700, marginBottom: 12, display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
-                      🖨️ ABRIR / IMPRIMIR PDF
+                    <button
+                      onClick={() => handleAbrirPDF(p)}
+                      style={{
+                        width: "100%",
+                        background: temSnapshot ? VINHO : "#888",
+                        color: "#fff",
+                        padding: "10px",
+                        borderRadius: 10,
+                        border: "none",
+                        cursor: "pointer",
+                        fontFamily: "'DM Sans',sans-serif",
+                        fontSize: 12,
+                        fontWeight: 700,
+                        marginBottom: temSnapshot ? 6 : 12,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: 6,
+                      }}
+                    >
+                      🖨️ {temSnapshot ? "ABRIR / IMPRIMIR PDF COMPLETO" : "ABRIR PDF (dados do cliente)"}
                     </button>
+
+                    {/* Aviso quando não há snapshot */}
+                    {!temSnapshot && (
+                      <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 0.5, marginBottom: 12, textAlign: "center" }}>
+                        PDF completo disponível apenas no dispositivo onde o pedido foi criado
+                      </p>
+                    )}
+
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 16px", marginBottom: 12 }}>
                       {[["WhatsApp", wpp], ["E-mail", em], ["CPF/CNPJ", cpf]].map(([l, v]) => v && v !== "—" ? (
                         <div key={l}>
@@ -810,7 +895,7 @@ const PedidosScreen = memo(({ onBack }) => {
                     )}
 
                     {obs && obs !== "—" && (
-                      <div style={{ background: VINHOL, borderRadius: 10, padding: "10px 12px", border: `1px solid ${VINHO}22` }}>
+                      <div style={{ background: VINHOL, borderRadius: 10, padding: "10px 12px", border: `1px solid ${VINHO}22`, marginTop: 10 }}>
                         <p className="mn" style={{ color: VINHO, fontSize: 9, letterSpacing: 1, marginBottom: 4 }}>OBSERVAÇÕES</p>
                         <p className="dm" style={{ color: TEXT2, fontSize: 13, lineHeight: 1.6 }}>{obs}</p>
                       </div>
@@ -828,14 +913,14 @@ const PedidosScreen = memo(({ onBack }) => {
 
 // ── APP ───────────────────────────────────────────────────────────────────────
 export default function App() {
-  const [cat, setCat]     = useState("Todos");
+  const [cat, setCat]       = useState("Todos");
   const [search, setSearch] = useState("");
-  const [modal, setModal] = useState(null);
+  const [modal, setModal]   = useState(null);
   const [screen, setScreen] = useState("catalog");
-  const [cart, setCart]   = useState(() => {
+  const [cart, setCart]     = useState(() => {
     try { const s = localStorage.getItem("laco_cart"); return s ? JSON.parse(s) : []; } catch { return []; }
   });
-  const [form, setForm]   = useState({ nome: "", cpfcnpj: "", whats: "", email: "", obs: "" });
+  const [form, setForm]         = useState({ nome: "", cpfcnpj: "", whats: "", email: "", obs: "" });
   const [vendedora, setVendedora] = useState("");
   const [desconto, setDesconto]   = useState({ tipo: "%", valor: 0 });
   const [frete, setFrete]         = useState(0);
@@ -855,10 +940,10 @@ export default function App() {
     return catOk && searchOk;
   });
 
-  const cartCount   = cart.reduce((s, i) => s + i.qty, 0);
-  const subtotal    = cart.reduce((s, i) => s + i.qty * (i.preco ?? i.product.preco), 0);
-  const descVal     = desconto.tipo === "%" ? subtotal * (desconto.valor / 100) : Math.min(desconto.valor, subtotal);
-  const totalFinal  = Math.max(0, subtotal - descVal) + (frete || 0);
+  const cartCount  = cart.reduce((s, i) => s + i.qty, 0);
+  const subtotal   = cart.reduce((s, i) => s + i.qty * (i.preco ?? i.product.preco), 0);
+  const descVal    = desconto.tipo === "%" ? subtotal * (desconto.valor / 100) : Math.min(desconto.valor, subtotal);
+  const totalFinal = Math.max(0, subtotal - descVal) + (frete || 0);
 
   const showToast = msg => { setToast(msg); setTimeout(() => setToast(null), 2500); };
 
@@ -884,7 +969,14 @@ export default function App() {
     if (!form.nome || !form.whats) { alert("Preencha Nome e WhatsApp!"); return; }
     setEnviando(true);
     const itens = cart.map(i => `• [${i.product.sku}] ${i.size?.ref ? i.size.ref + " — " : ""}${i.product.name} | Cor: ${i.color?.name} | Qtd: ${i.qty} | ${BRL(i.qty * (i.preco ?? i.product.preco))}`).join("\n");
-    const snapshot = { cart: [...cart], form: { ...form, vendedor: vendedora }, nrPedido, desconto, frete, data: new Date().toLocaleString("pt-BR") };
+    const snapshot = {
+      cart: [...cart],
+      form: { ...form, vendedor: vendedora },
+      nrPedido,
+      desconto,
+      frete,
+      data: new Date().toLocaleString("pt-BR"),
+    };
     const params = new URLSearchParams({
       pedido:      nrPedido,
       data:        new Date().toLocaleString("pt-BR"),
@@ -1109,7 +1201,7 @@ export default function App() {
               </button>
               <div style={{ height: 1, background: BORDER, marginBottom: 18 }} />
 
-              {/* Vendedora — separada dos dados do cliente */}
+              {/* Vendedora */}
               <div style={{ marginBottom: 14 }}>
                 <p className="mn" style={{ color: VERDE, fontSize: 9, letterSpacing: 2.5, marginBottom: 10 }}>VENDEDORA</p>
                 <div style={{ position: "relative" }}>
@@ -1125,14 +1217,15 @@ export default function App() {
               <p className="mn" style={{ color: VERDE, fontSize: 9, letterSpacing: 2.5, marginBottom: 10 }}>DADOS DO CLIENTE</p>
 
               {[
-                { k: "nome",  l: "Nome / Empresa *", p: "Ex: Shopping Parque D. Pedro", t: "text" },
+                { k: "nome", l: "Nome / Empresa *", p: "Ex: Shopping Parque D. Pedro", t: "text" },
               ].map(f => (
                 <div key={f.k} style={{ marginBottom: 11 }}>
                   <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>{f.l.toUpperCase()}</p>
                   <input className="inp" type={f.t} value={form[f.k]} placeholder={f.p} autoComplete="off" onChange={e => setForm(prev => ({ ...prev, [f.k]: e.target.value }))} />
                 </div>
               ))}
-              {/* CNPJ com máscara */}
+
+              {/* CNPJ */}
               <div style={{ marginBottom: 11 }}>
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>CNPJ</p>
                 <input className="inp" type="text" inputMode="numeric" value={form.cpfcnpj} placeholder="00.000.000/0001-00" autoComplete="off"
@@ -1146,7 +1239,8 @@ export default function App() {
                     setForm(prev => ({ ...prev, cpfcnpj: v }));
                   }} />
               </div>
-              {/* WhatsApp com máscara */}
+
+              {/* WhatsApp */}
               <div style={{ marginBottom: 11 }}>
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>WHATSAPP *</p>
                 <input className="inp" type="text" inputMode="numeric" value={form.whats} placeholder="(11) 99999-9999" autoComplete="off"
@@ -1158,11 +1252,13 @@ export default function App() {
                     setForm(prev => ({ ...prev, whats: v }));
                   }} />
               </div>
+
               {/* Email */}
               <div style={{ marginBottom: 11 }}>
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>E-MAIL</p>
                 <input className="inp" type="email" value={form.email} placeholder="contato@empresa.com.br" autoComplete="off" onChange={e => setForm(prev => ({ ...prev, email: e.target.value }))} />
               </div>
+
               <div style={{ marginBottom: 18 }}>
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>OBSERVAÇÕES</p>
                 <textarea className="inp" value={form.obs} placeholder="Data do evento, detalhes especiais..." rows={2} style={{ resize: "none" }} onChange={e => setForm(prev => ({ ...prev, obs: e.target.value }))} />
@@ -1189,9 +1285,7 @@ export default function App() {
             </p>
             <button onClick={() => {
               if (!pedidoFinalizado) return;
-              const html = gerarPedidoHTML(pedidoFinalizado);
-              const win = window.open("", "_blank");
-              if (win) { win.document.write(html); win.document.close(); }
+              abrirPDF(pedidoFinalizado);
             }} style={{ width: "100%", background: VINHO, color: "#fff", padding: "14px", borderRadius: 14, fontSize: 13, fontWeight: 700, letterSpacing: 1.5, cursor: "pointer", border: "none", marginBottom: 11, fontFamily: "'DM Sans',sans-serif", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
               🖨️ IMPRIMIR / SALVAR PDF
             </button>
