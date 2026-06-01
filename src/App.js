@@ -197,7 +197,10 @@ const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbzLrphy9FQJBPv5hi0G
 
 const BRL     = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
 const gerarNr = () => `#${Date.now().toString().slice(-5)}`;
-const getFoto = (p, i) => p.cores?.[i]?.photo || p.photo || "";
+const getFoto = (p, i) => {
+  if (p.photo === PH) return PH;
+  return p.cores?.[i]?.photo || p.photo || PH;
+};
 const getPreco = (product, size) => size?.preco ?? product.preco ?? 0;
 // Estoque: usa sempre o valor fixo do código (persistente desativado por ora)
 const getEstoque = (sku, ref, base) => base;
