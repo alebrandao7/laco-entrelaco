@@ -115,9 +115,9 @@ const TC = {
 
 const PRODUCTS = [
   { sku:"EVV",      name:"Escapulário Veludo Vermelho",                subtitle:"200cm",                  category:"Veludo",    material:"100% poliéster",            acabamento:ACF,  prazo:P30,           estoque:100, preco:PRECO_UN, desc:"Escapulário 1mt confeccionado em Veludo Vermelho tradicional.",                                           cores:cVM,    photo:F.escapulario, ...TC.V, sizes:[{label:"200cm",ref:"200EVV",min:1,estoque:100,preco:94.90}] },
-  { sku:"EVVDec",   name:"Escapulário Veludo Vermelho Decorado",       subtitle:"200cm",                  category:"Veludo",    material:"100% poliéster",            acabamento:"Costura francesa e galho natalino.", prazo:"31 dias úteis", estoque:60, preco:159.90, desc:"Escapulário 1mt confeccionado em Veludo Vermelho com decoração natalina.", cores:cVM, photo:F.escap_flor, ...TC.V, sizes:[{label:"200cm",ref:"200EVVDec",min:1,estoque:60,preco:159.90}] },
-  { sku:"EVVLis",   name:"Escapulário Veludo Vermelho Listra",         subtitle:"200cm",                  category:"Veludo",    material:"100% poliéster",            acabamento:"Costura francesa e galho natalino.", prazo:"31 dias úteis", estoque:36, preco:183.90, desc:"Escapulário 1mt confeccionado em Veludo Vermelho com listra natalina.", cores:cVM, photo:F.escap_listra, ...TC.V, sizes:[{label:"200cm",ref:"200EVVLis",min:1,estoque:36,preco:183.90}] },
-  { sku:"EVVXdz",   name:"Escapulário Veludo Vermelho Xadrez",         subtitle:"200cm",                  category:"Veludo",    material:"100% poliéster",            acabamento:"Costura francesa e galho natalino.", prazo:"31 dias úteis", estoque:500, preco:PRECO_UN, desc:"Escapulário em Veludo Vermelho com decoração xadrez natalino.", cores:cVM, photo:F.escap_xdz, ...TC.V, sizes:[{label:"200cm",ref:"200EVVXdz",min:1,estoque:36,preco:183.90}] },
+  { sku:"EVVDec",   name:"Escapulário Veludo Vermelho Decorado",       subtitle:"200cm",                  category:"Veludo",    material:"100% poliéster",            acabamento:"Costura francesa e galho natalino.", prazo:"31 dias úteis", estoque:60,  preco:159.90, desc:"Escapulário 1mt confeccionado em Veludo Vermelho com decoração natalina.", cores:cVM, photo:F.escap_flor,  ...TC.V, sizes:[{label:"200cm",ref:"200EVVDec",min:1,estoque:60,preco:159.90}] },
+  { sku:"EVVLis",   name:"Escapulário Veludo Vermelho Listra",         subtitle:"200cm",                  category:"Veludo",    material:"100% poliéster",            acabamento:"Costura francesa e galho natalino.", prazo:"31 dias úteis", estoque:36,  preco:183.90, desc:"Escapulário 1mt confeccionado em Veludo Vermelho com listra natalina.",   cores:cVM, photo:F.escap_listra,...TC.V, sizes:[{label:"200cm",ref:"200EVVLis",min:1,estoque:36,preco:183.90}] },
+  { sku:"EVVXdz",   name:"Escapulário Veludo Vermelho Xadrez",         subtitle:"200cm",                  category:"Veludo",    material:"100% poliéster",            acabamento:"Costura francesa e galho natalino.", prazo:"31 dias úteis", estoque:500, preco:PRECO_UN, desc:"Escapulário em Veludo Vermelho com decoração xadrez natalino.",          cores:cVM, photo:F.escap_xdz,   ...TC.V, sizes:[{label:"200cm",ref:"200EVVXdz",min:1,estoque:36,preco:183.90}] },
   { sku:"LDR",      name:"Laço Lamê Dourado",                         subtitle:"Brilho metálico",        category:"Lamê",      material:"100% poliéster metalizado", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em Lamê dourado; brilho intenso.",                                         cores:cLD,    photo:F.ldr,         ...TC.L, sizes:[{label:"20cm",ref:"20LDR",min:1,estoque:500,preco:43.00},{label:"30cm",ref:"30LDR",min:1,estoque:500,preco:61.90},{label:"40cm",ref:"40LDR",min:1,estoque:500,preco:98.90}] },
   { sku:"TL",       name:"Laço Tecido Listra Vermelho/Branco",        subtitle:"Listrado clássico",      category:"Estampado", material:"100% algodão",              acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em tecido listrado.",                                                      cores:cVB,    photo:F.tl,          ...TC.E, sizes:[{label:"20cm",ref:"20TL",min:1,estoque:500,preco:21.90},{label:"30cm",ref:"30TL",min:1,estoque:500,preco:33.90},{label:"40cm",ref:"40TL",min:1,estoque:500,preco:44.70}] },
   { sku:"VAL",      name:"Laço Veludo Ale",                           subtitle:"20cm a 40cm",            category:"Veludo",    material:"100% poliéster",            acabamento:APL,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em Veludo Cristal.",                                                       cores:cVGBC,  photo:F.val,         ...TC.V, sizes:[{label:"20cm",ref:"20VAl",min:1,estoque:500,preco:26.90},{label:"30cm",ref:"30VAl",min:1,estoque:500,preco:39.90},{label:"40cm",ref:"40VAl",min:1,estoque:500,preco:56.20}] },
@@ -126,7 +126,7 @@ const PRODUCTS = [
   { sku:"VAlTri",   name:"Laço Veludo Ale Triplo",                    subtitle:"90cm",                   category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço com borboleta tripla e gravata tradicional.",                                                        cores:cVGBCLD,photo:F.veludo_triplo,...TC.V, sizes:[{label:"90cm",ref:"90VAlTri",min:1,estoque:500,preco:389.80}] },
   { sku:"VALLIND",  name:"Laço Veludo Ale — Lindíssimo",              subtitle:"30cm a 90cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço duplo confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata.",                  cores:cVGBC,  photo:F.val_lind,    ...TC.V, sizes:[{label:"30cm",ref:"30VAl/Lind",min:1,estoque:500,preco:58.00},{label:"60cm",ref:"60VAl/Lind",min:1,estoque:500,preco:208.90},{label:"90cm",ref:"90VAl/Lind",min:1,estoque:500,preco:398.00}] },
   { sku:"LBCO",     name:"Laço Veludo Branco",                        subtitle:"20cm a 40cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço clássico confeccionado em Veludo na cor Branco.",                                                    cores:cBR,    photo:F.laco_branco, ...TC.V, sizes:[{label:"20cm",ref:"20LBco",min:1,estoque:500,preco:26.90},{label:"30cm",ref:"30LBco",min:1,estoque:500,preco:39.90},{label:"40cm",ref:"40LBco",min:1,estoque:500,preco:56.20}] },
-  { sku:"VALGL",    name:"Laço Veludo Cristal Gravata Longa",         subtitle:"30cm a 50cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata ao descer pela árvore ou coluna.", cores:cVGBC, photo:F.val_gl, ...TC.V, sizes:[{label:"30cm",ref:"30VaL",min:1,estoque:500,preco:43.00},{label:"40cm",ref:"40VaL",min:1,estoque:500,preco:61.90},{label:"50cm",ref:"50VaL",min:1,estoque:500,preco:98.90}] },
+  { sku:"VALGL",    name:"Laço Veludo Cristal Gravata Longa",         subtitle:"30cm a 50cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata ao descer pela árvore ou coluna.", cores:cVGBC, photo:F.val_gl,  ...TC.V, sizes:[{label:"30cm",ref:"30VaL",min:1,estoque:500,preco:43.00},{label:"40cm",ref:"40VaL",min:1,estoque:500,preco:61.90},{label:"50cm",ref:"50VaL",min:1,estoque:500,preco:98.90}] },
   { sku:"VDuGV",    name:"Laço Veludo Duplo Gravata V",               subtitle:"100cm",                  category:"Veludo",    material:"100% poliéster",            acabamento:"Estrutura interna com placa, arame e costura francesa.", prazo:P30, estoque:500, preco:369.00, desc:"Laço confeccionado em Veludo tradicional, com borboleta dupla e gravata em V.", cores:cVVM, photo:PH, ...TC.V, sizes:[{label:"100cm",ref:"100VDuGV",min:1,estoque:500,preco:369.00}] },
   { sku:"VVM",      name:"Laço Veludo Vermelho",                      subtitle:"20cm a 100cm",           category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"O clássico da linha; confeccionado em Veludo tradicional.",                                               cores:cVVM,   photo:F.vvm,         ...TC.V, sizes:[{label:"20cm",ref:"20V",min:1,estoque:500,preco:21.90},{label:"30cm",ref:"30V",min:1,estoque:500,preco:33.90},{label:"40cm",ref:"40V",min:1,estoque:500,preco:46.90},{label:"50cm",ref:"50V",min:1,estoque:500,preco:79.90},{label:"80cm",ref:"80V",min:1,estoque:500,preco:197.90},{label:"100cm",ref:"100V",min:1,estoque:500,preco:269.00}] },
   { sku:"VD",       name:"Laço Veludo Vermelho com Dourado",          subtitle:"Borda ouro",             category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda ouro.",                                               cores:cVD,    photo:F.vd,          ...TC.E, sizes:[{label:"20cm",ref:"20VD",min:1,estoque:500,preco:24.90},{label:"30cm",ref:"30VD",min:1,estoque:500,preco:36.90},{label:"40cm",ref:"40VD",min:1,estoque:500,preco:48.90}] },
@@ -200,22 +200,25 @@ const getPreco   = (product, size) => size?.preco ?? product.preco ?? 0;
 const getEstoque = (sku, ref, base) => base;
 const decrementarEstoque = () => {};
 
-// ── GERADOR DO PEDIDO PARA IMPRESSÃO ─────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// GERADOR DO PEDIDO PARA IMPRESSÃO
+// ─────────────────────────────────────────────────────────────────────────────
 const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
   const subtotal   = cart.reduce((s, i) => s + i.qty * (i.preco ?? i.product.preco), 0);
-  const descVal    = desconto.tipo === "%" ? subtotal * (desconto.valor / 100) : desconto.valor;
+  const descVal    = desconto.tipo === "%" ? subtotal * (desconto.valor / 100) : (desconto.valor || 0);
   const totalFinal = Math.max(0, subtotal - descVal) + (frete || 0);
   const totalItens = cart.length;
   const totalUn    = cart.reduce((s, i) => s + i.qty, 0);
   const dataHora   = new Date().toLocaleString("pt-BR");
+
   const linhasItens = cart.map(item => `
     <tr>
       <td class="td-ref">${item.size?.ref || ""}</td>
-      <td><strong>${item.product.sku ? "[" + item.product.sku + "] " : ""}${item.product.name}</strong></td>
+      <td><strong>${item.product?.sku ? "[" + item.product.sku + "] " : ""}${item.product?.name || ""}</strong></td>
       <td>${item.size?.label || ""}</td>
       <td><span class="td-cor"><span class="cor-dot" style="background:${item.color?.hex || "#ccc"}"></span> ${item.color?.name || ""}</span></td>
       <td style="text-align:center;font-family:'DM Mono',monospace;font-weight:700;color:#2D5A27;">${item.qty}</td>
-      <td style="text-align:right;font-family:'DM Mono',monospace;font-weight:700;color:#2D5A27;">${BRL(item.qty * (item.preco ?? item.product.preco))}</td>
+      <td style="text-align:right;font-family:'DM Mono',monospace;font-weight:700;color:#2D5A27;">${BRL(item.qty * (item.preco ?? item.product?.preco ?? 0))}</td>
     </tr>`).join("");
 
   return `<!DOCTYPE html>
@@ -266,7 +269,6 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
   .no-print{text-align:center;margin-bottom:20px;display:flex;gap:10px;justify-content:center;}
   .btn{border:none;padding:10px 28px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
   .btn-print{background:#2D5A27;color:#fff;}.btn-close{background:#E8E0D8;color:#1A1A1A;}
-  .sem-itens{text-align:center;padding:24px;color:#888;font-size:13px;font-style:italic;}
   @media print{body{background:#fff;padding:0;}.page{box-shadow:none;border-radius:0;padding:16px 24px;}.no-print{display:none!important;}.linha-escrita{border-bottom:1px solid #aaa;}}
 </style>
 </head>
@@ -295,7 +297,7 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
   <div class="tabela-wrap">
     <table>
       <thead><tr><th>Ref.</th><th>Produto</th><th>Tam.</th><th>Cor</th><th style="text-align:center">Qtd</th><th style="text-align:right">Subtotal</th></tr></thead>
-      <tbody>${linhasItens || `<tr><td colspan="6" class="sem-itens">Itens não disponíveis</td></tr>`}</tbody>
+      <tbody>${linhasItens || `<tr><td colspan="6" style="text-align:center;padding:20px;color:#888;font-style:italic;">Nenhum item encontrado</td></tr>`}</tbody>
     </table>
   </div>
   <div class="bottom-area">
@@ -313,7 +315,7 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
       <div class="totais-linha total-final"><span>Total</span><span>${BRL(totalFinal)}</span></div>
     </div>
   </div>
-  ${form.obs ? `<p class="section-title" style="margin-top:4px;">Observações</p><div style="background:#FBE9E7;border:1px solid #8B1A2A33;border-radius:6px;padding:10px 14px;margin-bottom:20px;font-size:12px;line-height:1.6;">${form.obs}</div>` : ""}
+  ${form.obs ? `<p class="section-title" style="margin-top:4px;">Observações</p><div style="background:#FBE9E7;border:1px solid #8B1A2A33;border-radius:6px;padding:10px 14px;margin-bottom:20px;font-size:12px;line-height:1.6;white-space:pre-wrap;">${form.obs}</div>` : ""}
   <div class="footer">
     <div class="footer-assinatura"><div class="linha-assinatura"></div><span>Assinatura do Cliente</span></div>
     <div class="footer-assinatura"><div class="linha-assinatura"></div><span>Vendedora Responsável</span></div>
@@ -329,7 +331,9 @@ const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
 </body></html>`;
 };
 
-// ── CSS ───────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// CSS
+// ─────────────────────────────────────────────────────────────────────────────
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -344,7 +348,9 @@ const CSS = `
   .card-btn-add:active{opacity:.75;}
 `;
 
-// ── COMPONENTES BASE ──────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// COMPONENTES BASE
+// ─────────────────────────────────────────────────────────────────────────────
 const Img = memo(({ src, h = 200 }) => {
   const [err, setErr] = useState(false);
   if (err || !src) return <div style={{ width: "100%", height: h, background: CARD2, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 32 }}>🎀</div>;
@@ -359,7 +365,9 @@ const Logo = () => (
   <img src={F.logo} alt="Laço & Entrelaço" style={{ height: 40, objectFit: "contain" }} onError={e => e.target.style.display = "none"} />
 );
 
-// ── QUICK ADD ────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// QUICK ADD
+// ─────────────────────────────────────────────────────────────────────────────
 const QuickAdd = memo(({ product: p, onAdd }) => {
   const [sz, setSz] = useState(0);
   const [cl, setCl] = useState(0);
@@ -433,7 +441,9 @@ const QuickAdd = memo(({ product: p, onAdd }) => {
   );
 });
 
-// ── MODAL DETALHES ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// MODAL DETALHES
+// ─────────────────────────────────────────────────────────────────────────────
 const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }) => {
   const [sz, setSz] = useState(0);
   const [cl, setCl] = useState(0);
@@ -537,9 +547,73 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
   );
 });
 
-// ── TELA DE PEDIDOS ──────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// HELPERS DE SNAPSHOT — tentam todas as grafias possíveis de chave
+// ─────────────────────────────────────────────────────────────────────────────
 const ORDERS_URL = "https://script.google.com/macros/s/AKfycbzLrphy9FQJBPv5hi0G1Rm3enp4RNqanAVfbfBUV4QjB8jTTmQvb01tNl1fVOxZKs4wTQ/exec";
 
+// Extrai a string raw do snapshot de um objeto pedido,
+// tentando todas as grafias possíveis de cabeçalho
+const extrairRawSnapshot = (obj) => {
+  if (!obj) return "";
+  const tentativas = ["snapshot", "Snapshot", "SNAPSHOT", "Snapshot JSON", "snap"];
+  for (const k of tentativas) {
+    if (obj[k] && String(obj[k]).trim() !== "" && String(obj[k]) !== "undefined" && String(obj[k]) !== "null") {
+      return String(obj[k]);
+    }
+  }
+  return "";
+};
+
+// Tenta parsear o raw e valida que tem cart e form
+const parsearSnapshot = (raw) => {
+  if (!raw || raw.trim() === "" || raw === "undefined" || raw === "null") return null;
+  try {
+    const obj = JSON.parse(raw);
+    if (obj && Array.isArray(obj.cart) && obj.cart.length > 0 && obj.form) return obj;
+    return null;
+  } catch (e) {
+    console.error("[SNAP] parse falhou:", e.message, "| raw (200):", raw.slice(0, 200));
+    return null;
+  }
+};
+
+// JSONP genérico — retorna uma Promise com o dado ou null
+const jsonp = (url, timeout = 12000) => new Promise((resolve) => {
+  const cb = "cb_" + Date.now() + "_" + Math.random().toString(36).slice(2);
+  const script = document.createElement("script");
+  const timer = setTimeout(() => {
+    delete window[cb];
+    script.parentNode && script.parentNode.removeChild(script);
+    console.warn("[JSONP] timeout:", url);
+    resolve(null);
+  }, timeout);
+  window[cb] = (data) => {
+    clearTimeout(timer);
+    delete window[cb];
+    script.parentNode && script.parentNode.removeChild(script);
+    resolve(data);
+  };
+  script.onerror = () => {
+    clearTimeout(timer);
+    delete window[cb];
+    resolve(null);
+  };
+  script.src = url + (url.includes("?") ? "&" : "?") + `callback=${cb}`;
+  document.head.appendChild(script);
+});
+
+// Abre janela de PDF — centralizado
+const abrirPDF = (snapObj) => {
+  const html = gerarPedidoHTML(snapObj);
+  const win = window.open("", "_blank");
+  if (win) { win.document.write(html); win.document.close(); }
+  else { alert("Pop-up bloqueado pelo navegador. Libere pop-ups para este site e tente novamente."); }
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TELA DE PEDIDOS
+// ─────────────────────────────────────────────────────────────────────────────
 const COL = {
   pedido:      "Nº Pedido",
   data:        "Data/Hora",
@@ -556,75 +630,25 @@ const COL = {
   total:       "Total",
 };
 
-// ── Abre janela de PDF ────────────────────────────────────────────────────────
-const abrirPDF = (snapObj) => {
-  const html = gerarPedidoHTML(snapObj);
-  const win = window.open("", "_blank");
-  if (win) { win.document.write(html); win.document.close(); }
-  else { alert("Pop-up bloqueado. Libere pop-ups para este site e tente novamente."); }
-};
-
-// ── Busca snapshot da planilha via JSONP (ação dedicada) ──────────────────────
-const buscarSnapshot = (nrPedido) => new Promise((resolve) => {
-  const cbName = "cb_snap_" + Date.now();
-  const script = document.createElement("script");
-  const timeout = setTimeout(() => {
-    delete window[cbName];
-    document.head.contains(script) && document.head.removeChild(script);
-    resolve(null);
-  }, 10000);
-  window[cbName] = (data) => {
-    clearTimeout(timeout);
-    delete window[cbName];
-    document.head.contains(script) && document.head.removeChild(script);
-    const raw = data?.snapshot || "";
-    if (!raw || raw === "undefined" || raw === "null" || raw.trim() === "") { resolve(null); return; }
-    try {
-      const obj = JSON.parse(raw);
-      resolve((obj && Array.isArray(obj.cart) && obj.form) ? obj : null);
-    } catch (e) {
-      console.error("[PDF] Parse do snapshot falhou:", e.message, "\n200 chars:", raw.slice(0, 200));
-      resolve(null);
-    }
-  };
-  script.onerror = () => { clearTimeout(timeout); delete window[cbName]; resolve(null); };
-  // Chama a nova ação dedicada ?action=snapshot&pedido=XXX
-  script.src = `${ORDERS_URL}?action=snapshot&pedido=${encodeURIComponent(nrPedido)}&callback=${cbName}`;
-  document.head.appendChild(script);
-});
-
 const PedidosScreen = memo(({ onBack }) => {
   const [pedidos, setPedidos]       = useState([]);
   const [loading, setLoading]       = useState(true);
   const [erro, setErro]             = useState("");
   const [busca, setBusca]           = useState("");
   const [expandido, setExpandido]   = useState(null);
-  const [pdfLoading, setPdfLoading] = useState(null); // nr do pedido sendo carregado
+  const [pdfLoading, setPdfLoading] = useState(null);
 
   const carregar = () => {
     setLoading(true); setErro("");
-    const cbName = "cb_pedidos_" + Date.now();
-    const script = document.createElement("script");
-    const timeout = setTimeout(() => {
-      delete window[cbName];
-      document.head.contains(script) && document.head.removeChild(script);
-      setErro("Tempo esgotado. Verifique sua conexão.");
+    // ?action=listar — Apps Script retorna todos os pedidos SEM snapshot (leve)
+    jsonp(`${ORDERS_URL}?action=listar`).then(data => {
+      if (data && data.pedidos) {
+        setPedidos(data.pedidos);
+      } else {
+        setErro("Não foi possível carregar os pedidos. Verifique a conexão.");
+      }
       setLoading(false);
-    }, 10000);
-    window[cbName] = (data) => {
-      clearTimeout(timeout);
-      delete window[cbName];
-      document.head.contains(script) && document.head.removeChild(script);
-      setPedidos(data.pedidos || []);
-      setLoading(false);
-    };
-    script.onerror = () => {
-      clearTimeout(timeout); delete window[cbName];
-      setErro("Não foi possível carregar os pedidos.");
-      setLoading(false);
-    };
-    script.src = `${ORDERS_URL}?action=listar&callback=${cbName}`;
-    document.head.appendChild(script);
+    });
   };
 
   useEffect(() => { carregar(); }, []);
@@ -638,7 +662,7 @@ const PedidosScreen = memo(({ onBack }) => {
       || (p[COL.vendedor] || "").toLowerCase().includes(q);
   });
 
-  // ── Handler PDF: localStorage → planilha (ação dedicada) → fallback ───────
+  // ── Handler do botão PDF — 3 etapas em cascata ──────────────────────────
   const handleAbrirPDF = async (pedidoRow) => {
     const nr   = pedidoRow[COL.pedido]      || "—";
     const nm   = pedidoRow[COL.nome]        || "";
@@ -654,43 +678,84 @@ const PedidosScreen = memo(({ onBack }) => {
 
     setPdfLoading(nr);
 
-    // 1. Tenta localStorage (mesmo dispositivo que criou)
+    // ── ETAPA 1: localStorage (mesmo dispositivo que criou) ──────────────
     try {
       const historico = JSON.parse(localStorage.getItem("laco_historico") || "[]");
       const snap = historico.find(h => h.nrPedido === nr);
-      if (snap && Array.isArray(snap.cart) && snap.cart.length > 0) {
-        setPdfLoading(null);
-        abrirPDF(snap);
-        return;
+      if (snap) {
+        const obj = parsearSnapshot(JSON.stringify(snap));
+        if (obj) { setPdfLoading(null); abrirPDF(obj); return; }
       }
     } catch (e) { console.warn("[PDF] localStorage:", e.message); }
 
-    // 2. Busca snapshot na planilha via ação dedicada ?action=snapshot
-    const snapObj = await buscarSnapshot(nr);
-    setPdfLoading(null);
-
-    if (snapObj) {
-      abrirPDF(snapObj);
-      return;
+    // ── ETAPA 2: busca snapshot dedicado via ?action=snapshot&pedido=XXX ──
+    // (requer Apps Script atualizado com a ação "snapshot")
+    const data2 = await jsonp(`${ORDERS_URL}?action=snapshot&pedido=${encodeURIComponent(nr)}`);
+    if (data2) {
+      const raw2 = data2.snapshot || extrairRawSnapshot(data2);
+      const obj2 = parsearSnapshot(raw2);
+      if (obj2) { setPdfLoading(null); abrirPDF(obj2); return; }
     }
 
-    // 3. Fallback: PDF com dados do cliente + resumo financeiro nas obs
-    const obsCompleta = [
-      obs && obs !== "—" ? obs : "",
-      "— RESUMO FINANCEIRO —",
-      sub  && sub  !== "—" ? `Subtotal: ${sub}`  : "",
-      desc && desc !== "—" ? `Desconto: ${desc}` : "",
-      frt  && frt  !== "—" ? `Frete: ${frt}`     : "",
-      tot  && tot  !== "—" ? `Total: ${tot}`      : "",
-    ].filter(Boolean).join("\n");
+    // ── ETAPA 3: busca a lista completa COM snapshot incluído ─────────────
+    // (fallback para Apps Script na versão antiga que incluía snapshot na listagem)
+    const data3 = await jsonp(`${ORDERS_URL}?action=listar&incluir_snapshot=1`);
+    if (data3 && data3.pedidos) {
+      const linha = data3.pedidos.find(p => p[COL.pedido] === nr || p["Nº Pedido"] === nr);
+      if (linha) {
+        const raw3 = extrairRawSnapshot(linha);
+        const obj3 = parsearSnapshot(raw3);
+        if (obj3) { setPdfLoading(null); abrirPDF(obj3); return; }
+      }
+    }
 
-    abrirPDF({
-      cart: [],
-      form: { nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend, obs: obsCompleta },
+    setPdfLoading(null);
+
+    // ── ETAPA 4: fallback visual — monta PDF com dados disponíveis ────────
+    // Usa os campos de texto "Itens do Pedido" para montar uma tabela simples
+    const linhaItensTexto = pedidoRow[COL.itens] || "";
+    const itensTextuais = linhaItensTexto
+      .split("\n")
+      .filter(l => l.trim().startsWith("•"))
+      .map(l => {
+        // Formato: • [SKU] REF — Nome | Cor: X | Qtd: N | R$ V
+        const m = l.match(/\[(.+?)\].+?—\s*(.+?)\s*\|\s*Cor:\s*(.+?)\s*\|\s*Qtd:\s*(\d+)\s*\|\s*(.+)/);
+        if (!m) return null;
+        const [, sku, nome, cor, qtd, valor] = m;
+        return {
+          product: { sku, name: nome },
+          size:    { ref: sku, label: "" },
+          color:   { name: cor, hex: "#C0392B" },
+          qty:     parseInt(qtd),
+          preco:   0,
+        };
+      })
+      .filter(Boolean);
+
+    const snapFallback = {
+      cart: itensTextuais,
+      form: {
+        nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend,
+        obs: [obs && obs !== "—" ? obs : ""].filter(Boolean).join("\n"),
+      },
       nrPedido: nr,
       desconto: { tipo: "%", valor: 0 },
       frete: 0,
-    });
+    };
+
+    // Se conseguiu reconstruir itens pelo texto, usa; senão monta PDF só com financeiro
+    if (snapFallback.cart.length === 0) {
+      snapFallback.form.obs = [
+        obs && obs !== "—" ? obs : "",
+        "— RESUMO FINANCEIRO —",
+        sub  && sub  !== "—" ? `Subtotal: ${sub}`  : "",
+        desc && desc !== "—" ? `Desconto: ${desc}` : "",
+        frt  && frt  !== "—" ? `Frete: ${frt}`     : "",
+        tot  && tot  !== "—" ? `Total: ${tot}`      : "",
+      ].filter(Boolean).join("\n");
+    }
+
+    abrirPDF(snapFallback);
   };
 
   return (
@@ -716,6 +781,7 @@ const PedidosScreen = memo(({ onBack }) => {
           <div style={{ background: VINHOL, border: `1px solid ${VINHO}33`, borderRadius: 10, padding: "14px 16px", margin: "12px 0" }}>
             <p style={{ color: VINHO, fontSize: 13, fontFamily: "'DM Sans',sans-serif", marginBottom: 8 }}>⚠ {erro}</p>
             <p className="mn" style={{ color: TEXT3, fontSize: 10 }}>Certifique-se de que o Apps Script está publicado com acesso "Qualquer pessoa".</p>
+            <button onClick={carregar} style={{ marginTop: 10, background: VERDE, color: "#fff", border: "none", borderRadius: 8, padding: "8px 16px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif", fontSize: 12, fontWeight: 700 }}>Tentar novamente</button>
           </div>
         )}
         {!loading && !erro && filtrados.length === 0 && (
@@ -763,19 +829,21 @@ const PedidosScreen = memo(({ onBack }) => {
                 {open && (
                   <div style={{ background: CARD2, padding: "14px 16px", borderTop: `1px solid ${BORDER}` }}>
 
-                    {/* ── Botão PDF ── */}
                     <button
                       onClick={() => !carregandoPDF && handleAbrirPDF(p)}
                       disabled={carregandoPDF}
                       style={{
-                        width: "100%", background: carregandoPDF ? "#999" : VINHO,
-                        color: "#fff", padding: "10px", borderRadius: 10, border: "none",
+                        width: "100%", background: carregandoPDF ? "#888" : VINHO,
+                        color: "#fff", padding: "11px", borderRadius: 10, border: "none",
                         cursor: carregandoPDF ? "not-allowed" : "pointer",
                         fontFamily: "'DM Sans',sans-serif", fontSize: 12, fontWeight: 700,
                         marginBottom: 12, display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
+                        opacity: carregandoPDF ? 0.8 : 1,
                       }}
                     >
-                      {carregandoPDF ? "⏳ Buscando dados..." : "🖨️ ABRIR / IMPRIMIR PDF"}
+                      {carregandoPDF
+                        ? "⏳ Buscando dados do pedido..."
+                        : "🖨️ ABRIR / IMPRIMIR PDF"}
                     </button>
 
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 16px", marginBottom: 12 }}>
@@ -822,7 +890,9 @@ const PedidosScreen = memo(({ onBack }) => {
   );
 });
 
-// ── APP ───────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// APP PRINCIPAL
+// ─────────────────────────────────────────────────────────────────────────────
 export default function App() {
   const [cat, setCat]         = useState("Todos");
   const [search, setSearch]   = useState("");
@@ -929,7 +999,8 @@ export default function App() {
           </div>
         )}
 
-        {screen === "pedidos" && <PedidosScreen onBack={() => setScreen("catalog")} />}
+        {/* ── TELAS ── */}
+        {screen === "pedidos"  && <PedidosScreen onBack={() => setScreen("catalog")} />}
 
         {screen === "catalog" && <>
           <div style={{ padding: "14px 20px 10px", background: BG, borderBottom: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
@@ -1107,7 +1178,6 @@ export default function App() {
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>NOME / EMPRESA *</p>
                 <input className="inp" type="text" value={form.nome} placeholder="Ex: Shopping Parque D. Pedro" autoComplete="off" onChange={e => setForm(prev => ({ ...prev, nome: e.target.value }))} />
               </div>
-
               <div style={{ marginBottom: 11 }}>
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>CNPJ</p>
                 <input className="inp" type="text" inputMode="numeric" value={form.cpfcnpj} placeholder="00.000.000/0001-00" autoComplete="off"
@@ -1117,7 +1187,6 @@ export default function App() {
                     setForm(prev => ({ ...prev, cpfcnpj: v }));
                   }} />
               </div>
-
               <div style={{ marginBottom: 11 }}>
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>WHATSAPP *</p>
                 <input className="inp" type="text" inputMode="numeric" value={form.whats} placeholder="(11) 99999-9999" autoComplete="off"
@@ -1127,12 +1196,10 @@ export default function App() {
                     setForm(prev => ({ ...prev, whats: v }));
                   }} />
               </div>
-
               <div style={{ marginBottom: 11 }}>
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>E-MAIL</p>
                 <input className="inp" type="email" value={form.email} placeholder="contato@empresa.com.br" autoComplete="off" onChange={e => setForm(prev => ({ ...prev, email: e.target.value }))} />
               </div>
-
               <div style={{ marginBottom: 18 }}>
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>OBSERVAÇÕES</p>
                 <textarea className="inp" value={form.obs} placeholder="Data do evento, detalhes especiais..." rows={2} style={{ resize: "none" }} onChange={e => setForm(prev => ({ ...prev, obs: e.target.value }))} />
