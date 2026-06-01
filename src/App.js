@@ -4,7 +4,6 @@ const VERDE = "#2D5A27", VERDE2 = "#4A7A42", VERDES = "#E8F0E6";
 const VINHO = "#8B1A2A", VINHOL = "#F5E8EA";
 const BG = "#FAF8F5", CARD = "#FFFFFF", CARD2 = "#F5F0EB";
 const TEXT = "#1A1A1A", TEXT2 = "#555555", TEXT3 = "#888888", BORDER = "#E8E0D8";
-const CL = "https://res.cloudinary.com/djeliz676/image/upload/f_auto,q_auto/";
 
 const F = {
   vvm:          "https://res.cloudinary.com/djeliz676/image/upload/f_auto,q_auto/v1779469881/6645645_dd5hsu.jpg",
@@ -80,17 +79,17 @@ const F = {
 const PH = F.logo;
 const PRECO_UN = 10.00;
 
-const cVVM   = [{ name: "Vermelho", hex: "#C0392B", photo: F.vvm_verm }, { name: "Dourado", hex: "#CFB53B" }];
-const cVGBC  = [{ name: "Vermelho", hex: "#C0392B" }, { name: "Verde", hex: "#2D5A27" }, { name: "Branco", hex: "#F5F5F0" }, { name: "Champagne", hex: "#C8B89A" }, { name: "Dourado", hex: "#CFB53B" }];
+const cVVM   = [{ name: "Vermelho", hex: "#C0392B", photo: F.vvm_verm }];
+const cVGBC  = [{ name: "Vermelho", hex: "#C0392B" }, { name: "Verde", hex: "#2D5A27" }, { name: "Branco", hex: "#F5F5F0" }, { name: "Champagne", hex: "#C8B89A" }];
 const cVGBCL = [...cVGBC, { name: "Lamê Dourado", hex: "#CFB53B" }];
 const cVGBCLD= [...cVGBC, { name: "Dourado", hex: "#CFB53B" }];
-const cVM    = [{ name: "Vermelho", hex: "#C0392B" }, { name: "Dourado", hex: "#CFB53B" }];
-const cVD    = [{ name: "Vermelho + Dourado", hex: "#C0392B" }, { name: "Dourado", hex: "#CFB53B" }];
-const cVP    = [{ name: "Vermelho + Preto", hex: "#C0392B" }, { name: "Dourado", hex: "#CFB53B" }];
-const cVB    = [{ name: "Vermelho + Branco", hex: "#C0392B" }, { name: "Dourado", hex: "#CFB53B" }];
+const cVM    = [{ name: "Vermelho", hex: "#C0392B" }];
+const cVD    = [{ name: "Vermelho + Dourado", hex: "#C0392B" }];
+const cVP    = [{ name: "Vermelho + Preto", hex: "#C0392B" }];
+const cVB    = [{ name: "Vermelho + Branco", hex: "#C0392B" }];
 const cLD    = [{ name: "Dourado", hex: "#CFB53B" }];
 const cNAT   = [{ name: "Natural", hex: "#C8B89A" }];
-const cBR    = [{ name: "Branco", hex: "#F5F5F0" }, { name: "Dourado", hex: "#CFB53B" }];
+const cBR    = [{ name: "Branco", hex: "#F5F5F0" }];
 const cUNI   = [{ name: "Cor Única", hex: "#C0392B" }];
 const cVNude = [{ name: "Vermelho e Nude", hex: "#C0392B" }];
 const cVNDou = [{ name: "Vermelho, Nude e Dourado", hex: "#C0392B" }];
@@ -115,96 +114,105 @@ const TC = {
 };
 
 const PRODUCTS = [
-  { sku:"EVV",      name:"Escapulário Veludo Vermelho",                subtitle:"200cm",                  category:"Veludo",    material:"100% poliéster",            acabamento:ACF,  prazo:P30,           estoque:100, preco:PRECO_UN, desc:"Escapulário 1mt confeccionado em Veludo Vermelho tradicional.",                                           cores:cVM,    photo:F.escapulario, ...TC.V, sizes:[{label:"200cm",ref:"200EVV",min:1,estoque:100,preco:94.90}] },
-  { sku:"EVVDec",     name:"Escapulário Veludo Vermelho Decorado",     subtitle:"200cm",           category:"Veludo",  material:"100% poliéster", acabamento:"Costura francesa e galho natalino.", prazo:"31 dias úteis", estoque:60, preco:159.90, desc:"Escapulário 1mt confeccionado em Veludo Vermelho com decoração natalina.", cores:cVM, photo:F.escap_flor, ...TC.V, sizes:[{label:"200cm",ref:"200EVVDec",min:1,estoque:60,preco:159.90}] },
-  { sku:"EVVLis",     name:"Escapulário Veludo Vermelho Listra",       subtitle:"200cm",           category:"Veludo",  material:"100% poliéster", acabamento:"Costura francesa e galho natalino.", prazo:"31 dias úteis", estoque:36, preco:183.90, desc:"Escapulário 1mt confeccionado em Veludo Vermelho com listra natalina.", cores:cVM, photo:F.escap_listra, ...TC.V, sizes:[{label:"200cm",ref:"200EVVLis",min:1,estoque:36,preco:183.90}] },
-  { sku:"EVVXdz",   name:"Escapulário Veludo Vermelho Xadrez",         subtitle:"200cm",                  category:"Veludo",    material:"100% poliéster",            acabamento:"Costura francesa e galho natalino.", prazo:"31 dias úteis", estoque:500, preco:PRECO_UN, desc:"Escapulário em Veludo Vermelho com decoração xadrez natalino.", cores:cVM, photo:F.escap_xdz, ...TC.V, sizes:[{label:"200cm",ref:"200EVVXdz",min:1,estoque:36,preco:183.90}] },
-  { sku:"LDR",      name:"Laço Lamê Dourado",                         subtitle:"Brilho metálico",        category:"Lamê",      material:"100% poliéster metalizado", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em Lamê dourado; brilho intenso.",                                         cores:cLD,    photo:F.ldr,         ...TC.L, sizes:[{label:"20cm",ref:"20LDR",min:1,estoque:500,preco:43.00},{label:"30cm",ref:"30LDR",min:1,estoque:500,preco:61.90},{label:"40cm",ref:"40LDR",min:1,estoque:500,preco:98.90}] },
-  { sku:"TL",       name:"Laço Tecido Listra Vermelho/Branco",        subtitle:"Listrado clássico",      category:"Estampado", material:"100% algodão",              acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em tecido listrado.",                                                      cores:cVB,    photo:F.tl,          ...TC.E, sizes:[{label:"20cm",ref:"20TL",min:1,estoque:500,preco:21.90},{label:"30cm",ref:"30TL",min:1,estoque:500,preco:33.90},{label:"40cm",ref:"40TL",min:1,estoque:500,preco:44.70}] },
-  { sku:"VAL",      name:"Laço Veludo Ale",                           subtitle:"20cm a 40cm",            category:"Veludo",    material:"100% poliéster",            acabamento:APL,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em Veludo Cristal.",                                                       cores:cVGBC,  photo:F.val,         ...TC.V, sizes:[{label:"20cm",ref:"20VAl",min:1,estoque:500,preco:26.90},{label:"30cm",ref:"30VAl",min:1,estoque:500,preco:39.90},{label:"40cm",ref:"40VAl",min:1,estoque:500,preco:56.20}] },
-  { sku:"VAleBGSol",  name:"Laço Veludo Ale Borboleta Gravata Solta",  subtitle:"60cm",            category:"Veludo",  material:"100% poliéster", acabamento:"Estrutura interna com placa, arame e costura francesa.", prazo:P30, estoque:500, preco:289.00, desc:"Laço confeccionado em Veludo tradicional, com borboleta extra larga e gravata solta.", cores:[{name:"Vermelho",hex:"#C0392B"},{name:"Champagne",hex:"#C8B89A"}], photo:F.laco_branco, ...TC.V, sizes:[{label:"60cm",ref:"60VAleBGSol",min:1,estoque:500,preco:289.00}] },
-  { sku:"VAlMinGL", name:"Laço Veludo Ale Min. Gravata Longa",        subtitle:"50cm e 80cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço com borboleta extra larga e Gravata extra longa.",                                                   cores:cVGBCLD,photo:F.veludo_novo,  ...TC.V, sizes:[{label:"50cm",ref:"50VAlMinGL",min:1,estoque:500,preco:199.00},{label:"80cm",ref:"80VAlMinGL",min:1,estoque:500,preco:289.00}] },
-  { sku:"VAlTri",   name:"Laço Veludo Ale Triplo",                    subtitle:"90cm",                   category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço com borboleta tripla e gravata tradicional.",                                                        cores:cVGBCLD,photo:F.veludo_triplo,...TC.V, sizes:[{label:"90cm",ref:"90VAlTri",min:1,estoque:500,preco:389.80}] },
-  { sku:"VALLIND",  name:"Laço Veludo Ale — Lindíssimo",              subtitle:"30cm a 90cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço duplo confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata.",                  cores:cVGBC,  photo:F.val_lind,    ...TC.V, sizes:[{label:"30cm",ref:"30VAl/Lind",min:1,estoque:500,preco:58.00},{label:"60cm",ref:"60VAl/Lind",min:1,estoque:500,preco:208.90},{label:"90cm",ref:"90VAl/Lind",min:1,estoque:500,preco:398.00}] },
-  { sku:"LBCO",     name:"Laço Veludo Branco",                        subtitle:"20cm a 40cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço clássico confeccionado em Veludo na cor Branco.",                                                    cores:cBR,    photo:F.laco_branco, ...TC.V, sizes:[{label:"20cm",ref:"20LBco",min:1,estoque:500,preco:26.90},{label:"30cm",ref:"30LBco",min:1,estoque:500,preco:39.90},{label:"40cm",ref:"40LBco",min:1,estoque:500,preco:56.20}] },
-  { sku:"VALGL",    name:"Laço Veludo Cristal Gravata Longa",         subtitle:"30cm a 50cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata ao descer pela árvore ou coluna.", cores:cVGBC,photo:F.val_gl,...TC.V,sizes:[{label:"30cm",ref:"30VaL",min:1,estoque:500,preco:43.00},{label:"40cm",ref:"40VaL",min:1,estoque:500,preco:61.90},{label:"50cm",ref:"50VaL",min:1,estoque:500,preco:98.90}] },
-  { sku:"VDuGV",      name:"Laço Veludo Duplo Gravata V",              subtitle:"100cm",           category:"Veludo",  material:"100% poliéster", acabamento:"Estrutura interna com placa, arame e costura francesa.", prazo:P30, estoque:500, preco:369.00, desc:"Laço confeccionado em Veludo tradicional, com borboleta dupla e gravata em V.", cores:cVVM, photo:PH, ...TC.V, sizes:[{label:"100cm",ref:"100VDuGV",min:1,estoque:500,preco:369.00}] },
-  { sku:"VVM",      name:"Laço Veludo Vermelho",                     subtitle:"20cm a 100cm",           category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"O clássico da linha; confeccionado em Veludo tradicional.",                                       cores:cVVM,   photo:F.vvm,         ...TC.V, sizes:[{label:"20cm",ref:"20V",min:1,estoque:500,preco:21.90},{label:"30cm",ref:"30V",min:1,estoque:500,preco:33.90},{label:"40cm",ref:"40V",min:1,estoque:500,preco:46.90},{label:"50cm",ref:"50V",min:1,estoque:500,preco:79.90},{label:"80cm",ref:"80V",min:1,estoque:500,preco:197.90},{label:"100cm",ref:"100V",min:1,estoque:500,preco:269.00}] },
-  { sku:"VD",       name:"Laço Veludo Vermelho com Dourado",          subtitle:"Borda ouro",             category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda ouro.",                                               cores:cVD,    photo:F.vd,          ...TC.E, sizes:[{label:"20cm",ref:"20VD",min:1,estoque:500,preco:24.90},{label:"30cm",ref:"30VD",min:1,estoque:500,preco:36.90},{label:"40cm",ref:"40VD",min:1,estoque:500,preco:48.90}] },
-  { sku:"VFIXDZ",   name:"Laço Veludo Vermelho Fita Xadrez",          subtitle:"Fita xadrez",            category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:36, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com fita xadrez decorativa central.",                          cores:cVM,    photo:F.vfixdz,      ...TC.E, sizes:[{label:"40cm",ref:"40VFiXdz",min:1,estoque:36,preco:56.90}] },
-  { sku:"VL",       name:"Laço Veludo Vermelho Listra",               subtitle:"Borda listrada",         category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda de listra.",                                         cores:cVM,    photo:F.vl,          ...TC.E, sizes:[{label:"20cm",ref:"20VL",min:1,estoque:500,preco:24.90},{label:"30cm",ref:"30VL",min:1,estoque:500,preco:36.90},{label:"40cm",ref:"40VL",min:1,estoque:500,preco:48.90}] },
-  { sku:"VXC",      name:"Laço Veludo Vermelho Meio Xadrez",          subtitle:"Xadrez central",         category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em tecido xadrez, com borda em veludo.",                                   cores:cVM,    photo:F.vxc,         ...TC.E, sizes:[{label:"20cm",ref:"20VXC",min:1,estoque:500,preco:27.90},{label:"30cm",ref:"30VXC",min:1,estoque:500,preco:39.90},{label:"40cm",ref:"40VXC",min:1,estoque:500,preco:53.90}] },
-  { sku:"VMinGL",     name:"Laço Veludo Vermelho Min",                 subtitle:"50cm",            category:"Veludo",  material:"100% poliéster", acabamento:"Estrutura interna com placa e costura francesa.", prazo:P30, estoque:500, preco:169.40, desc:"Laço confeccionado em Veludo Cristal, com borboleta tripla e gravata tradicional.", cores:cVVM, photo:PH, ...TC.V, sizes:[{label:"50cm",ref:"50VMinGL",min:1,estoque:500,preco:169.40}] },
-  { sku:"VSout",      name:"Laço Veludo Vermelho Soutache",            subtitle:"20cm a 40cm",     category:"Veludo",  material:"100% poliéster", acabamento:"Costura francesa, estrutura interna e soutache dourado.", prazo:P30, estoque:108, preco:32.90, desc:"Laço confeccionado em Veludo tradicional, adornado com fita natalina xadrez e soutache dourado.", cores:cVVM, photo:PH, ...TC.V, sizes:[{label:"20cm",ref:"20VSout",min:1,estoque:48,preco:32.90},{label:"30cm",ref:"30VSout",min:1,estoque:36,preco:51.80},{label:"40cm",ref:"40VSout",min:1,estoque:24,preco:69.50}] },
-  { sku:"VX",       name:"Laço Veludo Vermelho Xadrez",               subtitle:"Borda xadrez",           category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda xadrez.",                                            cores:cVM,    photo:F.vx,          ...TC.E, sizes:[{label:"20cm",ref:"20VX",min:1,estoque:500,preco:24.90},{label:"30cm",ref:"30VX",min:1,estoque:500,preco:36.90},{label:"40cm",ref:"40VX",min:1,estoque:500,preco:48.90}] },
-  { sku:"VXP",      name:"Laço Veludo Vermelho Xadrez/Preto",         subtitle:"Flanela xadrez",         category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço com flanela xadrez Vermelho/Preto central.",                                                         cores:cVP,    photo:F.vxp,         ...TC.E, sizes:[{label:"20cm",ref:"20VXP",min:1,estoque:12,preco:24.90},{label:"30cm",ref:"30VXP",min:1,estoque:43,preco:31.90},{label:"40cm",ref:"40VXP",min:1,estoque:58,preco:39.90}] },
-  { sku:"BTLT",     name:"Bola Tecido Listrado Decorada",              subtitle:"Listrado Verm/Branco",   category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola coberta com tecido listrado Vermelho/Branco e decorada com galhos natalinos.",                      cores:cVB,    photo:F.bola_lst,    ...TC.B, sizes:[{label:"15cm",ref:"15BTLt",min:1,estoque:500,preco:29.80}] },
-  { sku:"BTXDZ",    name:"Bola Tecido Xadrez Decorada",                subtitle:"Xadrez Verm/Branco",     category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola coberta com tecido xadrez Vermelho/Branco e decorada com galhos natalinos.",                         cores:cVB,    photo:F.bola_xdz,    ...TC.B, sizes:[{label:"15cm",ref:"15BTXdz",min:1,estoque:500,preco:29.80}] },
-  { sku:"BTXDZP",   name:"Bola Tecido Xadrez Vermelho/Preto",          subtitle:"Xadrez Verm/Preto",      category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola coberta com tecido Xadrez Vermelho/Preto e decorada com galhos natalinos.",                         cores:cVP,    photo:F.bola_pt,     ...TC.B, sizes:[{label:"15cm",ref:"15BTXdzVm/Pt",min:1,estoque:500,preco:29.80}] },
-  { sku:"BVAL",     name:"Bola Veludo Ale",                            subtitle:"12cm a 25cm",            category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola tradicional coberta com veludo cristal.",                                                            cores:cVGBCL, photo:F.bola_vm,     ...TC.B, sizes:[{label:"12cm",ref:"12BVAl",min:1,estoque:12,preco:19.90},{label:"15cm",ref:"15BVAl",min:1,estoque:10,preco:23.20},{label:"20cm",ref:"20BVAl",min:1,estoque:8,preco:39.20},{label:"25cm",ref:"25BVAl",min:1,estoque:6,preco:49.80}] },
-  { sku:"BFCODRLÇ", name:"Bota Feltro Cordeiro Laço",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:10,  preco:29.80,    desc:"Bota em feltro cordeiro com laço.",                                                                       cores:cNAT,   photo:F.bota_laco_dou,...TC.S,sizes:[{label:"50cm",ref:"50BFCODRLÇ",min:1,estoque:10,preco:29.80}] },
-  { sku:"BFCCXDZ",  name:"Bota Feltro Cru Cervo Xadrez",               subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:6,   preco:39.80,    desc:"Bota em feltro cru com cervo xadrez.",                                                                   cores:cVM,    photo:F.bfccxdz,     ...TC.S, sizes:[{label:"50cm",ref:"50BFCCXDZ",min:1,estoque:6,preco:39.80}] },
-  { sku:"BFVB",     name:"Bota Feltro Verde Bengala",                   subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:2,   preco:79.90,    desc:"Bota em feltro verde bengala.",                                                                          cores:cNAT,   photo:F.bfvb,        ...TC.S, sizes:[{label:"50cm",ref:"50BFVB",min:1,estoque:2,preco:79.90}] },
-  { sku:"BFVDEPX",  name:"Bota Feltro Verde Espinha Peixe",             subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:13,  preco:49.80,    desc:"Bota em feltro verde espinha de peixe.",                                                                 cores:cNAT,   photo:F.bfvdepx,     ...TC.S, sizes:[{label:"50cm",ref:"50BFVDEPX",min:1,estoque:13,preco:49.80}] },
-  { sku:"BFVOC",    name:"Bota Feltro Verde Oliva Cervo",               subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:29.80,    desc:"Bota em feltro verde oliva com cervo.",                                                                  cores:cNAT,   photo:F.bfvoc,       ...TC.S, sizes:[{label:"50cm",ref:"50BFVOC",min:1,estoque:4,preco:29.80}] },
-  { sku:"BFVO",     name:"Bota Feltro Verde Ossinho",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:49.80,    desc:"Bota em feltro verde com ossinho.",                                                                       cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780058523/WhatsApp_Image_2026-05-14_at_10.42.38432432_aac4sl.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BFVO",min:1,estoque:4,preco:49.80}] },
-  { sku:"BFVMCPT",  name:"Bota Feltro Vermelho Cachorrinho Preto",      subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:5,   preco:69.70,    desc:"Bota em feltro vermelho com cachorrinho preto.",                                                         cores:cNAT,   photo:F.bfvmcpt,     ...TC.S, sizes:[{label:"50cm",ref:"50BFVMCPT",min:1,estoque:5,preco:69.70}] },
-  { sku:"BFVCBR",   name:"Bota Feltro Vermelho Cervo Branco",          subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:12,  preco:39.80,    desc:"Bota em feltro vermelho com cervo branco.",                                                              cores:cVM,    photo:F.bfvcbr,      ...TC.S, sizes:[{label:"50cm",ref:"50BFVCBR",min:1,estoque:12,preco:39.80}] },
-  { sku:"BXFDZP",   name:"Bota Flanelada Xadrez/Pelúcia",              subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:10,  preco:68.70,    desc:"Bota em tecido flanelado xadrez com pelúcia.",                                                           cores:cNAT,   photo:F.bota_flanela,...TC.S, sizes:[{label:"50cm",ref:"50BXFDZP",min:1,estoque:10,preco:68.70}] },
-  { sku:"BJCM",     name:"Bota Juta Cervo Madeira",                      subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:69.50,    desc:"Bota em juta com cervo madeira.",                                                                         cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779739791/bota_reninha_l4tydy.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BJCM",min:1,estoque:4,preco:69.50}] },
-  { sku:"BJR",      name:"Bota Juta Renda",                            subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:7,   preco:59.80,    desc:"Bota decorativa em Juta com Renda.",                                                                     cores:cNAT,   photo:F.bjr,         ...TC.S, sizes:[{label:"50cm",ref:"50BJR",min:1,estoque:7,preco:59.80}] },
-  { sku:"BJXDZN",   name:"Bota Juta Xadrez Natalino",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:16,  preco:69.50,    desc:"Bota em juta com xadrez natalino.",                                                                       cores:cNAT,   photo:F.bjxdzn,      ...TC.S, sizes:[{label:"50cm",ref:"50BJXDZN",min:1,estoque:16,preco:69.50}] },
-  { sku:"BNDDec",     name:"Bota Natalina Dourada Decorada",           subtitle:"50cm",            category:"Saldão",  material:"90% Poliéster/10% Plástico", acabamento:"Costura francesa, pelúcia e galho natalino.", prazo:P30, estoque:12, preco:89.00, desc:"Bota Natalina 50cm em Veludo Velboa dourado, pelúcia e galho natalino.", cores:cUNI, photo:F.bota_dourada, ...TC.S, sizes:[{label:"50cm",ref:"50BNDDec",min:1,estoque:12,preco:89.00}] },
-  { sku:"BNNDec",     name:"Bota Natalina Noel Decorada",              subtitle:"50cm",            category:"Saldão",  material:"90% Poliéster/10% Plástico", acabamento:"Costura francesa, pelúcia e galho natalino.", prazo:P30, estoque:21, preco:89.00, desc:"Bota Natalina 50cm em Veludo Velboa, pelúcia e galho natalino.", cores:cUNI, photo:F.bota_alce, ...TC.S, sizes:[{label:"50cm",ref:"50BNNDec",min:1,estoque:21,preco:89.00}] },
-  { sku:"BNXdzDec",   name:"Bota Natalina Xadrez Decorada",            subtitle:"50cm",            category:"Saldão",  material:"100% Poliéster", acabamento:"Costura francesa e pelúcia.", prazo:P30, estoque:7, preco:89.00, desc:"Bota Natalina 50cm em Flanela Xadrez, pelúcia e galho natalino.", cores:cUNI, photo:F.bota_pelucia_dec, ...TC.S, sizes:[{label:"50cm",ref:"50BNXdzDec",min:1,estoque:7,preco:89.00}] },
-  { sku:"BVVm",     name:"Bota Velboa Vermelho 50cm",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:ACFP, prazo:P30,           estoque:3,   preco:19.90,    desc:"Bota Natalina 50cm em Veludo Velboa e pelúcia.",                                                         cores:cUNI,   photo:F.bota_bolinha,...TC.S, sizes:[{label:"50cm",ref:"50BVVm",min:1,estoque:3,preco:19.90}] },
-  { sku:"BVPArDr",  name:"Bota Velboa/Pelúcia Árvore",                   subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:27,  preco:34.80,    desc:"Bota em velboa/pelúcia com árvore.",                                                                      cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779740019/bota_arvore_mp9hpw.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BVPArDr",min:1,estoque:27,preco:34.80}] },
+  { sku:"EVV",      name:"Escapulário Veludo Vermelho",                subtitle:"200cm",                  category:"Veludo",    material:"100% poliéster",            acabamento:ACF,  prazo:P30,           estoque:100, preco:PRECO_UN, desc:"Escapulário 1mt confeccionado em Veludo Vermelho tradicional.",                                           cores:cVM,    photo:F.escapulario, ...TC.V, sizes:[{label:"200cm",ref:"200EVV",min:3,estoque:100,preco:94.90}] },
+  { sku:"EVVDec",     name:"Escapulário Veludo Vermelho Decorado",     subtitle:"200cm",           category:"Veludo",  material:"100% poliéster", acabamento:"Costura francesa e galho natalino.", prazo:"31 dias úteis", estoque:60, preco:159.90, desc:"Escapulário 1mt confeccionado em Veludo Vermelho com decoração natalina.", cores:cVM, photo:F.escap_flor, ...TC.V, sizes:[{label:"200cm",ref:"200EVVDec",min:3,estoque:60,preco:159.90}] },
+  { sku:"EVVLis",     name:"Escapulário Veludo Vermelho Listra",       subtitle:"200cm",           category:"Veludo",  material:"100% poliéster", acabamento:"Costura francesa e galho natalino.", prazo:"31 dias úteis", estoque:36, preco:183.90, desc:"Escapulário 1mt confeccionado em Veludo Vermelho com listra natalina.", cores:cVM, photo:F.escap_listra, ...TC.V, sizes:[{label:"200cm",ref:"200EVVLis",min:3,estoque:36,preco:183.90}] },
+  { sku:"EVVXdz",   name:"Escapulário Veludo Vermelho Xadrez",         subtitle:"200cm",                  category:"Veludo",    material:"100% poliéster",            acabamento:"Costura francesa e galho natalino.", prazo:"31 dias úteis", estoque:500, preco:PRECO_UN, desc:"Escapulário em Veludo Vermelho com decoração xadrez natalino.", cores:cVM, photo:F.escap_xdz, ...TC.V, sizes:[{label:"200cm",ref:"200EVVXdz",min:3,estoque:36,preco:183.90}] },
+  { sku:"LDR",      name:"Laço Lamê Dourado",                         subtitle:"Brilho metálico",        category:"Lamê",      material:"100% poliéster metalizado", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em Lamê dourado; brilho intenso.",                                         cores:cLD,    photo:F.ldr,         ...TC.L, sizes:[{label:"20cm",ref:"20LDR",min:12,estoque:500,preco:43.00},{label:"30cm",ref:"30LDR",min:10,estoque:500,preco:61.90},{label:"40cm",ref:"40LDR",min:8,estoque:500,preco:98.90}] },
+  { sku:"TL",       name:"Laço Tecido Listra Vermelho/Branco",        subtitle:"Listrado clássico",      category:"Estampado", material:"100% algodão",              acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em tecido listrado.",                                                      cores:cVB,    photo:F.tl,          ...TC.E, sizes:[{label:"20cm",ref:"20TL",min:12,estoque:500,preco:21.90},{label:"30cm",ref:"30TL",min:10,estoque:500,preco:33.90},{label:"40cm",ref:"40TL",min:8,estoque:500,preco:44.70}] },
+  { sku:"VAL",      name:"Laço Veludo Ale",                           subtitle:"20cm a 40cm",            category:"Veludo",    material:"100% poliéster",            acabamento:APL,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em Veludo Cristal.",                                                       cores:cVGBC,  photo:F.val,         ...TC.V, sizes:[{label:"20cm",ref:"20VAl",min:12,estoque:500,preco:26.90},{label:"30cm",ref:"30VAl",min:10,estoque:500,preco:39.90},{label:"40cm",ref:"40VAl",min:8,estoque:500,preco:56.20}] },
+  { sku:"VAleBGSol",  name:"Laço Veludo Ale Borboleta Gravata Solta",  subtitle:"60cm",            category:"Veludo",  material:"100% poliéster", acabamento:"Estrutura interna com placa, arame e costura francesa.", prazo:P30, estoque:500, preco:289.00, desc:"Laço confeccionado em Veludo tradicional, com borboleta extra larga e gravata solta.", cores:[{name:"Vermelho",hex:"#C0392B"},{name:"Champagne",hex:"#C8B89A"}], photo:F.laco_branco, ...TC.V, sizes:[{label:"60cm",ref:"60VAleBGSol",min:2,estoque:500,preco:289.00}] },
+  { sku:"VAlMinGL", name:"Laço Veludo Ale Min. Gravata Longa",        subtitle:"50cm e 80cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço com borboleta extra larga e Gravata extra longa.",                                                   cores:cVGBCLD,photo:F.veludo_novo,  ...TC.V, sizes:[{label:"50cm",ref:"50VAlMinGL",min:4,estoque:500,preco:199.00},{label:"80cm",ref:"80VAlMinGL",min:2,estoque:500,preco:289.00}] },
+  { sku:"VAlTri",   name:"Laço Veludo Ale Triplo",                    subtitle:"90cm",                   category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço com borboleta tripla e gravata tradicional.",                                                        cores:cVGBCLD,photo:F.veludo_triplo,...TC.V, sizes:[{label:"90cm",ref:"90VAlTri",min:2,estoque:500,preco:389.80}] },
+  { sku:"VALLIND",  name:"Laço Veludo Ale — Lindíssimo",              subtitle:"30cm a 90cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AAR,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço duplo confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata.",                  cores:cVGBC,  photo:F.val_lind,    ...TC.V, sizes:[{label:"30cm",ref:"30VAl/Lind",min:6,estoque:500,preco:58.00},{label:"60cm",ref:"60VAl/Lind",min:4,estoque:500,preco:208.90},{label:"90cm",ref:"90VAl/Lind",min:2,estoque:500,preco:398.00}] },
+  { sku:"LBCO",     name:"Laço Veludo Branco",                        subtitle:"20cm a 40cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço clássico confeccionado em Veludo na cor Branco.",                                                    cores:cBR,    photo:F.laco_branco, ...TC.V, sizes:[{label:"20cm",ref:"20LBco",min:12,estoque:500,preco:26.90},{label:"30cm",ref:"30LBco",min:10,estoque:500,preco:39.90},{label:"40cm",ref:"40LBco",min:8,estoque:500,preco:56.20}] },
+  { sku:"VALGL",    name:"Laço Veludo Cristal Gravata Longa",         subtitle:"30cm a 50cm",            category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Confeccionado em Veludo Cristal, com Gravata Longa que cria efeito cascata ao descer pela árvore ou coluna.", cores:cVGBC,photo:F.val_gl,...TC.V,sizes:[{label:"30cm",ref:"30VaL",min:10,estoque:500,preco:43.00},{label:"40cm",ref:"40VaL",min:8,estoque:500,preco:61.90},{label:"50cm",ref:"50VaL",min:6,estoque:500,preco:98.90}] },
+  { sku:"VDuGV",      name:"Laço Veludo Duplo Gravata V",              subtitle:"100cm",           category:"Veludo",  material:"100% poliéster", acabamento:"Estrutura interna com placa, arame e costura francesa.", prazo:P30, estoque:500, preco:369.00, desc:"Laço confeccionado em Veludo tradicional, com borboleta dupla e gravata em V.", cores:cVVM, photo:F.laco_gravata_tripla, ...TC.V, sizes:[{label:"100cm",ref:"100VDuGV",min:2,estoque:500,preco:369.00}] },
+  { sku:"VVM",      name:"Laço Veludo Vermelho",                     subtitle:"20cm a 100cm",           category:"Veludo",    material:"100% poliéster",            acabamento:AP,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"O clássico da linha; confeccionado em Veludo tradicional.",                                       cores:cVVM,   photo:F.vvm,         ...TC.V, sizes:[{label:"20cm",ref:"20V",min:15,estoque:500,preco:21.90},{label:"30cm",ref:"30V",min:12,estoque:500,preco:33.90},{label:"40cm",ref:"40V",min:10,estoque:500,preco:46.90},{label:"50cm",ref:"50V",min:6,estoque:500,preco:79.90},{label:"80cm",ref:"80V",min:3,estoque:500,preco:197.90},{label:"100cm",ref:"100V",min:2,estoque:500,preco:269.00}] },
+  { sku:"VD",       name:"Laço Veludo Vermelho com Dourado",          subtitle:"Borda ouro",             category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda ouro.",                                               cores:cVD,    photo:F.vd,          ...TC.E, sizes:[{label:"20cm",ref:"20VD",min:12,estoque:500,preco:24.90},{label:"30cm",ref:"30VD",min:10,estoque:500,preco:36.90},{label:"40cm",ref:"40VD",min:8,estoque:500,preco:48.90}] },
+  { sku:"VFIXDZ",   name:"Laço Veludo Vermelho Fita Xadrez",          subtitle:"Fita xadrez",            category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:36, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com fita xadrez decorativa central.",                          cores:cVM,    photo:F.vfixdz,      ...TC.E, sizes:[{label:"40cm",ref:"40VFiXdz",min:10,estoque:36,preco:56.90}] },
+  { sku:"VL",       name:"Laço Veludo Vermelho Listra",               subtitle:"Borda listrada",         category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda de listra.",                                         cores:cVM,    photo:F.vl,          ...TC.E, sizes:[{label:"20cm",ref:"20VL",min:12,estoque:500,preco:24.90},{label:"30cm",ref:"30VL",min:10,estoque:500,preco:36.90},{label:"40cm",ref:"40VL",min:8,estoque:500,preco:48.90}] },
+  { sku:"VXC",      name:"Laço Veludo Vermelho Meio Xadrez",          subtitle:"Xadrez central",         category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço tradicional confeccionado em tecido xadrez, com borda em veludo.",                                   cores:cVM,    photo:F.vxc,         ...TC.E, sizes:[{label:"20cm",ref:"20VXC",min:12,estoque:500,preco:27.90},{label:"30cm",ref:"30VXC",min:10,estoque:500,preco:39.90},{label:"40cm",ref:"40VXC",min:8,estoque:500,preco:53.90}] },
+  { sku:"VMinGL",     name:"Laço Veludo Vermelho Min",                 subtitle:"50cm",            category:"Veludo",  material:"100% poliéster", acabamento:"Estrutura interna com placa e costura francesa.", prazo:P30, estoque:500, preco:169.40, desc:"Laço confeccionado em Veludo Cristal, com borboleta tripla e gravata tradicional.", cores:cVVM, photo:F.vaimin, ...TC.V, sizes:[{label:"50cm",ref:"50VMinGL",min:4,estoque:500,preco:169.40}] },
+  { sku:"VSout",      name:"Laço Veludo Vermelho Soutache",            subtitle:"20cm a 40cm",     category:"Veludo",  material:"100% poliéster", acabamento:"Costura francesa, estrutura interna e soutache dourado.", prazo:P30, estoque:108, preco:32.90, desc:"Laço confeccionado em Veludo tradicional, adornado com fita natalina xadrez e soutache dourado.", cores:cVVM, photo:F.laco_soutache, ...TC.V, sizes:[{label:"20cm",ref:"20VSout",min:1,estoque:48,preco:32.90},{label:"30cm",ref:"30VSout",min:1,estoque:36,preco:51.80},{label:"40cm",ref:"40VSout",min:1,estoque:24,preco:69.50}] },
+  { sku:"VX",       name:"Laço Veludo Vermelho Xadrez",               subtitle:"Borda xadrez",           category:"Estampado", material:"90% poliéster/10% algodão", acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço confeccionado em Veludo Tradicional, com borda xadrez.",                                            cores:cVM,    photo:F.vx,          ...TC.E, sizes:[{label:"20cm",ref:"20VX",min:12,estoque:500,preco:24.90},{label:"30cm",ref:"30VX",min:10,estoque:500,preco:36.90},{label:"40cm",ref:"40VX",min:8,estoque:500,preco:48.90}] },
+  { sku:"VXP",      name:"Laço Veludo Vermelho Xadrez/Preto",         subtitle:"Flanela xadrez",         category:"Estampado", material:"100% poliéster",            acabamento:AE,   prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Laço com flanela xadrez Vermelho/Preto central.",                                                         cores:cVP,    photo:F.vxp,         ...TC.E, sizes:[{label:"20cm",ref:"20VXP",min:12,estoque:12,preco:24.90},{label:"30cm",ref:"30VXP",min:10,estoque:43,preco:31.90},{label:"40cm",ref:"40VXP",min:8,estoque:58,preco:39.90}] },
+  { sku:"BTLT",     name:"Bola Tecido Listrado Decorada",              subtitle:"Listrado Verm/Branco",   category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola coberta com tecido listrado Vermelho/Branco e decorada com galhos natalinos.",                      cores:cVB,    photo:F.bola_lst,    ...TC.B, sizes:[{label:"15cm",ref:"15BTLt",min:10,estoque:500,preco:29.80}] },
+  { sku:"BTXDZ",    name:"Bola Tecido Xadrez Decorada",                subtitle:"Xadrez Verm/Branco",     category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola coberta com tecido xadrez Vermelho/Branco e decorada com galhos natalinos.",                         cores:cVB,    photo:F.bola_xdz,    ...TC.B, sizes:[{label:"15cm",ref:"15BTXdz",min:10,estoque:500,preco:29.80}] },
+  { sku:"BTXDZP",   name:"Bola Tecido Xadrez Vermelho/Preto",          subtitle:"Xadrez Verm/Preto",      category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola coberta com tecido Xadrez Vermelho/Preto e decorada com galhos natalinos.",                         cores:cVP,    photo:F.bola_pt,     ...TC.B, sizes:[{label:"15cm",ref:"15BTXdzVm/Pt",min:10,estoque:500,preco:29.80}] },
+  { sku:"BVAL",     name:"Bola Veludo Ale",                            subtitle:"12cm a 25cm",            category:"Bolas",     material:"Isopor e poliéster",        acabamento:AIS,  prazo:P30,           estoque:500, preco:PRECO_UN, desc:"Bola tradicional coberta com veludo cristal.",                                                            cores:cVGBCL, photo:F.bola_vm,     ...TC.B, sizes:[{label:"12cm",ref:"12BVAl",min:10,estoque:12,preco:19.90},{label:"15cm",ref:"15BVAl",min:10,estoque:10,preco:23.20},{label:"20cm",ref:"20BVAl",min:10,estoque:8,preco:39.20},{label:"25cm",ref:"25BVAl",min:10,estoque:6,preco:49.80}] },
+  { sku:"BFCODRLÇ", name:"Bota Feltro Cordeiro Laço",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:10,  preco:29.80,    desc:"Bota em feltro cordeiro com laço.",                                                                       cores:cNAT,   photo:F.bota_laco_dou,...TC.S,sizes:[{label:"50cm",ref:"50BFCODRLÇ",min:1,estoque:10}] },
+  { sku:"BFCCXDZ",  name:"Bota Feltro Cru Cervo Xadrez",               subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:6,   preco:39.80,    desc:"Bota em feltro cru com cervo xadrez.",                                                                   cores:cVM,    photo:F.bfccxdz,     ...TC.S, sizes:[{label:"50cm",ref:"50BFCCXDZ",min:1,estoque:6}] },
+  { sku:"BFVB",     name:"Bota Feltro Verde Bengala",                   subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:2,   preco:79.90,    desc:"Bota em feltro verde bengala.",                                                                          cores:cNAT,   photo:F.bfvb,        ...TC.S, sizes:[{label:"50cm",ref:"50BFVB",min:1,estoque:2}] },
+  { sku:"BFVDEPX",  name:"Bota Feltro Verde Espinha Peixe",             subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:13,  preco:49.80,    desc:"Bota em feltro verde espinha de peixe.",                                                                 cores:cNAT,   photo:F.bfvdepx,     ...TC.S, sizes:[{label:"50cm",ref:"50BFVDEPX",min:1,estoque:13}] },
+  { sku:"BFVOC",    name:"Bota Feltro Verde Oliva Cervo",               subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:29.80,    desc:"Bota em feltro verde oliva com cervo.",                                                                  cores:cNAT,   photo:F.bfvoc,       ...TC.S, sizes:[{label:"50cm",ref:"50BFVOC",min:1,estoque:4}] },
+  { sku:"BFVO",     name:"Bota Feltro Verde Ossinho",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:49.80,    desc:"Bota em feltro verde com ossinho.",                                                                       cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780058523/WhatsApp_Image_2026-05-14_at_10.42.38432432_aac4sl.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BFVO",min:1,estoque:4}] },
+  { sku:"BFVMCPT",  name:"Bota Feltro Vermelho Cachorrinho Preto",      subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:5,   preco:69.70,    desc:"Bota em feltro vermelho com cachorrinho preto.",                                                         cores:cNAT,   photo:F.bfvmcpt,     ...TC.S, sizes:[{label:"50cm",ref:"50BFVMCPT",min:1,estoque:5}] },
+  { sku:"BFVCBR",   name:"Bota Feltro Vermelho Cervo Branco",          subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:12,  preco:39.80,    desc:"Bota em feltro vermelho com cervo branco.",                                                              cores:cVM,    photo:F.bfvcbr,      ...TC.S, sizes:[{label:"50cm",ref:"50BFVCBR",min:1,estoque:12}] },
+  { sku:"BXFDZP",   name:"Bota Flanelada Xadrez/Pelúcia",              subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:10,  preco:68.70,    desc:"Bota em tecido flanelado xadrez com pelúcia.",                                                           cores:cNAT,   photo:F.bota_flanela,...TC.S, sizes:[{label:"50cm",ref:"50BXFDZP",min:1,estoque:10}] },
+  { sku:"BJCM",     name:"Bota Juta Cervo Madeira",                      subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:69.50,    desc:"Bota em juta com cervo madeira.",                                                                         cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779739791/bota_reninha_l4tydy.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BJCM",min:1,estoque:4}] },
+  { sku:"BJR",      name:"Bota Juta Renda",                            subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:7,   preco:59.80,    desc:"Bota decorativa em Juta com Renda.",                                                                     cores:cNAT,   photo:F.bjr,         ...TC.S, sizes:[{label:"50cm",ref:"50BJR",min:1,estoque:7}] },
+  { sku:"BJXDZN",   name:"Bota Juta Xadrez Natalino",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:16,  preco:69.50,    desc:"Bota em juta com xadrez natalino.",                                                                       cores:cNAT,   photo:F.bjxdzn,      ...TC.S, sizes:[{label:"50cm",ref:"50BJXDZN",min:1,estoque:16}] },
+  { sku:"BNDDec",     name:"Bota Natalina Dourada Decorada",           subtitle:"50cm",            category:"Saldão",  material:"90% Poliéster/10% Plástico", acabamento:"Costura francesa, pelúcia e galho natalino.", prazo:P30, estoque:12, preco:89.00, desc:"Bota Natalina 50cm em Veludo Velboa dourado, pelúcia e galho natalino.", cores:cUNI, photo:F.bota_dourada, ...TC.S, sizes:[{label:"50cm",ref:"50BNDDec",min:3,estoque:12,preco:89.00}] },
+  { sku:"BNNDec",     name:"Bota Natalina Noel Decorada",              subtitle:"50cm",            category:"Saldão",  material:"90% Poliéster/10% Plástico", acabamento:"Costura francesa, pelúcia e galho natalino.", prazo:P30, estoque:21, preco:89.00, desc:"Bota Natalina 50cm em Veludo Velboa, pelúcia e galho natalino.", cores:cUNI, photo:F.bota_alce, ...TC.S, sizes:[{label:"50cm",ref:"50BNNDec",min:3,estoque:21,preco:89.00}] },
+  { sku:"BNXdzDec",   name:"Bota Natalina Xadrez Decorada",            subtitle:"50cm",            category:"Saldão",  material:"100% Poliéster", acabamento:"Costura francesa e pelúcia.", prazo:P30, estoque:7, preco:89.00, desc:"Bota Natalina 50cm em Flanela Xadrez, pelúcia e galho natalino.", cores:cUNI, photo:F.bota_pelucia_dec, ...TC.S, sizes:[{label:"50cm",ref:"50BNXdzDec",min:3,estoque:7,preco:89.00}] },
+  { sku:"BVVm",     name:"Bota Velboa Vermelho 50cm",                    subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:ACFP, prazo:P30,           estoque:3,   preco:19.90,    desc:"Bota Natalina 50cm em Veludo Velboa e pelúcia.",                                                         cores:cUNI,   photo:F.bota_bolinha,...TC.S, sizes:[{label:"50cm",ref:"50BVVm",min:10,estoque:3}] },
+  { sku:"BVPArDr",  name:"Bota Velboa/Pelúcia Árvore",                   subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:27,  preco:34.80,    desc:"Bota em velboa/pelúcia com árvore.",                                                                      cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779740019/bota_arvore_mp9hpw.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BVPArDr",min:1,estoque:27}] },
   { sku:"BFVPACH",  name:"Bota Velboz Patchwork",                        subtitle:"50cm",                   category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:10,  preco:49.70,    desc:"Bota em velboz estilo patchwork.",                                                                        cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779740460/bota_lacinho_djz698.jpg",            ...TC.S, sizes:[{label:"50cm",ref:"50BFVPACH",min:1,estoque:10,preco:49.70}] },
-  { sku:"RNL",      name:"Roupa Noel Luxo",                              subtitle:"Tam. GG",                category:"Saldão",    material:"95% poliéster, 5% vinil",   acabamento:"",   prazo:P30,           estoque:28, preco:320.00,        desc:"Roupa do Papai Noel luxo em feltro e pelúcia.",                                                          cores:cUNI,   photo:F.roupa_noel,  ...TC.S, sizes:[{label:"GG",ref:"RNL",min:1,estoque:28,preco:320.00}] },
-  { sku:"SFCRU",    name:"Saia Feltro Cru Organza Lacinho",              subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:12, preco:79.00,        desc:"Saia para árvore em feltro cru com organza e lacinho.",                                                  cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780057870/WhatsApp_Image_2026-05-29_at_09.30.44_neopr1.jpg",            ...TC.S, sizes:[{label:"100cm",ref:"1SFCRU/OLÇ",min:1,estoque:12,preco:79.00}] },
+  { sku:"RNL",      name:"Roupa Noel Luxo",                              subtitle:"Tam. GG",                category:"Saldão",    material:"95% poliéster, 5% vinil",   acabamento:"",   prazo:P30,           estoque:28, preco:320.00,        desc:"Roupa do Papai Noel luxo em feltro e pelúcia.",                                                          cores:cUNI,   photo:F.roupa_noel,  ...TC.S, sizes:[{label:"GG",ref:"RNL",min:2,estoque:28,preco:320.00}] },
+  { sku:"SFCRU",    name:"Saia Feltro Cru Organza Lacinho",              subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:12, preco:79.00,        desc:"Saia para árvore em feltro cru com organza e lacinho.",                                                  cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780057870/WhatsApp_Image_2026-05-29_at_09.30.44_neopr1.jpg", ...TC.S, sizes:[{label:"100cm",ref:"1SFCRU/OLÇ",min:1,estoque:12,preco:79.00}] },
   { sku:"SFOS",     name:"Saia Feltro Organza Sextavada",                subtitle:"80cm / 100cm",           category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:20,  preco:69.40,    desc:"Saia para árvore em feltro com organza sextavada.",                                                      cores:cNAT,   photo:F.sfos,        ...TC.S, sizes:[{label:"80cm",ref:"80SFOS",min:1,estoque:10,preco:69.40},{label:"100cm",ref:"1SFOS",min:1,estoque:10,preco:79.60}] },
-  { sku:"SFVVArv",  name:"Saia Feltro Vermelho e Verde Árvore",          subtitle:"80 a 120cm",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, sianinha e botão.",      prazo:P30, estoque:18,  preco:19.90,    desc:"Saia Natalina em Feltro, aplicação árvores Patchwork e sianinha.",       cores:cUNI,   photo:F.saia_arvore, ...TC.S, sizes:[{label:"80cm",ref:"80SFVVArv",min:1,estoque:3,preco:19.90},{label:"100cm",ref:"100SFVVArv",min:1,estoque:12,preco:19.90},{label:"120cm",ref:"120SFVVArv",min:1,estoque:3,preco:19.90}] },
-  { sku:"SNFC",     name:"Saia Natalina Feltro Coruja",                  subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, viés e velcro.",         prazo:P30, estoque:3,   preco:79.80,    desc:"Saia Verde Musgo 100cm em Feltro, aplicação Coruja e galho.",            cores:cUNI,   photo:F.saia_coruja, ...TC.S, sizes:[{label:"100cm",ref:"100SNFC",min:1,estoque:3,preco:79.80}] },
-  { sku:"SNNCxP",   name:"Saia Natalina Noel Caixa Presente",            subtitle:"60 a 100cm",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Cianinha vermelha e botão.",               prazo:P30, estoque:90,  preco:32.90,    desc:"Saia Natalina em Feltro, com aplicação Noel e Caixas Presente.",         cores:cUNI,   photo:F.saia_cx_noel,...TC.S, sizes:[{label:"60cm",ref:"60SNNCxP",min:1,estoque:30,preco:32.90},{label:"80cm",ref:"80SNNCxP",min:1,estoque:30,preco:37.90},{label:"100cm",ref:"100SNNCxP",min:1,estoque:30,preco:42.90}] },
-  { sku:"SNPop",    name:"Saia Natalina POP Árvore",                     subtitle:"60 a 120cm",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Cianinha branca e botão.",                 prazo:P30, estoque:95,  preco:29.90,    desc:"Saia Natalina em Feltro, com aplicação Árvores.",                        cores:cUNI,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779888440/saia_arvore_4_rvrseu.jpg",...TC.S,sizes:[{label:"60cm",ref:"60SNPop",min:1,estoque:30,preco:29.90},{label:"80cm",ref:"80SNPop",min:1,estoque:30,preco:34.90},{label:"100cm",ref:"100SNPop",min:1,estoque:30,preco:39.90},{label:"120cm",ref:"120SNPop",min:1,estoque:5,preco:45.90}] },
-  { sku:"SNSor",    name:"Saia Natalina Sortida",                        subtitle:"60 a 120cm",            category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e fivela.",      prazo:P30, estoque:274, preco:18.90, desc:"Saia Natalina em Organza e Cetim, estampada em Verde, Vermelho, Dourado e Branco.", cores:cVMulti,photo:F.saias_var,...TC.S,sizes:[{label:"60cm",ref:"60SNSor",min:1,estoque:71,preco:18.90},{label:"80cm",ref:"80SNSor",min:1,estoque:78,preco:24.90},{label:"100cm",ref:"100SNSor",min:1,estoque:97,preco:29.00},{label:"120cm",ref:"120SNSor",min:1,estoque:28,preco:34.90}] },
+  { sku:"SFVVArv",  name:"Saia Feltro Vermelho e Verde Árvore",          subtitle:"80 a 120cm",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, sianinha e botão.",      prazo:P30, estoque:18,  preco:19.90,    desc:"Saia Natalina em Feltro, aplicação árvores Patchwork e sianinha.",       cores:cUNI,   photo:F.saia_arvore, ...TC.S, sizes:[{label:"80cm",ref:"80SFVVArv",min:5,estoque:3,preco:19.90},{label:"100cm",ref:"100SFVVArv",min:3,estoque:12,preco:19.90},{label:"120cm",ref:"120SFVVArv",min:3,estoque:3,preco:19.90}] },
+  { sku:"SNFC",     name:"Saia Natalina Feltro Coruja",                  subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, viés e velcro.",         prazo:P30, estoque:3,   preco:79.80,    desc:"Saia Verde Musgo 100cm em Feltro, aplicação Coruja e galho.",            cores:cUNI,   photo:F.saia_coruja, ...TC.S, sizes:[{label:"100cm",ref:"100SNFC",min:8,estoque:3}] },
+  { sku:"SNNCxP",   name:"Saia Natalina Noel Caixa Presente",            subtitle:"60 a 100cm",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Cianinha vermelha e botão.",               prazo:P30, estoque:90,  preco:32.90,    desc:"Saia Natalina em Feltro, com aplicação Noel e Caixas Presente.",         cores:cUNI,   photo:F.saia_cx_noel,...TC.S, sizes:[{label:"60cm",ref:"60SNNCxP",min:30,estoque:30,preco:32.90},{label:"80cm",ref:"80SNNCxP",min:30,estoque:30,preco:37.90},{label:"100cm",ref:"100SNNCxP",min:30,estoque:30,preco:42.90}] },
+  { sku:"SNPop",    name:"Saia Natalina POP Árvore",                     subtitle:"60 a 120cm",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Cianinha branca e botão.",                 prazo:P30, estoque:95,  preco:29.90,    desc:"Saia Natalina em Feltro, com aplicação Árvores.",                        cores:cUNI,   photo:F.saia_arvore4,...TC.S,sizes:[{label:"60cm",ref:"60SNPop",min:30,estoque:30,preco:29.90},{label:"80cm",ref:"80SNPop",min:30,estoque:30,preco:34.90},{label:"100cm",ref:"100SNPop",min:30,estoque:30,preco:39.90},{label:"120cm",ref:"120SNPop",min:5,estoque:5,preco:45.90}] },
+  { sku:"SNSor",    name:"Saia Natalina Sortida",                        subtitle:"60 a 120cm",            category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e fivela.",      prazo:P30, estoque:274, preco:18.90, desc:"Saia Natalina em Organza e Cetim, estampada em Verde, Vermelho, Dourado e Branco.", cores:cVMulti,photo:F.saias_var,...TC.S,sizes:[{label:"60cm",ref:"60SNSor",min:6,estoque:71,preco:18.90},{label:"80cm",ref:"80SNSor",min:6,estoque:78,preco:24.90},{label:"100cm",ref:"100SNSor",min:6,estoque:97,preco:29.00},{label:"120cm",ref:"120SNSor",min:6,estoque:28,preco:34.90}] },
   { sku:"SVVBBR",   name:"Saia Velboa Vermelho Bolas Pelúcia",           subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4, preco:69.90,        desc:"Saia para árvore em velboa vermelho com bolas de pelúcia.",                                              cores:cNAT,   photo:F.saia_bola_pel,...TC.S,sizes:[{label:"100cm",ref:"1SVVBBR",min:1,estoque:4,preco:69.90}] },
-  { sku:"SVVmBr",   name:"Saia Velboa Vermelho e Branco",                subtitle:"50 e 60cm",              category:"Saldão",    material:"100% Poliéster",            acabamento:"Cianinha branca.",                         prazo:P30, estoque:8,   preco:24.90,    desc:"Saia Natalina Veludo Velboa e Pelúcia, aplicação cianinha.",              cores:cUNI,   photo:F.saia_velb_pol,...TC.S,sizes:[{label:"50cm",ref:"50SVVmBr",min:1,estoque:4,preco:24.90},{label:"60cm",ref:"60SVVmBr",min:1,estoque:4,preco:29.90}] },
-  { sku:"SFCCXD",   name:"Saia Árvore Feltro Cru Cervo Xadrez",        subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:89.60,    desc:"Saia para árvore em feltro cru com cervo xadrez.",                                                       cores:cVM,    photo:F.sfccxd,      ...TC.S, sizes:[{label:"1MT",ref:"1SFCCXD",min:1,estoque:4,preco:89.60}] },
-  { sku:"SFVGPT",   name:"Saia Árvore Feltro Gatinho Preto",            subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:1,   preco:119.40,   desc:"Saia para árvore em feltro com gatinho preto.",                                                          cores:cNAT,   photo:F.sfvgpt,      ...TC.S, sizes:[{label:"1MT",ref:"1SFVGPT",min:1,estoque:1,preco:119.40}] },
-  { sku:"SFG",      name:"Saia Árvore Feltro Gnomo",                     subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:1,   preco:79.50,    desc:"Saia para árvore em feltro com gnomo.",                                                                  cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779740140/saia_gnomo_ff6t78.jpg",            ...TC.S, sizes:[{label:"100cm",ref:"1SFG",min:1,estoque:1,preco:79.50}] },
-  { sku:"SFPN",     name:"Saia Árvore Feltro Papai Noel",                subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:7,   preco:89.30,    desc:"Saia para árvore em feltro com Papai Noel.",                                                             cores:cNAT,   photo:F.saia_noel,   ...TC.S, sizes:[{label:"100cm",ref:"1SFPN",min:1,estoque:7,preco:89.30}] },
-  { sku:"SFVDB",    name:"Saia Árvore Feltro Verde Bengala",            subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:2,   preco:129.60,   desc:"Saia para árvore em feltro verde bengala.",                                                              cores:cNAT,   photo:F.sfvdb,       ...TC.S, sizes:[{label:"1MT",ref:"1SFVDB",min:1,estoque:2,preco:129.60}] },
-  { sku:"SFVEP",    name:"Saia Árvore Feltro Verde Espinha Peixe",      subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:79.50,    desc:"Saia para árvore em feltro verde espinha de peixe.",                                                     cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780058374/saia_espinha_1_sq4fqk.jpg",            ...TC.S, sizes:[{label:"1MT",ref:"1SFVEP",min:1,estoque:4,preco:79.50}] },
-  { sku:"SFVOC",    name:"Saia Árvore Feltro Verde Oliva Cervo",        subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:1,   preco:79.30,    desc:"Saia para árvore em feltro verde oliva com cervo e guizo.",                                              cores:cNAT,   photo:F.sfvoc,       ...TC.S, sizes:[{label:"1MT",ref:"1SFVOC",min:1,estoque:1,preco:79.30}] },
-  { sku:"SFVCPT",   name:"Saia Árvore Feltro Vermelho Cachorro Preto",  subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:3,   preco:129.40,   desc:"Saia para árvore em feltro vermelho com cachorrinho preto.",                                             cores:cNAT,   photo:F.sfvcpt,      ...TC.S, sizes:[{label:"1MT",ref:"1SFVCPT",min:1,estoque:3,preco:129.40}] },
-  { sku:"SFVCBR",   name:"Saia Árvore Feltro Vermelho Cervo Branco",   subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:2,   preco:89.60,    desc:"Saia para árvore em feltro vermelho com cervo branco.",                                                  cores:cVM,    photo:F.sfvcbr,      ...TC.S, sizes:[{label:"1MT",ref:"1SFVCBR",min:1,estoque:2,preco:89.60}] },
-  { sku:"SFXDP",    name:"Saia Árvore Flanelada Xadrez/Pelúcia",       subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:8,   preco:104.30,   desc:"Saia para árvore em tecido flanelado xadrez com pelúcia.",                                               cores:cVM,    photo:F.saia_xdz_rosa,...TC.S,sizes:[{label:"1MT",ref:"1SFXDP",min:1,estoque:8,preco:104.30}] },
+  { sku:"SVVmBr",   name:"Saia Velboa Vermelho e Branco",                subtitle:"50 e 60cm",              category:"Saldão",    material:"100% Poliéster",            acabamento:"Cianinha branca.",                         prazo:P30, estoque:8,   preco:24.90,    desc:"Saia Natalina Veludo Velboa e Pelúcia, aplicação cianinha.",              cores:cUNI,   photo:F.saia_velb_pol,...TC.S,sizes:[{label:"50cm",ref:"50SVVmBr",min:7,estoque:4,preco:24.90},{label:"60cm",ref:"60SVVmBr",min:4,estoque:4,preco:29.90}] },
+  { sku:"SFCCXD",   name:"Saia Árvore Feltro Cru Cervo Xadrez",        subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:89.60,    desc:"Saia para árvore em feltro cru com cervo xadrez.",                                                       cores:cVM,    photo:F.sfccxd,      ...TC.S, sizes:[{label:"1MT",ref:"1SFCCXD",min:1,estoque:4}] },
+  { sku:"SFVGPT",   name:"Saia Árvore Feltro Gatinho Preto",            subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:1,   preco:119.40,   desc:"Saia para árvore em feltro com gatinho preto.",                                                          cores:cNAT,   photo:F.sfvgpt,      ...TC.S, sizes:[{label:"1MT",ref:"1SFVGPT",min:1,estoque:1}] },
+  { sku:"SFG",      name:"Saia Árvore Feltro Gnomo",                     subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:1,   preco:79.50,    desc:"Saia para árvore em feltro com gnomo.",                                                                  cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1779740140/saia_gnomo_ff6t78.jpg",            ...TC.S, sizes:[{label:"100cm",ref:"1SFG",min:1,estoque:1}] },
+  { sku:"SFPN",     name:"Saia Árvore Feltro Papai Noel",                subtitle:"100cm",                  category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:7,   preco:89.30,    desc:"Saia para árvore em feltro com Papai Noel.",                                                             cores:cNAT,   photo:F.saia_noel,   ...TC.S, sizes:[{label:"100cm",ref:"1SFPN",min:1,estoque:7}] },
+  { sku:"SFVDB",    name:"Saia Árvore Feltro Verde Bengala",            subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:2,   preco:129.60,   desc:"Saia para árvore em feltro verde bengala.",                                                              cores:cNAT,   photo:F.sfvdb,       ...TC.S, sizes:[{label:"1MT",ref:"1SFVDB",min:1,estoque:2}] },
+  { sku:"SFVEP",    name:"Saia Árvore Feltro Verde Espinha Peixe",      subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:4,   preco:79.50,    desc:"Saia para árvore em feltro verde espinha de peixe.",                                                     cores:cNAT,   photo:"https://res.cloudinary.com/djeliz676/image/upload/v1780058374/saia_espinha_1_sq4fqk.jpg",            ...TC.S, sizes:[{label:"1MT",ref:"1SFVEP",min:1,estoque:4}] },
+  { sku:"SFVOC",    name:"Saia Árvore Feltro Verde Oliva Cervo",        subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:1,   preco:79.30,    desc:"Saia para árvore em feltro verde oliva com cervo e guizo.",                                              cores:cNAT,   photo:F.sfvoc,       ...TC.S, sizes:[{label:"1MT",ref:"1SFVOC",min:1,estoque:1}] },
+  { sku:"SFVCPT",   name:"Saia Árvore Feltro Vermelho Cachorro Preto",  subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:3,   preco:129.40,   desc:"Saia para árvore em feltro vermelho com cachorrinho preto.",                                             cores:cNAT,   photo:F.sfvcpt,      ...TC.S, sizes:[{label:"1MT",ref:"1SFVCPT",min:1,estoque:3}] },
+  { sku:"SFVCBR",   name:"Saia Árvore Feltro Vermelho Cervo Branco",   subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:2,   preco:89.60,    desc:"Saia para árvore em feltro vermelho com cervo branco.",                                                  cores:cVM,    photo:F.sfvcbr,      ...TC.S, sizes:[{label:"1MT",ref:"1SFVCBR",min:1,estoque:2}] },
+  { sku:"SFXDP",    name:"Saia Árvore Flanelada Xadrez/Pelúcia",       subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:8,   preco:104.30,   desc:"Saia para árvore em tecido flanelado xadrez com pelúcia.",                                               cores:cVM,    photo:F.saia_xdz_rosa,...TC.S,sizes:[{label:"1MT",ref:"1SFXDP",min:1,estoque:8}] },
   { sku:"SVVPN",    name:"Saia Árvore Velboa Vermelho Papai Noel",       subtitle:"80/100/120cm",           category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:14,  preco:59.00,    desc:"Saia para árvore em velboa vermelho com Papai Noel.",                                                    cores:cNAT,   photo:F.saia_noel_vm,...TC.S, sizes:[{label:"80cm",ref:"80SVVPN",min:1,estoque:4,preco:59.00},{label:"100cm",ref:"100SVVPN",min:1,estoque:6,preco:64.00},{label:"120cm",ref:"120SVVPN",min:1,estoque:4,preco:69.00}] },
-  { sku:"SFVO",     name:"Saia Árvore Vermelho Ossinho",                 subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:3,   preco:79.50,    desc:"Saia para árvore em feltro vermelho com ossinho.",                                                       cores:cNAT,   photo:F.saia_ossinho,...TC.S, sizes:[{label:"1MT",ref:"1SFVO",min:1,estoque:3,preco:79.50}] },
-  { sku:"KitNatB30",name:"Kit Bota Natalina Sortidas 30cm",              subtitle:"Kit 5 pçs · 30cm",      category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e fivela.",      prazo:P30, estoque:35,  preco:29.50, desc:"Kit com 5 Botas Natalinas 30cm.",                                       cores:cVMulti,photo:F.kit_bota_30,  ...TC.K, sizes:[{label:"30cm",ref:"KitNatB30",min:1,estoque:35,preco:29.50}] },
-  { sku:"KitNatB35",name:"Kit Bota Natalina Sortidas 35cm",              subtitle:"Kit 5 pçs · 35cm",      category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e fivela.",      prazo:P30, estoque:11,  preco:39.50, desc:"Kit com 5 Botas Natalinas 35cm em organza, feltro e pelúcia.",          cores:cVMulti,photo:F.kit_bota_35,  ...TC.K, sizes:[{label:"35cm",ref:"KitNatB35",min:1,estoque:11,preco:39.50}] },
-  { sku:"KitNatB50",name:"Kit Bota Natalina Sortidas 50cm",              subtitle:"Kit 5 pçs · 50cm",      category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e soutache.",    prazo:P30, estoque:3,   preco:49.00, desc:"Kit com 5 Botas Natalinas 50cm em organza, veludo velboa e feltro.",     cores:cVMulti,photo:F.kit_bota_nat, ...TC.K, sizes:[{label:"50cm",ref:"KitNatB50",min:1,estoque:3,preco:49.00}] },
-  { sku:"KitNat5",  name:"Kit Figuras Natalinas Sortidas",               subtitle:"Kit 5 pçs",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia, soutache e botão.", prazo:P30, estoque:4,   preco:25.00, desc:"Kit com 5 pçs: casaco, calça, bota, gorro, estrela e árvore.",          cores:cVNDou, photo:F.kit_figuras, ...TC.K, sizes:[{label:"Kit 5",ref:"KitNat5",min:1,estoque:4,preco:25.00}] },
-  { sku:"KitRN4",   name:"Kit Roupa Noel Sortida",                       subtitle:"Kit 4 pçs",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e fivela.",      prazo:P30, estoque:3,   preco:28.00, desc:"Kit com 4 pçs: casaco e calça em feltro e pelúcia.",                    cores:cVNude, photo:F.kit_noel_sort,...TC.K,sizes:[{label:"Kit 4",ref:"KitRN4",min:1,estoque:3,preco:28.00}] },
-  { sku:"KitVN2",   name:"Kit Varalzinho Natalino",                      subtitle:"Kit 2 pçs · 150cm",     category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e fivela.",      prazo:P30, estoque:10,  preco:39.80, desc:"Kit com 2 pçs: Varalzinho 1,50mt em feltro e pelúcia.",                  cores:cVNude, photo:F.kit_varal,   ...TC.K, sizes:[{label:"150cm",ref:"KitVN2",min:1,estoque:10,preco:39.80}] }
+  { sku:"SFVO",     name:"Saia Árvore Vermelho Ossinho",                 subtitle:"1MT",                    category:"Saldão",    material:"100% Poliéster",            acabamento:"",   prazo:P30,           estoque:3,   preco:79.50,    desc:"Saia para árvore em feltro vermelho com ossinho.",                                                       cores:cNAT,   photo:F.saia_ossinho,...TC.S, sizes:[{label:"1MT",ref:"1SFVO",min:1,estoque:3}] },
+  { sku:"KitNatB30",name:"Kit Bota Natalina Sortidas 30cm",              subtitle:"Kit 5 pçs · 30cm",      category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e fivela.",      prazo:P30, estoque:35,  preco:29.50, desc:"Kit com 5 Botas Natalinas 30cm.",                                       cores:cVMulti,photo:F.kit_bota_30,  ...TC.K, sizes:[{label:"30cm",ref:"KitNatB30",min:5,estoque:35}] },
+  { sku:"KitNatB35",name:"Kit Bota Natalina Sortidas 35cm",              subtitle:"Kit 5 pçs · 35cm",      category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e fivela.",      prazo:P30, estoque:11,  preco:39.50, desc:"Kit com 5 Botas Natalinas 35cm em organza, feltro e pelúcia.",          cores:cVMulti,photo:F.kit_bota_35,  ...TC.K, sizes:[{label:"35cm",ref:"KitNatB35",min:3,estoque:11}] },
+  { sku:"KitNatB50",name:"Kit Bota Natalina Sortidas 50cm",              subtitle:"Kit 5 pçs · 50cm",      category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e soutache.",    prazo:P30, estoque:3,   preco:49.00, desc:"Kit com 5 Botas Natalinas 50cm em organza, veludo velboa e feltro.",     cores:cVMulti,photo:F.kit_bota_nat, ...TC.K, sizes:[{label:"50cm",ref:"KitNatB50",min:3,estoque:3}] },
+  { sku:"KitNat5",  name:"Kit Figuras Natalinas Sortidas",               subtitle:"Kit 5 pçs",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia, soutache e botão.", prazo:P30, estoque:4,   preco:25.00, desc:"Kit com 5 pçs: casaco, calça, bota, gorro, estrela e árvore.",          cores:cVNDou, photo:F.kit_figuras, ...TC.K, sizes:[{label:"Kit 5",ref:"KitNat5",min:3,estoque:4}] },
+  { sku:"KitRN4",   name:"Kit Roupa Noel Sortida",                       subtitle:"Kit 4 pçs",             category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e fivela.",      prazo:P30, estoque:3,   preco:28.00, desc:"Kit com 4 pçs: casaco e calça em feltro e pelúcia.",                    cores:cVNude, photo:F.kit_noel_sort,...TC.K,sizes:[{label:"Kit 4",ref:"KitRN4",min:3,estoque:3}] },
+  { sku:"KitVN2",   name:"Kit Varalzinho Natalino",                      subtitle:"Kit 2 pçs · 150cm",     category:"Saldão",    material:"100% Poliéster",            acabamento:"Costura francesa, pelúcia e fivela.",      prazo:P30, estoque:10,  preco:39.80, desc:"Kit com 2 pçs: Varalzinho 1,50mt em feltro e pelúcia.",                  cores:cVNude, photo:F.kit_varal,   ...TC.K, sizes:[{label:"150cm",ref:"KitVN2",min:3,estoque:10}] }
 ];
 
 
 const CATEGORIES = ["Todos", "Veludo", "Lamê", "Estampado", "Bolas", "Saldão"];
-const VENDEDORES  = ["Alexandra", "Valéria", "Cleuza", "Van"];
-const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbzLrphy9FQJBPv5hi0G1Rm3enp4RNqanAVfbfBUV4QjB8jTTmQvb01tNl1fVOxZKs4wTQ/exec";
+const VENDEDORES  = ["Alexandra", "Valéria", "Cleuza"];
+const SHEETS_URL  = "https://script.google.com/macros/s/AKfycbw1H8c_xESyNUOGTnnwn20Q4COOroDgF6vnxQIWBMIfLiMvrCTO9oYeM2bU8sGDmToYpA/exec";
 
 const BRL     = v => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
 const gerarNr = () => `#${Date.now().toString().slice(-5)}`;
-const getFoto = (p, i) => {
-  if (p.photo === PH) return PH;
-  return p.cores?.[i]?.photo || p.photo || PH;
-};
+const getFoto = (p, i) => p.cores?.[i]?.photo || p.photo || "";
 const getPreco = (product, size) => size?.preco ?? product.preco ?? 0;
-// Estoque: usa sempre o valor fixo do código (persistente desativado por ora)
-const getEstoque = (sku, ref, base) => base;
-const decrementarEstoque = (cartItems) => {}; // desativado
+
+// ── PATCH 3: helper para preço "a partir de" ─────────────────────────────────
+// Retorna o menor preço entre todos os tamanhos disponíveis em estoque
+const getPrecoMin = (product) => {
+  const precos = product.sizes
+    .filter(s => (s.estoque ?? product.estoque ?? 0) > 0)
+    .map(s => s.preco ?? product.preco ?? 0);
+  if (precos.length === 0) return product.preco ?? 0;
+  return Math.min(...precos);
+};
+// Retorna true se o produto tem múltiplos tamanhos com preços diferentes
+const temPrecoVariavel = (product) => {
+  const precos = new Set(product.sizes.map(s => s.preco ?? product.preco ?? 0));
+  return precos.size > 1;
+};
 
 // ── GERADOR DO PEDIDO PARA IMPRESSÃO ─────────────────────────────────────────
 const gerarPedidoHTML = ({ cart, form, nrPedido, desconto, frete }) => {
@@ -407,7 +415,7 @@ const QuickAdd = memo(({ product: p, onAdd }) => {
   const tam = p.sizes[sz] || p.sizes[0];
   const cor = p.cores[cl] || p.cores[0];
   const min = tam?.min || 1;
-  const estoqueAtual = getEstoque(p.sku, tam?.ref, tam?.estoque ?? p.estoque ?? 0);
+  const estoqueAtual = tam?.estoque ?? p.estoque ?? 0;
   const semEstoque = estoqueAtual === 0;
 
   const handleSz = i => { setSz(i); setQt(p.sizes[i]?.min || 1); };
@@ -489,7 +497,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
   const min = tam?.min || 1;
   const [qt, setQt] = useState(min);
   const cor = p.cores[cl] || p.cores[0];
-  const estoqueModal = getEstoque(p.sku, tam?.ref, tam?.estoque ?? p.estoque ?? 0);
+  const estoqueModal = tam?.estoque ?? p.estoque ?? 0;
   const precoAtual = getPreco(p, tam);
 
   const handleSz = i => { setSz(i); setQt(p.sizes[i]?.min || 1); setEr(""); };
@@ -591,9 +599,8 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
 });
 
 // ── TELA DE PEDIDOS ──────────────────────────────────────────────────────────
-const ORDERS_URL = "https://script.google.com/macros/s/AKfycbzLrphy9FQJBPv5hi0G1Rm3enp4RNqanAVfbfBUV4QjB8jTTmQvb01tNl1fVOxZKs4wTQ/exec";
+const ORDERS_URL = "https://script.google.com/macros/s/AKfycbw1H8c_xESyNUOGTnnwn20Q4COOroDgF6vnxQIWBMIfLiMvrCTO9oYeM2bU8sGDmToYpA/exec";
 
-// Cabeçalhos exatos da planilha
 const COL = {
   pedido:      "Nº Pedido",
   data:        "Data/Hora",
@@ -619,7 +626,6 @@ const PedidosScreen = memo(({ onBack }) => {
 
   const carregar = () => {
     setLoading(true); setErro("");
-    // JSONP para contornar CORS do Google Apps Script
     const cbName = "cb_pedidos_" + Date.now();
     const script = document.createElement("script");
     const timeout = setTimeout(() => {
@@ -658,7 +664,6 @@ const PedidosScreen = memo(({ onBack }) => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      {/* Header */}
       <div style={{ padding: "14px 20px 10px", background: BG, borderBottom: `1px solid ${BORDER}`, display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
         <button onClick={onBack} style={{ background: "none", border: "none", color: VERDE, fontSize: 22, cursor: "pointer", padding: "0 4px" }}>←</button>
         <p className="pf" style={{ color: TEXT, fontSize: 20 }}>Pedidos</p>
@@ -667,7 +672,6 @@ const PedidosScreen = memo(({ onBack }) => {
         </button>
       </div>
 
-      {/* Busca */}
       <div style={{ padding: "10px 20px 6px", flexShrink: 0 }}>
         <div style={{ position: "relative", marginBottom: 8 }}>
           <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", fontSize: 15, color: TEXT3, pointerEvents: "none" }}>🔍</span>
@@ -681,7 +685,6 @@ const PedidosScreen = memo(({ onBack }) => {
         )}
       </div>
 
-      {/* Lista */}
       <div className="scr" style={{ flex: 1, padding: "8px 20px 40px" }}>
         {loading && (
           <div style={{ textAlign: "center", padding: "60px 0" }}>
@@ -738,47 +741,27 @@ const PedidosScreen = memo(({ onBack }) => {
 
                 {open && (
                   <div style={{ background: CARD2, padding: "14px 16px", borderTop: `1px solid ${BORDER}` }}>
-                    {/* Botão PDF */}
-                    <button onClick={async () => {
-                      // 1. Tenta localStorage primeiro
+                    <button onClick={() => {
                       try {
                         const historico = JSON.parse(localStorage.getItem("laco_historico") || "[]");
-                        const snap = historico.find(h => h.nrPedido === nr);
-                        if (snap) {
-                          const html = gerarPedidoHTML(snap);
+                        const snapshot = historico.find(h => h.nrPedido === nr);
+                        if (snapshot) {
+                          const html = gerarPedidoHTML(snapshot);
                           const win = window.open("", "_blank");
                           if (win) { win.document.write(html); win.document.close(); }
                           return;
                         }
                       } catch {}
-                      // 2. Tenta buscar snapshot da planilha via JSONP
-                      const cbName = "cb_snap_" + Date.now();
-                      const script = document.createElement("script");
-                      const timeout = setTimeout(() => {
-                        delete window[cbName];
-                        document.head.contains(script) && document.head.removeChild(script);
-                        // Fallback: PDF só com dados do cliente
-                        const snap = { cart: [], form: { nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend, obs }, nrPedido: nr, desconto: { tipo: "%", valor: 0 }, frete: 0 };
-                        const html = gerarPedidoHTML(snap);
-                        const win = window.open("", "_blank");
-                        if (win) { win.document.write(html); win.document.close(); }
-                      }, 5000);
-                      window[cbName] = (data) => {
-                        clearTimeout(timeout);
-                        delete window[cbName];
-                        document.head.contains(script) && document.head.removeChild(script);
-                        const pedido = (data.pedidos || []).find(p => p[COL.pedido] === nr);
-                        let snap;
-                        try {
-                          snap = pedido?.snapshot ? JSON.parse(pedido.snapshot) : null;
-                        } catch {}
-                        if (!snap) snap = { cart: [], form: { nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend, obs }, nrPedido: nr, desconto: { tipo: "%", valor: 0 }, frete: 0 };
-                        const html = gerarPedidoHTML(snap);
-                        const win = window.open("", "_blank");
-                        if (win) { win.document.write(html); win.document.close(); }
+                      const pedidoData = {
+                        cart: [],
+                        form: { nome: nm, cpfcnpj: cpf, whats: wpp, email: em, vendedor: vend, obs },
+                        nrPedido: nr,
+                        desconto: { tipo: "%", valor: 0 },
+                        frete: 0,
                       };
-                      script.src = `${ORDERS_URL}?action=listar&callback=${cbName}`;
-                      document.head.appendChild(script);
+                      const html = gerarPedidoHTML(pedidoData);
+                      const win = window.open("", "_blank");
+                      if (win) { win.document.write(html); win.document.close(); }
                     }} style={{ width: "100%", background: VINHO, color: "#fff", padding: "10px", borderRadius: 10, border: "none", cursor: "pointer", fontFamily: "'DM Sans',sans-serif", fontSize: 12, fontWeight: 700, marginBottom: 12, display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
                       🖨️ ABRIR / IMPRIMIR PDF
                     </button>
@@ -844,6 +827,36 @@ export default function App() {
   const [nrPedido]                = useState(gerarNr);
   const [pedidoFinalizado, setPedidoFinalizado] = useState(null);
 
+  // ── PATCH 2: estoque persistido em localStorage ────────────────────────────
+  // Armazena overrides de estoque por ref: { "50BFVB": 0, "20V": 3, ... }
+  // Ativado quando você chamar: window.__ativarEstoque = true; localStorage.setItem("laco_estoque_ativo","1")
+  const [estoqueOverride, setEstoqueOverride] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("laco_estoque") || "{}"); } catch { return {}; }
+  });
+  const estoqueAtivo = localStorage.getItem("laco_estoque_ativo") === "1";
+
+  // Retorna o estoque efetivo de um size, considerando override
+  const getEstoque = useCallback((product, size) => {
+    if (!estoqueAtivo) return size?.estoque ?? product.estoque ?? 0;
+    const ref = size?.ref || product.sku;
+    return ref in estoqueOverride ? estoqueOverride[ref] : (size?.estoque ?? product.estoque ?? 0);
+  }, [estoqueOverride, estoqueAtivo]);
+
+  // Deduz do estoque quando um pedido é confirmado
+  const deduzirEstoque = useCallback((cartItems) => {
+    if (!estoqueAtivo) return;
+    setEstoqueOverride(prev => {
+      const novo = { ...prev };
+      cartItems.forEach(item => {
+        const ref = item.size?.ref || item.product.sku;
+        const atual = ref in novo ? novo[ref] : (item.size?.estoque ?? item.product.estoque ?? 0);
+        novo[ref] = Math.max(0, atual - item.qty);
+      });
+      try { localStorage.setItem("laco_estoque", JSON.stringify(novo)); } catch {}
+      return novo;
+    });
+  }, [estoqueAtivo]);
+
   useEffect(() => {
     try { localStorage.setItem("laco_cart", JSON.stringify(cart)); } catch {}
   }, [cart]);
@@ -852,7 +865,11 @@ export default function App() {
     const catOk    = cat === "Todos" || p.category === cat;
     const q        = search.toLowerCase().trim();
     const searchOk = !q || p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q) || p.subtitle.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
-    return catOk && searchOk;
+    // Filtra produto inteiro somente se TODOS os tamanhos estiverem sem estoque
+    const temEstoque = estoqueAtivo
+      ? p.sizes.some(s => getEstoque(p, s) > 0)
+      : true; // quando estoque não ativo, não filtra
+    return catOk && searchOk && temEstoque;
   });
 
   const cartCount   = cart.reduce((s, i) => s + i.qty, 0);
@@ -901,16 +918,32 @@ export default function App() {
       observacoes: form.obs || "—",
       snapshot:    JSON.stringify(snapshot),
     });
-    try {
-      await fetch(`${SHEETS_URL}?${params}`, { method: "GET", mode: "no-cors" });
-    } catch (e) { console.error(e); }
-    // Salva snapshot localmente também
+    // JSONP — não abre cliente de email externo
+    await new Promise((resolve) => {
+      const cbName = "cb_pedido_" + Date.now();
+      const script = document.createElement("script");
+      const timeout = setTimeout(() => {
+        delete window[cbName];
+        if (document.head.contains(script)) document.head.removeChild(script);
+        resolve();
+      }, 8000);
+      window[cbName] = () => {
+        clearTimeout(timeout);
+        delete window[cbName];
+        if (document.head.contains(script)) document.head.removeChild(script);
+        resolve();
+      };
+      params.append("callback", cbName);
+      script.src = `${SHEETS_URL}?${params}`;
+      script.onerror = () => { clearTimeout(timeout); delete window[cbName]; resolve(); };
+      document.head.appendChild(script);
+    });
+    // Salva snapshot localmente para gerar PDF na tela de sucesso e na tela de pedidos
     try {
       const historico = JSON.parse(localStorage.getItem("laco_historico") || "[]");
       historico.unshift(snapshot);
       localStorage.setItem("laco_historico", JSON.stringify(historico.slice(0, 50)));
     } catch {}
-    decrementarEstoque(cart);
     try { localStorage.removeItem("laco_cart"); } catch {}
     setPedidoFinalizado(snapshot);
     setEnviando(false);
@@ -983,43 +1016,46 @@ export default function App() {
               </div>
             ) : (
               <div style={{ display: "grid", gridTemplateColumns: isDesktop ? "repeat(3,1fr)" : "1fr", gap: 14 }}>
-                {filtered.map(p => (
-                  <div key={p.sku} style={{ background: CARD, borderRadius: 16, overflow: "hidden", border: `1px solid ${BORDER}`, boxShadow: "0 2px 8px rgba(0,0,0,0.05)", display: "flex", flexDirection: "column" }}>
-                    <div style={{ position: "relative", cursor: "pointer" }} onClick={() => setModal(p)}>
-                      <Img src={getFoto(p, 0)} h={isDesktop ? 200 : 180} />
-                      <div style={{ position: "absolute", top: 10, left: 10 }}><Tag label={p.tag} color={p.tagColor} bg={p.tagBg} /></div>
-                      <div style={{ position: "absolute", top: 10, right: 10, background: "rgba(255,255,255,0.92)", borderRadius: 8, padding: "3px 9px" }}>
-                        <span className="mn" style={{ color: VERDE, fontSize: 10, fontWeight: 700 }}>
-                          {(() => {
-                            const precos = p.sizes.map(s => s.preco ?? p.preco ?? 0).filter(x => x > 0);
-                            const minP = Math.min(...precos);
-                            const maxP = Math.max(...precos);
-                            return precos.length > 1 && minP !== maxP
-                              ? `a partir de ${BRL(minP)}`
-                              : `${BRL(minP || p.preco)}/un`;
-                          })()}
-                        </span>
-                      </div>
-                    </div>
-                    <div style={{ padding: "14px", flex: 1, display: "flex", flexDirection: "column" }}>
-                      <div style={{ cursor: "pointer", flex: 1 }} onClick={() => setModal(p)}>
-                        <p className="pf" style={{ color: TEXT, fontSize: 17, lineHeight: 1.2, marginBottom: 3 }}>{p.name}</p>
-                        <p className="dm" style={{ color: TEXT3, fontSize: 12, marginBottom: 5 }}>{p.subtitle}</p>
-                        <p className="mn" style={{ color: VERDE2, fontSize: 9, letterSpacing: 1, opacity: 0.7, marginBottom: 7 }}>REF: {p.sku}</p>
-                        <div style={{ display: "flex", gap: 5, alignItems: "center", marginBottom: 7 }}>
-                          {p.cores.map((c, i) => <div key={i} title={c.name} style={{ width: 12, height: 12, borderRadius: "50%", background: c.hex, border: `1px solid ${BORDER}` }} />)}
-                          <span className="mn" style={{ color: TEXT3, fontSize: 9, marginLeft: 2 }}>{p.cores.length} COR{p.cores.length > 1 ? "ES" : ""}</span>
-                        </div>
-                        <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 10 }}>
-                          <span className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1 }}>MÍN. {Math.min(...p.sizes.map(s => s.min || 1))} UN.</span>
-                          <span style={{ color: BORDER }}>·</span>
-                          <span className="dm" style={{ color: TEXT2, fontSize: 12 }}>{p.prazo}</span>
+                {filtered.map(p => {
+                  // ── PATCH 3: preço "a partir de" no card ──────────────────
+                  const precoMin = getPrecoMin(p);
+                  const variavel = temPrecoVariavel(p);
+                  const labelPreco = variavel
+                    ? `a partir de ${BRL(precoMin)}`
+                    : `${BRL(precoMin)}/un`;
+
+                  return (
+                    <div key={p.sku} style={{ background: CARD, borderRadius: 16, overflow: "hidden", border: `1px solid ${BORDER}`, boxShadow: "0 2px 8px rgba(0,0,0,0.05)", display: "flex", flexDirection: "column" }}>
+                      <div style={{ position: "relative", cursor: "pointer" }} onClick={() => setModal(p)}>
+                        <Img src={getFoto(p, 0)} h={isDesktop ? 200 : 180} />
+                        <div style={{ position: "absolute", top: 10, left: 10 }}><Tag label={p.tag} color={p.tagColor} bg={p.tagBg} /></div>
+                        {/* ── PATCH 3: badge de preço atualizado ── */}
+                        <div style={{ position: "absolute", top: 10, right: 10, background: "rgba(255,255,255,0.95)", borderRadius: 8, padding: "3px 9px", maxWidth: 160 }}>
+                          <span className="mn" style={{ color: VERDE, fontSize: variavel ? 9 : 10, fontWeight: 700, lineHeight: 1.3, display: "block", textAlign: "right" }}>
+                            {labelPreco}
+                          </span>
                         </div>
                       </div>
-                      <QuickAdd product={p} onAdd={handleAdd} />
+                      <div style={{ padding: "14px", flex: 1, display: "flex", flexDirection: "column" }}>
+                        <div style={{ cursor: "pointer", flex: 1 }} onClick={() => setModal(p)}>
+                          <p className="pf" style={{ color: TEXT, fontSize: 17, lineHeight: 1.2, marginBottom: 3 }}>{p.name}</p>
+                          <p className="dm" style={{ color: TEXT3, fontSize: 12, marginBottom: 5 }}>{p.subtitle}</p>
+                          <p className="mn" style={{ color: VERDE2, fontSize: 9, letterSpacing: 1, opacity: 0.7, marginBottom: 7 }}>REF: {p.sku}</p>
+                          <div style={{ display: "flex", gap: 5, alignItems: "center", marginBottom: 7 }}>
+                            {p.cores.map((c, i) => <div key={i} title={c.name} style={{ width: 12, height: 12, borderRadius: "50%", background: c.hex, border: `1px solid ${BORDER}` }} />)}
+                            <span className="mn" style={{ color: TEXT3, fontSize: 9, marginLeft: 2 }}>{p.cores.length} COR{p.cores.length > 1 ? "ES" : ""}</span>
+                          </div>
+                          <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 10 }}>
+                            <span className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1 }}>MÍN. {Math.min(...p.sizes.map(s => s.min || 1))} UN.</span>
+                            <span style={{ color: BORDER }}>·</span>
+                            <span className="dm" style={{ color: TEXT2, fontSize: 12 }}>{p.prazo}</span>
+                          </div>
+                        </div>
+                        <QuickAdd product={p} onAdd={handleAdd} />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
@@ -1109,7 +1145,7 @@ export default function App() {
               </button>
               <div style={{ height: 1, background: BORDER, marginBottom: 18 }} />
 
-              {/* Vendedora — separada dos dados do cliente */}
+              {/* Vendedora */}
               <div style={{ marginBottom: 14 }}>
                 <p className="mn" style={{ color: VERDE, fontSize: 9, letterSpacing: 2.5, marginBottom: 10 }}>VENDEDORA</p>
                 <div style={{ position: "relative" }}>
@@ -1132,7 +1168,7 @@ export default function App() {
                   <input className="inp" type={f.t} value={form[f.k]} placeholder={f.p} autoComplete="off" onChange={e => setForm(prev => ({ ...prev, [f.k]: e.target.value }))} />
                 </div>
               ))}
-              {/* CNPJ com máscara */}
+              {/* CNPJ */}
               <div style={{ marginBottom: 11 }}>
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>CNPJ</p>
                 <input className="inp" type="text" inputMode="numeric" value={form.cpfcnpj} placeholder="00.000.000/0001-00" autoComplete="off"
@@ -1146,7 +1182,7 @@ export default function App() {
                     setForm(prev => ({ ...prev, cpfcnpj: v }));
                   }} />
               </div>
-              {/* WhatsApp com máscara */}
+              {/* WhatsApp */}
               <div style={{ marginBottom: 11 }}>
                 <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 1, marginBottom: 5 }}>WHATSAPP *</p>
                 <input className="inp" type="text" inputMode="numeric" value={form.whats} placeholder="(11) 99999-9999" autoComplete="off"
