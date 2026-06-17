@@ -418,10 +418,15 @@ const CSS = `
 `;
 
 // ── COMPONENTES BASE ──────────────────────────────────────────────────────────
-const Img = memo(({ src, h = 200 }) => {
+// SKUs com fotos verticais — usar contain em vez de cover
+const VERTICAL_SKUS = new Set(['VAleBGSol','VAlMinGL','LVAG4','VAlTri','VALLIND','VALGL','EVV','EVVDec','EVVLis','EVVXdz']);
+
+const Img = memo(({ src, h = 200, sku = "" }) => {
   const [err, setErr] = useState(false);
+  const fit = VERTICAL_SKUS.has(sku) ? "contain" : "cover";
+  const bg  = VERTICAL_SKUS.has(sku) ? "#F5F0EB" : CARD2;
   if (err || !src) return <div style={{ width: "100%", height: h, background: CARD2, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 32 }}>🎀</div>;
-  return <img src={src} alt="" style={{ width: "100%", height: h, objectFit: "cover", display: "block" }} onError={() => setErr(true)} />;
+  return <img src={src} alt="" style={{ width: "100%", height: h, objectFit: fit, background: bg, display: "block" }} onError={() => setErr(true)} />;
 });
 
 const Tag = ({ label, color, bg }) => (
@@ -540,7 +545,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
     <div style={{ position: "fixed", inset: 0, background: "rgba(20,10,10,0.6)", display: "flex", alignItems: "flex-end", justifyContent: "center", zIndex: 9999, backdropFilter: "blur(6px)" }} onClick={onClose}>
       <div className="scr" style={{ background: BG, borderRadius: "24px 24px 0 0", width: "100%", maxWidth: 560, maxHeight: "92vh", borderTop: `2px solid ${VERDE}` }} onClick={e => e.stopPropagation()}>
         <div style={{ position: "relative", borderRadius: "24px 24px 0 0", overflow: "hidden" }}>
-          <Img src={getFoto(p, cl)} h={260} />
+          <Img src={getFoto(p, cl)} h={260} sku={p.sku} />
           <button onClick={onClose} style={{ position: "absolute", top: 12, left: 12, background: "rgba(255,255,255,0.92)", border: "none", borderRadius: "50%", width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 16, boxShadow: "0 2px 8px rgba(0,0,0,0.15)" }}>←</button>
           <div style={{ position: "absolute", top: 12, right: 12, background: "rgba(255,255,255,0.92)", borderRadius: 8, padding: "4px 10px" }}>
             <span className="mn" style={{ color: VERDE, fontSize: 12, fontWeight: 700 }}>{BRL(precoAtual)}/un</span>
@@ -1047,7 +1052,7 @@ export default function App() {
                 {filtered.map(p => (
                   <div key={p.sku} style={{ background: CARD, borderRadius: 16, overflow: "hidden", border: `1px solid ${BORDER}`, boxShadow: "0 2px 8px rgba(0,0,0,0.05)", display: "flex", flexDirection: "column" }}>
                     <div style={{ position: "relative", cursor: "pointer" }} onClick={() => setModal(p)}>
-                      <Img src={getFoto(p, 0)} h={isDesktop ? 200 : 180} />
+                      <Img src={getFoto(p, 0)} h={isDesktop ? 200 : 180} sku={p.sku} />
                       <div style={{ position: "absolute", top: 10, left: 10 }}><Tag label={p.tag} color={p.tagColor} bg={p.tagBg} /></div>
                       <div style={{ position: "absolute", top: 10, right: 10, background: "rgba(255,255,255,0.92)", borderRadius: 8, padding: "3px 9px" }}>
                         <span className="mn" style={{ color: VERDE, fontSize: 10, fontWeight: 700 }}>
