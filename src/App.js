@@ -419,7 +419,7 @@ const CSS = `
 
 // ── COMPONENTES BASE ──────────────────────────────────────────────────────────
 // SKUs com fotos verticais — usar contain em vez de cover
-const VERTICAL_SKUS = new Set(['VAleBGSol','VAlMinGL','LVAG4','VAlTri','VALLIND','VALGL','EVV','EVVDec','EVVLis','EVVXdz','VDuGV','VMinGL','VSout','BTLT','BTXDZ','BTXDZP','BVAL','BFCCXDZ','BFVB','BFVDEPX','BFVOC','BFVO','BFVMCPT','BFVCBR','BXFDZP','BJCM','BJR','BJXDZN','BNDDec','BNNDec','BNXdzDec','BVVm','BVPArDr','BFVPACH']);
+const VERTICAL_SKUS = new Set(['VAleBGSol','VAlMinGL','LVAG4','VAlTri','VALLIND','VALGL','EVV','EVVDec','EVVLis','EVVXdz','VDuGV','VMinGL','VSout','BTLT','BTXDZ','BTXDZP','BVAL','BFCCXDZ','BFVB','BFVDEPX','BFVOC','BFVO','BFVMCPT','BFVCBR','BXFDZP','BJCM','BJR','BJXDZN','BNDDec','BNNDec','BNXdzDec','BVVm','BVPArDr','BFVPACH','RNL','SFCRU','SFOS','SFVVArv','SNFC','SNNCxP','SNPop','SNSor','SVVBBR','SVVmBr','SFCCXD','SFVGPT','SFG','SFPN','SFVDB','SFVEP','SFVOC','SFVCPT','SFVCBR','SFXDP','SVVPN','SFVO','KitNatB30','KitNatB35','KitNatB50','KitNat5','KitRN4','KitVN2']);
 
 const Img = memo(({ src, h = 200, sku = "" }) => {
   const [err, setErr] = useState(false);
