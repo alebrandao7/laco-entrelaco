@@ -419,7 +419,7 @@ const CSS = `
 
 // ── COMPONENTES BASE ──────────────────────────────────────────────────────────
 // SKUs com fotos verticais — usar contain em vez de cover
-const VERTICAL_SKUS = new Set(['VAleBGSol','VAlMinGL','LVAG4','VAlTri','VALLIND','VALGL','EVV','EVVDec','EVVLis','EVVXdz']);
+const VERTICAL_SKUS = new Set(['VAleBGSol','VAlMinGL','LVAG4','VAlTri','VALLIND','VALGL','EVV','EVVDec','EVVLis','EVVXdz','VDuGV','VMinGL','VSout','BTLT','BTXDZ','BTXDZP','BVAL','BFCCXDZ','BFVB','BFVDEPX','BFVOC','BFVO','BFVMCPT','BFVCBR','BXFDZP','BJCM','BJR','BJXDZN','BNDDec','BNNDec','BNXdzDec','BVVm','BVPArDr','BFVPACH']);
 
 const Img = memo(({ src, h = 200, sku = "" }) => {
   const [err, setErr] = useState(false);
