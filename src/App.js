@@ -448,10 +448,10 @@ const QuickAdd = memo(({ product: p, onAdd }) => {
   const cor = p.cores[cl] || p.cores[0];
   const min = tam?.min || 1;
   const estoqueAtual = getEstoque(p.sku, tam?.ref, tam?.estoque ?? p.estoque ?? 0);
-  const semEstoque = estoqueAtual === 0;
+  const semEstoque = false;
 
   const handleSz = i => { setSz(i); setQt(p.sizes[i]?.min || 1); };
-  const addQty = n => setQt(q => Math.min(estoqueAtual || 9999, Math.max(min, q + n)));
+  const addQty = n => setQt(q => Math.max(min, q + n));
 
   const doAdd = e => {
     e.stopPropagation();
@@ -481,12 +481,6 @@ const QuickAdd = memo(({ product: p, onAdd }) => {
             </button>
           );
         })}
-      </div>
-      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 10 }}>
-        <span style={{ fontSize: 10 }}>📦</span>
-        <span className="mn" style={{ fontSize: 10, color: estoqueAtual <= 3 ? "#BF360C" : VERDE, fontWeight: 700 }}>
-          {estoqueAtual === 0 ? "SEM ESTOQUE" : `${estoqueAtual} un. disponíveis`}
-        </span>
       </div>
       {p.cores.length > 1 && <>
         <p className="mn" style={{ fontSize: 9, color: TEXT3, letterSpacing: 1, marginBottom: 6 }}>COR</p>
@@ -533,7 +527,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
   const precoAtual = getPreco(p, tam);
 
   const handleSz = i => { setSz(i); setQt(p.sizes[i]?.min || 1); setEr(""); };
-  const addQty = n => setQt(q => Math.min(estoqueModal || 9999, Math.max(min, q + n)));
+  const addQty = n => setQt(q => Math.max(min, q + n));
 
   const doAdd = () => {
     if (qt < min) { setEr(`Mínimo de ${min} unidades para este tamanho.`); return; }
@@ -590,12 +584,7 @@ const ProductModal = memo(({ product: p, cartCount, onClose, onAdd, onGoToCart }
             <span className="mn" style={{ color: TEXT3, fontSize: 10 }}>SELECIONADO</span>
             <span className="mn" style={{ color: VERDE, fontSize: 10, fontWeight: 700 }}>{tam?.ref} · {cor?.name}</span>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
-            <span style={{ fontSize: 10 }}>📦</span>
-            <span className="mn" style={{ fontSize: 10, color: estoqueModal <= 3 ? "#BF360C" : TEXT3, fontWeight: 700 }}>
-              {estoqueModal === 0 ? "SEM ESTOQUE" : `${estoqueModal} un. disponíveis${estoqueModal <= 3 ? " — Últimas!" : ""}`}
-            </span>
-          </div>
+
           <p className="mn" style={{ color: TEXT3, fontSize: 9, letterSpacing: 2, marginBottom: 10, marginTop: 12 }}>QUANTIDADE</p>
           <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 10, flexWrap: "wrap" }}>
             <div style={{ display: "inline-flex", alignItems: "center", background: CARD, borderRadius: 10, border: `1px solid ${BORDER}`, overflow: "hidden" }}>
