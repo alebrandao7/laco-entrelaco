@@ -471,16 +471,12 @@ const QuickAdd = memo(({ product: p, onAdd }) => {
     <div onClick={e => e.stopPropagation()} style={{ background: VERDES, borderRadius: 12, padding: "12px", border: `1px solid ${VERDE}33` }}>
       <p className="mn" style={{ fontSize: 9, color: TEXT3, letterSpacing: 1, marginBottom: 6 }}>TAMANHO</p>
       <div style={{ display: "flex", gap: 5, flexWrap: "wrap", marginBottom: 10 }}>
-        {p.sizes.map((s, i) => {
-          const est = s.estoque ?? p.estoque ?? 0;
-          const esg = est === 0;
-          return (
-            <button key={i} onClick={() => { if (!esg) handleSz(i); }}
-              style={{ padding: "5px 9px", borderRadius: 7, background: sz === i ? VERDE : esg ? "#eee" : CARD, color: sz === i ? "#fff" : esg ? "#bbb" : TEXT, border: sz === i ? `1px solid ${VERDE2}` : `1px solid ${BORDER}`, fontSize: 10, fontWeight: 700, fontFamily: "'DM Mono',monospace", cursor: "pointer", opacity: 1 }}>
-              {s.label}
-            </button>
-          );
-        })}
+        {p.sizes.map((s, i) => (
+          <button key={i} onClick={() => handleSz(i)}
+            style={{ padding: "5px 9px", borderRadius: 7, background: sz === i ? VERDE : CARD, color: sz === i ? "#fff" : TEXT, border: sz === i ? `1px solid ${VERDE2}` : `1px solid ${BORDER}`, fontSize: 10, fontWeight: 700, fontFamily: "'DM Mono',monospace", cursor: "pointer" }}>
+            {s.label}
+          </button>
+        ))}
       </div>
       {p.cores.length > 1 && <>
         <p className="mn" style={{ fontSize: 9, color: TEXT3, letterSpacing: 1, marginBottom: 6 }}>COR</p>
